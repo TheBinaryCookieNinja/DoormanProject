@@ -1,4 +1,4 @@
-package DAO;
+package database;
 
 public class DoormanDAO {
 
