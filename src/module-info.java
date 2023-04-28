@@ -6,4 +6,5 @@
  *
  */
 module EksamensProjektDoorman {
+	requires java.desktop;
 }
