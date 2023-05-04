@@ -18,10 +18,29 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JMenu;
+import java.awt.GridLayout;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Dimension;
+import javax.swing.JMenuBar;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import javax.swing.Box;
+import javax.swing.event.MenuKeyListener;
+import javax.swing.event.MenuKeyEvent;
+import java.awt.event.InputEvent;
 
 public class AssignShiftCalendar extends JFrame {
 
 	private JPanel contentPane;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
+	private JMenuItem mntmNewMenuItem;
+	private PopUp pp;
 
 	/**
 	 * Launch the application.
@@ -44,7 +63,31 @@ public class AssignShiftCalendar extends JFrame {
 	 */
 	public AssignShiftCalendar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1027, 454);
+		setBounds(100, 100, 904, 450);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Drop down menu");
+		menuBar.add(mnNewMenu);
+		
+		mntmNewMenuItem = new JMenuItem("Assign shifts");
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		mntmNewMenuItem_1 = new JMenuItem("Calendar");
+		mntmNewMenuItem_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.SHIFT_DOWN_MASK));
+		mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pp = new PopUp();
+				pp.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		mntmNewMenuItem_2 = new JMenuItem("Department schedule");
+		mnNewMenu.add(mntmNewMenuItem_2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -67,7 +110,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -117,7 +160,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
@@ -163,7 +206,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_3 = new GridBagLayout();
 		gbl_panel_3.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_3.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_3.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_3.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_3.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_3.setLayout(gbl_panel_3);
 		
@@ -209,7 +252,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_4.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_4.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
@@ -255,7 +298,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_5 = new GridBagLayout();
 		gbl_panel_5.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_5.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_5.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_5.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_5.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_5.setLayout(gbl_panel_5);
 		
@@ -301,7 +344,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_6 = new GridBagLayout();
 		gbl_panel_6.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_6.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_6.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_6.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_6.setLayout(gbl_panel_6);
 		
@@ -347,7 +390,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_7 = new GridBagLayout();
 		gbl_panel_7.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_7.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_7.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_7.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_7.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_7.setLayout(gbl_panel_7);
 		
@@ -393,7 +436,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_8 = new GridBagLayout();
 		gbl_panel_8.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_8.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_8.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_8.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_8.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_8.setLayout(gbl_panel_8);
 		
@@ -439,7 +482,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_9 = new GridBagLayout();
 		gbl_panel_9.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_9.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_9.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
 		
@@ -485,7 +528,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_10 = new GridBagLayout();
 		gbl_panel_10.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_10.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_10.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_10.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_10.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_10.setLayout(gbl_panel_10);
 		
@@ -531,7 +574,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_11 = new GridBagLayout();
 		gbl_panel_11.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_11.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_11.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_11.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_11.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_11.setLayout(gbl_panel_11);
 		
@@ -576,7 +619,7 @@ public class AssignShiftCalendar extends JFrame {
 		GridBagLayout gbl_panel_12 = new GridBagLayout();
 		gbl_panel_12.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_12.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_12.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_12.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_12.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_12.setLayout(gbl_panel_12);
 		
@@ -612,4 +655,21 @@ public class AssignShiftCalendar extends JFrame {
 		panel_12.add(btnShiftTime12_2, gbc_btnShiftTime12_2);
 	}
 
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }
