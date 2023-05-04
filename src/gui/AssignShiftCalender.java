@@ -34,7 +34,7 @@ import javax.swing.event.MenuKeyListener;
 import javax.swing.event.MenuKeyEvent;
 import java.awt.event.InputEvent;
 
-public class AssignShiftCalendar extends JFrame {
+public class AssignShiftCalender extends JFrame {
 
 	private JPanel contentPane;
 	private JMenuItem mntmNewMenuItem_1;
@@ -49,7 +49,7 @@ public class AssignShiftCalendar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssignShiftCalendar frame = new AssignShiftCalendar();
+					AssignShiftCalender frame = new AssignShiftCalender();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +61,7 @@ public class AssignShiftCalendar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AssignShiftCalendar() {
+	public AssignShiftCalender() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
 		
