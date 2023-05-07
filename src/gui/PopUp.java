@@ -1,12 +1,18 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PopUp extends JDialog {
 
@@ -35,6 +41,28 @@ public class PopUp extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
+			JMenu mnNewMenu = new JMenu("Menu");
+			contentPanel.add(mnNewMenu);
+			{
+				JMenuItem mntmNewMenuItem = new JMenuItem("Club menu");
+				mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						testMenu();
+					}
+				});
+				mnNewMenu.add(mntmNewMenuItem);
+			}
+			{
+				JMenuItem mntmNewMenuItem_1 = new JMenuItem("Assign shift calendar");
+				mnNewMenu.add(mntmNewMenuItem_1);
+			}
+			{
+				JMenuItem mntmNewMenuItem_2 = new JMenuItem("Whatever");
+				mnNewMenu.add(mntmNewMenuItem_2);
+			}
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -50,6 +78,15 @@ public class PopUp extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	private void testMenu() {
+		AssignShiftChooseClub ascc = new AssignShiftChooseClub();
+		this.setVisible(false);
+		this.dispose();
+		ascc.setVisible(true);
+		ascc.setAlwaysOnTop(true);
+		ascc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 
 }
