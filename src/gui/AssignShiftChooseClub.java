@@ -23,6 +23,7 @@ import java.awt.GridLayout;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Dimension;
@@ -34,7 +35,7 @@ import javax.swing.event.MenuKeyListener;
 import javax.swing.event.MenuKeyEvent;
 import java.awt.event.InputEvent;
 
-public class AssignShiftCalender extends JFrame {
+public class AssignShiftChooseClub extends JFrame {
 
 	private JPanel contentPane;
 	private JMenuItem mntmNewMenuItem_1;
@@ -49,7 +50,7 @@ public class AssignShiftCalender extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssignShiftCalender frame = new AssignShiftCalender();
+					AssignShiftChooseClub frame = new AssignShiftChooseClub();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,21 +62,28 @@ public class AssignShiftCalender extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AssignShiftCalender() {
+	public AssignShiftChooseClub() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Drop down menu");
+		JMenu mnNewMenu = new JMenu("Menu");
 		menuBar.add(mnNewMenu);
 		
 		mntmNewMenuItem = new JMenuItem("Assign shifts");
+		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				testMenu();
+			}
+		});
+		mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		mntmNewMenuItem_1 = new JMenuItem("Calendar");
-		mntmNewMenuItem_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.SHIFT_DOWN_MASK));
+		mntmNewMenuItem_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, InputEvent.SHIFT_DOWN_MASK));
 		mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -87,6 +95,7 @@ public class AssignShiftCalender extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		mntmNewMenuItem_2 = new JMenuItem("Department schedule");
+		mntmNewMenuItem_2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(mntmNewMenuItem_2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -138,6 +147,11 @@ public class AssignShiftCalender extends JFrame {
 		});
 		
 		JButton btnShiftTime1_1 = new JButton("New button");
+		btnShiftTime1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				testMenu();
+			}
+		});
 		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
 		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime1_1.gridx = 1;
@@ -654,22 +668,14 @@ public class AssignShiftCalender extends JFrame {
 		gbc_btnShiftTime12_2.gridy = 3;
 		panel_12.add(btnShiftTime12_2, gbc_btnShiftTime12_2);
 	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+	private void testMenu() {
+		PopUp pp = new PopUp();
+		this.setVisible(false);
+		this.dispose();
+		pp.setVisible(true);
+		pp.setModal(true); 
+		pp.setAlwaysOnTop(true);
+		pp.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
+	
 }
