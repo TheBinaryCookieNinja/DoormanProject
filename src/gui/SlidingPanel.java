@@ -99,7 +99,6 @@ public class SlidingPanel extends JPanel {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
        GroupLayout layout = new GroupLayout(this);

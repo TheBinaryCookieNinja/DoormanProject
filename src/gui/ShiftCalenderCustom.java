@@ -39,11 +39,15 @@ public class ShiftCalenderCustom extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	//a new thread is being used to continuously update the time and date on the user interface (UI) without blocking the main thread, which is responsible for handling UI events and updates.
+	//By using a separate thread for this task, the UI remains responsive, and other user events can be processed concurrently. 
+	//The main thread, responsible for the UI, is not blocked by the continuous updating of the time and date, ensuring smooth operation of the application.
 	public ShiftCalenderCustom() {
 		initComponents();
 		thisMonth();
 		slide.show(new ShiftCalenderPanel(5, 2021), SlidingPanel.AnimateType.TO_RIGHT);
-		showMonthYear();
+		updateMonthYear();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -62,11 +66,12 @@ public class ShiftCalenderCustom extends JPanel {
 					lbDate.setText(df.format(date));
 				}
 			}
-		}).start();
+		}).start(); // stars the above created thread
 	}
 
 	@SuppressWarnings("unchecked")
-
+	 // This method initializes the components used in the calendar panel, such as the sliding panel,
+    // the labels for displaying the time and date, and the buttons for navigating between months.
 	private void initComponents() {
 		slide = new SlidingPanel();
 		jPanel1 = new JPanel();
@@ -230,7 +235,10 @@ public class ShiftCalenderCustom extends JPanel {
 		);
 		this.setLayout(layout);
 	}
-
+	
+	// This method handles the action performed when the "arrowForward" button is clicked.
+    // It advances the calendar to the next month, and if the current month is December (changing back to january), it also
+    // advances the year. The sliding panel is then updated to show the new month and year.
 	private void arrowForwardActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
 		if (month == 12) {
@@ -240,9 +248,12 @@ public class ShiftCalenderCustom extends JPanel {
 			month++;
 		}
 		slide.show(new ShiftCalenderPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
-		showMonthYear();
+		updateMonthYear();
 	}
-
+	
+	// This method handles the action performed when the "arrowBack" button is clicked.
+    // It moves the calendar to the previous month, and if the current month is January, it also
+    // decrements the year. The sliding panel is then updated to show the new month and year.
 	private void arrowBackActionPerformed(ActionEvent evt) {
 		if (month == 1) {
 			month = 12;
@@ -251,17 +262,20 @@ public class ShiftCalenderCustom extends JPanel {
 			month--;
 		}
 		slide.show(new ShiftCalenderPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
-		showMonthYear();
+		updateMonthYear();
 	}
-
+	
+	// This method retrieves the current month and year and sets the appropriate instance variables.
 	private void thisMonth() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date()); // today
 		month = calendar.get(Calendar.MONTH) + 1;
 		year = calendar.get(Calendar.YEAR);
 	}
-
-	private void showMonthYear() {
+	
+	 // This method updates the displayed month and year on the calendar panel based on the current
+    // values of the "month" and "year" instance variables.
+	private void updateMonthYear() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, month - 1);
 		calendar.set(Calendar.YEAR, year);
