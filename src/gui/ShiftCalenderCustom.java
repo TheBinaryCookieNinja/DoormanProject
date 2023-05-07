@@ -21,6 +21,9 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class ShiftCalenderCustom extends JPanel {
 	private int month;
@@ -35,6 +38,9 @@ public class ShiftCalenderCustom extends JPanel {
 	private JLabel lbMonthYear;
 	private JLabel lbTime;
 	private JLabel lbType;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
 
 	/**
 	 * Create the panel.
@@ -114,7 +120,9 @@ public class ShiftCalenderCustom extends JPanel {
 		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lbDate.setText("Sunday, 07/05/2023");
 		
-		JButton btnNewButton = new JButton("DropdownMenu");
+		JPanel menuPanel = new JPanel();
+		menuPanel.setBackground(new Color(0, 128, 192));
+		menuPanel.setForeground(new Color(255, 255, 255));
 
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 		jPanel1Layout.setHorizontalGroup(
@@ -123,8 +131,7 @@ public class ShiftCalenderCustom extends JPanel {
 					.addContainerGap()
 					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
 						.addGroup(jPanel1Layout.createSequentialGroup()
-							.addGap(10)
-							.addComponent(btnNewButton)
+							.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
 							.addGroup(jPanel1Layout.createSequentialGroup()
@@ -133,22 +140,37 @@ public class ShiftCalenderCustom extends JPanel {
 								.addComponent(lbType, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(38, Short.MAX_VALUE))
 							.addGroup(jPanel1Layout.createSequentialGroup()
-								.addComponent(lbDate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lbDate, GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
 								.addGap(20)))))
 		);
 		jPanel1Layout.setVerticalGroup(
-			jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+			jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lbType))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lbDate)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnNewButton)
-					.addContainerGap(483, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(479, Short.MAX_VALUE))
 		);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuPanel.add(menuBar);
+		
+		JMenu mnVagtkalender = new JMenu("Valgmuligheder");
+		menuBar.add(mnVagtkalender);
+		
+		mntmNewMenuItem = new JMenuItem("Tag vagt");
+		mnVagtkalender.add(mntmNewMenuItem);
+		
+		mntmNewMenuItem_1 = new JMenuItem("Afdelinsplan");
+		mnVagtkalender.add(mntmNewMenuItem_1);
+		
+		mntmNewMenuItem_2 = new JMenuItem("Statestikker");
+		mnVagtkalender.add(mntmNewMenuItem_2);
 		jPanel1.setLayout(jPanel1Layout);
 
 		lbMonthYear.setFont(new Font("sansserif", 1, 30));
@@ -229,7 +251,7 @@ public class ShiftCalenderCustom extends JPanel {
 					.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(slide, GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-				.addGroup(layout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
 		);

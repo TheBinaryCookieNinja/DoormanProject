@@ -9,6 +9,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JLayeredPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class ShiftCalenderPanel extends JLayeredPane {
 	
@@ -79,6 +82,11 @@ public class ShiftCalenderPanel extends JLayeredPane {
 		fri = new Cell();
 		sat = new Cell();
 		cell8 = new Cell();
+		cell8.setToolTipText("");
+		cell8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cell9 = new Cell();
 		cell10 = new Cell();
 		cell11 = new Cell();
@@ -151,25 +159,46 @@ public class ShiftCalenderPanel extends JLayeredPane {
         sat.setText("Sat");
         sat.setFont(new Font("sansserif", 0, 14)); 
         add(sat);
-
+        
+        
+        // to set the date at the top center of the cell and the shift time at the bottom, the jbutton is wrapped in HTML and div element with CSS styles has been used to align text.
+        int date = 27;
+        String shiftTime = "9:00 - 17:00";
+        String shiftStatus = "Frigiv";
+        String buttonText = String.format(
+        		"<html><div style='text-align: center; padding-top: 0px;'>%d</div><br/><div style='text-align: center;'>%s</div><br/><div style='text-align: center;'>%s</div></html>",
+                date, shiftTime, shiftStatus);
+        cell8.setText(buttonText);
         cell8.setFont(new Font("sansserif", 0, 14)); 
         add(cell8);
 
+        cell9.setText("28");
         cell9.setFont(new Font("sansserif", 0, 14)); 
         add(cell9);
 
+        int date9 = 29;
+        String shiftTime9 = "22:00 - 05:00";
+        String shiftStatus9 = "Frigiv";
+        String buttonText9 = String.format(
+        		"<html><div style='text-align: center; padding-top: 0px;'>%d</div><br/><div style='text-align: center;'>%s</div><br/><div style='text-align: center;'>%s</div></html>",
+                date9, shiftTime9, shiftStatus9);
+        cell10.setText(buttonText9);
         cell10.setFont(new Font("sansserif", 0, 14)); 
         add(cell10);
 
+        cell11.setText("30");
         cell11.setFont(new Font("sansserif", 0, 14)); 
         add(cell11);
 
+        cell12.setText("1");
         cell12.setFont(new Font("sansserif", 0, 14)); 
         add(cell12);
 
+        cell13.setText("2");
         cell13.setFont(new Font("sansserif", 0, 14)); 
         add(cell13);
 
+        cell14.setText("3");
         cell14.setFont(new Font("sansserif", 0, 14)); 
         add(cell14);
 
