@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout.Alignment;
 
 public class MainCalendar extends JFrame {
 
@@ -41,7 +42,7 @@ public class MainCalendar extends JFrame {
 	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 915, 826);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -54,22 +55,21 @@ public class MainCalendar extends JFrame {
 		calendarCustom2.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 205)));
 		
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+		jPanel1Layout.setHorizontalGroup(
+			jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+					.addGap(27)
+					.addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(31, Short.MAX_VALUE))
+		);
+		jPanel1Layout.setVerticalGroup(
+			jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+					.addGap(26)
+					.addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(33, Short.MAX_VALUE))
+		);
 		jPanel1.setLayout(jPanel1Layout);
-		 jPanel1Layout.setHorizontalGroup(
-		            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		            .addGroup(jPanel1Layout.createSequentialGroup()
-		                .addGap(48, 48, 48)
-		                .addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addContainerGap(381, Short.MAX_VALUE))
-		        );
-		 
-		 jPanel1Layout.setVerticalGroup(
-		            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-		            .addGroup(jPanel1Layout.createSequentialGroup()
-		                .addGap(48, 48, 48)
-		                .addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                .addContainerGap(381, Short.MAX_VALUE))
-		    );
 
 		  GroupLayout layout = new GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
