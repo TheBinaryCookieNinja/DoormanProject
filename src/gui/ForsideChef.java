@@ -57,9 +57,9 @@ public class ForsideChef extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton btnArbejdsdage = new JButton("Angiv arbejdsdage");
-		btnArbejdsdage.setBounds(20, 120, 150, 30);
-		btnArbejdsdage.addActionListener(new ActionListener() {
+		JButton btnVagtUddelegering = new JButton("Vagt uddelegering");
+		btnVagtUddelegering.setBounds(20, 120, 150, 30);
+		btnVagtUddelegering.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -93,7 +93,7 @@ public class ForsideChef extends JFrame {
 		textInfo.setEditable(false);
 		textInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		textInfo.setText("Info");
-		textInfo.setBounds(214, 26, 252, 26);
+		textInfo.setBounds(217, 26, 246, 26);
 		contentPane.add(textInfo);
 		textInfo.setColumns(10);
 		
@@ -102,9 +102,9 @@ public class ForsideChef extends JFrame {
 		txtEvents.setText("Events");
 		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEvents.setColumns(10);
-		txtEvents.setBounds(502, 26, 252, 26);
+		txtEvents.setBounds(505, 26, 246, 26);
 		contentPane.add(txtEvents);
-		contentPane.add(btnArbejdsdage);
+		contentPane.add(btnVagtUddelegering);
 		
 		JButton btnVagtkalender = new JButton("Vagtkalender");
 		btnVagtkalender.setBounds(20, 78, 150, 30);
@@ -119,9 +119,9 @@ public class ForsideChef extends JFrame {
 
 		   
 		
-		JButton btnUddelegering = new JButton("Vagt uddelegering");
-		btnUddelegering.setBounds(20, 162, 150, 30);
-		contentPane.add(btnUddelegering);
+		JButton btnTagEnVagt = new JButton("Tag en vagt");
+		btnTagEnVagt.setBounds(20, 162, 150, 30);
+		contentPane.add(btnTagEnVagt);
 		
 		JButton btnAfdelingsplan = new JButton("Afdelingsplan");
 		btnAfdelingsplan.setBounds(20, 204, 150, 30);
@@ -135,17 +135,17 @@ public class ForsideChef extends JFrame {
 		btnStatistikker.setBounds(20, 246, 150, 30);
 		contentPane.add(btnStatistikker);
 		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		model.addElement("Item 1");
-		model.addElement("Item 2");
-		model.addElement("Item 3");
-		model.addElement("Item 4");
-		model.addElement("Item 5");
-		model.addElement("Item 6");
-		model.addElement("Item 7");
-		model.addElement("Item 8");
+		DefaultListModel<String> modelInfoList = new DefaultListModel<>();
+		modelInfoList.addElement("Item 1");
+		modelInfoList.addElement("Item 2");
+		modelInfoList.addElement("Item 3");
+		modelInfoList.addElement("Item 4");
+		modelInfoList.addElement("Item 5");
+		modelInfoList.addElement("Item 6");
+		modelInfoList.addElement("Item 7");
+		modelInfoList.addElement("Item 8");
 
-		JList<String> InfoList= new JList<String>(model);
+		JList<String> InfoList= new JList<String>(modelInfoList);
 		InfoList.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(InfoList);
 		scrollPane.setBounds(217, 48, 246, 473);
@@ -153,17 +153,17 @@ public class ForsideChef extends JFrame {
 
 
 
-		DefaultListModel<String> model2 = new DefaultListModel<>();
-		model.addElement("Item 1");
-		model.addElement("Item 2");
-		model.addElement("Item 3");
-		model.addElement("Item 4");
-		model.addElement("Item 5");
-		model.addElement("Item 6");
-		model.addElement("Item 7");
-		model.addElement("Item 8");
+		DefaultListModel<String> modelEventsList = new DefaultListModel<>();
+		modelEventsList.addElement("Item 1");
+		modelEventsList.addElement("Item 2");
+		modelEventsList.addElement("Item 3");
+		modelEventsList.addElement("Item 4");
+		modelEventsList.addElement("Item 5");
+		modelEventsList.addElement("Item 6");
+		modelEventsList.addElement("Item 7");
+		modelEventsList.addElement("Item 8");
 
-		JList<String> EventsList = new JList<String>(model2);
+		JList<String> EventsList = new JList<String>(modelEventsList);
 		JScrollPane scrollPane2 = new JScrollPane(EventsList);
 		scrollPane2.setBounds(505, 48, 246, 473);
 		contentPane.add(scrollPane2);
