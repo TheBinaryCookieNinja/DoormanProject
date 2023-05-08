@@ -93,7 +93,7 @@ public class ForsideChef extends JFrame {
 		textInfo.setEditable(false);
 		textInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		textInfo.setText("Info");
-		textInfo.setBounds(214, 26, 246, 26);
+		textInfo.setBounds(217, 26, 246, 26);
 		contentPane.add(textInfo);
 		textInfo.setColumns(10);
 		
@@ -102,7 +102,7 @@ public class ForsideChef extends JFrame {
 		txtEvents.setText("Events");
 		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEvents.setColumns(10);
-		txtEvents.setBounds(502, 26, 246, 26);
+		txtEvents.setBounds(505, 26, 246, 26);
 		contentPane.add(txtEvents);
 		contentPane.add(btnVagtUddelegering);
 		

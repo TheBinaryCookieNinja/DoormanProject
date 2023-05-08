@@ -102,7 +102,7 @@ public class ForsideMedarbejder extends JFrame {
 		txtEvents.setText("Events");
 		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEvents.setColumns(10);
-		txtEvents.setBounds(502, 26, 246, 26);
+		txtEvents.setBounds(505, 26, 246, 26);
 		contentPane.add(txtEvents);
 		contentPane.add(btnArbejdsdage);
 		
