@@ -1,5 +1,19 @@
 package model;
 
 public class UnavailabilityRequest {
+	private String reason;
 
+    public UnavailabilityRequest(String reason) {
+        this.reason = reason;
+    }
+
+    
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }
+
