@@ -7,16 +7,25 @@ public abstract class Employee {
     private String email;
     private String address;
     private String passcode;
+    protected static EmployeeType employeeType;
 
-    public Employee(String name, String phone, String email, String address, String passcode) {
-        this.employeeId = employeeId;
+    public Employee( int employeeId, String name, String phone, String email, String address, String passcode, EmployeeType employeeType) {
+    	this.employeeId = employeeId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.passcode = passcode;
+        Employee.employeeType = employeeType;
     }
 
+    public static EmployeeType getEmployeeType() {
+		return employeeType;
+	}
+
+	public void setEmployeeType(EmployeeType employeeType) {
+		Employee.employeeType = employeeType;
+	}
     
     public int getEmployeeId() {
         return employeeId;
