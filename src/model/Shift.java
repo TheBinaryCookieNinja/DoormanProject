@@ -5,12 +5,16 @@ public class Shift {
 	    private String shiftDate;
 	    private String checkInTime;
 	    private String checkOutTime;
+		private int barId;
+		private int doormanId;
 
-	    public Shift(int shiftId, String shiftDate, String checkInTime, String checkOutTime) {
+	    public Shift(int shiftId, String shiftDate, String checkInTime, String checkOutTime, int barId, int doormanId) {
 	        this.shiftId = shiftId;
 	        this.shiftDate = shiftDate;
 	        this.checkInTime = checkInTime;
 	        this.checkOutTime = checkOutTime;
+	        this.barId = barId;
+	        this.doormanId = doormanId;
 	    }
 
 	   
@@ -47,6 +51,22 @@ public class Shift {
 
 	    public void setCheckOutTime(String checkOutTime) {
 	        this.checkOutTime = checkOutTime;
+	    }
+	    
+	    public int getBarId() {
+	    	return barId;
+	    }
+	    
+	    public void setBarId(int barId) {
+	    	this.barId = barId;
+	    }
+	    
+	    public int getDoormanId() {
+	    	return doormanId;
+	    }
+	    
+	    public void setDoormanId(int doormanId) {
+	    	this.doormanId = doormanId;
 	    }
 	}
 
