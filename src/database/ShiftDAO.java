@@ -3,27 +3,24 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.DoormanCtrl;
-import controller.ShiftCtrl;
-import database.DBConnection;
-import database.DataAccessException;
-import model.Doorman;
 import model.Shift;
 
 public class ShiftDAO {
 	private static final String findAllQ = 
-			"select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shift";
+			"select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
 	private static final String findByIdQ = 
 		findAllQ + "where shiftId = ?";
-	
+	private static final String createShiftQ =
+			"insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String updateQ = 
-			"update Shift set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?, signatureId = ?";
+			"update Shiftt set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?, signatureId = ?";
+	private static final String deleteShiftQ = 
+			"delete * from Shiftt where shiftId = ?";
 	
-	private PreparedStatement findAll, findById, update;
+	private PreparedStatement findAll, findById, createShift, update, deleteShift;
 			
 	public ShiftDAO() throws DataAccessException {
 		try {
@@ -31,8 +28,12 @@ public class ShiftDAO {
 				.prepareStatement(findAllQ);
 		findById = DBConnection.getInstance().getConnection()
 				.prepareStatement(findByIdQ);
+		createShift =  DBConnection.getInstance().getConnection()
+				.prepareStatement(createShiftQ);
 		update = DBConnection.getInstance().getConnection()
 				.prepareStatement(updateQ);
+		deleteShift = DBConnection.getInstance().getConnection()
+				.prepareStatement(deleteShiftQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -62,6 +63,17 @@ public class ShiftDAO {
 		}
 	}
 	
+	public void createShift (Shift shift) throws SQLException {
+		createShift.setInt(1, shift.getShiftId());
+		createShift.setString(2, shift.getShiftDate());
+		createShift.setString(3, shift.getCheckInTime());
+		createShift.setString(4, shift.getCheckOutTime());
+		createShift.setInt(5, shift.getBarId());
+		createShift.setInt(6, shift.getDoormanId());
+		createShift.execute();
+		
+	}
+	
 	public void update(Shift s) throws DataAccessException {
 		final int shiftId = s.getShiftId();
 		final String shiftDate = s.getCheckInTime();
@@ -86,8 +98,14 @@ public class ShiftDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
 		}
-
 	}
+		
+		public void deleteShift(int shiftId) throws SQLException {
+			deleteShift.setInt(1, shiftId);
+			deleteShift.execute();
+	}
+	
+	
 	private Shift buildObject(ResultSet rs) throws SQLException {
 		Shift s = new Shift(
 				rs.getInt("shiftId"),
