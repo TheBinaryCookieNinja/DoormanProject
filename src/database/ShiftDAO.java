@@ -79,12 +79,13 @@ public class ShiftDAO {
 	}
 	private Shift buildObject(ResultSet rs) throws SQLException {
 		Shift s = new Shift(
-				rs.getInt("id"),
-				rs.getString("name"),
-				rs.getString("email"),
-				rs.getString("phone"),
-				rs.getDate("birth_date").toLocalDate(),
-				new Shift(rs.getInt("groups_id"), null, null)
+				rs.getInt("shiftId"),
+				rs.getDate("shiftDate").toLocalDate(),
+				rs.getTime("checkInTime"),
+				rs.getTime("checkOutTime"),
+				rs.getInt("barId"),
+				rs.getInt("doormanId"),
+				new Shift(rs.getInt("shifts_id"), null, null)
 				);
 		return s;
 	}
