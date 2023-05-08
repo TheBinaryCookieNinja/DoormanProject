@@ -4,7 +4,7 @@ public class Doorman extends Employee {
 	private double hourlyRate;
 
     public Doorman(int employeeId, String name, String phone, String email, String address, String passcode, double hourlyRate) {
-        super(name, phone, email, address, passcode);
+        super(employeeId, name, phone, email, address, passcode);
         this.hourlyRate = hourlyRate;
     }
 
