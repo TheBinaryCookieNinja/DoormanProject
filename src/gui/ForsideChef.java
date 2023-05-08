@@ -18,6 +18,9 @@ import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import java.awt.Choice;
 import javax.swing.JScrollPane;
+import javax.swing.JMenuBar;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 
 
@@ -56,45 +59,12 @@ public class ForsideChef extends JFrame {
 		contentPane = new JPanel();
 
 		setContentPane(contentPane);
-		
-		JButton btnVagtUddelegering = new JButton("Vagt uddelegering");
-		btnVagtUddelegering.setBounds(20, 120, 150, 30);
-		btnVagtUddelegering.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		contentPane.setLayout(null);
-		
-		Choice dropdownMenu = new Choice();
-		dropdownMenu.setBounds(20, 43, 150, 26);
-		dropdownMenu.add("Item 1");
-		dropdownMenu.add("Item 2");
-		dropdownMenu.add("Item 3");
-		dropdownMenu.add("Item 4");
-		dropdownMenu.addItemListener((ItemListener) new ItemListener() {
-		    public void itemStateChanged1(ItemEvent e) {
-		        String selected = dropdownMenu.getSelectedItem();
-		        System.out.println("Selected: " + selected);
-		    }
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-
-		});
-		contentPane.add(dropdownMenu);
 
 		
 		textInfo = new JTextField();
 		textInfo.setEditable(false);
 		textInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		textInfo.setText("Info");
-		textInfo.setBounds(217, 26, 246, 26);
-		contentPane.add(textInfo);
 		textInfo.setColumns(10);
 		
 		txtEvents = new JTextField();
@@ -102,13 +72,6 @@ public class ForsideChef extends JFrame {
 		txtEvents.setText("Events");
 		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
 		txtEvents.setColumns(10);
-		txtEvents.setBounds(505, 26, 246, 26);
-		contentPane.add(txtEvents);
-		contentPane.add(btnVagtUddelegering);
-		
-		JButton btnVagtkalender = new JButton("Vagtkalender");
-		btnVagtkalender.setBounds(20, 78, 150, 30);
-		contentPane.add(btnVagtkalender);
 		
 		
 		DefaultListModel<String> l1 = new DefaultListModel<>();  
@@ -116,24 +79,6 @@ public class ForsideChef extends JFrame {
 		l1.addElement("Item2");  
 		l1.addElement("Item3");  
 		l1.addElement("Item4");
-
-		   
-		
-		JButton btnTagEnVagt = new JButton("Tag en vagt");
-		btnTagEnVagt.setBounds(20, 162, 150, 30);
-		contentPane.add(btnTagEnVagt);
-		
-		JButton btnAfdelingsplan = new JButton("Afdelingsplan");
-		btnAfdelingsplan.setBounds(20, 204, 150, 30);
-		contentPane.add(btnAfdelingsplan);
-		
-		JButton btnStatistikker = new JButton("Statistikker");
-		btnStatistikker.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStatistikker.setBounds(20, 246, 150, 30);
-		contentPane.add(btnStatistikker);
 		
 		DefaultListModel<String> modelInfoList = new DefaultListModel<>();
 		modelInfoList.addElement("Item 1");
@@ -148,8 +93,6 @@ public class ForsideChef extends JFrame {
 		JList<String> InfoList= new JList<String>(modelInfoList);
 		InfoList.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(InfoList);
-		scrollPane.setBounds(217, 48, 246, 473);
-		contentPane.add(scrollPane);
 
 
 
@@ -165,8 +108,64 @@ public class ForsideChef extends JFrame {
 
 		JList<String> EventsList = new JList<String>(modelEventsList);
 		JScrollPane scrollPane2 = new JScrollPane(EventsList);
-		scrollPane2.setBounds(505, 48, 246, 473);
-		contentPane.add(scrollPane2);
+		
+		JMenuBar menuBar = new JMenuBar();
+		
+		JButton btnVagtkalender = new JButton("Vagtkalender");
+		menuBar.add(btnVagtkalender);
+		
+		JButton btnArbejdsdage = new JButton("Angiv arbejdsdage");
+		menuBar.add(btnArbejdsdage);
+		
+				   
+				
+				JButton btnUddelegering = new JButton("Vagt uddelegering");
+				menuBar.add(btnUddelegering);
+				
+				JButton btnAfdelingsplan = new JButton("Afdelingsplan");
+				menuBar.add(btnAfdelingsplan);
+				
+				JButton btnStatistikker = new JButton("Statistikker");
+				menuBar.add(btnStatistikker);
+				GroupLayout gl_contentPane = new GroupLayout(contentPane);
+				gl_contentPane.setHorizontalGroup(
+					gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, 800, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textInfo, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE))
+							.addGap(36)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtEvents, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)))
+				);
+				gl_contentPane.setVerticalGroup(
+					gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(6)
+							.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+							.addGap(17)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(24)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtEvents, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(24)
+									.addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))))
+				);
+				contentPane.setLayout(gl_contentPane);
+				btnStatistikker.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
+		btnArbejdsdage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 	}
 }

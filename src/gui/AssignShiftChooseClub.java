@@ -29,6 +29,9 @@ import java.awt.event.MouseEvent;
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.event.KeyEvent;
 import javax.swing.Box;
 import javax.swing.event.MenuKeyListener;
@@ -45,8 +48,14 @@ public class AssignShiftChooseClub extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @throws UnsupportedLookAndFeelException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
