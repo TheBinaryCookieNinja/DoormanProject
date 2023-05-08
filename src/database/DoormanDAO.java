@@ -3,16 +3,12 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.DoormanCtrl;
-import controller.ShiftCtrl;
-import database.DBConnection;
-import database.DataAccessException;
+
 import model.Doorman;
-import model.Shift;
+
 
 public class DoormanDAO {
 	private static final String findAllQ = 
@@ -93,9 +89,11 @@ public class DoormanDAO {
 		final double hourlyRate = d.getHourlyRate();
 		
 		try {
-			//update person set 
-			//name = ?, email = ?, phone = ? , 
-			//birth_date = ?, groups_id = ? where id = ?"
+			//"update Doorman set 
+			//employeeId = ?, f_name = ?, l_name = ?, phone = ?,
+			//email = ?, address = ?, passcode = ?, hourlyRate = ?
+			//where employeeId = ?"
+			
 			update.setInt(1, employeeId);
 			update.setString(2, f_name);
 			update.setString(3, l_name);

@@ -1,15 +1,23 @@
 package model;
 
 public class Bar {
-	 private String name;
+		private int barId;
+		private String name;
 	    private String phone;
 	    private String email;
 	    private String address;
 	    private String cvr;
 
-	    public Bar() {
+	    public Bar(int barId, String name, String phone, String email, String address, String cvr) {
 	    }
 
+	    public int getBarId() {
+	    	return barId;
+	    }
+	    
+	    public void setBarId(int barId) {
+	    	this.barId = barId;
+	    }
 	    
 	    public String getName() {
 	        return name;

@@ -83,16 +83,16 @@ public class ShiftDAO {
 		final int doormanId = s.getDoormanId();
 				
 		try {
-			//update person set 
-			//name = ?, email = ?, phone = ? , 
-			//birth_date = ?, groups_id = ? where id = ?"
+			//"update Shift set
+			//shiftId = ?, shiftDate = ?, checkInTime = ?,
+			//checkOutTime = ?, barId = ?, doormanId = ? where shiftId = ?"
+			//
 			update.setInt(1, shiftId);
 			update.setString(2, shiftDate);
 			update.setString(3, checkInTime);
 			update.setString(4, checkOutTime);
 			update.setInt(5, barId);
 			update.setInt(6, doormanId);
-			
 			
 			update.executeUpdate();
 		} catch (SQLException e) {
