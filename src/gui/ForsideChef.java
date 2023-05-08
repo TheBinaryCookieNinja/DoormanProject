@@ -57,9 +57,9 @@ public class ForsideChef extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton btnArbejdsdage = new JButton("Angiv arbejdsdage");
-		btnArbejdsdage.setBounds(20, 120, 150, 30);
-		btnArbejdsdage.addActionListener(new ActionListener() {
+		JButton btnVagtUddelegering = new JButton("Vagt uddelegering");
+		btnVagtUddelegering.setBounds(20, 120, 150, 30);
+		btnVagtUddelegering.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -104,7 +104,7 @@ public class ForsideChef extends JFrame {
 		txtEvents.setColumns(10);
 		txtEvents.setBounds(502, 26, 246, 26);
 		contentPane.add(txtEvents);
-		contentPane.add(btnArbejdsdage);
+		contentPane.add(btnVagtUddelegering);
 		
 		JButton btnVagtkalender = new JButton("Vagtkalender");
 		btnVagtkalender.setBounds(20, 78, 150, 30);
@@ -119,9 +119,9 @@ public class ForsideChef extends JFrame {
 
 		   
 		
-		JButton btnUddelegering = new JButton("Vagt uddelegering");
-		btnUddelegering.setBounds(20, 162, 150, 30);
-		contentPane.add(btnUddelegering);
+		JButton btnTagEnVagt = new JButton("Tag en vagt");
+		btnTagEnVagt.setBounds(20, 162, 150, 30);
+		contentPane.add(btnTagEnVagt);
 		
 		JButton btnAfdelingsplan = new JButton("Afdelingsplan");
 		btnAfdelingsplan.setBounds(20, 204, 150, 30);
