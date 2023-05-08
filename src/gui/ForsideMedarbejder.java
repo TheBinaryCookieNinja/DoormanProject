@@ -135,17 +135,17 @@ public class ForsideMedarbejder extends JFrame {
 		btnStatistikker.setBounds(20, 246, 150, 30);
 		contentPane.add(btnStatistikker);
 		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		model.addElement("Item 1");
-		model.addElement("Item 2");
-		model.addElement("Item 3");
-		model.addElement("Item 4");
-		model.addElement("Item 5");
-		model.addElement("Item 6");
-		model.addElement("Item 7");
-		model.addElement("Item 8");
+		DefaultListModel<String> modelInfoList = new DefaultListModel<>();
+		modelInfoList.addElement("Item 1");
+		modelInfoList.addElement("Item 2");
+		modelInfoList.addElement("Item 3");
+		modelInfoList.addElement("Item 4");
+		modelInfoList.addElement("Item 5");
+		modelInfoList.addElement("Item 6");
+		modelInfoList.addElement("Item 7");
+		modelInfoList.addElement("Item 8");
 
-		JList<String> InfoList= new JList<String>(model);
+		JList<String> InfoList= new JList<String>(modelInfoList);
 		InfoList.setBorder(null);
 		JScrollPane scrollPane = new JScrollPane(InfoList);
 		scrollPane.setBounds(217, 48, 246, 473);
@@ -153,17 +153,17 @@ public class ForsideMedarbejder extends JFrame {
 
 
 
-		DefaultListModel<String> model2 = new DefaultListModel<>();
-		model.addElement("Item 1");
-		model.addElement("Item 2");
-		model.addElement("Item 3");
-		model.addElement("Item 4");
-		model.addElement("Item 5");
-		model.addElement("Item 6");
-		model.addElement("Item 7");
-		model.addElement("Item 8");
+		DefaultListModel<String> modelEventsList = new DefaultListModel<>();
+		modelEventsList.addElement("Item 1");
+		modelEventsList.addElement("Item 2");
+		modelEventsList.addElement("Item 3");
+		modelEventsList.addElement("Item 4");
+		modelEventsList.addElement("Item 5");
+		modelEventsList.addElement("Item 6");
+		modelEventsList.addElement("Item 7");
+		modelEventsList.addElement("Item 8");
 
-		JList<String> EventsList = new JList<String>(model2);
+		JList<String> EventsList = new JList<String>(modelEventsList);
 		JScrollPane scrollPane2 = new JScrollPane(EventsList);
 		scrollPane2.setBounds(505, 48, 246, 473);
 		contentPane.add(scrollPane2);
