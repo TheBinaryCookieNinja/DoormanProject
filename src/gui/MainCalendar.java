@@ -22,7 +22,8 @@ public class MainCalendar extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
+		//Nimbus uses Java 2D vector graphics to draw the user interface (UI), rather than static bitmaps, so the UI can be crisply rendered at any resolution
 		try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

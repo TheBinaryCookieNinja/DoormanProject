@@ -18,6 +18,13 @@ import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import java.awt.Choice;
 import javax.swing.JScrollPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JMenuBar;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 
 
@@ -52,63 +59,38 @@ public class ForsideChef extends JFrame {
 	 */
 	public ForsideChef() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
-		contentPane = new JPanel();
-
-		setContentPane(contentPane);
+		setBounds(100, 100, 852, 726);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JButton btnVagtkalender = new JButton("Vagtkalender");
+		menuBar.add(btnVagtkalender);
 		
 		JButton btnVagtUddelegering = new JButton("Vagt uddelegering");
-		btnVagtUddelegering.setBounds(20, 120, 150, 30);
+		menuBar.add(btnVagtUddelegering);
+		
+				   
+				
+				JButton btnTagEnVagt = new JButton("Tag en vagt");
+				menuBar.add(btnTagEnVagt);
+				
+				JButton btnAfdelingsplan = new JButton("Afdelingsplan");
+				menuBar.add(btnAfdelingsplan);
+				
+				JButton btnStatistikker = new JButton("Statistikker");
+				menuBar.add(btnStatistikker);
+				btnStatistikker.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 		btnVagtUddelegering.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		contentPane.setLayout(null);
-		
-		Choice dropdownMenu = new Choice();
-		dropdownMenu.setBounds(20, 43, 150, 26);
-		dropdownMenu.add("Item 1");
-		dropdownMenu.add("Item 2");
-		dropdownMenu.add("Item 3");
-		dropdownMenu.add("Item 4");
-		dropdownMenu.addItemListener((ItemListener) new ItemListener() {
-		    public void itemStateChanged1(ItemEvent e) {
-		        String selected = dropdownMenu.getSelectedItem();
-		        System.out.println("Selected: " + selected);
-		    }
+		contentPane = new JPanel();
 
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-
-		});
-		contentPane.add(dropdownMenu);
-
-		
-		textInfo = new JTextField();
-		textInfo.setEditable(false);
-		textInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		textInfo.setText("Info");
-		textInfo.setBounds(217, 26, 246, 26);
-		contentPane.add(textInfo);
-		textInfo.setColumns(10);
-		
-		txtEvents = new JTextField();
-		txtEvents.setEditable(false);
-		txtEvents.setText("Events");
-		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
-		txtEvents.setColumns(10);
-		txtEvents.setBounds(505, 26, 246, 26);
-		contentPane.add(txtEvents);
-		contentPane.add(btnVagtUddelegering);
-		
-		JButton btnVagtkalender = new JButton("Vagtkalender");
-		btnVagtkalender.setBounds(20, 78, 150, 30);
-		contentPane.add(btnVagtkalender);
+		setContentPane(contentPane);
 		
 		
 		DefaultListModel<String> l1 = new DefaultListModel<>();  
@@ -116,24 +98,6 @@ public class ForsideChef extends JFrame {
 		l1.addElement("Item2");  
 		l1.addElement("Item3");  
 		l1.addElement("Item4");
-
-		   
-		
-		JButton btnTagEnVagt = new JButton("Tag en vagt");
-		btnTagEnVagt.setBounds(20, 162, 150, 30);
-		contentPane.add(btnTagEnVagt);
-		
-		JButton btnAfdelingsplan = new JButton("Afdelingsplan");
-		btnAfdelingsplan.setBounds(20, 204, 150, 30);
-		contentPane.add(btnAfdelingsplan);
-		
-		JButton btnStatistikker = new JButton("Statistikker");
-		btnStatistikker.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStatistikker.setBounds(20, 246, 150, 30);
-		contentPane.add(btnStatistikker);
 		
 		DefaultListModel<String> modelInfoList = new DefaultListModel<>();
 		modelInfoList.addElement("Item 1");
@@ -144,12 +108,6 @@ public class ForsideChef extends JFrame {
 		modelInfoList.addElement("Item 6");
 		modelInfoList.addElement("Item 7");
 		modelInfoList.addElement("Item 8");
-
-		JList<String> InfoList= new JList<String>(modelInfoList);
-		InfoList.setBorder(null);
-		JScrollPane scrollPane = new JScrollPane(InfoList);
-		scrollPane.setBounds(217, 48, 246, 473);
-		contentPane.add(scrollPane);
 
 
 
@@ -162,11 +120,52 @@ public class ForsideChef extends JFrame {
 		modelEventsList.addElement("Item 6");
 		modelEventsList.addElement("Item 7");
 		modelEventsList.addElement("Item 8");
-
-		JList<String> EventsList = new JList<String>(modelEventsList);
-		JScrollPane scrollPane2 = new JScrollPane(EventsList);
-		scrollPane2.setBounds(505, 48, 246, 473);
-		contentPane.add(scrollPane2);
+		
+				
+				textInfo = new JTextField();
+				textInfo.setEditable(false);
+				textInfo.setHorizontalAlignment(SwingConstants.CENTER);
+				textInfo.setText("Info");
+				textInfo.setColumns(10);
+		
+		txtEvents = new JTextField();
+		txtEvents.setEditable(false);
+		txtEvents.setText("Events");
+		txtEvents.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEvents.setColumns(10);
+				
+						JList<String> EventsList = new JList<String>(modelEventsList);
+				
+						JList<String> InfoList= new JList<String>(modelInfoList);
+						InfoList.setBorder(null);
+				GroupLayout gl_contentPane = new GroupLayout(contentPane);
+				gl_contentPane.setHorizontalGroup(
+					gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(20)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(textInfo)
+								.addComponent(InfoList, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtEvents)
+								.addComponent(EventsList, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+							.addGap(29))
+				);
+				gl_contentPane.setVerticalGroup(
+					gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(28)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textInfo, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtEvents, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(InfoList, GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+								.addComponent(EventsList, GroupLayout.PREFERRED_SIZE, 591, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap())
+				);
+				contentPane.setLayout(gl_contentPane);
 
 	}
 }
