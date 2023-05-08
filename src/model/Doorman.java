@@ -1,10 +1,10 @@
 package model;
 
-public class Doorman {
+public class Doorman extends Employee {
 	private double hourlyRate;
 
     public Doorman(int employeeId, String name, String phone, String email, String address, String passcode, double hourlyRate) {
-        super();
+        super(name, phone, email, address, passcode);
         this.hourlyRate = hourlyRate;
     }
 

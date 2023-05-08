@@ -63,12 +63,23 @@ public class ShiftDAO {
 	}
 	
 	public void update(Shift s) throws DataAccessException {
-		
+		final int shiftId = s.getShiftId();
+		final String shiftDate = s.getCheckInTime();
+		final String checkInTime = s.getCheckInTime();
+		final String checkOutTime = s.getCheckOutTime();
+		final int barId = s.getBarId();
+		final int doormanId = s.getDoormanId();
+				
 		try {
 			//update person set 
 			//name = ?, email = ?, phone = ? , 
 			//birth_date = ?, groups_id = ? where id = ?"
-			update.setString(1, name);
+			update.setInt(1, shiftId);
+			update.setString(2, shiftDate);
+			update.setString(3, checkInTime);
+			update.setString(4, checkOutTime);
+			update.setInt(5, barId);
+			update.setInt(6, doormanId);
 			
 			
 			update.executeUpdate();
@@ -80,12 +91,11 @@ public class ShiftDAO {
 	private Shift buildObject(ResultSet rs) throws SQLException {
 		Shift s = new Shift(
 				rs.getInt("shiftId"),
-				rs.getDate("shiftDate").toLocalDate(),
-				rs.getTime("checkInTime"),
-				rs.getTime("checkOutTime"),
+				rs.getString("shiftDate"),
+				rs.getString("checkInTime"),
+				rs.getString("checkOutTime"),
 				rs.getInt("barId"),
-				rs.getInt("doormanId"),
-				new Shift(rs.getInt("shifts_id"), null, null)
+				rs.getInt("doormanId")
 				);
 		return s;
 	}

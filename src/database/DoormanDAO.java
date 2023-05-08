@@ -12,8 +12,6 @@ import controller.ShiftCtrl;
 import database.DBConnection;
 import database.DataAccessException;
 import model.Doorman;
-import model.Group;
-import model.Person;
 import model.Shift;
 
 public class DoormanDAO {
@@ -65,29 +63,42 @@ public class DoormanDAO {
 	}
 	
 	public void update(Doorman d) throws DataAccessException {
-	
+		final int employeeId = d.getEmployeeId();
+		final String name = d.getName();
+		final String phone = d.getPhone();
+		final String email = d.getEmail();
+		final String address = d.getAddress();
+		final String passcode = d.getPasscode();
+		final double hourlyRate = d.getHourlyRate();
+		
 		try {
 			//update person set 
 			//name = ?, email = ?, phone = ? , 
 			//birth_date = ?, groups_id = ? where id = ?"
-			update.setString(1, name);
-			
+			update.setInt(1, employeeId);
+			update.setString(2, name);
+			update.setString(3, phone);
+			update.setString(4, email);
+			update.setString(5, address);
+			update.setString(6, passcode);
+			update.setDouble(7, hourlyRate);
 			
 			update.executeUpdate();
 		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not update person where id = " + id);
+			throw new DataAccessException(e, "Could not update employee where id = " + employeeId);
 		}
 
 	}
 	
 	private Doorman buildObject(ResultSet rs) throws SQLException {
 		Doorman d = new Doorman(
-				rs.getInt("id"),
+				rs.getInt("employeeId"),
 				rs.getString("name"),
-				rs.getString("email"),
 				rs.getString("phone"),
-				rs.getDate("birth_date").toLocalDate(),
-				new Shift(rs.getInt("groups_id"), null, null)
+				rs.getString("email"),
+				rs.getString("address"),
+				rs.getString("passcode"),
+				rs.getDouble("hourlyRate")
 				);
 		return d;
 	}
