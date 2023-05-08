@@ -19,11 +19,14 @@ public class DoormanDAO {
 			"select employeeId, hourlyRate from Doorman";
 	private static final String findByIdQ = 
 		findAllQ + "where employeeId = ?";
-	
+	private static final String createDoormanQ =
+			"insert into Doorman (employeeId, name, phone, email, address, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String updateQ = 
 			"update Doorman set employeeId = ?, hourlyRate = ?";
+	private static final String deleteDoormanQ =
+			"delete * from Doorman where employeeId = ?";
 	
-	private PreparedStatement findAll, findById, update;
+	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman;
 			
 	public DoormanDAO() throws DataAccessException {
 		try {
@@ -31,7 +34,11 @@ public class DoormanDAO {
 				.prepareStatement(findAllQ);
 		findById = DBConnection.getInstance().getConnection()
 				.prepareStatement(findByIdQ);
+		createDoorman = DBConnection.getInstance().getConnection()
+				.prepareStatement(createDoormanQ);
 		update = DBConnection.getInstance().getConnection()
+				.prepareStatement(updateQ);
+		deleteDoorman = DBConnection.getInstance().getConnection()
 				.prepareStatement(updateQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
@@ -62,6 +69,19 @@ public class DoormanDAO {
 		}
 	}
 	
+	public void createDoorman(Doorman doorman) throws SQLException {
+		createDoorman.setInt(1, doorman.getEmployeeId());
+		createDoorman.setString(2, doorman.getName());
+		createDoorman.setString(3, doorman.getPhone());
+		createDoorman.setString(4, doorman.getEmail());
+		createDoorman.setString(5, doorman.getEmail());
+		createDoorman.setString(6, doorman.getAddress());
+		createDoorman.setString(7, doorman.getPasscode());
+		createDoorman.setDouble(8, doorman.getHourlyRate());
+		createDoorman.execute();
+		
+	}
+	
 	public void update(Doorman d) throws DataAccessException {
 		final int employeeId = d.getEmployeeId();
 		final String name = d.getName();
@@ -88,6 +108,11 @@ public class DoormanDAO {
 			throw new DataAccessException(e, "Could not update employee where id = " + employeeId);
 		}
 
+	}
+	
+	public void deleteDoorman(int employeeId) throws SQLException {
+		deleteDoorman.setInt(1, employeeId);
+		deleteDoorman.execute();
 	}
 	
 	private Doorman buildObject(ResultSet rs) throws SQLException {

@@ -8,7 +8,7 @@ public abstract class Employee {
     private String address;
     private String passcode;
 
-    public Employee(int employeeId, String name, String phone, String email, String address, String passcode) {
+    public Employee(String name, String phone, String email, String address, String passcode) {
         this.employeeId = employeeId;
         this.name = name;
         this.phone = phone;
