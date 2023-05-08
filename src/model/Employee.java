@@ -7,10 +7,13 @@ public abstract class Employee {
     private String email;
     private String address;
     private String passcode;
+	private String l_name;
+	private String f_name;
 
-    public Employee(String name, String phone, String email, String address, String passcode) {
+    public Employee(String f_name, String l_name, String phone, String email, String address, String passcode) {
         this.employeeId = employeeId;
-        this.name = name;
+        this.f_name = f_name;
+        this.l_name = l_name;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -27,12 +30,20 @@ public abstract class Employee {
     }
 
     
-    public String getName() {
-        return name;
+    public String getF_name() {
+        return f_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setF_name(String f_name) {
+        this.f_name = f_name;
+    }
+    
+    public String getL_name() {
+    	return l_name;
+    }
+    
+    public void setL_name(String l_name) {
+    	this.l_name = l_name;
     }
 
   

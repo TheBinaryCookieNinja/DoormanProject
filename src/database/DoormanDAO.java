@@ -20,7 +20,7 @@ public class DoormanDAO {
 	private static final String findByIdQ = 
 		findAllQ + "where employeeId = ?";
 	private static final String createDoormanQ =
-			"insert into Doorman (employeeId, name, phone, email, address, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?)";
+			"insert into Doorman (employeeId, f_name, l_name, phone, email, address, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String updateQ = 
 			"update Doorman set employeeId = ?, hourlyRate = ?";
 	private static final String deleteDoormanQ =
@@ -39,7 +39,7 @@ public class DoormanDAO {
 		update = DBConnection.getInstance().getConnection()
 				.prepareStatement(updateQ);
 		deleteDoorman = DBConnection.getInstance().getConnection()
-				.prepareStatement(updateQ);
+				.prepareStatement(deleteDoormanQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 			}
@@ -71,9 +71,9 @@ public class DoormanDAO {
 	
 	public void createDoorman(Doorman doorman) throws SQLException {
 		createDoorman.setInt(1, doorman.getEmployeeId());
-		createDoorman.setString(2, doorman.getName());
-		createDoorman.setString(3, doorman.getPhone());
-		createDoorman.setString(4, doorman.getEmail());
+		createDoorman.setString(2, doorman.getF_name());
+		createDoorman.setString(3, doorman.getL_name());
+		createDoorman.setString(4, doorman.getPhone());
 		createDoorman.setString(5, doorman.getEmail());
 		createDoorman.setString(6, doorman.getAddress());
 		createDoorman.setString(7, doorman.getPasscode());
@@ -84,7 +84,8 @@ public class DoormanDAO {
 	
 	public void update(Doorman d) throws DataAccessException {
 		final int employeeId = d.getEmployeeId();
-		final String name = d.getName();
+		final String f_name = d.getF_name();
+		final String l_name = d.getL_name();
 		final String phone = d.getPhone();
 		final String email = d.getEmail();
 		final String address = d.getAddress();
@@ -96,12 +97,13 @@ public class DoormanDAO {
 			//name = ?, email = ?, phone = ? , 
 			//birth_date = ?, groups_id = ? where id = ?"
 			update.setInt(1, employeeId);
-			update.setString(2, name);
-			update.setString(3, phone);
-			update.setString(4, email);
-			update.setString(5, address);
-			update.setString(6, passcode);
-			update.setDouble(7, hourlyRate);
+			update.setString(2, f_name);
+			update.setString(3, l_name);
+			update.setString(4, phone);
+			update.setString(5, email);
+			update.setString(6, address);
+			update.setString(7, passcode);
+			update.setDouble(8, hourlyRate);
 			
 			update.executeUpdate();
 		} catch (SQLException e) {
