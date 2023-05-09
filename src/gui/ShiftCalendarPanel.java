@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.GridLayout;
 
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -10,23 +11,31 @@ import java.util.Date;
 
 import javax.swing.JLayeredPane;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class ShiftCalenderPanel extends JLayeredPane {
+public class ShiftCalendarPanel extends JLayeredPane {
 	
 	// all the cells variables are declared at the bottom
 	private int month;
 	private int year;
+	private Cell[] days;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public ShiftCalenderPanel(int month, int year) {
+	public ShiftCalendarPanel(int month, int year) {
+		Calendar now = Calendar.getInstance();
 
-		this.month = month;
-		this.year = year;
+	
+		this.month = now.get(Calendar.MONTH) + 1;
+		this.year = now.get(Calendar.YEAR);
 		initComponents();
+		initializeDaysInMonth();
 		init();
 
 	}
@@ -39,10 +48,40 @@ public class ShiftCalenderPanel extends JLayeredPane {
 		fri.asTitle();
 		sat.asTitle();
 		sun.asTitle();
-		setDate();
+		setDate(LocalDate.now());
 	}
+	
+	public void initializeDaysInMonth() {
+		if (month < 1 || month > 12) {
+			throw new IllegalArgumentException("Invalid month value: " + month);
+		}
+        int numDaysInMonth = Month.of(month).length(Year.isLeap(year));
 
-	private void setDate() {
+        // Create a new array of Cells for this month
+        days = new Cell[numDaysInMonth];
+
+        // Initialize each day in the month
+        for (int i = 0; i < numDaysInMonth; i++) {
+        	Cell cell = new Cell();
+        	LocalDate localDate = LocalDate.of(year, month, i+1);
+            cell.setDate(localDate);
+            days[i] = cell;
+        }
+
+        // Add all the Cells to the panel
+        this.removeAll();
+        for (Cell day : days) {
+            this.add(day);
+        }
+        this.revalidate();
+        this.repaint();
+    }
+
+
+	private void setDate(LocalDate date) {
+		if (month < 1 || month > 12) {
+		    throw new IllegalArgumentException("Invalid month value: " + month);
+		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.MONTH, month-1); // subtracts 1 so that january will be month 0
@@ -52,9 +91,9 @@ public class ShiftCalenderPanel extends JLayeredPane {
 		Today today = getToday();
 		for(Component com : getComponents()) {
 			Cell cell = (Cell) com;
-			if(!Cell.isTitle()) {
+			if(!cell.isTitle()) {
 				cell.setText(calendar.get(Calendar.DATE) + "");
-				cell.setDate(calendar.getTime());
+				cell.setDate(date);
 				cell.currentMonth(calendar.get(Calendar.MONTH) == month -1);
 				calendar.add(Calendar.DATE, 1);// the current date is increased by 1
 				

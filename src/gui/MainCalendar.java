@@ -14,7 +14,7 @@ import javax.swing.GroupLayout.Alignment;
 public class MainCalendar extends JFrame {
 
 	private JPanel contentPane;
-	private ShiftCalenderCustom calendarCustom2;
+	private ShiftCalendarCustom calendarCustom2;
 	private JPanel jPanel1;
 
 
@@ -72,7 +72,10 @@ public class MainCalendar extends JFrame {
 		jPanel1 = new JPanel();
 		jPanel1.setBackground(new Color(255, 255, 255));
 		contentPane.add(jPanel1);
-		calendarCustom2 = new ShiftCalenderCustom();
+		ShiftCalendarPanel panel = new ShiftCalendarPanel(5, 2023);
+		    jPanel1.add(panel);
+		
+		calendarCustom2 = new ShiftCalendarCustom();
 		calendarCustom2.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 205)));
 		
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);

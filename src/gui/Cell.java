@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -12,9 +13,9 @@ import javax.swing.JLabel;
 public class Cell extends JButton {
 	
 	
-	private Date date;
-	private static boolean title;
-	private static boolean isToday;
+	private LocalDate date;
+	private boolean title;
+	private boolean isToday;
 	
 	// Constructor
 	public Cell () {
@@ -28,7 +29,7 @@ public class Cell extends JButton {
 		title = true;
 	}
 	
-	public static boolean isTitle() {
+	public boolean isTitle() {
 		return title;
 	}
 	
@@ -42,7 +43,7 @@ public class Cell extends JButton {
 		}
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	
