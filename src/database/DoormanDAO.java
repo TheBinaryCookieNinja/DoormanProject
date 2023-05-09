@@ -40,7 +40,7 @@ public class DoormanDAO {
 			throw new DataAccessException(e, "Could not prepare statement");
 			}
 		}
-		public List <Doorman> findAll() throws DataAccessException {
+		public List<Doorman> findAll() throws DataAccessException {
 			ResultSet rs;
 			try {
 				rs = findAll.executeQuery();
