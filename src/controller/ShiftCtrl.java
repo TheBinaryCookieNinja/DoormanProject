@@ -31,7 +31,7 @@ public class ShiftCtrl  {
      * @param date the date to get shifts for
      * @return list of shifts for the specified date
      */
-	public List<Shift> getShiftsByDate(Date date) throws DataAccessException {
+	public List<Shift> getShiftsByDate(java.util.Date date) throws DataAccessException {
 		// Convert java.util.Date to java.time.LocalDate
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return shiftDAO.getShiftsByDate(localDate);
