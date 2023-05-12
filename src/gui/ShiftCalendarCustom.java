@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+
+
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -24,11 +27,16 @@ import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.util.HashMap;
 
-public class ShiftCalenderCustom extends JPanel {
+public class ShiftCalendarCustom extends JPanel {
 	private int month;
 	private int year;
 	private SlidingPanel slide;
+	private Map<String, ShiftCalendarPanel> calendarPanels;
+    private ShiftCalendarPanel currentPanel;
+    private int currentMonth;
+    private int currentYear;
 
 	private JButton arrowBack;
 	private JButton arrowForward;
@@ -38,9 +46,6 @@ public class ShiftCalenderCustom extends JPanel {
 	private JLabel lbMonthYear;
 	private JLabel lbTime;
 	private JLabel lbType;
-	private JMenuItem mntmNewMenuItem;
-	private JMenuItem mntmNewMenuItem_1;
-	private JMenuItem mntmNewMenuItem_2;
 
 	/**
 	 * Create the panel.
@@ -49,10 +54,14 @@ public class ShiftCalenderCustom extends JPanel {
 	//a new thread is being used to continuously update the time and date on the user interface (UI) without blocking the main thread, which is responsible for handling UI events and updates.
 	//By using a separate thread for this task, the UI remains responsive, and other user events can be processed concurrently. 
 	//The main thread, responsible for the UI, is not blocked by the continuous updating of the time and date, ensuring smooth operation of the application.
-	public ShiftCalenderCustom() {
-		initComponents();
+	public ShiftCalendarCustom() {
+		
 		thisMonth();
-		slide.show(new ShiftCalenderPanel(5, 2021), SlidingPanel.AnimateType.TO_RIGHT);
+		calendarPanels = new HashMap<>();
+		initComponents();
+		currentMonth = 1;
+		currentYear = 2023;
+		slide.show(new ShiftCalendarPanel(5, 2021), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 		new Thread(new Runnable() {
 			@Override
@@ -88,7 +97,9 @@ public class ShiftCalenderCustom extends JPanel {
 		lbMonthYear = new JLabel();
 		lbMonthYear.setBackground(new Color(0, 128, 192));
 		arrowForward = new JButton();
-
+		currentPanel = new ShiftCalendarPanel(currentMonth, currentYear);
+		calendarPanels.put(String.valueOf(currentMonth) + String.valueOf(currentYear), currentPanel);
+		this.add(currentPanel);
 		setBackground(new Color(255, 255, 255));
 
 		slide.setBackground(new Color(255, 255, 255));
@@ -104,25 +115,21 @@ public class ShiftCalenderCustom extends JPanel {
 		);
 		slide.setLayout(slideLayout);
 
-		jPanel1.setBackground(new Color(0, 128, 192));
+		jPanel1.setBackground(new Color(255, 255, 255));
 
-		lbTime.setFont(new Font("sansserif", 1, 48)); 
-		lbTime.setForeground(new Color(201, 201, 201));
-		lbTime.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30)); 
+		lbTime.setForeground(new Color(0, 0, 0));
+		lbTime.setHorizontalAlignment(SwingConstants.LEFT);
 		lbTime.setText("10:00:00");
 
 		lbType.setFont(new Font("sansserif", 1, 25)); 
-		lbType.setForeground(new Color(201, 201, 201));
+		lbType.setForeground(new Color(0, 0, 0));
 		lbType.setText("PM");
 
 		lbDate.setFont(new Font("sansserif", 0, 18)); 
-		lbDate.setForeground(new Color(201, 201, 201));
+		lbDate.setForeground(new Color(0, 0, 0));
 		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lbDate.setText("Sunday, 07/05/2023");
-		
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBackground(new Color(0, 128, 192));
-		menuPanel.setForeground(new Color(255, 255, 255));
 
 		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 		jPanel1Layout.setHorizontalGroup(
@@ -131,46 +138,23 @@ public class ShiftCalenderCustom extends JPanel {
 					.addContainerGap()
 					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
 						.addGroup(jPanel1Layout.createSequentialGroup()
-							.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-							.addGroup(jPanel1Layout.createSequentialGroup()
-								.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lbType, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(38, Short.MAX_VALUE))
-							.addGroup(jPanel1Layout.createSequentialGroup()
-								.addComponent(lbDate, GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-								.addGap(20)))))
+							.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lbType, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lbDate, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(67, Short.MAX_VALUE))
 		);
 		jPanel1Layout.setVerticalGroup(
 			jPanel1Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lbType))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lbDate)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(479, Short.MAX_VALUE))
+					.addContainerGap(537, Short.MAX_VALUE))
 		);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuPanel.add(menuBar);
-		
-		JMenu mnVagtkalender = new JMenu("Valgmuligheder");
-		menuBar.add(mnVagtkalender);
-		
-		mntmNewMenuItem = new JMenuItem("Tag vagt");
-		mnVagtkalender.add(mntmNewMenuItem);
-		
-		mntmNewMenuItem_1 = new JMenuItem("Afdelinsplan");
-		mnVagtkalender.add(mntmNewMenuItem_1);
-		
-		mntmNewMenuItem_2 = new JMenuItem("Statestikker");
-		mnVagtkalender.add(mntmNewMenuItem_2);
 		jPanel1.setLayout(jPanel1Layout);
 
 		lbMonthYear.setFont(new Font("sansserif", 1, 30));
@@ -178,7 +162,7 @@ public class ShiftCalenderCustom extends JPanel {
 		lbMonthYear.setHorizontalAlignment(SwingConstants.CENTER);
 		lbMonthYear.setText("Month - Year");
 
-		arrowForward.setIcon(new ImageIcon(ShiftCalenderCustom.class.getResource("/icons/angle-double-small-left (1).png"))); 
+		arrowForward.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/angle-double-small-left (1).png"))); 
 		arrowForward.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		arrowForward.setContentAreaFilled(false);
 		arrowForward.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -192,7 +176,7 @@ public class ShiftCalenderCustom extends JPanel {
 		jLayeredPane1.setLayer(arrowForward, JLayeredPane.DEFAULT_LAYER);
 		arrowBack = new JButton();
 		
-				arrowBack.setIcon(new ImageIcon(ShiftCalenderCustom.class.getResource("/icons/angle-double-small-left.png"))); 
+				arrowBack.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/angle-double-small-left.png"))); 
 				arrowBack.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 				arrowBack.setContentAreaFilled(false);
 				arrowBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -237,11 +221,11 @@ public class ShiftCalenderCustom extends JPanel {
 			layout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
+					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
-						.addComponent(slide, GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+						.addComponent(slide, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
@@ -251,44 +235,46 @@ public class ShiftCalenderCustom extends JPanel {
 					.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(slide, GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
 		);
 		this.setLayout(layout);
 	}
 	
-	// This method handles the action performed when the "arrowForward" button is clicked.
-    // It advances the calendar to the next month, and if the current month is December (changing back to january), it also
-    // advances the year. The sliding panel is then updated to show the new month and year.
+	
 	private void arrowForwardActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
 		if (month == 12) {
 			month = 1;
+			 currentMonth = (currentMonth == 12) ? 1 : currentMonth + 1;//ternary operator, which is a shorthand for an if-else 
+			 currentYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
+			 changeMonth(currentMonth, currentYear);  // To go to the next month
 			year++;
 		} else {
 			month++;
 		}
-		slide.show(new ShiftCalenderPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
+		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
 		updateMonthYear();
 	}
 	
-	// This method handles the action performed when the "arrowBack" button is clicked.
-    // It moves the calendar to the previous month, and if the current month is January, it also
-    // decrements the year. The sliding panel is then updated to show the new month and year.
+	
 	private void arrowBackActionPerformed(ActionEvent evt) {
 		if (month == 1) {
 			month = 12;
+			currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
+		    currentYear = (currentMonth == 12) ? currentYear - 1 : currentYear;
+		    changeMonth(currentMonth, currentYear);
 			year--;
 		} else {
 			month--;
 		}
-		slide.show(new ShiftCalenderPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
+		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 	}
 	
 	// This method retrieves the current month and year and sets the appropriate instance variables.
-	private void thisMonth() {
+	public void thisMonth() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date()); // today
 		month = calendar.get(Calendar.MONTH) + 1;
@@ -305,4 +291,36 @@ public class ShiftCalenderCustom extends JPanel {
 		SimpleDateFormat df = new SimpleDateFormat("MMMM-yyyy");
 		lbMonthYear.setText(df.format(calendar.getTime()));
 	}
-}
+	
+	 public void changeMonth(int newMonth, int newYear) {
+	        if (calendarPanels.containsKey(String.valueOf(newMonth) + String.valueOf(newYear))) {
+	            // If it does, use that panel
+	            this.remove(currentPanel);
+	            currentPanel = calendarPanels.get(String.valueOf(newMonth) + String.valueOf(newYear));
+	            if (currentPanel == null) {
+	                currentPanel = new ShiftCalendarPanel(month, year);
+	                calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), currentPanel);
+	            } else {
+	                currentPanel.initializeDaysInMonth();  // add this line
+	            }
+	            this.add(currentPanel);
+	        } else {
+	            // If it doesn't, create a new panel and add it to the map
+	            ShiftCalendarPanel newPanel = new ShiftCalendarPanel(newMonth, newYear);
+	            calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), newPanel);
+
+	            
+	            this.remove(currentPanel);
+	            currentPanel = newPanel;
+	            this.add(currentPanel);
+	        }
+	       
+	        currentMonth = newMonth;
+	        currentYear = newYear;
+	        
+	        
+	        this.validate();
+	        this.repaint();
+	    }
+	}
+
