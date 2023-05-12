@@ -8,10 +8,10 @@ import database.BarDAO;
 import database.DataAccessException;
 import model.Bar;
 
-public class BarController {
+public class BarCtrl {
 	private BarDAO barDAO;
 	
-	public BarController() throws DataAccessException  {
+	public BarCtrl() throws DataAccessException  {
 		try {
 			barDAO = new BarDAO();
 		} catch (Exception e) {
@@ -29,5 +29,9 @@ public class BarController {
 		public List<Bar> findAll() throws DataAccessException{
 			return barDAO.findAll();
 	}
+		
+		public Bar findById(int barId) throws DataAccessException {
+			return barDAO.findById(barId);
+		}
 
 }

@@ -1,18 +1,18 @@
 package controller;
 
-import java.sql.Date;
-
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 import database.DataAccessException;
 import database.ShiftDAO;
-import model.Doorman;
+import model.Bar;
 import model.Shift;
 
 public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
+	private BarCtrl bCtrl;
+	private DoormanCtrl dCtrl;
+	private LocalDate date;
 	
 	
 	
@@ -20,6 +20,8 @@ public class ShiftCtrl  {
 	public ShiftCtrl() throws DataAccessException {
 		try {
 			shiftDAO = new ShiftDAO();
+			bCtrl = new BarCtrl();
+			dCtrl = new DoormanCtrl();
 		} catch (Exception e) {
 			throw new DataAccessException(e, "Can't create shiftDAO");
 		}
@@ -31,20 +33,24 @@ public class ShiftCtrl  {
      * @param date the date to get shifts for
      * @return list of shifts for the specified date
      */
-	public List<Shift> getShiftsByDate(java.util.Date date) throws DataAccessException {
-		// Convert java.util.Date to java.time.LocalDate
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return shiftDAO.getShiftsByDate(localDate);
-		
+	public List<Shift> getShiftsByDate() throws DataAccessException {
+		this.date = LocalDate.parse("2023-05-15");
+        return shiftDAO.getShiftsByDate(date);
 	}
 	
-	public Shift getShiftById(int shiftId) throws DataAccessException{
+	public Shift findById(int shiftId) throws DataAccessException{
 		return shiftDAO.findById(shiftId);
 	}
 	
-	
-	
 	public List<Shift> findAll() throws DataAccessException{
 		return shiftDAO.findAll();
+	}
+	
+	public Bar findBarById(int barId) throws DataAccessException {
+		return bCtrl.findById(barId);
+	}
+	
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 }

@@ -39,6 +39,7 @@ import javax.swing.Box;
 import javax.swing.event.MenuKeyListener;
 
 import controller.ShiftCtrl;
+import database.DataAccessException;
 import model.Shift;
 
 import javax.swing.event.MenuKeyEvent;
@@ -77,8 +78,9 @@ public class AssignShiftChooseClub extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DataAccessException 
 	 */
-	public AssignShiftChooseClub() {
+	public AssignShiftChooseClub() throws DataAccessException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
 		
@@ -178,7 +180,16 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_btnShiftTime1_2.gridx = 2;
 		gbc_btnShiftTime1_2.gridy = 3;
 		panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
+		
+		init();
 	}
+	
+	private void init() throws DataAccessException {
+		sCtrl = new ShiftCtrl();
+		displayClubInfo();
+	}
+	
+	
 	private void testMenu() {
 		PopUp pp = new PopUp();
 		this.setVisible(false);
@@ -189,10 +200,11 @@ public class AssignShiftChooseClub extends JFrame {
 		pp.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	
-	private void displayClubInfo(Date date) {
-		ShiftCtrl sCtrl = new ShiftCtrl();
-		List<Shift> shifts = sCtrl.getShiftsByDate(date);
+	private void displayClubInfo() throws DataAccessException {
+		List<Shift> shifts = sCtrl.getShiftsByDate();
+		
 		for(int i = 0; i<shifts.size(); i++){
+			Shift s = shifts.get(i);
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new LineBorder(Color.GRAY));
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -208,7 +220,7 @@ public class AssignShiftChooseClub extends JFrame {
 			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel_1.setLayout(gbl_panel_1);
 			
-			JLabel lblName1 = new JLabel();
+			JLabel lblName1 = new JLabel(sCtrl.findBarById(s.getBarId()).getName());
 			lblName1.setFont(new Font("Tahoma", Font.BOLD, 14));
 			GridBagConstraints gbc_lblName1 = new GridBagConstraints();
 			gbc_lblName1.gridwidth = 2;
@@ -217,7 +229,7 @@ public class AssignShiftChooseClub extends JFrame {
 			gbc_lblName1.gridy = 0;
 			panel_1.add(lblName1, gbc_lblName1);
 			
-			JLabel lblAddress1 = new JLabel();
+			JLabel lblAddress1 = new JLabel(sCtrl.findBarById(s.getBarId()).getAddress());
 			GridBagConstraints gbc_lblAddress1 = new GridBagConstraints();
 			gbc_lblAddress1.gridwidth = 2;
 			gbc_lblAddress1.insets = new Insets(0, 0, 5, 5);
@@ -225,13 +237,13 @@ public class AssignShiftChooseClub extends JFrame {
 			gbc_lblAddress1.gridy = 1;
 			panel_1.add(lblAddress1, gbc_lblAddress1);
 			
-			JButton btnShiftTime1_2 = new JButton();
+			JButton btnShiftTime1_2 = new JButton(s.getCheckInTime());
 			btnShiftTime1_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
 			
-			JButton btnShiftTime1_1 = new JButton();
+			JButton btnShiftTime1_1 = new JButton(s.getCheckOutTime());
 			btnShiftTime1_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					testMenu();
@@ -248,7 +260,7 @@ public class AssignShiftChooseClub extends JFrame {
 			gbc_btnShiftTime1_2.gridy = 3;
 			panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
 		}
-		}
 	}
-	
 }
+	
+
