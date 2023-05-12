@@ -11,7 +11,7 @@ import java.util.List;
 import model.Shift;
 
 public class ShiftDAO {
-	private static final String getShiftsByDateQ = "select * from shiftt where calendarDate = ?";
+	private static final String getShiftsByDateQ = "select * from shiftt where shiftDate = ?";
 	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
 	private static final String findByIdQ = findAllQ + "where shiftId = ?";
 	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";

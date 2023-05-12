@@ -50,6 +50,10 @@ public class ShiftCtrl  {
 		return bCtrl.findById(barId);
 	}
 	
+	public List<Bar> findAllBars() throws DataAccessException{
+		return bCtrl.findAll();
+	}
+	
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}

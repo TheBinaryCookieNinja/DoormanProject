@@ -40,6 +40,7 @@ import javax.swing.event.MenuKeyListener;
 
 import controller.ShiftCtrl;
 import database.DataAccessException;
+import model.Bar;
 import model.Shift;
 
 import javax.swing.event.MenuKeyEvent;
@@ -119,67 +120,7 @@ public class AssignShiftChooseClub extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(Color.GRAY));
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 0;
-		contentPane.add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
-		
-		JLabel lblName1 = new JLabel();
-		lblName1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		GridBagConstraints gbc_lblName1 = new GridBagConstraints();
-		gbc_lblName1.gridwidth = 2;
-		gbc_lblName1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName1.gridx = 1;
-		gbc_lblName1.gridy = 0;
-		panel_1.add(lblName1, gbc_lblName1);
-		
-		JLabel lblAddress1 = new JLabel();
-		GridBagConstraints gbc_lblAddress1 = new GridBagConstraints();
-		gbc_lblAddress1.gridwidth = 2;
-		gbc_lblAddress1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAddress1.gridx = 1;
-		gbc_lblAddress1.gridy = 1;
-		panel_1.add(lblAddress1, gbc_lblAddress1);
-		
-		JButton btnShiftTime1_2 = new JButton();
-		btnShiftTime1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton btnShiftTime1_1 = new JButton();
-		btnShiftTime1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				testMenu();
-			}
-		});
-		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
-		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1_1.gridx = 1;
-		gbc_btnShiftTime1_1.gridy = 3;
-		panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
-		GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
-		gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1_2.gridx = 2;
-		gbc_btnShiftTime1_2.gridy = 3;
-		panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
+		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		init();
 	}
@@ -201,10 +142,10 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayClubInfo() throws DataAccessException {
-		List<Shift> shifts = sCtrl.getShiftsByDate();
+		List<Bar> bars = sCtrl.findAllBars();
 		
-		for(int i = 0; i<shifts.size(); i++){
-			Shift s = shifts.get(i);
+		for(int i = 0; i<bars.size(); i++){
+			Bar b = bars.get(i);
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new LineBorder(Color.GRAY));
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -220,45 +161,7 @@ public class AssignShiftChooseClub extends JFrame {
 			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel_1.setLayout(gbl_panel_1);
 			
-			JLabel lblName1 = new JLabel(sCtrl.findBarById(s.getBarId()).getName());
-			lblName1.setFont(new Font("Tahoma", Font.BOLD, 14));
-			GridBagConstraints gbc_lblName1 = new GridBagConstraints();
-			gbc_lblName1.gridwidth = 2;
-			gbc_lblName1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblName1.gridx = 1;
-			gbc_lblName1.gridy = 0;
-			panel_1.add(lblName1, gbc_lblName1);
-			
-			JLabel lblAddress1 = new JLabel(sCtrl.findBarById(s.getBarId()).getAddress());
-			GridBagConstraints gbc_lblAddress1 = new GridBagConstraints();
-			gbc_lblAddress1.gridwidth = 2;
-			gbc_lblAddress1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblAddress1.gridx = 1;
-			gbc_lblAddress1.gridy = 1;
-			panel_1.add(lblAddress1, gbc_lblAddress1);
-			
-			JButton btnShiftTime1_2 = new JButton(s.getCheckInTime());
-			btnShiftTime1_2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			
-			JButton btnShiftTime1_1 = new JButton(s.getCheckOutTime());
-			btnShiftTime1_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					testMenu();
-				}
-			});
-			GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
-			gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
-			gbc_btnShiftTime1_1.gridx = 1;
-			gbc_btnShiftTime1_1.gridy = 3;
-			panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
-			GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
-			gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
-			gbc_btnShiftTime1_2.gridx = 2;
-			gbc_btnShiftTime1_2.gridy = 3;
-			panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
+
 		}
 	}
 }
