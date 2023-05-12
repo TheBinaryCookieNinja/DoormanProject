@@ -2,7 +2,6 @@ package model;
 
 public abstract class Employee {
 	private int employeeId;
-    private String name;
     private String phone;
     private String email;
     private String address;
@@ -10,7 +9,7 @@ public abstract class Employee {
 	private String l_name;
 	private String f_name;
 
-    public Employee(String f_name, String l_name, String phone, String email, String address, String passcode) {
+    public Employee(int employeeId, String f_name, String l_name, String phone, String email, String address, String passcode) {
         this.employeeId = employeeId;
         this.f_name = f_name;
         this.l_name = l_name;

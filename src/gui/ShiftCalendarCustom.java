@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 
@@ -8,6 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -37,11 +39,12 @@ public class ShiftCalendarCustom extends JPanel {
     private ShiftCalendarPanel currentPanel;
     private int currentMonth;
     private int currentYear;
+    private LocalDate currentDate;
 
 	private JButton arrowBack;
 	private JButton arrowForward;
-	private JLayeredPane jLayeredPane1;
-	private JPanel jPanel1;
+	private JLayeredPane jLayeredPaneMonth;
+	private JPanel jPanelTimeDateMenu;
 	private JLabel lbDate;
 	private JLabel lbMonthYear;
 	private JLabel lbTime;
@@ -87,20 +90,24 @@ public class ShiftCalendarCustom extends JPanel {
 	@SuppressWarnings("unchecked")
 	 // This method initializes the components used in the calendar panel, such as the sliding panel,
     // the labels for displaying the time and date, and the buttons for navigating between months.
+	
 	private void initComponents() {
 		slide = new SlidingPanel();
-		jPanel1 = new JPanel();
+		jPanelTimeDateMenu = new JPanel();
 		lbTime = new JLabel();
 		lbType = new JLabel();
 		lbDate = new JLabel();
-		jLayeredPane1 = new JLayeredPane();
+		jLayeredPaneMonth = new JLayeredPane();
 		lbMonthYear = new JLabel();
 		lbMonthYear.setBackground(new Color(0, 128, 192));
 		arrowForward = new JButton();
-		currentPanel = new ShiftCalendarPanel(currentMonth, currentYear);
+		currentDate = LocalDate.now().withDayOfMonth(1);
+		currentPanel = new ShiftCalendarPanel(currentDate.getMonth().getValue(), currentDate.getYear());
 		calendarPanels.put(String.valueOf(currentMonth) + String.valueOf(currentYear), currentPanel);
 		this.add(currentPanel);
 		setBackground(new Color(255, 255, 255));
+		
+		
 
 		slide.setBackground(new Color(255, 255, 255));
 
@@ -115,7 +122,7 @@ public class ShiftCalendarCustom extends JPanel {
 		);
 		slide.setLayout(slideLayout);
 
-		jPanel1.setBackground(new Color(255, 255, 255));
+		jPanelTimeDateMenu.setBackground(new Color(255, 255, 255));
 
 		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30)); 
 		lbTime.setForeground(new Color(0, 0, 0));
@@ -131,31 +138,31 @@ public class ShiftCalendarCustom extends JPanel {
 		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lbDate.setText("Sunday, 07/05/2023");
 
-		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-		jPanel1Layout.setHorizontalGroup(
-			jPanel1Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(jPanel1Layout.createSequentialGroup()
-							.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lbType, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lbDate, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(67, Short.MAX_VALUE))
+		GroupLayout gl_jPanelTimeDateMenu = new GroupLayout(jPanelTimeDateMenu);
+		gl_jPanelTimeDateMenu.setHorizontalGroup(
+			gl_jPanelTimeDateMenu.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_jPanelTimeDateMenu.createSequentialGroup()
+			    .addContainerGap()
+				.addGroup(gl_jPanelTimeDateMenu.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_jPanelTimeDateMenu.createSequentialGroup()
+				.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(lbType, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE))
+				.addComponent(lbDate, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(67, Short.MAX_VALUE))
 		);
-		jPanel1Layout.setVerticalGroup(
-			jPanel1Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbType))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lbDate)
-					.addContainerGap(537, Short.MAX_VALUE))
+		gl_jPanelTimeDateMenu.setVerticalGroup(
+			gl_jPanelTimeDateMenu.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_jPanelTimeDateMenu.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(gl_jPanelTimeDateMenu.createParallelGroup(Alignment.BASELINE)
+				.addComponent(lbTime, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+				.addComponent(lbType))
+			    .addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(lbDate)
+				.addContainerGap(537, Short.MAX_VALUE))
 		);
-		jPanel1.setLayout(jPanel1Layout);
+		jPanelTimeDateMenu.setLayout(gl_jPanelTimeDateMenu);
 
 		lbMonthYear.setFont(new Font("sansserif", 1, 30));
 		lbMonthYear.setForeground(new Color(0, 128, 192));
@@ -172,8 +179,8 @@ public class ShiftCalendarCustom extends JPanel {
 			}
 
 		});
-		jLayeredPane1.setLayer(lbMonthYear, JLayeredPane.DEFAULT_LAYER);
-		jLayeredPane1.setLayer(arrowForward, JLayeredPane.DEFAULT_LAYER);
+		jLayeredPaneMonth.setLayer(lbMonthYear, JLayeredPane.DEFAULT_LAYER);
+		jLayeredPaneMonth.setLayer(arrowForward, JLayeredPane.DEFAULT_LAYER);
 		arrowBack = new JButton();
 		
 				arrowBack.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/angle-double-small-left.png"))); 
@@ -186,12 +193,12 @@ public class ShiftCalendarCustom extends JPanel {
 					}
 				});
 				
-						jLayeredPane1.setLayer(arrowBack, JLayeredPane.DEFAULT_LAYER);
+						jLayeredPaneMonth.setLayer(arrowBack, JLayeredPane.DEFAULT_LAYER);
 
-		GroupLayout jLayeredPane1Layout = new GroupLayout(jLayeredPane1);
-		jLayeredPane1Layout.setHorizontalGroup(
-			jLayeredPane1Layout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(jLayeredPane1Layout.createSequentialGroup()
+		GroupLayout gl_jLayeredPaneMonth = new GroupLayout(jLayeredPaneMonth);
+		gl_jLayeredPaneMonth.setHorizontalGroup(
+			gl_jLayeredPaneMonth.createParallelGroup(Alignment.TRAILING)
+				    .addGroup(gl_jLayeredPaneMonth.createSequentialGroup()
 					.addGap(16)
 					.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -200,44 +207,44 @@ public class ShiftCalendarCustom extends JPanel {
 					.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addGap(22))
 		);
-		jLayeredPane1Layout.setVerticalGroup(
-			jLayeredPane1Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(jLayeredPane1Layout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(jLayeredPane1Layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(jLayeredPane1Layout.createSequentialGroup()
-							.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(jLayeredPane1Layout.createSequentialGroup()
-							.addGroup(jLayeredPane1Layout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbMonthYear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addContainerGap(221, Short.MAX_VALUE))))
+		gl_jLayeredPaneMonth.setVerticalGroup(
+			gl_jLayeredPaneMonth.createParallelGroup(Alignment.LEADING)
+				    .addGroup(gl_jLayeredPaneMonth.createSequentialGroup()
+                    .addContainerGap()
+				    .addGroup(gl_jLayeredPaneMonth.createParallelGroup(Alignment.LEADING)
+				    .addGroup(gl_jLayeredPaneMonth.createSequentialGroup()
+				    .addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+				    .addContainerGap())
+				    .addGroup(gl_jLayeredPaneMonth.createSequentialGroup()
+				    .addGroup(gl_jLayeredPaneMonth.createParallelGroup(Alignment.TRAILING)
+				    .addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+				    .addComponent(lbMonthYear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				    .addContainerGap(221, Short.MAX_VALUE))))
 		);
-		jLayeredPane1.setLayout(jLayeredPane1Layout);
+		jLayeredPaneMonth.setLayout(gl_jLayeredPaneMonth);
 
 		GroupLayout layout = new GroupLayout(this);
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(layout.createSequentialGroup()
+				    .addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
+					.addComponent(jPanelTimeDateMenu, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
-						.addComponent(slide, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
+					.addComponent(jLayeredPaneMonth, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+					.addComponent(slide, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
+				    .addGroup(layout.createSequentialGroup()
 					.addGap(13)
-					.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+					.addComponent(jLayeredPaneMonth, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(slide, GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-				.addGroup(layout.createSequentialGroup()
+				    .addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
+					.addComponent(jPanelTimeDateMenu, GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
 		);
 		this.setLayout(layout);
 	}
