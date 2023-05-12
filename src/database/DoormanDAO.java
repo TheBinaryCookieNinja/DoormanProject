@@ -51,16 +51,6 @@ public class DoormanDAO {
 			throw new DataAccessException(e, "Could not prepare statement");
 			}
 		}
-		public List<Doorman> findAll() throws DataAccessException {
-			ResultSet rs;
-			try {
-				rs = findAll.executeQuery();
-				List<Doorman> res = buildObjects(rs);
-				return res;
-			} catch (SQLException e) {
-				throw new DataAccessException(e, "Could not retrieve all persons");
-			}
-		}
 	
 	public Doorman findById(int employeeId) throws DataAccessException {
 		try {
@@ -73,6 +63,17 @@ public class DoormanDAO {
 			return p;
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not find by id = " + employeeId);
+		}
+	}
+	
+	public List<Doorman> findAll() throws DataAccessException {
+		ResultSet rs;
+		try {
+			rs = findAll.executeQuery();
+			List<Doorman> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not retrieve all persons");
 		}
 	}
 	

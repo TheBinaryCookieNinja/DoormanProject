@@ -5,11 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Shift;
 
 public class ShiftDAO {
+	private static final String getShiftsByDateQ = "select * from shiftt where calendarDate = ?";
 	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
 	private static final String findByIdQ = findAllQ + "where shiftId = ?";
 	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
@@ -18,10 +20,11 @@ public class ShiftDAO {
 
 	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
 
-	private PreparedStatement findAll, findById, createShift, update, deleteShift, findByDate;
+	private PreparedStatement getShiftsByDate, findAll, findById, createShift, update, deleteShift, findByDate;
 
 	public ShiftDAO() throws DataAccessException {
 		try {
+			getShiftsByDate = DBConnection.getInstance().getConnection().prepareStatement(getShiftsByDateQ);
 			findAll = DBConnection.getInstance().getConnection().prepareStatement(findAllQ);
 			findById = DBConnection.getInstance().getConnection().prepareStatement(findByIdQ);
 			createShift = DBConnection.getInstance().getConnection().prepareStatement(createShiftQ);
@@ -30,6 +33,17 @@ public class ShiftDAO {
 			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
+		}
+	}
+	
+	public List<Shift> getShiftsByDate(java.sql.Date date) throws DataAccessException {
+		try {
+			findById.setDate(1, date);
+			ResultSet rs = getShiftsByDate.executeQuery();
+			List<Shift> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not find any shifts for this date = " + date);
 		}
 	}
 
