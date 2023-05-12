@@ -142,27 +142,67 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayClubInfo() throws DataAccessException {
-		List<Bar> bars = sCtrl.findAllBars();
-		
-		for(int i = 0; i<bars.size(); i++){
-			Bar b = bars.get(i);
-			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new LineBorder(Color.GRAY));
-			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-			gbc_panel_1.fill = GridBagConstraints.BOTH;
-			gbc_panel_1.gridx = 0;
-			gbc_panel_1.gridy = 0;
-			contentPane.add(panel_1, gbc_panel_1);
-			GridBagLayout gbl_panel_1 = new GridBagLayout();
-			gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
-			gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-			gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			panel_1.setLayout(gbl_panel_1);
-			
-
-		}
+	    List<Bar> bars = sCtrl.findAllBars();
+	    
+	    for (Bar bar : bars) {
+	        JPanel panel_1 = createBarPanel(bar);
+	        contentPane.add(panel_1);
+	    }
+	    
+	    revalidate(); 
+	}
+	
+	private JPanel createBarPanel(Bar bar) {
+	    JPanel panel_1 = new JPanel();
+	    panel_1.setBorder(new LineBorder(Color.GRAY));
+	    GridBagLayout gbl_panel_1 = new GridBagLayout();
+	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
+	    gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+	    gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+	    panel_1.setLayout(gbl_panel_1);
+	    
+	    JLabel lblName = new JLabel(bar.getName());
+	    lblName.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    GridBagConstraints gbc_lblName = new GridBagConstraints();
+	    gbc_lblName.gridwidth = 2;
+	    gbc_lblName.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblName.gridx = 1;
+	    gbc_lblName.gridy = 0;
+	    panel_1.add(lblName, gbc_lblName);
+	    
+	    JLabel lblAddress = new JLabel(bar.getAddress());
+	    GridBagConstraints gbc_lblAddress = new GridBagConstraints();
+	    gbc_lblAddress.gridwidth = 2;
+	    gbc_lblAddress.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblAddress.gridx = 1;
+	    gbc_lblAddress.gridy = 1;
+	    panel_1.add(lblAddress, gbc_lblAddress);
+	    
+	    JButton btnShiftTime1_1 = new JButton();
+	    btnShiftTime1_1.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            testMenu();
+	        }
+	    });
+	    GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
+	    gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
+	    gbc_btnShiftTime1_1.gridx = 1;
+	    gbc_btnShiftTime1_1.gridy = 3;
+	    panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
+	    
+	    JButton btnShiftTime1_2 = new JButton();
+	    btnShiftTime1_2.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        }
+	    });
+	    GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
+	    gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
+	    gbc_btnShiftTime1_2.gridx = 2;
+	    gbc_btnShiftTime1_2.gridy = 3;
+	    panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
+	    
+	    return panel_1;
 	}
 }
 	

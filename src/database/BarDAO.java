@@ -16,9 +16,9 @@ public class BarDAO {
 	private static final String createBarQ =
 			"insert into Bar (barId, name, phone, email, address, cvr) VALUES (?,?,?,?,?,?)";
 	private static final String updateQ = 
-			"update Bar set barId = ?, name = ?, phone = ?, email = ?, address = ?, cvr = ?";
+			"update Bar set barId = ?, name = ?, phone = ?, email = ?, address = ?, cvr = ? where barId = ?";
 	private static final String deleteBarQ = 
-			"delete * from Bar where barId = ?";
+			"delete from Bar where barId = ?";
 	
 	private PreparedStatement findAll, findById, createBar, update, deleteBar;
 	

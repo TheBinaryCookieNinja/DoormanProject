@@ -85,7 +85,7 @@ public class MainCalendar extends JFrame {
 	    GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 	    jPanel1Layout.setHorizontalGroup(
 	    	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(jPanel1Layout.createSequentialGroup()
+	    		    .addGroup(jPanel1Layout.createSequentialGroup()
 	    			.addContainerGap()
 	    			.addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    			.addGap(18)
