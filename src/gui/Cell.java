@@ -47,6 +47,9 @@ public class Cell extends JButton {
 		this.date = date;
 	}
 	
+	public LocalDate getDate() {
+		return this.date;
+	}
 	public void setAsToday() {
         isToday = true;
         setForeground(Color.WHITE);
