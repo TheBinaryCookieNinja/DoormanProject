@@ -11,16 +11,15 @@ import java.util.List;
 import model.Shift;
 
 public class ShiftDAO {
-	private static final String getShiftsByDateQ = "select * from shiftt where shiftDate = ?";
+
 	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
+	private static final String getShiftsByDateQ = findAllQ + " where shiftDate = ?";
 	private static final String findByIdQ = findAllQ + "where shiftId = ?";
 	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String updateQ = "update Shiftt set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?, signatureId = ?";
 	private static final String deleteShiftQ = "delete * from Shiftt where shiftId = ?";
 
-	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
-
-	private PreparedStatement getShiftsByDate, findAll, findById, createShift, update, deleteShift, findByDate;
+	private PreparedStatement getShiftsByDate, findAll, findById, createShift, update, deleteShift;
 
 	public ShiftDAO() throws DataAccessException {
 		try {
@@ -30,20 +29,20 @@ public class ShiftDAO {
 			createShift = DBConnection.getInstance().getConnection().prepareStatement(createShiftQ);
 			update = DBConnection.getInstance().getConnection().prepareStatement(updateQ);
 			deleteShift = DBConnection.getInstance().getConnection().prepareStatement(deleteShiftQ);
-			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
 	}
 	
-	public List<Shift> getShiftsByDate(java.sql.Date date) throws DataAccessException {
+	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
 		try {
-			findById.setDate(1, date);
+			getShiftsByDate.setString(1, localDate.toString()); // converts the localDate to a String, since the Date in the
+															// database schema is a String
 			ResultSet rs = getShiftsByDate.executeQuery();
 			List<Shift> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find any shifts for this date = " + date);
+			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
 		}
 	}
 
@@ -114,18 +113,7 @@ public class ShiftDAO {
 		deleteShift.execute();
 	}
 
-	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
-		try {
-			findByDate.setString(1, localDate.toString()); // converts the localDate to a String, since the Date in the
-															// database schema is a String
-			ResultSet rs = findByDate.executeQuery();
-			List<Shift> res = buildObjects(rs);
-			return res;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
-		}
 
-	}
 
 	private Shift buildObject(ResultSet rs) throws SQLException {
 		Shift s = new Shift(rs.getInt("shiftId"), rs.getString("shiftDate"), rs.getString("checkInTime"),
