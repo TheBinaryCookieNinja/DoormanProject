@@ -11,13 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainCalendar extends JFrame {
 
 	private JPanel contentPane;
 	private ShiftCalendarCustom calendarCustom2;
 	private JPanel jPanel1;
-	private ShiftCalendarPanel shiftCalendarPanel;
+	//private ShiftCalendarPanel shiftCalendarPanel;
 	private  LocalDate currentDate;
 
 	/**
@@ -65,7 +66,7 @@ public class MainCalendar extends JFrame {
 	
 	private void initComponents() {
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setBounds(100, 100, 329, 391);
+	    setBounds(100, 100, 1130, 883);
 	    contentPane = new JPanel();
 	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -75,30 +76,30 @@ public class MainCalendar extends JFrame {
 	    jPanel1.setBackground(new Color(255, 255, 255));
 	    contentPane.add(jPanel1);
 	    currentDate = LocalDate.now().withDayOfMonth(1);
-	    shiftCalendarPanel = new ShiftCalendarPanel(currentDate.getMonthValue(), currentDate.getYear());
-	    jPanel1.add(shiftCalendarPanel);
+	    //shiftCalendarPanel = new ShiftCalendarPanel(currentDate.getMonth().getValue(), currentDate.getYear());
+	    //jPanel1.add(shiftCalendarPanel);
 	    
 	    calendarCustom2 = new ShiftCalendarCustom();
 	    calendarCustom2.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 205)));
 	    
 	    GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 	    jPanel1Layout.setHorizontalGroup(
-	        jPanel1Layout.createParallelGroup(Alignment.LEADING)
-	            .addGroup(jPanel1Layout.createSequentialGroup()
-	                .addContainerGap()
-	                .addComponent(shiftCalendarPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	                .addGap(18, 18, 18)
-	                .addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
-	                .addContainerGap())
+	    	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+	    		.addGroup(jPanel1Layout.createSequentialGroup()
+	    			.addContainerGap()
+	    			.addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    			.addGap(18)
+	    			.addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+	    			.addContainerGap())
 	    );
 	    jPanel1Layout.setVerticalGroup(
-	        jPanel1Layout.createParallelGroup(Alignment.LEADING)
-	            .addGroup(jPanel1Layout.createSequentialGroup()
-	                .addContainerGap()
-	                .addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-	                    .addComponent(shiftCalendarPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	                    .addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE))
-	                .addContainerGap())
+	    	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+	    		.addGroup(jPanel1Layout.createSequentialGroup()
+	    			.addContainerGap()
+	    			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+	    				.addComponent(calendarCustom2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    				.addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE))
+	    			.addContainerGap())
 	    );
 	    jPanel1.setLayout(jPanel1Layout);
 
