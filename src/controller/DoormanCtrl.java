@@ -18,8 +18,8 @@ public class DoormanCtrl {
 	    }
 	    }
 
-	    public List<Doorman> getAvailableDoormenForShift(Date date, int barId) {
-	        return doormanDAO.findAvailableDoormenForShift(date, barId);
+	    public List<Doorman> getAvailableDoormenForShift(java.sql.Date date, int barId) throws DataAccessException {
+	        return doormanDAO.getAvailableDoormenForShift(date, barId);
 	    }
 
 	    public Doorman getDoormanByDoormanId(int doormanId) throws DataAccessException {

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -11,6 +12,14 @@ import model.Doorman;
 
 
 public class DoormanDAO {
+	private static final String getAvailableDoormenForShiftQ = 
+			  "select * from doorman as d"
+			+ "left join Employee on (Employee.employeeId = d.employeeId)"
+			+ "left join AvailableDates on AvailableDates.employeeId = d.employeeId"
+			+ "left join BarWishlist on (BarWishList.employeeId = d.employeeId and BarWishlist.BarId = ?)"
+			+ "left join BarBlacklist on (BarBlacklist.employeeId = d.employeeId and BarBlacklist.BarId = ?)"
+			+ "where AvailableDates.calenderDate = ? and BarBlacklist.BarId is null"
+			+ "order by BarWishlist.employeeId desc";
 	private static final String findAllQ = 
 			"select employeeId, hourlyRate from Doorman";
 	private static final String findByIdQ = 
@@ -22,10 +31,12 @@ public class DoormanDAO {
 	private static final String deleteDoormanQ =
 			"delete * from Doorman where employeeId = ?";
 	
-	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman;
+	private PreparedStatement getAvailableDoormenForShift, findAll, findById, createDoorman, update, deleteDoorman;
 			
 	public DoormanDAO() throws DataAccessException {
 		try {
+		getAvailableDoormenForShift = DBConnection.getInstance().getConnection()
+				.prepareStatement(getAvailableDoormenForShiftQ);
 		findAll = DBConnection.getInstance().getConnection()
 				.prepareStatement(findAllQ);
 		findById = DBConnection.getInstance().getConnection()
@@ -62,6 +73,20 @@ public class DoormanDAO {
 			return p;
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not find by id = " + employeeId);
+		}
+	}
+	
+	public List<Doorman> getAvailableDoormenForShift(java.sql.Date date, int barId) throws DataAccessException {
+		ResultSet rs;
+		try {
+			getAvailableDoormenForShift.setInt(1, barId);
+			getAvailableDoormenForShift.setInt(2, barId);
+			getAvailableDoormenForShift.setDate(1, date);
+			rs = getAvailableDoormenForShift.executeQuery();
+			List<Doorman> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not retrieve the list");
 		}
 	}
 	
