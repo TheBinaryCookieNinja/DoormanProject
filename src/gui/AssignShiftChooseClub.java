@@ -35,6 +35,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.KeyEvent;
 import javax.swing.Box;
 import javax.swing.event.MenuKeyListener;
+
+import controller.ShiftCtrl;
+import database.DataAccessException;
+
 import javax.swing.event.MenuKeyEvent;
 import java.awt.event.InputEvent;
 
@@ -45,6 +49,8 @@ public class AssignShiftChooseClub extends JFrame {
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenuItem mntmNewMenuItem;
 	private PopUp pp;
+	private ShiftCtrl shiftCtrl;
+	private JButton btnShiftTime1;
 
 	/**
 	 * Launch the application.
@@ -70,8 +76,9 @@ public class AssignShiftChooseClub extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DataAccessException 
 	 */
-	public AssignShiftChooseClub() {
+	public AssignShiftChooseClub() throws DataAccessException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
 		
@@ -155,17 +162,18 @@ public class AssignShiftChooseClub extends JFrame {
 			}
 		});
 		
-		JButton btnShiftTime1_1 = new JButton("New button");
-		btnShiftTime1_1.addActionListener(new ActionListener() {
+		btnShiftTime1 = new JButton();
+		btnShiftTime1.setText("Hej");
+		btnShiftTime1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				testMenu();
 			}
 		});
-		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
-		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1_1.gridx = 1;
-		gbc_btnShiftTime1_1.gridy = 3;
-		panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
+		GridBagConstraints gbc_btnShiftTime1 = new GridBagConstraints();
+		gbc_btnShiftTime1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnShiftTime1.gridx = 1;
+		gbc_btnShiftTime1.gridy = 3;
+		panel_1.add(btnShiftTime1, gbc_btnShiftTime1);
 		GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
 		gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime1_2.gridx = 2;
@@ -676,6 +684,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_btnShiftTime12_2.gridx = 2;
 		gbc_btnShiftTime12_2.gridy = 3;
 		panel_12.add(btnShiftTime12_2, gbc_btnShiftTime12_2);
+		
+		init();
+	}
+	
+	private void init() throws DataAccessException {
+		shiftCtrl = new ShiftCtrl();
+		btnShiftTime1.setText(shiftCtrl.getShiftById(2).getCheckInTime());
+		
 	}
 	private void testMenu() {
 		PopUp pp = new PopUp();
