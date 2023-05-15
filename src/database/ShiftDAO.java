@@ -10,10 +10,10 @@ import java.util.List;
 import model.Shift;
 
 public class ShiftDAO {
-	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId from Shiftt";
+	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
 	private static final String findByIdQ = findAllQ + " where shiftId = ?";
-	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId) VALUES (?,?,?,?,?,?,?,?)";
-	private static final String updateQ = "update Shiftt set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?";
+	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String updateQ = "update Shiftt set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?, signatureId =?";
 	private static final String deleteShiftQ = "delete from Shiftt where shiftId = ?";
 
 	private static final String findByDateQ = findAllQ + " where shiftDate = ?";

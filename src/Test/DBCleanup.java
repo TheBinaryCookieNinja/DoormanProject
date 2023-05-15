@@ -19,11 +19,12 @@ public class DBCleanup {
 		System.out.println("cleaned");
 	}
 	public static void cleanDB() throws SQLException {
-		e("drop table Signaturee");
+		
 		e("drop table DoormanBlackList");
 		e("drop table DoormanWishList");
 		e("drop table UnavailabilityRequest");
 		e("drop table Shiftt");
+		e("drop table Signaturee");
 		e("drop table AvailableDates");
 		e("drop table Bar");
 		e("drop table Doorman");
