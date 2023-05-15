@@ -3,12 +3,16 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Bar;
+import model.Shift;
 
 public class BarDAO {
+	private LocalDate localDate;
+	
 	private static final String findAllQ = 
 			"select barId, name, phone, email, address, cvr from Bar";
 	private static final String findByIdQ = 
@@ -19,8 +23,9 @@ public class BarDAO {
 			"update Bar set barId = ?, name = ?, phone = ?, email = ?, address = ?, cvr = ?";
 	private static final String deleteBarQ = 
 			"delete * from Bar where barId = ?";
+	private static final String findByDateQ = findAllQ + "FROM Bar b " + "INNER JOIN Shiftt s ON b.barId = s.barId " + "WHERE s.shiftDate = ?";
 	
-	private PreparedStatement findAll, findById, createBar, update, deleteBar;
+	private PreparedStatement findAll, findById, createBar, update, deleteBar, findByDate;
 	
 	public BarDAO() throws DataAccessException {
 		try {
@@ -34,6 +39,9 @@ public class BarDAO {
 					.prepareStatement(updateQ);
 			deleteBar = DBConnection.getInstance().getConnection()
 					.prepareStatement(deleteBarQ);
+			findByDate = DBConnection.getInstance().getConnection()
+					.prepareStatement(findByDateQ);
+			findByDate.setDate(1, java.sql.Date.valueOf(localDate));
 			} catch (SQLException e) {
 				throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -60,6 +68,21 @@ public class BarDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not find by id = " + barId);
 		}
+	}
+	
+	
+	public List<Bar> getBarListByDate(LocalDate localDate) throws DataAccessException{
+		try {
+			findByDate.setString(1, localDate.toString()); // converts the localDate to a String, since the Date in the
+															// database schema is a String
+			ResultSet rs = findByDate.executeQuery();
+			List<Bar> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
+		}
+		
+		
 	}
 	
 	public void createBar (Bar bar) throws SQLException {
