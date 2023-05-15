@@ -118,7 +118,8 @@ public class DoormanDAO {
 	private Doorman buildObject(ResultSet rs) throws SQLException {
 		Doorman d = new Doorman(
 				rs.getInt("employeeId"),
-				rs.getString("name"),
+				rs.getString("f_name"),
+				rs.getString("l_name"),
 				rs.getString("phone"),
 				rs.getString("email"),
 				rs.getString("address"),

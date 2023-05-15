@@ -3,8 +3,8 @@ package model;
 public class Boss extends Employee {
 	private double salary;
 
-    public Boss(int employeeId, String name, String phone, String email, String address, String passcode, double salary) {
-        super(employeeId, name, phone, email, address, passcode, employeeType);
+    public Boss(int employeeId, String f_name, String l_name, String phone, String email, String address, String passcode, double salary) {
+        super(employeeId, f_name, l_name, phone, email, address, passcode);
         this.salary = salary;
     }
 
