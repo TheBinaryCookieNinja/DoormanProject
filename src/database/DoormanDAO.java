@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,18 +12,27 @@ import model.Doorman;
 
 
 public class DoormanDAO {
-	private static final String findAllQ = 
+	
+	private static final String findAllQ =
 			"select employeeId, hourlyRate from Doorman";
 	private static final String findByIdQ = 
-		findAllQ + "where employeeId = ?";
+			findAllQ + "where employeeId = ?";
 	private static final String createDoormanQ =
 			"insert into Doorman (employeeId, f_name, l_name, phone, email, address, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String updateQ = 
 			"update Doorman set employeeId = ?, hourlyRate = ?";
 	private static final String deleteDoormanQ =
 			"delete * from Doorman where employeeId = ?";
+	private static final String getAvailableDoormenForShiftQ = 
+			findAllQ + "as d" +
+			"left join Employee on (Employee.employeeId = d.employeeId)" +
+			"left join AvailableDates on AvailableDates.employeeId = d.employeeId" +
+			"left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?)" +
+			"left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?)" + 
+			"where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null" +
+			"order by DoormanWishlist.employeeId desc";
 	
-	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman;
+	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman, getAvailableDoormenForShift;
 			
 	public DoormanDAO() throws DataAccessException {
 		try {
@@ -36,6 +46,8 @@ public class DoormanDAO {
 				.prepareStatement(updateQ);
 		deleteDoorman = DBConnection.getInstance().getConnection()
 				.prepareStatement(deleteDoormanQ);
+		getAvailableDoormenForShift = DBConnection.getInstance().getConnection()
+				.prepareStatement(getAvailableDoormenForShiftQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 			}
@@ -93,7 +105,6 @@ public class DoormanDAO {
 			//employeeId = ?, f_name = ?, l_name = ?, phone = ?,
 			//email = ?, address = ?, passcode = ?, hourlyRate = ?
 			//where employeeId = ?"
-			
 			update.setInt(1, employeeId);
 			update.setString(2, f_name);
 			update.setString(3, l_name);
@@ -113,6 +124,20 @@ public class DoormanDAO {
 	public void deleteDoorman(int employeeId) throws SQLException {
 		deleteDoorman.setInt(1, employeeId);
 		deleteDoorman.execute();
+	}
+	
+	public List<Doorman> getAvailableDoormenForShift(Date date, int barId) throws DataAccessException {
+		ResultSet rs;
+		try {
+			getAvailableDoormenForShift.setInt(1, barId);
+			getAvailableDoormenForShift.setInt(2, barId);
+			getAvailableDoormenForShift.setDate(3, date);
+			rs = getAvailableDoormenForShift.executeQuery();
+			List<Doorman> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not retrieve all persons");
+		}
 	}
 	
 	private Doorman buildObject(ResultSet rs) throws SQLException {
