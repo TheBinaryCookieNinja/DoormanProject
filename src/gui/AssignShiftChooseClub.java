@@ -727,8 +727,7 @@ public class AssignShiftChooseClub extends JFrame {
 	
 	private void displayShifts() throws DataAccessException {
 	   shiftCtrl.findAll()
-				.stream()
-				.parallel()
+				.parallelStream()
 				.filter(s -> s.getDoormanId() == 0)
 				.forEach(s -> {	
 					switch(shiftCtrl.findBarById(s.getBarId()).getName()){
