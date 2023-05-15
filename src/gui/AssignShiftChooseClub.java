@@ -51,6 +51,7 @@ public class AssignShiftChooseClub extends JFrame {
 	private PopUp pp;
 	private ShiftCtrl shiftCtrl;
 	private JButton btnShiftTime1;
+	private JButton btnShiftTime1_1;
 
 	/**
 	 * Launch the application.
@@ -156,8 +157,8 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress1.gridy = 1;
 		panel_1.add(lblAddress1, gbc_lblAddress1);
 		
-		JButton btnShiftTime1_2 = new JButton("New button");
-		btnShiftTime1_2.addActionListener(new ActionListener() {
+		btnShiftTime1_1 = new JButton("New button");
+		btnShiftTime1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -174,11 +175,11 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_btnShiftTime1.gridx = 1;
 		gbc_btnShiftTime1.gridy = 3;
 		panel_1.add(btnShiftTime1, gbc_btnShiftTime1);
-		GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
-		gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1_2.gridx = 2;
-		gbc_btnShiftTime1_2.gridy = 3;
-		panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
+		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
+		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnShiftTime1_1.gridx = 2;
+		gbc_btnShiftTime1_1.gridy = 3;
+		panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(Color.GRAY));
@@ -691,6 +692,7 @@ public class AssignShiftChooseClub extends JFrame {
 	private void init() throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
 		btnShiftTime1.setText(shiftCtrl.getShiftById(2).getCheckInTime());
+		btnShiftTime1_1.setText(shiftCtrl.getShiftById(2).getCheckOutTime());
 		
 	}
 	private void testMenu() {
