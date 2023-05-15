@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -97,8 +98,9 @@ public class ShiftCalendarCustom extends JPanel {
 		lbMonthYear = new JLabel();
 		lbMonthYear.setBackground(new Color(0, 128, 192));
 		arrowForward = new JButton();
-		currentPanel = new ShiftCalendarPanel(currentMonth, currentYear);
-		calendarPanels.put(String.valueOf(currentMonth) + String.valueOf(currentYear), currentPanel);
+		LocalDate currentDate = LocalDate.now().withDayOfMonth(1);
+		currentPanel = new ShiftCalendarPanel(currentDate.getMonthValue(), currentDate.getYear());
+		calendarPanels.put(String.valueOf(currentDate.getMonthValue()) + String.valueOf(currentDate.getYear()), currentPanel);
 		this.add(currentPanel);
 		setBackground(new Color(255, 255, 255));
 
