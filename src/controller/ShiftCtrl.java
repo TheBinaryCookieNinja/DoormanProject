@@ -20,6 +20,7 @@ public class ShiftCtrl  {
 	
 	
 	public ShiftCtrl() throws DataAccessException {
+		barCtrl = new BarController();
 		try {
 			shiftDAO = new ShiftDAO();
 		} catch (Exception e) {

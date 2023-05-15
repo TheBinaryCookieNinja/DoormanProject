@@ -56,6 +56,26 @@ public class AssignShiftChooseClub extends JFrame {
 	private JButton btnShiftTime1_2;
 	private Shift shift;
 	private JLabel lblName1;
+	private JButton btnShiftTime2_1;
+	private JButton btnShiftTime2_2;
+	private JButton btnShiftTime3_1;
+	private JButton btnShiftTime3_2;
+	private JButton btnShiftTime4_1;
+	private JButton btnShiftTime4_2;
+	private JButton btnShiftTime5_1;
+	private JButton btnShiftTime5_2;
+	private JButton btnShiftTime6_1;
+	private JButton btnShiftTime6_2;
+	private JButton btnShiftTime7_1;
+	private JButton btnShiftTime7_2;
+	private JButton btnShiftTime8_1;
+	private JButton btnShiftTime8_2;
+	private JButton btnShiftTime9_1;
+	private JButton btnShiftTime9_2;
+	private JButton btnShiftTime11_1;
+	private JButton btnShiftTime11_2;
+	private JButton btnShiftTime12_1;
+	private JButton btnShiftTime12_2;
 
 	/**
 	 * Launch the application.
@@ -161,14 +181,13 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress1.gridy = 1;
 		panel_1.add(lblAddress1, gbc_lblAddress1);
 		
-		btnShiftTime1_2 = new JButton("New button");
+		btnShiftTime1_2 = new JButton("");
 		btnShiftTime1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
 		btnShiftTime1_1 = new JButton();
-		btnShiftTime1_1.setText("Hej");
 		btnShiftTime1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				testMenu();
@@ -217,14 +236,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress2.gridy = 1;
 		panel_2.add(lblAddress2, gbc_lblAddress2);
 		
-		JButton btnShiftTime2_1 = new JButton("New button");
+		btnShiftTime2_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime2_1 = new GridBagConstraints();
 		gbc_btnShiftTime2_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime2_1.gridx = 1;
 		gbc_btnShiftTime2_1.gridy = 3;
 		panel_2.add(btnShiftTime2_1, gbc_btnShiftTime2_1);
 		
-		JButton btnShiftTime2_2 = new JButton("New button");
+		btnShiftTime2_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime2_2 = new GridBagConstraints();
 		gbc_btnShiftTime2_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime2_2.gridx = 2;
@@ -263,14 +282,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress3.gridy = 1;
 		panel_3.add(lblAddress3, gbc_lblAddress3);
 		
-		JButton btnShiftTime3_1 = new JButton("New button");
+		btnShiftTime3_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime3_1 = new GridBagConstraints();
 		gbc_btnShiftTime3_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime3_1.gridx = 1;
 		gbc_btnShiftTime3_1.gridy = 3;
 		panel_3.add(btnShiftTime3_1, gbc_btnShiftTime3_1);
 		
-		JButton btnShiftTime3_2 = new JButton("New button");
+		btnShiftTime3_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime3_2 = new GridBagConstraints();
 		gbc_btnShiftTime3_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime3_2.gridx = 2;
@@ -309,14 +328,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress4.gridy = 1;
 		panel_4.add(lblAddress4, gbc_lblAddress4);
 		
-		JButton btnShiftTime4_1 = new JButton("New button");
+		btnShiftTime4_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime4_1 = new GridBagConstraints();
 		gbc_btnShiftTime4_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime4_1.gridx = 1;
 		gbc_btnShiftTime4_1.gridy = 3;
 		panel_4.add(btnShiftTime4_1, gbc_btnShiftTime4_1);
 		
-		JButton btnShiftTime4_2 = new JButton("New button");
+		btnShiftTime4_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime4_2 = new GridBagConstraints();
 		gbc_btnShiftTime4_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime4_2.gridx = 2;
@@ -355,14 +374,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress5.gridy = 1;
 		panel_5.add(lblAddress5, gbc_lblAddress5);
 		
-		JButton btnShiftTime5_1 = new JButton("New button");
+		btnShiftTime5_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime5_1 = new GridBagConstraints();
 		gbc_btnShiftTime5_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime5_1.gridx = 1;
 		gbc_btnShiftTime5_1.gridy = 3;
 		panel_5.add(btnShiftTime5_1, gbc_btnShiftTime5_1);
 		
-		JButton btnShiftTime5_2 = new JButton("New button");
+		btnShiftTime5_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime5_2 = new GridBagConstraints();
 		gbc_btnShiftTime5_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime5_2.gridx = 2;
@@ -401,14 +420,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress6.gridy = 1;
 		panel_6.add(lblAddress6, gbc_lblAddress6);
 		
-		JButton btnShiftTime6_1 = new JButton("New button");
+		btnShiftTime6_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime6_1 = new GridBagConstraints();
 		gbc_btnShiftTime6_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime6_1.gridx = 1;
 		gbc_btnShiftTime6_1.gridy = 3;
 		panel_6.add(btnShiftTime6_1, gbc_btnShiftTime6_1);
 		
-		JButton btnShiftTime6_2 = new JButton("New button");
+		btnShiftTime6_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime6_2 = new GridBagConstraints();
 		gbc_btnShiftTime6_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime6_2.gridx = 2;
@@ -447,14 +466,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress7.gridy = 1;
 		panel_7.add(lblAddress7, gbc_lblAddress7);
 		
-		JButton btnShiftTime7_1 = new JButton("New button");
+		btnShiftTime7_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime7_1 = new GridBagConstraints();
 		gbc_btnShiftTime7_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime7_1.gridx = 1;
 		gbc_btnShiftTime7_1.gridy = 3;
 		panel_7.add(btnShiftTime7_1, gbc_btnShiftTime7_1);
 		
-		JButton btnShiftTime7_2 = new JButton("New button");
+		btnShiftTime7_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime7_2 = new GridBagConstraints();
 		gbc_btnShiftTime7_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime7_2.gridx = 2;
@@ -493,14 +512,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress8.gridy = 1;
 		panel_8.add(lblAddress8, gbc_lblAddress8);
 		
-		JButton btnShiftTime8_1 = new JButton("New button");
+		btnShiftTime8_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime8_1 = new GridBagConstraints();
 		gbc_btnShiftTime8_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime8_1.gridx = 1;
 		gbc_btnShiftTime8_1.gridy = 3;
 		panel_8.add(btnShiftTime8_1, gbc_btnShiftTime8_1);
 		
-		JButton btnShiftTime8_2 = new JButton("New button");
+		btnShiftTime8_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime8_2 = new GridBagConstraints();
 		gbc_btnShiftTime8_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime8_2.gridx = 2;
@@ -539,14 +558,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress9.gridy = 1;
 		panel_9.add(lblAddress9, gbc_lblAddress9);
 		
-		JButton btnShiftTime9_1 = new JButton("New button");
+		btnShiftTime9_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime9_1 = new GridBagConstraints();
 		gbc_btnShiftTime9_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime9_1.gridx = 1;
 		gbc_btnShiftTime9_1.gridy = 3;
 		panel_9.add(btnShiftTime9_1, gbc_btnShiftTime9_1);
 		
-		JButton btnShiftTime9_2 = new JButton("New button");
+		btnShiftTime9_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime9_2 = new GridBagConstraints();
 		gbc_btnShiftTime9_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime9_2.gridx = 2;
@@ -585,14 +604,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress10.gridy = 1;
 		panel_10.add(lblAddress10, gbc_lblAddress10);
 		
-		JButton btnShiftTime10_1 = new JButton("New button");
+		JButton btnShiftTime10_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime10_1 = new GridBagConstraints();
 		gbc_btnShiftTime10_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime10_1.gridx = 1;
 		gbc_btnShiftTime10_1.gridy = 3;
 		panel_10.add(btnShiftTime10_1, gbc_btnShiftTime10_1);
 		
-		JButton btnShiftTime10_2 = new JButton("New button");
+		JButton btnShiftTime10_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime10_2 = new GridBagConstraints();
 		gbc_btnShiftTime10_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime10_2.gridx = 2;
@@ -631,14 +650,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress11.gridy = 1;
 		panel_11.add(lblAddress11, gbc_lblAddress11);
 		
-		JButton btnShiftTime11_1 = new JButton("New button");
+		btnShiftTime11_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime11_1 = new GridBagConstraints();
 		gbc_btnShiftTime11_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime11_1.gridx = 1;
 		gbc_btnShiftTime11_1.gridy = 3;
 		panel_11.add(btnShiftTime11_1, gbc_btnShiftTime11_1);
 		
-		JButton btnShiftTime11_2 = new JButton("New button");
+		btnShiftTime11_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime11_2 = new GridBagConstraints();
 		gbc_btnShiftTime11_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime11_2.gridx = 2;
@@ -676,14 +695,14 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress12.gridy = 1;
 		panel_12.add(lblAddress12, gbc_lblAddress12);
 		
-		JButton btnShiftTime12_1 = new JButton("New button");
+		btnShiftTime12_1 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime12_1 = new GridBagConstraints();
 		gbc_btnShiftTime12_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime12_1.gridx = 1;
 		gbc_btnShiftTime12_1.gridy = 3;
 		panel_12.add(btnShiftTime12_1, gbc_btnShiftTime12_1);
 		
-		JButton btnShiftTime12_2 = new JButton("New button");
+		btnShiftTime12_2 = new JButton("");
 		GridBagConstraints gbc_btnShiftTime12_2 = new GridBagConstraints();
 		gbc_btnShiftTime12_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime12_2.gridx = 2;
@@ -739,6 +758,15 @@ public class AssignShiftChooseClub extends JFrame {
 							else {
 								btnShiftTime1_2.setVisible(true);
 								btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+						case "Bar2":
+							if(btnShiftTime2_1.getText().isEmpty()) {
+								btnShiftTime2_1.setVisible(true);
+								btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime2_2.setVisible(true);
+								btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
 							}
 							break;
 						
