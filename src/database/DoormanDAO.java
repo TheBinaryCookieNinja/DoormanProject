@@ -27,10 +27,10 @@ public class DoormanDAO {
 			findAllQ + "as d" +
 			"left join Employee on (Employee.employeeId = d.employeeId)" +
 			"left join AvailableDates on AvailableDates.employeeId = d.employeeId" +
-			"left join BarWishlist on (BarWishList.employeeId = d.employeeId and BarWishlist.BarId = ?)" +
-			"left join BarBlacklist on (BarBlacklist.employeeId = d.employeeId and BarBlacklist.BarId = ?)" + 
-			"where AvailableDates.calenderDate = ? and BarBlacklist.BarId is null" +
-			"order by BarWishlist.employeeId desc";
+			"left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?)" +
+			"left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?)" + 
+			"where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null" +
+			"order by DoormanWishlist.employeeId desc";
 	
 	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman, getAvailableDoormenForShift;
 			
