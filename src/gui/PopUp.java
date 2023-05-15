@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.DataAccessException;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -48,7 +51,12 @@ public class PopUp extends JDialog {
 				mntmNewMenuItem.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						testMenu();
+						try {
+							testMenu();
+						} catch (DataAccessException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				mnNewMenu.add(mntmNewMenuItem);
@@ -80,7 +88,7 @@ public class PopUp extends JDialog {
 		}
 	}
 	
-	private void testMenu() {
+	private void testMenu() throws DataAccessException {
 		AssignShiftChooseClub ascc = new AssignShiftChooseClub();
 		this.setVisible(false);
 		this.dispose();
