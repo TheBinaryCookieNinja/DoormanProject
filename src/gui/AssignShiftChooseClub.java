@@ -26,6 +26,7 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.stream.Stream;
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.KeyStroke;
@@ -38,6 +39,7 @@ import javax.swing.event.MenuKeyListener;
 
 import controller.ShiftCtrl;
 import database.DataAccessException;
+import model.Shift;
 
 import javax.swing.event.MenuKeyEvent;
 import java.awt.event.InputEvent;
@@ -50,8 +52,10 @@ public class AssignShiftChooseClub extends JFrame {
 	private JMenuItem mntmNewMenuItem;
 	private PopUp pp;
 	private ShiftCtrl shiftCtrl;
-	private JButton btnShiftTime1;
 	private JButton btnShiftTime1_1;
+	private JButton btnShiftTime1_2;
+	private Shift shift;
+	private JLabel lblName1;
 
 	/**
 	 * Launch the application.
@@ -140,7 +144,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		JLabel lblName1 = new JLabel("Fabrikken");
+		lblName1 = new JLabel("Fabrikken");
 		lblName1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName1 = new GridBagConstraints();
 		gbc_lblName1.gridwidth = 2;
@@ -157,29 +161,29 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblAddress1.gridy = 1;
 		panel_1.add(lblAddress1, gbc_lblAddress1);
 		
-		btnShiftTime1_1 = new JButton("New button");
-		btnShiftTime1_1.addActionListener(new ActionListener() {
+		btnShiftTime1_2 = new JButton("New button");
+		btnShiftTime1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		btnShiftTime1 = new JButton();
-		btnShiftTime1.setText("Hej");
-		btnShiftTime1.addActionListener(new ActionListener() {
+		btnShiftTime1_1 = new JButton();
+		btnShiftTime1_1.setText("Hej");
+		btnShiftTime1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				testMenu();
 			}
 		});
-		GridBagConstraints gbc_btnShiftTime1 = new GridBagConstraints();
-		gbc_btnShiftTime1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1.gridx = 1;
-		gbc_btnShiftTime1.gridy = 3;
-		panel_1.add(btnShiftTime1, gbc_btnShiftTime1);
 		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
 		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnShiftTime1_1.gridx = 2;
+		gbc_btnShiftTime1_1.gridx = 1;
 		gbc_btnShiftTime1_1.gridy = 3;
 		panel_1.add(btnShiftTime1_1, gbc_btnShiftTime1_1);
+		GridBagConstraints gbc_btnShiftTime1_2 = new GridBagConstraints();
+		gbc_btnShiftTime1_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnShiftTime1_2.gridx = 2;
+		gbc_btnShiftTime1_2.gridy = 3;
+		panel_1.add(btnShiftTime1_2, gbc_btnShiftTime1_2);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(Color.GRAY));
@@ -686,15 +690,67 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_btnShiftTime12_2.gridy = 3;
 		panel_12.add(btnShiftTime12_2, gbc_btnShiftTime12_2);
 		
+		btnShiftTime1_1.setVisible(false);
+		btnShiftTime1_2.setVisible(false);
+		btnShiftTime2_1.setVisible(false);
+		btnShiftTime2_2.setVisible(false);
+		btnShiftTime3_1.setVisible(false);
+		btnShiftTime3_2.setVisible(false);
+		btnShiftTime4_1.setVisible(false);
+		btnShiftTime4_2.setVisible(false);
+		btnShiftTime5_1.setVisible(false);
+		btnShiftTime5_2.setVisible(false);
+		btnShiftTime6_1.setVisible(false);
+		btnShiftTime6_2.setVisible(false);
+		btnShiftTime7_1.setVisible(false);
+		btnShiftTime7_2.setVisible(false);
+		btnShiftTime8_1.setVisible(false);
+		btnShiftTime8_2.setVisible(false);
+		btnShiftTime9_1.setVisible(false);
+		btnShiftTime9_2.setVisible(false);
+		btnShiftTime10_1.setVisible(false);
+		btnShiftTime10_2.setVisible(false);
+		btnShiftTime11_1.setVisible(false);
+		btnShiftTime11_2.setVisible(false);
+		btnShiftTime12_1.setVisible(false);
+		btnShiftTime12_2.setVisible(false);
+		
 		init();
 	}
 	
 	private void init() throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
-		btnShiftTime1.setText(shiftCtrl.getShiftById(2).getCheckInTime());
-		btnShiftTime1_1.setText(shiftCtrl.getShiftById(2).getCheckOutTime());
+		displayShifts();
+		
 		
 	}
+	
+	private void displayShifts() throws DataAccessException {
+	   shiftCtrl.findAll()
+				.stream()
+				.parallel()
+				.filter(s -> s.getDoormanId() == 0)
+				.forEach(s -> {	
+					switch(shiftCtrl.findBarById(s.getBarId()).getName()){
+						case "Fabrikken":
+							if(btnShiftTime1_1.getText().isEmpty()) {
+								btnShiftTime1_1.setVisible(true);
+								btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime1_2.setVisible(true);
+								btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						
+					}
+					
+				
+				});
+						
+				
+	}
+	
 	private void testMenu() {
 		PopUp pp = new PopUp();
 		this.setVisible(false);

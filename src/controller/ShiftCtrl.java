@@ -8,11 +8,13 @@ import java.util.List;
 
 import database.DataAccessException;
 import database.ShiftDAO;
+import model.Bar;
 import model.Doorman;
 import model.Shift;
 
 public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
+	private BarController barCtrl;
 	
 	
 	
@@ -42,9 +44,11 @@ public class ShiftCtrl  {
 		return shiftDAO.findById(shiftId);
 	}
 	
-	
-	
 	public List<Shift> findAll() throws DataAccessException{
 		return shiftDAO.findAll();
+	}
+	
+	public Bar findBarById(int barId) {
+		return barCtrl.findById();
 	}
 }

@@ -56,6 +56,7 @@ public class BarDAO {
 		throw new DataAccessException(e, "Could not retrieve all Bars");
 		}
 	}
+	
 	public Bar findById(int barId) throws DataAccessException {
 		try {
 			findById.setInt(1, barId);
@@ -69,7 +70,6 @@ public class BarDAO {
 			throw new DataAccessException(e, "Could not find by id = " + barId);
 		}
 	}
-	
 	
 	public List<Bar> getBarListByDate(LocalDate localDate) throws DataAccessException{
 		try {
