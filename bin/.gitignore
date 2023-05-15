@@ -1,1 +1,10 @@
 /gui/
+<<<<<<< Updated upstream
+/controller/
+/database/
+/model/
+=======
+/database/
+/model/
+/controller/
+>>>>>>> Stashed changes
