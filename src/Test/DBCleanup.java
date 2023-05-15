@@ -19,18 +19,18 @@ public class DBCleanup {
 		System.out.println("cleaned");
 	}
 	public static void cleanDB() throws SQLException {
-		e("drop table Zipcode");
-		e("drop table Addresss");
-		e("drop table Employee");
-		e("drop table Boss");
-		e("drop table Doorman");
-		e("drop table Bar");
-		e("drop table AvailableDates");
-		e("drop table Shiftt");
-		e("drop table UnavailabilityRequest");
-		e("drop table DoormanWishList");
-		e("drop table DoormanBlackList");
 		e("drop table Signaturee");
+		e("drop table DoormanBlackList");
+		e("drop table DoormanWishList");
+		e("drop table UnavailabilityRequest");
+		e("drop table Shiftt");
+		e("drop table AvailableDates");
+		e("drop table Bar");
+		e("drop table Doorman");
+		e("drop table Boss");
+		e("drop table Employee");
+		e("drop table Addresss");
+		e("drop table Zipcode");
 		for(int i = 0 ; i < script.length; i++) {
 			e(script[i]);
 		}
