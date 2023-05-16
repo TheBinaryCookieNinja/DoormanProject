@@ -746,7 +746,7 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayBars() throws DataAccessException {
-		lblName1.setText(shiftCtrl.findBarById(1).getName());
+		lblName1.setText(shiftCtrl.getShiftById(1).getCheckInTime());
 	}
 	
 	private void displayShifts() throws DataAccessException {

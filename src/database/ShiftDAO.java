@@ -40,7 +40,7 @@ public class ShiftDAO {
 			List<Shift> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not retrieve all persons");
+			throw new DataAccessException(e, "Could not retrieve all shifts");
 		}
 	}
 

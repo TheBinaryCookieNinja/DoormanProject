@@ -11,7 +11,7 @@ import model.Bar;
 import model.Shift;
 
 public class BarDAO {
-	private LocalDate localDate;
+
 	
 	private static final String findAllQ = 
 			"select barId, namee, phone, email, addressId, cvr from Bar";
@@ -23,7 +23,7 @@ public class BarDAO {
 			"update Bar set barId = ?, namee = ?, phone = ?, email = ?, addressId = ?, cvr = ?";
 	private static final String deleteBarQ = 
 			"delete * from Bar where barId = ?";
-	private static final String findByDateQ = findAllQ + "FROM Bar b " + "INNER JOIN Shiftt s ON b.barId = s.barId " + "WHERE s.shiftDate = ?";
+	private static final String findByDateQ = findAllQ + " FROM Bar b " + "INNER JOIN Shiftt s ON b.barId = s.barId " + "WHERE s.shiftDate = ?";
 	
 	private PreparedStatement findAll, findById, createBar, update, deleteBar, findByDate;
 	
@@ -52,7 +52,7 @@ public class BarDAO {
 		List<Bar> res = buildObjects(rs);
 		return res;
 	} catch (SQLException e) {
-		throw new DataAccessException(e, "Could not retrieve all Bars");
+		throw new DataAccessException(e, "Could not retrieve all bars");
 		}
 	}
 	
