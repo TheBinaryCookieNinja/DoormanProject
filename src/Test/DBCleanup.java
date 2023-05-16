@@ -18,8 +18,8 @@ public class DBCleanup {
 		cleanDB(); // call to the utility class that resets the database
 		System.out.println("cleaned");
 	}
-	public static void cleanDB() throws SQLException {
-		
+	
+	public static void cleanDB() throws SQLException {	
 		e("drop table DoormanBlackList");
 		e("drop table DoormanWishList");
 		e("drop table UnavailabilityRequest");
