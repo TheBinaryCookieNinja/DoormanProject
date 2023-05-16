@@ -27,6 +27,7 @@ import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.Dimension;
 import javax.swing.JMenuBar;
@@ -775,8 +776,9 @@ public class AssignShiftChooseClub extends JFrame {
 	private void displayShifts() throws DataAccessException {
 	   shiftCtrl.getShiftsByDate(LocalDate.of(2023, 05, 15
 			   ))
-				.stream()
+				.parallelStream()
 				.filter(s -> s.getDoormanId() == 0)
+				.collect(Collectors.toList())
 				.forEach(s -> {	
 					try {
 						switch(shiftCtrl.findBarById(s.getBarId()).getName()){
@@ -905,7 +907,8 @@ public class AssignShiftChooseClub extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();				
 					}
-				});							
+				});
+									
 	}
 	
 	private void testMenu() {
