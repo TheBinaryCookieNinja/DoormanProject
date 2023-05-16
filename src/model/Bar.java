@@ -5,10 +5,10 @@ public class Bar {
 		private String name;
 	    private String phone;
 	    private String email;
-	    private String address;
+	    private int addressId;
 	    private String cvr;
 
-	    public Bar(int barId, String name, String phone, String email, String address, String cvr) {
+	    public Bar(int barId, String name, String phone, String email, int addressId, String cvr) {
 	    }
 
 	    public int getBarId() {
@@ -46,12 +46,12 @@ public class Bar {
 	    }
 
 	    
-	    public String getAddress() {
-	        return address;
+	    public int getAddressId() {
+	        return addressId;
 	    }
 
-	    public void setAddress(String address) {
-	        this.address = address;
+	    public void setAddressId(int addressId) {
+	        this.addressId = addressId;
 	    }
 
 	   

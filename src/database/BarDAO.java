@@ -14,13 +14,13 @@ public class BarDAO {
 	private LocalDate localDate;
 	
 	private static final String findAllQ = 
-			"select barId, name, phone, email, address, cvr from Bar";
+			"select barId, namee, phone, email, addressId, cvr from Bar";
 	private static final String findByIdQ = 
-		findAllQ + "where barId = ?";
+			findAllQ + " where barId = ?";
 	private static final String createBarQ =
-			"insert into Bar (barId, name, phone, email, address, cvr) VALUES (?,?,?,?,?,?)";
+			"insert into Bar (barId, namee, phone, email, addressID, cvr) VALUES (?,?,?,?,?,?)";
 	private static final String updateQ = 
-			"update Bar set barId = ?, name = ?, phone = ?, email = ?, address = ?, cvr = ?";
+			"update Bar set barId = ?, namee = ?, phone = ?, email = ?, addressId = ?, cvr = ?";
 	private static final String deleteBarQ = 
 			"delete * from Bar where barId = ?";
 	private static final String findByDateQ = findAllQ + "FROM Bar b " + "INNER JOIN Shiftt s ON b.barId = s.barId " + "WHERE s.shiftDate = ?";
@@ -87,7 +87,7 @@ public class BarDAO {
 		createBar.setString(2, bar.getName());
 		createBar.setString(3, bar.getPhone());
 		createBar.setString(4, bar.getEmail());
-		createBar.setString(5, bar.getAddress());
+		createBar.setInt(5, bar.getAddressId());
 		createBar.setString(6, bar.getCvr());
 		createBar.execute();
 		
@@ -98,7 +98,7 @@ public class BarDAO {
 		final String name = b.getName();
 		final String phone = b.getPhone();
 		final String email = b.getEmail();
-		final String address = b.getAddress();
+		final int addressId = b.getAddressId();
 		final String cvr = b.getCvr();
 				
 		try {
@@ -110,7 +110,7 @@ public class BarDAO {
 			update.setString(2, name);
 			update.setString(3, phone);
 			update.setString(4, email);
-			update.setString(5, address);
+			update.setInt(5, addressId);
 			update.setString(6, cvr);
 			
 			update.executeUpdate();
@@ -127,10 +127,10 @@ public class BarDAO {
 	private Bar buildObject(ResultSet rs) throws SQLException {
 		Bar b = new Bar(
 				rs.getInt("barId"),
-				rs.getString("name"),
+				rs.getString("namee"),
 				rs.getString("phone"),
 				rs.getString("email"),
-				rs.getString("address"),
+				rs.getInt("addressId"),
 				rs.getString("cvr")
 				);
 		return b;
