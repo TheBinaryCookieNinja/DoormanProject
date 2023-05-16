@@ -1,14 +1,16 @@
 package model;
 
+import java.time.LocalTime;
+
 public class Shift {
 	  private int shiftId;
 	    private String shiftDate;
-	    private String checkInTime;
-	    private String checkOutTime;
+	    private LocalTime checkInTime;
+	    private LocalTime checkOutTime;
 		private int barId;
 		private int doormanId;
 
-	    public Shift(int shiftId, String shiftDate, String checkInTime, String checkOutTime, int barId, int doormanId) {
+	    public Shift(int shiftId, String shiftDate, LocalTime checkInTime, LocalTime checkOutTime, int barId, int doormanId) {
 	        this.shiftId = shiftId;
 	        this.shiftDate = shiftDate;
 	        this.checkInTime = checkInTime;
@@ -36,20 +38,20 @@ public class Shift {
 	    }
 
 	 
-	    public String getCheckInTime() {
+	    public LocalTime getCheckInTime() {
 	        return checkInTime;
 	    }
 
-	    public void setCheckInTime(String checkInTime) {
+	    public void setCheckInTime(LocalTime checkInTime) {
 	        this.checkInTime = checkInTime;
 	    }
 
 	 
-	    public String getCheckOutTime() {
+	    public LocalTime getCheckOutTime() {
 	        return checkOutTime;
 	    }
 
-	    public void setCheckOutTime(String checkOutTime) {
+	    public void setCheckOutTime(LocalTime checkOutTime) {
 	        this.checkOutTime = checkOutTime;
 	    }
 	    

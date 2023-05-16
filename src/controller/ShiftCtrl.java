@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import database.DataAccessException;
+import database.DoormanDAO;
 import database.ShiftDAO;
 import model.Bar;
 import model.Doorman;
@@ -15,6 +16,9 @@ import model.Shift;
 public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
 	private BarController barCtrl;
+	private DoormanCtrl doormanCtrl;
+	private Shift shift;
+	private Date date;
 	
 	
 	
@@ -34,10 +38,10 @@ public class ShiftCtrl  {
      * @param date the date to get shifts for
      * @return list of shifts for the specified date
      */
-	public List<Shift> getShiftsByDate(Date date) throws DataAccessException {
-		// Convert java.util.Date to java.time.LocalDate
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return shiftDAO.getShiftsByDate(localDate);
+	public List<Shift> getShiftsByDate(LocalDate date) throws DataAccessException {
+//		// Convert java.util.Date to java.time.LocalDate
+//		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return shiftDAO.getShiftsByDate(date);
 		
 	}
 	
@@ -51,5 +55,9 @@ public class ShiftCtrl  {
 	
 	public Bar findBarById(int barId) throws DataAccessException {
 		return barCtrl.findById(barId);
+	}
+	
+	  public List<Doorman> getAvailableDoormenForShift() throws DataAccessException {
+	        return doormanCtrl.getAvailableDoormenForShift(date, shift.getBarId());
 	}
 }

@@ -1,4 +1,8 @@
 /controller/
-/gui/
 /database/
+<<<<<<< HEAD
+/gui/
+=======
 /Test/
+>>>>>>> 34f7843e90b7b34cf367005f0ba826109a87c73e
+/model/

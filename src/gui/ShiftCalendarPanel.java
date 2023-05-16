@@ -3,10 +3,15 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.ShiftCtrl;
+import database.DataAccessException;
 import model.Shift;
 
 import java.time.*;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.time.LocalDate;
 
 public class ShiftCalendarPanel extends JLayeredPane {
 
@@ -14,8 +19,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private int year;
 	private Cell[] dayCells;
 	private Cell[] titleCells;
+	private ShiftCtrl shiftCtrl;
 
-	public ShiftCalendarPanel(int month, int year) {
+	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
 		this.month = month;
 		this.year = year;
 		initComponents();
@@ -23,6 +29,10 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		setDatesForMonth(LocalDate.of(year, month, 1));
 	}
 
+	public void setShiftCtrl(ShiftCtrl shiftCtrl) {
+        this.shiftCtrl = shiftCtrl;
+    }
+	
 	private void initComponents() {
 		String[] daysOfWeek = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 		this.setLayout(new GridLayout(0, 7));
@@ -66,7 +76,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		this.repaint();
 	}
 
-	public void setDatesForMonth(LocalDate date) {
+	public void setDatesForMonth(LocalDate date) throws DataAccessException {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
@@ -79,6 +89,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			cell.setText("");
 			cell.setDate(null);
 			cell.currentMonth(false);
+			cell.clearShifts();
 		}
 
 		// Set the dates
@@ -91,14 +102,19 @@ public class ShiftCalendarPanel extends JLayeredPane {
 
 			// here shifts objects are added to a date cell if the shift date matches the
 			// date cell
-			for (Shift shift : shifts) {
-				LocalDate shiftDate = LocalDate.parse(shift.getShiftDate());
-				if (shiftDate.equals(dayDate)) {
-					String shiftText = String.format("<html>%s<br/>%s - %s</html>", shift.getShiftId(),
-							shift.getCheckInTime(), shift.getCheckOutTime());
-					cell.addShift(shiftText);
+			if (shiftCtrl != null) {
+			
+				List<Shift> shifts = shiftCtrl.getShiftsByDate((dayDate));
+			
+				for (Shift shift : shifts) {
+					 String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
+                             shift.getCheckInTime(), shift.getCheckOutTime());
+                     cell.addShift(shiftText);
 				}
+				
 			}
+			
 		}
+			
 	}
 }

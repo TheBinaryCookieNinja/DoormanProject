@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import database.DataAccessException;
+
 import javax.swing.GroupLayout.Alignment;
 
 public class MainCalendar extends JFrame {
@@ -47,6 +50,7 @@ public class MainCalendar extends JFrame {
 			public void run() {
 				try {
 					MainCalendar frame = new MainCalendar();
+					frame.setResizable(true);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,14 +61,15 @@ public class MainCalendar extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DataAccessException
 	 */
-	public MainCalendar() {
+	public MainCalendar() throws DataAccessException {
 		initComponents();
 	}
 	
-	private void initComponents() {
+	private void initComponents() throws DataAccessException {
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setBounds(100, 100, 329, 391);
+	    setBounds(100, 100, 1526, 1224);
 	    contentPane = new JPanel();
 	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -81,9 +86,9 @@ public class MainCalendar extends JFrame {
 	    GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
 	    jPanel1Layout.setHorizontalGroup(
 	    	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(jPanel1Layout.createSequentialGroup()
-	    			.addGap(189)
-	    			.addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+	    		.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+	    			.addContainerGap()
+	    			.addComponent(calendarCustom2, GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
 	    			.addContainerGap())
 	    );
 	    jPanel1Layout.setVerticalGroup(
@@ -97,16 +102,16 @@ public class MainCalendar extends JFrame {
 
 	    GroupLayout layout = new GroupLayout(getContentPane());
 	    layout.setHorizontalGroup(
-	        layout.createParallelGroup(Alignment.LEADING)
-	            .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 1056, GroupLayout.PREFERRED_SIZE)
+	    	layout.createParallelGroup(Alignment.LEADING)
+	    		.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 1500, Short.MAX_VALUE)
 	    );
 	    layout.setVerticalGroup(
-	        layout.createParallelGroup(Alignment.LEADING)
-	            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+	    	layout.createParallelGroup(Alignment.LEADING)
+	    		.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 1175, Short.MAX_VALUE)
 	    );
 	    getContentPane().setLayout(layout);
 
-	    pack();
+	    //pack();
 	    setLocationRelativeTo(null);
 	}
 

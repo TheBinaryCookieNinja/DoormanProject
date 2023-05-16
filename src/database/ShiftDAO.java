@@ -3,7 +3,9 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class ShiftDAO {
 			List<Shift> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not retrieve all persons");
+			throw new DataAccessException(e, "Could not retrieve all shifts");
 		}
 	}
 
@@ -61,8 +63,8 @@ public class ShiftDAO {
 	public void createShift(Shift shift) throws SQLException {
 		createShift.setInt(1, shift.getShiftId());
 		createShift.setString(2, shift.getShiftDate());
-		createShift.setString(3, shift.getCheckInTime());
-		createShift.setString(4, shift.getCheckOutTime());
+		createShift.setTime(3, Time.valueOf(shift.getCheckInTime()));
+		createShift.setTime(4, Time.valueOf(shift.getCheckOutTime()));
 		createShift.setInt(5, shift.getBarId());
 		createShift.setInt(6, shift.getDoormanId());
 		createShift.execute();
@@ -71,9 +73,9 @@ public class ShiftDAO {
 
 	public void update(Shift s) throws DataAccessException {
 		final int shiftId = s.getShiftId();
-		final String shiftDate = s.getCheckInTime();
-		final String checkInTime = s.getCheckInTime();
-		final String checkOutTime = s.getCheckOutTime();
+		final String shiftDate = s.getShiftDate();
+		final LocalTime checkInTime = s.getCheckInTime();
+		final LocalTime checkOutTime = s.getCheckOutTime();
 		final int barId = s.getBarId();
 		final int doormanId = s.getDoormanId();
 
@@ -84,8 +86,8 @@ public class ShiftDAO {
 			//
 			update.setInt(1, shiftId);
 			update.setString(2, shiftDate);
-			update.setString(3, checkInTime);
-			update.setString(4, checkOutTime);
+			update.setTime(3, Time.valueOf(checkInTime));
+			update.setTime(4, Time.valueOf(checkOutTime));
 			update.setInt(5, barId);
 			update.setInt(6, doormanId);
 
@@ -101,23 +103,41 @@ public class ShiftDAO {
 	}
 
 	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
-		try {
-			findByDate.setString(1, localDate.toString()); // converts the localDate to a String, since the Date in the
-															// database schema is a String
-			ResultSet rs = findByDate.executeQuery();
-			List<Shift> res = buildObjects(rs);
-			return res;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
-		}
+		 try {
+		        java.sql.Date sqlDate = java.sql.Date.valueOf(localDate); // Convert LocalDate to java.sql.Date
+		        findByDate.setDate(1, sqlDate);
+		        ResultSet rs = findByDate.executeQuery();
+		        List<Shift> res = buildObjects(rs);
+		        return res;
+		    } catch (SQLException e) {
+		        throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
+		    }
 
 	}
 
 	private Shift buildObject(ResultSet rs) throws SQLException {
-		Shift s = new Shift(rs.getInt("shiftId"), rs.getString("shiftDate"), rs.getString("checkInTime"),
-				rs.getString("checkOutTime"), rs.getInt("barId"), rs.getInt("doormanId"));
+<<<<<<< HEAD
+	    int shiftId = rs.getInt("shiftId");
+	    String shiftDate = rs.getString("shiftDate");
+	    LocalTime checkInTime = LocalTime.parse(rs.getString("checkInTime"));
+	    LocalTime checkOutTime = LocalTime.parse(rs.getString("checkOutTime"));
+	    int barId = rs.getInt("barId");
+	    int doormanId = rs.getInt("doormanId");
+
+	    Shift s = new Shift(shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId);
+	    return s;
+=======
+		Shift s = new Shift(
+				rs.getInt("shiftId"), 
+				rs.getString("shiftDate"), 
+				rs.getString("checkInTime"),
+				rs.getString("checkOutTime"), 
+				rs.getInt("barId"), 
+				rs.getInt("doormanId"));
 		return s;
+>>>>>>> 34f7843e90b7b34cf367005f0ba826109a87c73e
 	}
+
 
 	private List<Shift> buildObjects(ResultSet rs) throws SQLException {
 		List<Shift> res = new ArrayList<>();

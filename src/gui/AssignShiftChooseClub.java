@@ -105,6 +105,7 @@ public class AssignShiftChooseClub extends JFrame {
 	 * @throws DataAccessException 
 	 */
 	public AssignShiftChooseClub() throws DataAccessException {
+		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
 		
@@ -165,7 +166,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		lblName1 = new JLabel("Fabrikken");
+		lblName1 = new JLabel("");
 		lblName1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName1 = new GridBagConstraints();
 		gbc_lblName1.gridwidth = 2;
@@ -220,7 +221,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		JLabel lblName2 = new JLabel("Fabrikken");
+		JLabel lblName2 = new JLabel("");
 		lblName2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName2 = new GridBagConstraints();
 		gbc_lblName2.gridwidth = 2;
@@ -266,7 +267,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_3.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_3.setLayout(gbl_panel_3);
 		
-		JLabel lblName3 = new JLabel("Fabrikken");
+		JLabel lblName3 = new JLabel("");
 		lblName3.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName3 = new GridBagConstraints();
 		gbc_lblName3.gridwidth = 2;
@@ -312,7 +313,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
-		JLabel lblName4 = new JLabel("Fabrikken");
+		JLabel lblName4 = new JLabel("");
 		lblName4.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName4 = new GridBagConstraints();
 		gbc_lblName4.gridwidth = 2;
@@ -358,7 +359,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_5.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_5.setLayout(gbl_panel_5);
 		
-		JLabel lblName5 = new JLabel("Fabrikken");
+		JLabel lblName5 = new JLabel("");
 		lblName5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName5 = new GridBagConstraints();
 		gbc_lblName5.gridwidth = 2;
@@ -404,7 +405,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_6.setLayout(gbl_panel_6);
 		
-		JLabel lblName6 = new JLabel("Fabrikken");
+		JLabel lblName6 = new JLabel("");
 		lblName6.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName6 = new GridBagConstraints();
 		gbc_lblName6.gridwidth = 2;
@@ -450,7 +451,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_7.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_7.setLayout(gbl_panel_7);
 		
-		JLabel lblName7 = new JLabel("Fabrikken");
+		JLabel lblName7 = new JLabel(shiftCtrl.findBarById(7).getName());
 		lblName7.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName7 = new GridBagConstraints();
 		gbc_lblName7.gridwidth = 2;
@@ -496,7 +497,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_8.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_8.setLayout(gbl_panel_8);
 		
-		JLabel lblName8 = new JLabel("Fabrikken");
+		JLabel lblName8 = new JLabel(shiftCtrl.findBarById(8).getName());
 		lblName8.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName8 = new GridBagConstraints();
 		gbc_lblName8.gridwidth = 2;
@@ -542,7 +543,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
 		
-		JLabel lblName9 = new JLabel("Fabrikken");
+		JLabel lblName9 = new JLabel(shiftCtrl.findBarById(9).getName());
 		lblName9.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName9 = new GridBagConstraints();
 		gbc_lblName9.gridwidth = 2;
@@ -588,7 +589,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_10.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_10.setLayout(gbl_panel_10);
 		
-		JLabel lblName10 = new JLabel("Fabrikken");
+		JLabel lblName10 = new JLabel(shiftCtrl.findBarById(10).getName());
 		lblName10.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName10 = new GridBagConstraints();
 		gbc_lblName10.gridwidth = 2;
@@ -634,7 +635,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_11.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_11.setLayout(gbl_panel_11);
 		
-		JLabel lblName11 = new JLabel("Fabrikken");
+		JLabel lblName11 = new JLabel("");
 		lblName11.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName11 = new GridBagConstraints();
 		gbc_lblName11.gridwidth = 2;
@@ -679,7 +680,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_12.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_12.setLayout(gbl_panel_12);
 		
-		JLabel lblName12 = new JLabel("Fabrikken");
+		JLabel lblName12 = new JLabel("");
 		lblName12.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName12 = new GridBagConstraints();
 		gbc_lblName12.gridwidth = 2;
@@ -734,15 +735,18 @@ public class AssignShiftChooseClub extends JFrame {
 		btnShiftTime11_2.setVisible(false);
 		btnShiftTime12_1.setVisible(false);
 		btnShiftTime12_2.setVisible(false);
-		
+		 
 		init();
 	}
 	
 	private void init() throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
-		displayShifts();
-		
-		
+		displayBars();
+		displayShifts();	
+	}
+	
+	private void displayBars() throws DataAccessException {
+		lblName1.setText(shiftCtrl.getShiftById(1).getCheckInTime());
 	}
 	
 	private void displayShifts() throws DataAccessException {
@@ -750,131 +754,126 @@ public class AssignShiftChooseClub extends JFrame {
 				.parallelStream()
 				.filter(s -> s.getDoormanId() == 0)
 				.forEach(s -> {	
-					try {
-						switch(shiftCtrl.findBarById(s.getBarId()).getName()){
-							case "Fabrikken":
-								if(btnShiftTime1_1.getText().isEmpty()) {
-									btnShiftTime1_1.setVisible(true);
-									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime1_2.setVisible(true);
-									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-							case "Bar2":
-								if(btnShiftTime2_1.getText().isEmpty()) {
-									btnShiftTime2_1.setVisible(true);
-									btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime2_2.setVisible(true);
-									btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar3":
-								if(btnShiftTime3_1.getText().isEmpty()) {
-									btnShiftTime3_1.setVisible(true);
-									btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime3_2.setVisible(true);
-									btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar4":
-								if(btnShiftTime4_1.getText().isEmpty()) {
-									btnShiftTime4_1.setVisible(true);
-									btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime4_2.setVisible(true);
-									btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar6":
-								if(btnShiftTime6_1.getText().isEmpty()) {
-									btnShiftTime6_1.setVisible(true);
-									btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime6_2.setVisible(true);
-									btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar7":
-								if(btnShiftTime7_1.getText().isEmpty()) {
-									btnShiftTime7_1.setVisible(true);
-									btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime7_2.setVisible(true);
-									btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar 8":
-								if(btnShiftTime8_1.getText().isEmpty()) {
-									btnShiftTime8_1.setVisible(true);
-									btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime8_2.setVisible(true);
-									btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-							case "Bar9":
-								if(btnShiftTime9_1.getText().isEmpty()) {
-									btnShiftTime9_1.setVisible(true);
-									btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime9_2.setVisible(true);
-									btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar10":
-								if(btnShiftTime10_1.getText().isEmpty()) {
-									btnShiftTime10_1.setVisible(true);
-									btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime10_2.setVisible(true);
-									btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Ba11":
-								if(btnShiftTime11_1.getText().isEmpty()) {
-									btnShiftTime11_1.setVisible(true);
-									btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime11_2.setVisible(true);
-									btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar12":
-								if(btnShiftTime12_1.getText().isEmpty()) {
-									btnShiftTime12_1.setVisible(true);
-									btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime12_2.setVisible(true);
-									btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							case "Bar5":
-								if(btnShiftTime5_1.getText().isEmpty()) {
-									btnShiftTime5_1.setVisible(true);
-									btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								else {
-									btnShiftTime5_2.setVisible(true);
-									btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-								}
-								break;
-							
-						}
-					} catch (DataAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					switch("Fabrikken"){
+						case "Fabrikken":
+							if(btnShiftTime1_1.getText().isEmpty()) {
+								btnShiftTime1_1.setVisible(true);
+								btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime1_2.setVisible(true);
+								btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+						case "Bar2":
+							if(btnShiftTime2_1.getText().isEmpty()) {
+								btnShiftTime2_1.setVisible(true);
+								btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime2_2.setVisible(true);
+								btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar3":
+							if(btnShiftTime3_1.getText().isEmpty()) {
+								btnShiftTime3_1.setVisible(true);
+								btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime3_2.setVisible(true);
+								btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar4":
+							if(btnShiftTime4_1.getText().isEmpty()) {
+								btnShiftTime4_1.setVisible(true);
+								btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime4_2.setVisible(true);
+								btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar6":
+							if(btnShiftTime6_1.getText().isEmpty()) {
+								btnShiftTime6_1.setVisible(true);
+								btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime6_2.setVisible(true);
+								btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar7":
+							if(btnShiftTime7_1.getText().isEmpty()) {
+								btnShiftTime7_1.setVisible(true);
+								btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime7_2.setVisible(true);
+								btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar 8":
+							if(btnShiftTime8_1.getText().isEmpty()) {
+								btnShiftTime8_1.setVisible(true);
+								btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime8_2.setVisible(true);
+								btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+						case "Bar9":
+							if(btnShiftTime9_1.getText().isEmpty()) {
+								btnShiftTime9_1.setVisible(true);
+								btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime9_2.setVisible(true);
+								btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar10":
+							if(btnShiftTime10_1.getText().isEmpty()) {
+								btnShiftTime10_1.setVisible(true);
+								btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime10_2.setVisible(true);
+								btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Ba11":
+							if(btnShiftTime11_1.getText().isEmpty()) {
+								btnShiftTime11_1.setVisible(true);
+								btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime11_2.setVisible(true);
+								btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar12":
+							if(btnShiftTime12_1.getText().isEmpty()) {
+								btnShiftTime12_1.setVisible(true);
+								btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime12_2.setVisible(true);
+								btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						case "Bar5":
+							if(btnShiftTime5_1.getText().isEmpty()) {
+								btnShiftTime5_1.setVisible(true);
+								btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							else {
+								btnShiftTime5_2.setVisible(true);
+								btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+							}
+							break;
+						
 					}
 					
 				
