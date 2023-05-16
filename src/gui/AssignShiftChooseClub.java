@@ -903,12 +903,9 @@ public class AssignShiftChooseClub extends JFrame {
 						}
 					} catch (DataAccessException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						e.printStackTrace();				
 					}
-					
-				
-				});
-									
+				});							
 	}
 	
 	private void testMenu() {
