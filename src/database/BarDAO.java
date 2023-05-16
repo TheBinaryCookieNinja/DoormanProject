@@ -41,7 +41,6 @@ public class BarDAO {
 					.prepareStatement(deleteBarQ);
 			findByDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(findByDateQ);
-			findByDate.setDate(1, java.sql.Date.valueOf(localDate));
 			} catch (SQLException e) {
 				throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -81,8 +80,6 @@ public class BarDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
 		}
-		
-		
 	}
 	
 	public void createBar (Bar bar) throws SQLException {
@@ -146,18 +143,5 @@ public class BarDAO {
 		}
 		return res;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

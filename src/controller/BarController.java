@@ -30,4 +30,7 @@ public class BarController {
 			return barDAO.findAll();
 	}
 
+		public Bar findById(int barId) throws DataAccessException {
+			return barDAO.findById(barId);
+		}
 }

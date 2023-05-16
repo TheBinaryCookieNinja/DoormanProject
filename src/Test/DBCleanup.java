@@ -9,8 +9,8 @@ import database.DBConnection;
  * filled with data. By dropping the table, we reset the auto-generated
  * indices s.t. IDENTITY(1,1) starts on 1 and we can also count on the
  * ids of the records to be the same in all cases.
- * @author knol
- * @version 2017-02-20
+ * @author Frederik Bismark
+ * @version 2023-05-16
  *
  */
 public class DBCleanup {
@@ -23,8 +23,8 @@ public class DBCleanup {
 		e("drop table DoormanBlackList");
 		e("drop table DoormanWishList");
 		e("drop table UnavailabilityRequest");
-		e("drop table Signaturee");
 		e("drop table Shiftt");
+		e("drop table Signaturee");
 		e("drop table AvailableDates");
 		e("drop table Bar");
 		e("drop table Doorman");

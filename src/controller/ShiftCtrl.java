@@ -20,12 +20,12 @@ public class ShiftCtrl  {
 	
 	
 	public ShiftCtrl() throws DataAccessException {
-		barCtrl = new BarController();
 		try {
 			shiftDAO = new ShiftDAO();
 		} catch (Exception e) {
 			throw new DataAccessException(e, "Can't create shiftDAO");
 		}
+		barCtrl = new BarController();
 	}
 
 	 /**
@@ -49,7 +49,7 @@ public class ShiftCtrl  {
 		return shiftDAO.findAll();
 	}
 	
-	public Bar findBarById(int barId) {
-		return barCtrl.findById();
+	public Bar findBarById(int barId) throws DataAccessException {
+		return barCtrl.findById(barId);
 	}
 }
