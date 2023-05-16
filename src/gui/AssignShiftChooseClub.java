@@ -754,123 +754,124 @@ public class AssignShiftChooseClub extends JFrame {
 				.parallelStream()
 				.filter(s -> s.getDoormanId() == 0)
 				.forEach(s -> {	
+					String shiftTime = s.getCheckInTime().toString() + " - " + s.getCheckOutTime().toString();
 					switch("Fabrikken"){
 						case "Fabrikken":
 							if(btnShiftTime1_1.getText().isEmpty()) {
 								btnShiftTime1_1.setVisible(true);
-								btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime1_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime1_2.setVisible(true);
-								btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime1_2.setText(shiftTime);
 							}
 						case "Bar2":
 							if(btnShiftTime2_1.getText().isEmpty()) {
 								btnShiftTime2_1.setVisible(true);
-								btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime2_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime2_2.setVisible(true);
-								btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime2_2.setText(shiftTime);
 							}
 							break;
 						case "Bar3":
 							if(btnShiftTime3_1.getText().isEmpty()) {
 								btnShiftTime3_1.setVisible(true);
-								btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime3_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime3_2.setVisible(true);
-								btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime3_2.setText(shiftTime);
 							}
 							break;
 						case "Bar4":
 							if(btnShiftTime4_1.getText().isEmpty()) {
 								btnShiftTime4_1.setVisible(true);
-								btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime4_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime4_2.setVisible(true);
-								btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime4_2.setText(shiftTime);
 							}
 							break;
 						case "Bar6":
 							if(btnShiftTime6_1.getText().isEmpty()) {
 								btnShiftTime6_1.setVisible(true);
-								btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime6_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime6_2.setVisible(true);
-								btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime6_2.setText(shiftTime);
 							}
 							break;
 						case "Bar7":
 							if(btnShiftTime7_1.getText().isEmpty()) {
 								btnShiftTime7_1.setVisible(true);
-								btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime7_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime7_2.setVisible(true);
-								btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime7_2.setText(shiftTime);
 							}
 							break;
 						case "Bar 8":
 							if(btnShiftTime8_1.getText().isEmpty()) {
 								btnShiftTime8_1.setVisible(true);
-								btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime8_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime8_2.setVisible(true);
-								btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime8_2.setText(shiftTime);
 							}
 						case "Bar9":
 							if(btnShiftTime9_1.getText().isEmpty()) {
 								btnShiftTime9_1.setVisible(true);
-								btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime9_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime9_2.setVisible(true);
-								btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime9_2.setText(shiftTime);
 							}
 							break;
 						case "Bar10":
 							if(btnShiftTime10_1.getText().isEmpty()) {
 								btnShiftTime10_1.setVisible(true);
-								btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime10_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime10_2.setVisible(true);
-								btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime10_2.setText(shiftTime);
 							}
 							break;
 						case "Ba11":
 							if(btnShiftTime11_1.getText().isEmpty()) {
 								btnShiftTime11_1.setVisible(true);
-								btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime11_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime11_2.setVisible(true);
-								btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime11_2.setText(shiftTime);
 							}
 							break;
 						case "Bar12":
 							if(btnShiftTime12_1.getText().isEmpty()) {
 								btnShiftTime12_1.setVisible(true);
-								btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime12_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime12_2.setVisible(true);
-								btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime12_2.setText(shiftTime);
 							}
 							break;
 						case "Bar5":
 							if(btnShiftTime5_1.getText().isEmpty()) {
 								btnShiftTime5_1.setVisible(true);
-								btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime5_1.setText(shiftTime);
 							}
 							else {
 								btnShiftTime5_2.setVisible(true);
-								btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								btnShiftTime5_2.setText(shiftTime);
 							}
 							break;
 						
