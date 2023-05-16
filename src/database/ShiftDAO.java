@@ -116,7 +116,6 @@ public class ShiftDAO {
 	}
 
 	private Shift buildObject(ResultSet rs) throws SQLException {
-
 	    int shiftId = rs.getInt("shiftId");
 	    String shiftDate = rs.getString("shiftDate");
 	    LocalTime checkInTime = LocalTime.parse(rs.getString("checkInTime"));
@@ -126,17 +125,8 @@ public class ShiftDAO {
 
 	    Shift s = new Shift(shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId);
 	    return s;
-
-		Shift s = new Shift(
-				rs.getInt("shiftId"), 
-				rs.getString("shiftDate"), 
-				rs.getString("checkInTime"),
-				rs.getString("checkOutTime"), 
-				rs.getInt("barId"), 
-				rs.getInt("doormanId"));
-		return s;
-
 	}
+
 
 
 	private List<Shift> buildObjects(ResultSet rs) throws SQLException {
