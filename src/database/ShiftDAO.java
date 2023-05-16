@@ -125,6 +125,8 @@ public class ShiftDAO {
 	    
 	    LocalTime localCheckInTime = checkInTime.toLocalTime();
 	    LocalTime localCheckOutTime = checkOutTime.toLocalTime();
+	    
+	  
 
 	    Shift s = new Shift(shiftId, shiftDate, localCheckInTime, localCheckOutTime, barId, doormanId);
 	    return s;
