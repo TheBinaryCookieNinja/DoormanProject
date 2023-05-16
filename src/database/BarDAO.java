@@ -125,15 +125,17 @@ public class BarDAO {
 	}
 	
 	private Bar buildObject(ResultSet rs) throws SQLException {
-				int barId = rs.getInt("barId");
-				String name = rs.getString("namee");
-				String phone = rs.getString("phone");
-				String email = rs.getString("email");
-				int addressId = rs.getInt("addressId");
-				String cvr = rs.getString("cvr");
+//				int barId = rs.getInt("barId");
+//				String name = rs.getString("namee");
+//				String phone = rs.getString("phone");
+//				String email = rs.getString("email");
+//				int addressId = rs.getInt("addressId");
+//				String cvr = rs.getString("cvr");	
 				
-				Bar b = new Bar(barId, name, phone, email, addressId, cvr);
-				return b;
+				Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getInt("addressId"), rs.getString("cvr"));
+				
+				System.out.println();
+				return bar;
 	}
 	
 	private List<Bar> buildObjects(ResultSet rs) throws SQLException {

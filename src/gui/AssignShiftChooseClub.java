@@ -451,7 +451,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_7.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_7.setLayout(gbl_panel_7);
 		
-		JLabel lblName7 = new JLabel(shiftCtrl.findBarById(7).getName());
+		JLabel lblName7 = new JLabel("");
 		lblName7.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName7 = new GridBagConstraints();
 		gbc_lblName7.gridwidth = 2;
@@ -497,7 +497,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_8.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_8.setLayout(gbl_panel_8);
 		
-		JLabel lblName8 = new JLabel(shiftCtrl.findBarById(8).getName());
+		JLabel lblName8 = new JLabel("");
 		lblName8.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName8 = new GridBagConstraints();
 		gbc_lblName8.gridwidth = 2;
@@ -543,7 +543,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
 		
-		JLabel lblName9 = new JLabel(shiftCtrl.findBarById(9).getName());
+		JLabel lblName9 = new JLabel("");
 		lblName9.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName9 = new GridBagConstraints();
 		gbc_lblName9.gridwidth = 2;
@@ -589,7 +589,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbl_panel_10.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_10.setLayout(gbl_panel_10);
 		
-		JLabel lblName10 = new JLabel(shiftCtrl.findBarById(10).getName());
+		JLabel lblName10 = new JLabel("");
 		lblName10.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblName10 = new GridBagConstraints();
 		gbc_lblName10.gridwidth = 2;

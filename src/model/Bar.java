@@ -9,6 +9,12 @@ public class Bar {
 	    private String cvr;
 
 	    public Bar(int barId, String name, String phone, String email, int addressId, String cvr) {
+	    	this.barId = barId;
+	    	this.name = name;
+	    	this.phone = phone;
+	    	this.email = email;
+	    	this.addressId = addressId;
+	    	this.cvr = cvr;
 	    }
 
 	    public int getBarId() {
