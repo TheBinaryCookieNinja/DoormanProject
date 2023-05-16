@@ -18,7 +18,7 @@ public class BarDAO {
 	private static final String findByIdQ = 
 			findAllQ + " where barId = ?";
 	private static final String createBarQ =
-			"insert into Bar (barId, namee, phone, email, addressID, cvr) VALUES (?,?,?,?,?,?)";
+			"insert into Bar (barId, namee, phone, email, addressId, cvr) VALUES (?,?,?,?,?,?)";
 	private static final String updateQ = 
 			"update Bar set barId = ?, namee = ?, phone = ?, email = ?, addressId = ?, cvr = ?";
 	private static final String deleteBarQ = 
