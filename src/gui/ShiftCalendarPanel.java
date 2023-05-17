@@ -33,9 +33,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	}
 
 	public void setShiftCtrl(ShiftCtrl shiftCtrl) {
-        this.shiftCtrl = shiftCtrl;
-    }
-	
+		this.shiftCtrl = shiftCtrl;
+	}
+
 	private void initComponents() {
 		String[] daysOfWeek = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 		this.setLayout(new GridLayout(0, 7));
@@ -78,13 +78,19 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			LocalDate localDate = LocalDate.of(year, month, i + 1);
 			cell.setDate(localDate);
 			cell.setText(String.valueOf(i + 1));
-			cell.addActionListener(e -> { 
-		            Cell selectedCell = (Cell) e.getSource();
-		            LocalDate selectedDate = selectedCell.getDate();
-		            openAssignShiftChooseClub(selectedDate);
-		        
-		    });
-			
+			if (localDate.equals(LocalDate.now())) {
+				cell.setAsToday();
+			} else {
+				cell.setAsNotToday();
+			}
+
+			cell.addActionListener(e -> {
+				Cell selectedCell = (Cell) e.getSource();
+				LocalDate selectedDate = selectedCell.getDate();
+				openAssignShiftChooseClub(selectedDate);
+
+			});
+
 			this.add(cell);
 			dayCells[i] = cell;
 		}
@@ -92,16 +98,16 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		this.revalidate();
 		this.repaint();
 	}
-	
+
 	private void openAssignShiftChooseClub(LocalDate date) {
 		System.out.println("Action listener triggered!");
 		SwingUtilities.invokeLater(() -> {
-		    try {
-		        AssignShiftChooseClub frame = new AssignShiftChooseClub();
-		        frame.setVisible(true);
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
+			try {
+				AssignShiftChooseClub frame = new AssignShiftChooseClub();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
 	}
 
@@ -132,18 +138,18 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			// here shifts objects are added to a date cell if the shift date matches the
 			// date cell
 			if (shiftCtrl != null) {
-			
+
 				List<Shift> shifts = shiftCtrl.getShiftsByDate((dayDate));
-			
+
 				for (Shift shift : shifts) {
-					 String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
-                             shift.getCheckInTime(), shift.getCheckOutTime());
-                     cell.addShift(shiftText);
+					String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
+							shift.getCheckInTime(), shift.getCheckOutTime());
+					cell.addShift(shiftText);
 				}
-				
+
 			}
-			
+
 		}
-			
+
 	}
 }
