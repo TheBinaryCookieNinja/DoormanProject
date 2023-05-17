@@ -5,12 +5,12 @@ import java.time.LocalTime;
 public class Shift {
 	  private int shiftId;
 	    private String shiftDate;
-	    private LocalTime checkInTime;
-	    private LocalTime checkOutTime;
+	    private String checkInTime;
+	    private String checkOutTime;
 		private int barId;
 		private int doormanId;
 
-	    public Shift(int shiftId, String shiftDate, LocalTime checkInTime, LocalTime checkOutTime, int barId, int doormanId) {
+	    public Shift(int shiftId, String shiftDate, String checkInTime, String checkOutTime, int barId, int doormanId) {
 	        this.shiftId = shiftId;
 	        this.shiftDate = shiftDate;
 	        this.checkInTime = checkInTime;
@@ -38,20 +38,20 @@ public class Shift {
 	    }
 
 	 
-	    public LocalTime getCheckInTime() {
+	    public String getCheckInTime() {
 	        return checkInTime;
 	    }
 
-	    public void setCheckInTime(LocalTime checkInTime) {
+	    public void setCheckInTime(String checkInTime) {
 	        this.checkInTime = checkInTime;
 	    }
 
 	 
-	    public LocalTime getCheckOutTime() {
+	    public String getCheckOutTime() {
 	        return checkOutTime;
 	    }
 
-	    public void setCheckOutTime(LocalTime checkOutTime) {
+	    public void setCheckOutTime(String checkOutTime) {
 	        this.checkOutTime = checkOutTime;
 	    }
 	    
