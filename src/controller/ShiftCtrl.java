@@ -1,13 +1,12 @@
 package controller;
 
 import java.sql.Date;
-
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
+import database.DBConnection;
 import database.DataAccessException;
-import database.DoormanDAO;
 import database.ShiftDAO;
 import model.Bar;
 import model.Doorman;
@@ -17,6 +16,7 @@ public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
 	private BarController barCtrl;
 	private DoormanCtrl doormanCtrl;
+	private Doorman doorman;
 	private Shift shift;
 	private Date date;
 	
@@ -57,7 +57,22 @@ public class ShiftCtrl  {
 		return barCtrl.findById(barId);
 	}
 	
-	  public List<Doorman> getAvailableDoormenForShift() throws DataAccessException {
-	        return doormanCtrl.getAvailableDoormenForShift(date, shift.getBarId());
+	public List<Doorman> getAvailableDoormenForShift() throws DataAccessException {
+	    return doormanCtrl.getAvailableDoormenForShift(date, shift.getBarId());
+	}
+	  
+	public boolean confirmShift(int doormanId) throws DataAccessException, SQLException {
+		boolean confirmation = false;
+		try {
+			DBConnection.getInstance().startTransaction();
+			shiftDAO.updateDoormanId(shift, doormanId);
+			doormanCtrl.deleteDoorman(doormanId);
+			DBConnection.getInstance().commitTransaction();
+			confirmation = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBConnection.getInstance().rollbackTransaction();
+		}
+		return confirmation;
 	}
 }

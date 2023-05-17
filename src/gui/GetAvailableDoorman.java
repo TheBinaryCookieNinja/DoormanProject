@@ -25,6 +25,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class GetAvailableDoorman extends JFrame {
 
@@ -33,6 +36,7 @@ public class GetAvailableDoorman extends JFrame {
 	private DefaultListModel<Doorman>dataListModel;
 	private ShiftCtrl ShiftCtrl;
 	private JList<Doorman> doormanList;
+	private ShiftCtrl shiftCtrl;
 	
 	
 
@@ -51,20 +55,6 @@ public class GetAvailableDoorman extends JFrame {
 			}
 		});
 	}
-	
-	public GetAvailableDoorman(List<Doorman> data) {
-		this.data = data;
-		if(this.data == null) {
-			this.data = new ArrayList<>();
-		}
-	}
-	
-	public int getRowCount() {
-		return data.size();
-	}
-	
-	
-
 	/**
 	 * Create the frame.
 	 */
@@ -89,7 +79,7 @@ public class GetAvailableDoorman extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		doormanList = new JList();
+		doormanList = new JList<Doorman>();
 		doormanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		GetAvailableDoormanListCellRenderer renderer = new GetAvailableDoormanListCellRenderer();
 		GridBagConstraints gbc_doormanList = new GridBagConstraints();
@@ -103,6 +93,17 @@ public class GetAvailableDoorman extends JFrame {
 		contentPane.add(doormanList, gbc_doormanList);
 		
 		JButton btnNewButton_1 = new JButton("Confirm");
+		btnNewButton_1.addActionListener(e -> {
+			try {
+				shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId());
+			} catch (DataAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
@@ -123,8 +124,6 @@ public class GetAvailableDoorman extends JFrame {
 	private void init() {
 		try {
 			ShiftCtrl = new ShiftCtrl();
-			
-			
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
