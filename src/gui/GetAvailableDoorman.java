@@ -32,9 +32,7 @@ import java.awt.event.ActionEvent;
 public class GetAvailableDoorman extends JFrame {
 
 	private JPanel contentPane;
-	private List<Doorman> data;
 	private DefaultListModel<Doorman>dataListModel;
-	private ShiftCtrl ShiftCtrl;
 	private JList<Doorman> doormanList;
 	private ShiftCtrl shiftCtrl;
 	
@@ -81,10 +79,8 @@ public class GetAvailableDoorman extends JFrame {
 		
 		doormanList = new JList<Doorman>();
 		doormanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GetAvailableDoormanListCellRenderer renderer = new GetAvailableDoormanListCellRenderer();
 		GridBagConstraints gbc_doormanList = new GridBagConstraints();
-		doormanList.setCellRenderer(renderer);
-		doormanList.setModel(dataListModel);
+		
 		
 		gbc_doormanList.insets = new Insets(0, 0, 5, 5);
 		gbc_doormanList.fill = GridBagConstraints.BOTH;
@@ -122,8 +118,9 @@ public class GetAvailableDoorman extends JFrame {
 
 	
 	private void init() {
+		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
-			ShiftCtrl = new ShiftCtrl();
+			shiftCtrl = new ShiftCtrl();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +129,7 @@ public class GetAvailableDoorman extends JFrame {
 	
 	private void updateDoormanList() {
 		try {
-			List<Doorman> dlo = ShiftCtrl.getAvailableDoormenForShift();
+			List<Doorman> dlo = shiftCtrl.findAllDoormen();
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));

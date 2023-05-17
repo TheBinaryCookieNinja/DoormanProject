@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.chrono.ChronoZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,12 @@ import model.Doorman;
 public class DoormanDAO {
 	
 	private static final String findAllQ =
-			"select employeeId, hourlyRate from Doorman";
+			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d" +
+			"left join Employee on Employee.employeeId = d.employeeId";
 	private static final String findByIdQ = 
 			findAllQ + "where employeeId = ?";
 	private static final String createDoormanQ =
-			"insert into Doorman (employeeId, f_name, l_name, phone, email, address, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?,?)";
+			"insert into Doorman (employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String updateQ = 
 			"update Doorman set employeeId = ?, hourlyRate = ?";
 	private static final String deleteDoormanQ =
@@ -59,7 +62,7 @@ public class DoormanDAO {
 				List<Doorman> res = buildObjects(rs);
 				return res;
 			} catch (SQLException e) {
-				throw new DataAccessException(e, "Could not retrieve all persons");
+				throw new DataAccessException(e, "Could not retrieve all doormen");
 			}
 		}
 	
@@ -83,7 +86,7 @@ public class DoormanDAO {
 		createDoorman.setString(3, doorman.getL_name());
 		createDoorman.setString(4, doorman.getPhone());
 		createDoorman.setString(5, doorman.getEmail());
-		createDoorman.setString(6, doorman.getAddress());
+		createDoorman.setString(6, doorman.getAddressId());
 		createDoorman.setString(7, doorman.getPasscode());
 		createDoorman.setDouble(8, doorman.getHourlyRate());
 		createDoorman.execute();
@@ -96,7 +99,7 @@ public class DoormanDAO {
 		final String l_name = d.getL_name();
 		final String phone = d.getPhone();
 		final String email = d.getEmail();
-		final String address = d.getAddress();
+		final String address = d.getAddressId();
 		final String passcode = d.getPasscode();
 		final double hourlyRate = d.getHourlyRate();
 		
@@ -126,12 +129,12 @@ public class DoormanDAO {
 		deleteDoorman.execute();
 	}
 	
-	public List<Doorman> getAvailableDoormenForShift(Date date, int barId) throws DataAccessException {
+	public List<Doorman> getAvailableDoormenForShift(LocalDate date, int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
 			getAvailableDoormenForShift.setInt(1, barId);
 			getAvailableDoormenForShift.setInt(2, barId);
-			getAvailableDoormenForShift.setDate(3, date);
+			getAvailableDoormenForShift.setDate(3, Date.valueOf(date));
 			rs = getAvailableDoormenForShift.executeQuery();
 			List<Doorman> res = buildObjects(rs);
 			return res;

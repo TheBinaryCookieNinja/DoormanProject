@@ -129,12 +129,7 @@ public class AssignShiftChooseClub extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		mntmNewMenuItem = new JMenuItem("Assign shifts");
-		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				testMenu();
-			}
-		});
+
 		mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(mntmNewMenuItem);
 		
@@ -203,11 +198,7 @@ public class AssignShiftChooseClub extends JFrame {
 		});
 		
 		btnShiftTime1_1 = new JButton();
-		btnShiftTime1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				testMenu();
-			}
-		});
+		
 		GridBagConstraints gbc_btnShiftTime1_1 = new GridBagConstraints();
 		gbc_btnShiftTime1_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnShiftTime1_1.gridx = 1;
@@ -784,10 +775,12 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime1_1.getText().isEmpty()) {
 									btnShiftTime1_1.setVisible(true);
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+									btnShiftTime1_1.addActionListener(e -> {displayGetAvailableDoorman();});
 								}
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+									btnShiftTime1_2.addActionListener(e -> {displayGetAvailableDoorman();});
 								}
 								break;
 							case "Zurf":
@@ -909,14 +902,12 @@ public class AssignShiftChooseClub extends JFrame {
 									
 	}
 	
-	private void testMenu() {
-		PopUp pp = new PopUp();
+	private void displayGetAvailableDoorman() {
+		GetAvailableDoorman gad = new GetAvailableDoorman();
 		this.setVisible(false);
-		this.dispose();
-		pp.setVisible(true);
-		pp.setModal(true); 
-		pp.setAlwaysOnTop(true);
-		pp.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+		gad.setVisible(true);
+		gad.setAlwaysOnTop(true);
+		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	
 }
