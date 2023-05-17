@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import controller.ShiftCtrl;
@@ -47,7 +49,12 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 	}
 
-	public void initializeDaysInMonth() {
+	public void setDateCellActionListener(ActionListener listener) {
+	    for (Cell cell : dayCells) {
+	        cell.addActionListener(listener);
+	    }
+	}
+	public void initializeDaysInMonth(ActionListener listener) {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
@@ -56,6 +63,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		// Remove only the day cells from the panel
 		if (dayCells != null) {
 			for (Cell cell : dayCells) {
+				cell.removeActionListener(listener);
 				this.remove(cell);
 			}
 		}
@@ -68,6 +76,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			Cell cell = new Cell();
 			LocalDate localDate = LocalDate.of(year, month, i + 1);
 			cell.setDate(localDate);
+			 cell.addActionListener(listener);
 			this.add(cell);
 			dayCells[i] = cell;
 		}
