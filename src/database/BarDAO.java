@@ -12,7 +12,6 @@ import model.Shift;
 
 public class BarDAO {
 
-	
 	private static final String findAllQ = 
 			"select barId, namee, phone, email, addressId, cvr from Bar";
 	private static final String findByIdQ = 
@@ -90,7 +89,6 @@ public class BarDAO {
 		createBar.setInt(5, bar.getAddressId());
 		createBar.setString(6, bar.getCvr());
 		createBar.execute();
-		
 	}
 	
 	public void update(Bar b) throws DataAccessException {

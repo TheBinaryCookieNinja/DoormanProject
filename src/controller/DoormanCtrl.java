@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import database.DataAccessException;
@@ -27,6 +28,10 @@ public class DoormanCtrl {
 	    
 	    public List<Doorman> findAll() throws DataAccessException{
 	    	return doormanDAO.findAll();	    	
+	    }
+	    
+	    public void deleteDoorman(int doormanId) throws SQLException {
+	    	doormanDAO.deleteDoorman(doormanId);
 	    }
 	}
 

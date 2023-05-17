@@ -71,19 +71,14 @@ public class ShiftDAO {
 
 	}
 
-	public void update(Shift s) throws DataAccessException {
+	public void updateDoormanId(Shift s, int doormanId) throws DataAccessException {
 		final int shiftId = s.getShiftId();
 		final String shiftDate = s.getShiftDate();
 		final String checkInTime = s.getCheckInTime();
 		final String checkOutTime = s.getCheckOutTime();
 		final int barId = s.getBarId();
-		final int doormanId = s.getDoormanId();
 
 		try {
-			// "update Shift set
-			// shiftId = ?, shiftDate = ?, checkInTime = ?,
-			// checkOutTime = ?, barId = ?, doormanId = ? where shiftId = ?"
-			//
 			update.setInt(1, shiftId);
 			update.setString(2, shiftDate);
 			update.setString(3, checkInTime);

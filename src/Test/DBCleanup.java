@@ -42,7 +42,7 @@ public class DBCleanup {
 	}
 	
 	private static final String[] script = {
-
+			
 
 	};
 }
