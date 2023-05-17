@@ -130,7 +130,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			cell.setText("");
 			cell.setDate(null);
 			cell.currentMonth(false);
-			cell.clearShifts();
+			
 		}
 
 		// Set the dates
@@ -143,14 +143,14 @@ public class ShiftCalendarPanel extends JLayeredPane {
 
 			// here shifts objects are added to a date cell if the shift date matches the
 			// date cell
-			if (shiftCtrl != null) {
-
-				List<Shift> shifts = shiftCtrl.getShiftsByDate((dayDate));
-
-				for (Shift shift : shifts) {
-					String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
-							shift.getCheckInTime(), shift.getCheckOutTime());
-					cell.addShift(shiftText);
+//			if (shiftCtrl != null) {
+//
+//				List<Shift> shifts = shiftCtrl.getShiftsByDate((dayDate));
+//
+//				for (Shift shift : shifts) {
+//					String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
+//							shift.getCheckInTime(), shift.getCheckOutTime());
+//					cell.addShift(shiftText);
 				}
 
 			}
