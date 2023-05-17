@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		this.month = month;
 		this.year = year;
 		initComponents();
-		initializeDaysInMonth();
+		initializeDaysInMonth(null);
 		setDatesForMonth(LocalDate.of(year, month, 1));
 	}
 
@@ -49,11 +50,11 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 	}
 
-	public void setDateCellActionListener(ActionListener listener) {
-	    for (Cell cell : dayCells) {
-	        cell.addActionListener(listener);
-	    }
-	}
+//	public void setDateCellActionListener(ActionListener listener) {
+//	    for (Cell cell : dayCells) {
+//	        cell.addActionListener(listener);
+//	    }
+//}
 	public void initializeDaysInMonth(ActionListener listener) {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
@@ -76,13 +77,32 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			Cell cell = new Cell();
 			LocalDate localDate = LocalDate.of(year, month, i + 1);
 			cell.setDate(localDate);
-			 cell.addActionListener(listener);
+			cell.setText(String.valueOf(i + 1));
+			cell.addActionListener(e -> { 
+		            Cell selectedCell = (Cell) e.getSource();
+		            LocalDate selectedDate = selectedCell.getDate();
+		            openAssignShiftChooseClub(selectedDate);
+		        
+		    });
+			
 			this.add(cell);
 			dayCells[i] = cell;
 		}
 
 		this.revalidate();
 		this.repaint();
+	}
+	
+	private void openAssignShiftChooseClub(LocalDate date) {
+		System.out.println("Action listener triggered!");
+		SwingUtilities.invokeLater(() -> {
+		    try {
+		        AssignShiftChooseClub frame = new AssignShiftChooseClub();
+		        frame.setVisible(true);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		});
 	}
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
