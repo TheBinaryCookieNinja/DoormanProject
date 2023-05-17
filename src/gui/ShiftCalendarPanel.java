@@ -1,18 +1,16 @@
 package gui;
 
 import java.awt.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
-import controller.ShiftCtrl;
 import database.DataAccessException;
-import model.Shift;
 
 import java.time.*;
-import java.util.List;
 import java.time.LocalDate;
 
 public class ShiftCalendarPanel extends JLayeredPane {
@@ -21,8 +19,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private int year;
 	private Cell[] dayCells;
 	private Cell[] titleCells;
-	private ShiftCtrl shiftCtrl;
-
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
 		this.month = month;
 		this.year = year;
@@ -30,15 +29,10 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		initializeDaysInMonth(null);
 		setDatesForMonth(LocalDate.of(year, month, 1));
 	}
-	 /**
-     * @wbp.parser.constructor
-     */
-	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
-        this(dateTime.getMonthValue(), dateTime.getYear());
-    }
 
-	public void setShiftCtrl(ShiftCtrl shiftCtrl) {
-		this.shiftCtrl = shiftCtrl;
+	
+	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
+		this(dateTime.getMonthValue(), dateTime.getYear());
 	}
 
 	private void initComponents() {
@@ -85,16 +79,16 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			if (localDate.equals(LocalDate.now())) {
 				cell.setAsToday();
 			} else {
-				cell.setAsNotToday();
+				cell.setAsNotToday();;
 			}
 
-			 cell.addMouseListener(new MouseAdapter() {
-	                @Override
-	                public void mouseClicked(MouseEvent e) {
-	                    LocalDate selectedDate = cell.getDate();
-	                    openAssignShiftChooseClub(selectedDate);
-	                }
-	            });
+			cell.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					LocalDate selectedDate = cell.getDate();
+					openAssignShiftChooseClub(selectedDate);
+				}
+			});
 
 			this.add(cell);
 			dayCells[i] = cell;
@@ -129,7 +123,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			cell.setText("");
 			cell.setDate(null);
 			cell.currentMonth(false);
-			
+
 		}
 
 		// Set the dates
@@ -150,11 +144,8 @@ public class ShiftCalendarPanel extends JLayeredPane {
 //					String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
 //							shift.getCheckInTime(), shift.getCheckOutTime());
 //					cell.addShift(shiftText);
-				}
-
-			}
-
 		}
 
-	
+	}
 
+}
