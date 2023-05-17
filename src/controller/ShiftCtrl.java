@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,10 +15,7 @@ public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
 	private BarController barCtrl;
 	private DoormanCtrl doormanCtrl;
-	private Doorman doorman;
 	private Shift shift;
-	private Date date;
-	
 	
 	
 	
@@ -30,6 +26,7 @@ public class ShiftCtrl  {
 			throw new DataAccessException(e, "Can't create shiftDAO");
 		}
 		barCtrl = new BarController();
+		doormanCtrl = new DoormanCtrl();
 	}
 
 	 /**
@@ -57,8 +54,12 @@ public class ShiftCtrl  {
 		return barCtrl.findById(barId);
 	}
 	
+	public List<Doorman> findAllDoormen() throws DataAccessException {
+		return doormanCtrl.findAll();
+	}
+	
 	public List<Doorman> getAvailableDoormenForShift() throws DataAccessException {
-	    return doormanCtrl.getAvailableDoormenForShift(date, shift.getBarId());
+	    return doormanCtrl.getAvailableDoormenForShift(LocalDate.of(2023, 05, 15), 1);
 	}
 	  
 	public boolean confirmShift(int doormanId) throws DataAccessException, SQLException {

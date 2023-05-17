@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import database.DataAccessException;
@@ -18,8 +19,8 @@ public class DoormanCtrl {
 	    }
 	    }
 
-	    public List<Doorman> getAvailableDoormenForShift(java.sql.Date date, int barId) throws DataAccessException {
-	        return doormanDAO.getAvailableDoormenForShift(date, barId);
+	    public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
+	        return doormanDAO.getAvailableDoormenForShift(localDate, barId);
 	    }
 
 	    public Doorman getDoormanByDoormanId(int doormanId) throws DataAccessException {
