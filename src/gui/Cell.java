@@ -7,6 +7,7 @@ import java.awt.RenderingHints;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -24,7 +25,8 @@ public class Cell extends JButton {
 	// Constructor
 	public Cell () {
 		setContentAreaFilled(false);
-		setBorder(null);
+		setBorder(BorderFactory.createLineBorder(Color.RED));
+		//setBorder(null);
 		setHorizontalAlignment(JLabel.CENTER);
 		shiftLabel = new JLabel(); 
         add(shiftLabel);

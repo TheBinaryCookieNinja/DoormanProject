@@ -45,6 +45,7 @@ public class ShiftCalendarCustom extends JPanel {
 
 	public ShiftCalendarCustom() throws DataAccessException {
 		setBackground(new Color(255, 255, 255));
+		
 		thisMonth();
 		calendarPanels = new HashMap<>();
 		initComponents();
@@ -56,26 +57,12 @@ public class ShiftCalendarCustom extends JPanel {
 		initializeLabels();
 		initializeButtons();
 		
-		currentPanel.initializeDaysInMonth(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            Cell selectedCell = (Cell) e.getSource();
-	            LocalDate selectedDate = selectedCell.getDate();
-	            openAssignShiftChooseClub(selectedDate);
-	        }
-	    });
+		
 	}
 
 	
-	private void openAssignShiftChooseClub(LocalDate date) {
-	    try {
-	        AssignShiftChooseClub frame = new AssignShiftChooseClub();
-	        frame.setSelectedDate(date); // Pass the selected date to the frame
-	        frame.setVisible(true);
-	    } catch (DataAccessException e) {
-	        e.printStackTrace();
-	    }
-	}
+	
+	
 	private void initComponents() throws DataAccessException {
 		slide = new SlidingPanel();
 		slide.setBackground(new Color(255, 255, 255));
@@ -308,7 +295,7 @@ public class ShiftCalendarCustom extends JPanel {
 				currentPanel = new ShiftCalendarPanel(month, year);
 				calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), currentPanel);
 			} else {
-				currentPanel.initializeDaysInMonth();
+				currentPanel.initializeDaysInMonth(null);
 			}
 			this.add(currentPanel);
 		} else {
