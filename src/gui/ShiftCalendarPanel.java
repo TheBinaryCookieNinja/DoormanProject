@@ -69,7 +69,6 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		// Remove only the day cells from the panel
 		if (dayCells != null) {
 			for (Cell cell : dayCells) {
-				cell.removeActionListener(listener);
 				this.remove(cell);
 			}
 		}
@@ -157,5 +156,5 @@ public class ShiftCalendarPanel extends JLayeredPane {
 
 		}
 
-	}
-}
+	
+
