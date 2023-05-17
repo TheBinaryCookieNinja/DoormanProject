@@ -1,8 +1,9 @@
 package gui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -11,8 +12,6 @@ import database.DataAccessException;
 import model.Shift;
 
 import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -31,6 +30,12 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		initializeDaysInMonth(null);
 		setDatesForMonth(LocalDate.of(year, month, 1));
 	}
+	 /**
+     * @wbp.parser.constructor
+     */
+	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
+        this(dateTime.getMonthValue(), dateTime.getYear());
+    }
 
 	public void setShiftCtrl(ShiftCtrl shiftCtrl) {
 		this.shiftCtrl = shiftCtrl;
@@ -84,12 +89,13 @@ public class ShiftCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();
 			}
 
-			cell.addActionListener(e -> {
-				Cell selectedCell = (Cell) e.getSource();
-				LocalDate selectedDate = selectedCell.getDate();
-				openAssignShiftChooseClub(selectedDate);
-
-			});
+			 cell.addMouseListener(new MouseAdapter() {
+	                @Override
+	                public void mouseClicked(MouseEvent e) {
+	                    LocalDate selectedDate = cell.getDate();
+	                    openAssignShiftChooseClub(selectedDate);
+	                }
+	            });
 
 			this.add(cell);
 			dayCells[i] = cell;

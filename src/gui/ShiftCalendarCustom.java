@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,21 +20,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import database.DataAccessException;
 import controller.ShiftCtrl;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ShiftCalendarCustom extends JPanel {
-	private int month;
-	private int year;
 	private SlidingPanel slide;
 	private Map<String, ShiftCalendarPanel> calendarPanels;
 	private ShiftCalendarPanel currentPanel;
-	private int currentMonth;
-	private int currentYear;
+	private LocalDateTime dateTime;
 
 	private JButton arrowBack;
 	private JButton arrowForward;
@@ -42,15 +45,15 @@ public class ShiftCalendarCustom extends JPanel {
 	private JLabel lbMonthYear;
 	private JLabel lbTime;
 	private JLabel lbType;
+	
+	
 
 	public ShiftCalendarCustom() throws DataAccessException {
-		setBackground(new Color(255, 255, 255));
-		
-		thisMonth();
+		setBackground(Color.WHITE);
+		dateTime = LocalDateTime.now();
+		//thisMonth();
 		calendarPanels = new HashMap<>();
 		initComponents();
-		currentMonth = 1;
-		currentYear = 2023;
 		slide.show(new ShiftCalendarPanel(5, 2021), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 		initializeThread();
@@ -88,30 +91,14 @@ public class ShiftCalendarCustom extends JPanel {
 		arrowForward.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		arrowForward.setContentAreaFilled(false);
 		arrowForward.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		arrowForward.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				try {
-					arrowForwardActionPerformed(evt);
-				} catch (DataAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		arrowForward.addActionListener(evt -> SwingUtilities.invokeLater(this::arrowForwardActionPerformed));
 
 		arrowBack = new JButton();
 		arrowBack.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/angle-double-small-left.png")));
 		arrowBack.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		arrowBack.setContentAreaFilled(false);
 		arrowBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		arrowBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				try {
-					arrowBackActionPerformed(evt);
-				} catch (DataAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		arrowBack.addActionListener(evt -> SwingUtilities.invokeLater(this::arrowBackActionPerformed));
 
 		jLayeredPane1.setLayer(arrowForward, JLayeredPane.DEFAULT_LAYER);
 		jLayeredPane1.setLayer(arrowBack, JLayeredPane.DEFAULT_LAYER);
@@ -175,21 +162,29 @@ public class ShiftCalendarCustom extends JPanel {
 												.addGap(22)))));
 
 		GroupLayout layout = new GroupLayout(this);
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(slide, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addGap(13)
+					.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(slide, GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE))
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE))
+		);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addContainerGap()
-				.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE).addGap(18)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)
-						.addComponent(slide, GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
-				.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addGap(13)
-						.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(slide, GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-				.addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
-						GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)));
 		try {
 			initializeButtons();
 			initializeLabels();
@@ -212,16 +207,30 @@ public class ShiftCalendarCustom extends JPanel {
 	}
 
 	private void initializeLabels() throws DataAccessException {
-		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
-		lbTime.setForeground(Color.BLACK);
-		lbTime.setHorizontalAlignment(SwingConstants.LEFT);
+//		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
+//		lbTime.setForeground(Color.BLACK);
+//		lbTime.setHorizontalAlignment(SwingConstants.LEFT);
+//
+//		lbType.setFont(new Font("SansSerif", Font.BOLD, 25));
+//		lbType.setForeground(Color.BLACK);
+//
+//		lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
+//		lbDate.setForeground(Color.BLACK);
+//		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lbTime = new JLabel();
+        lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
+        lbTime.setForeground(Color.BLACK);
+        lbTime.setHorizontalAlignment(SwingConstants.LEFT);
 
-		lbType.setFont(new Font("SansSerif", Font.BOLD, 25));
-		lbType.setForeground(Color.BLACK);
+        lbType = new JLabel();
+        lbType.setFont(new Font("SansSerif", Font.BOLD, 25));
+        lbType.setForeground(Color.BLACK);
 
-		lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
-		lbDate.setForeground(Color.BLACK);
-		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
+        lbDate = new JLabel();
+        lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        lbDate.setForeground(Color.BLACK);
+        lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 	private void initializeThread() {
@@ -232,82 +241,113 @@ public class ShiftCalendarCustom extends JPanel {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				Date date = new Date();
-				SimpleDateFormat tf = new SimpleDateFormat("h:mm:ss aa");
-				SimpleDateFormat df = new SimpleDateFormat("EEEE, yyyy-MM/dd");
-				String time = tf.format(date);
-				lbTime.setText(time.split(" ")[0]);
-				lbType.setText(time.split(" ")[1]);
-				lbDate.setText(df.format(date));
-			}
-		}).start();
+				
+				 SwingUtilities.invokeLater(() -> {
+	                    LocalDateTime now = LocalDateTime.now();
+	                    DateTimeFormatter tf = DateTimeFormatter.ofPattern("h:mm:ss a");
+	                    DateTimeFormatter df = DateTimeFormatter.ofPattern("EEEE, yyyy-MM/dd");
+	                    String timeText = now.format(tf);
+	                    String dateText = now.format(df);
+	                    lbTime.setText(timeText);
+	                    lbDate.setText(dateText);
+	                });
+	            }
+	        }).start();
 	}
 
-	private void arrowForwardActionPerformed(ActionEvent evt) throws DataAccessException {
-		if (month == 12) {
-			month = 1;
-			currentMonth = (currentMonth == 12) ? 1 : currentMonth + 1;
-			currentYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
-			changeMonth(currentMonth, currentYear);
-			year++;
-		} else {
-			month++;
-		}
-		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
-		updateMonthYear();
+	private void arrowForwardActionPerformed() {
+//		if (month == 12) {
+//			month = 1;
+//			currentMonth = (currentMonth == 12) ? 1 : currentMonth + 1;
+//			currentYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
+//			changeMonth(currentMonth, currentYear);
+//			year++;
+//		} else {
+//			month++;
+//		}
+//		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
+//		updateMonthYear();
+		 dateTime = dateTime.plusMonths(1);
+	        updateMonthYear();
+	        changePanel();
 	}
 
-	private void arrowBackActionPerformed(ActionEvent evt) throws DataAccessException {
-		if (month == 1) {
-			month = 12;
-			currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
-			currentYear = (currentMonth == 12) ? currentYear - 1 : currentYear;
-			changeMonth(currentMonth, currentYear);
-			year--;
-		} else {
-			month--;
-		}
-		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
-		updateMonthYear();
+	private void arrowBackActionPerformed() {
+//		if (month == 1) {
+//			month = 12;
+//			currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
+//			currentYear = (currentMonth == 12) ? currentYear - 1 : currentYear;
+//			changeMonth(currentMonth, currentYear);
+//			year--;
+//		} else {
+//			month--;
+//		}
+//		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
+//		updateMonthYear();
+		
+		dateTime = dateTime.minusMonths(1);
+        updateMonthYear();
+        changePanel();
 	}
 
-	public void thisMonth() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		month = calendar.get(Calendar.MONTH) + 1;
-		year = calendar.get(Calendar.YEAR);
-	}
+//	public void thisMonth() {
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTime(new Date());
+//		month = calendar.get(Calendar.MONTH) + 1;
+//		year = calendar.get(Calendar.YEAR);
+//	}
 
 	private void updateMonthYear() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.MONTH, month - 1);
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.DATE, 1);
-		SimpleDateFormat df = new SimpleDateFormat("MMMM-yyyy");
-		lbMonthYear.setText(df.format(calendar.getTime()));
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(Calendar.MONTH, month - 1);
+//		calendar.set(Calendar.YEAR, year);
+//		calendar.set(Calendar.DATE, 1);
+//		SimpleDateFormat df = new SimpleDateFormat("MMMM-yyyy");
+//		lbMonthYear.setText(df.format(calendar.getTime()));
+		DateTimeFormatter mf = DateTimeFormatter.ofPattern("MMMM yyyy");
+        lbMonthYear.setText(dateTime.format(mf));
 	}
 
-	public void changeMonth(int newMonth, int newYear) throws DataAccessException {
-		if (calendarPanels.containsKey(String.valueOf(newMonth) + String.valueOf(newYear))) {
-			this.remove(currentPanel);
-			currentPanel = calendarPanels.get(String.valueOf(newMonth) + String.valueOf(newYear));
-			if (currentPanel == null) {
-				currentPanel = new ShiftCalendarPanel(month, year);
-				calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), currentPanel);
-			} else {
-				currentPanel.initializeDaysInMonth(null);
-			}
-			this.add(currentPanel);
-		} else {
-			ShiftCalendarPanel newPanel = new ShiftCalendarPanel(newMonth, newYear);
-			calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), newPanel);
-			this.remove(currentPanel);
-			currentPanel = newPanel;
-			this.add(currentPanel);
-		}
-		currentMonth = newMonth;
-		currentYear = newYear;
-		this.validate();
-		this.repaint();
-	}
+//	public void changeMonth(int newMonth, int newYear) throws DataAccessException {
+//		if (calendarPanels.containsKey(String.valueOf(newMonth) + String.valueOf(newYear))) {
+//			this.remove(currentPanel);
+//			currentPanel = calendarPanels.get(String.valueOf(newMonth) + String.valueOf(newYear));
+//			if (currentPanel == null) {
+//				currentPanel = new ShiftCalendarPanel(month, year);
+//				calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), currentPanel);
+//			} else {
+//				currentPanel.initializeDaysInMonth(null);
+//			}
+//			this.add(currentPanel);
+//		} else {
+//			ShiftCalendarPanel newPanel = new ShiftCalendarPanel(newMonth, newYear);
+//			calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), newPanel);
+//			this.remove(currentPanel);
+//			currentPanel = newPanel;
+//			this.add(currentPanel);
+//		}
+//		currentMonth = newMonth;
+//		currentYear = newYear;
+//		this.validate();
+//		this.repaint();
+//	}
+	
+	private void changePanel() {
+        try {
+            String monthYearKey = dateTime.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+            if (!calendarPanels.containsKey(monthYearKey)) {
+                ShiftCalendarPanel panel = new ShiftCalendarPanel(dateTime);
+                calendarPanels.put(monthYearKey, panel);
+            }
+            if (currentPanel != null) {
+                this.remove(currentPanel);
+            }
+            currentPanel = calendarPanels.get(monthYearKey);
+            this.add(currentPanel);
+            this.validate();
+            this.repaint();
+        } catch (DataAccessException e) {
+            JOptionPane.showMessageDialog(null, "Error loading data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

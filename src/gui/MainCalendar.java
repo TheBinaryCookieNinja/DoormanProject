@@ -111,8 +111,9 @@ public class MainCalendar extends JFrame {
 	    );
 	    getContentPane().setLayout(layout);
 
-	    //pack();
+	    
 	    setLocationRelativeTo(null);
+	    pack();
 	}
 
 
