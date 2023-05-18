@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -231,6 +232,11 @@ public class ShiftCalendarCustom extends JPanel {
         lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
         lbDate.setForeground(Color.BLACK);
         lbDate.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        jPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanel1.add(lbTime);
+        jPanel1.add(lbType);
+        jPanel1.add(lbDate);
 	}
 
 	private void initializeThread() {
@@ -268,8 +274,15 @@ public class ShiftCalendarCustom extends JPanel {
 //		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
 //		updateMonthYear();
 		 dateTime = dateTime.plusMonths(1);
-	        updateMonthYear();
+	        
 	        changePanel();
+	        try {
+				slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_LEFT);
+			} catch (DataAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        updateMonthYear();
 	}
 
 	private void arrowBackActionPerformed() {
@@ -286,8 +299,16 @@ public class ShiftCalendarCustom extends JPanel {
 //		updateMonthYear();
 		
 		dateTime = dateTime.minusMonths(1);
-        updateMonthYear();
+        
         changePanel();
+        try {
+			slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_RIGHT);
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        updateMonthYear();
+
 	}
 
 //	public void thisMonth() {
@@ -333,21 +354,21 @@ public class ShiftCalendarCustom extends JPanel {
 //	}
 	
 	private void changePanel() {
-        try {
-            String monthYearKey = dateTime.format(DateTimeFormatter.ofPattern("MM-yyyy"));
-            if (!calendarPanels.containsKey(monthYearKey)) {
-                ShiftCalendarPanel panel = new ShiftCalendarPanel(dateTime);
-                calendarPanels.put(monthYearKey, panel);
-            }
-            if (currentPanel != null) {
-                this.remove(currentPanel);
-            }
-            currentPanel = calendarPanels.get(monthYearKey);
-            this.add(currentPanel);
-            this.validate();
-            this.repaint();
-        } catch (DataAccessException e) {
-            JOptionPane.showMessageDialog(null, "Error loading data", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+	    try {
+	        String monthYearKey = dateTime.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+	        if (!calendarPanels.containsKey(monthYearKey)) {
+	            ShiftCalendarPanel panel = new ShiftCalendarPanel(dateTime.getMonthValue(), dateTime.getYear());
+	            calendarPanels.put(monthYearKey, panel);
+	        }
+	        if (currentPanel != null) {
+	            slide.remove(currentPanel);
+	        }
+	        currentPanel = calendarPanels.get(monthYearKey);
+	        slide.add(currentPanel);
+	        slide.revalidate();
+	        slide.repaint();
+	    } catch (DataAccessException e) {
+	        JOptionPane.showMessageDialog(null, "Error loading data", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
 }

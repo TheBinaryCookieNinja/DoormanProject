@@ -64,7 +64,7 @@ public class Cell extends JButton {
 
 	public void setAsToday() {
 		isToday = true;
-		setBackground(new Color(97, 49, 237));
+		setBackground(Color.YELLOW);
 		setForeground(Color.WHITE);
 	}
 
@@ -75,21 +75,40 @@ public class Cell extends JButton {
 	}
 
 	@Override
-	protected void paintComponent(Graphics grphcs) {
-		super.paintComponent(grphcs);
-		if (title) {
-			grphcs.setColor(new Color(213, 213, 213));
-			grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
-		}
-		if (isToday) {
-			grphcs.setColor(new Color(97, 49, 237));
-			int cellSize = Math.min(getWidth(), getHeight()) - 10;
-			int x = (getWidth() - cellSize) / 2;
-			int y = (getHeight() - cellSize) / 2;
-			grphcs.fillRoundRect(x, y, cellSize, cellSize, 100, 100);
-		}
+	 protected void paintComponent(Graphics grphcs) {
+        if (title) {
+     // If the cell is a title cell, draw a line at the bottom
+            grphcs.setColor(new Color(213, 213, 213));
+            grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
+        }
+     // If the cell represents today, draw a rounded rectangle with a specific color
+        if (isToday) {
+            Graphics2D g2 = (Graphics2D) grphcs;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti-aliasing is a technique used to smooth the jagged edges of shapes and lines, resulting in a more visually appealing appearance.
+            g2.setColor(new Color(97, 49, 237));
+            int cellSize = Math.min(getWidth(), getHeight()) - 10; // Adjust the cell size based on the available space
+            int x = (getWidth() - cellSize) / 2;
+            int y = (getHeight() - cellSize) / 2;
+            g2.fillRoundRect(x, y, cellSize, cellSize, 100, 100);
 
-	}
+        }
+        super.paintComponent(grphcs);
+    }
+//	protected void paintComponent(Graphics grphcs) {
+//		super.paintComponent(grphcs);
+//		if (title) {
+//			grphcs.setColor(new Color(213, 213, 213));
+//			grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
+//		}
+//		if (isToday) {
+//			grphcs.setColor(new Color(97, 49, 237));
+//			int cellSize = Math.min(getWidth(), getHeight()) - 10;
+//			int x = (getWidth() - cellSize) / 2;
+//			int y = (getHeight() - cellSize) / 2;
+//			grphcs.fillRoundRect(x, y, cellSize, cellSize, 100, 100);
+//		}
+//
+//	}
 
 //	public void addShift(String shiftText) {
 //		
