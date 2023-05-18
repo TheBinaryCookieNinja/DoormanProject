@@ -36,7 +36,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	}
 
 	private void initComponents() {
-		String[] daysOfWeek = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+		String[] daysOfWeek = { "Søn", "Man", "Tir", "Ons", "Tors", "Fre", "Lør" };
 		this.setLayout(new GridLayout(0, 7));
 
 		titleCells = new Cell[7];
@@ -44,9 +44,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			Cell cell = new Cell();
 			cell.asTitle();
 			cell.setText(daysOfWeek[i]);
+		
+			
+			if (daysOfWeek[i].equals("Søn")) {
+	            cell.setForeground(Color.RED);
+	        }
+			
 			this.add(cell);
 			titleCells[i] = cell;
 		}
+		
+		
 	}
 
 //	public void setDateCellActionListener(ActionListener listener) {
@@ -82,13 +90,12 @@ public class ShiftCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();;
 			}
 
-			cell.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					LocalDate selectedDate = cell.getDate();
-					openAssignShiftChooseClub(selectedDate);
-				}
+			cell.addActionListener(e -> {
+			    LocalDate selectedDate = cell.getDate();
+			    openAssignShiftChooseClub(selectedDate);
 			});
+			
+			
 
 			this.add(cell);
 			dayCells[i] = cell;
@@ -103,6 +110,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		SwingUtilities.invokeLater(() -> {
 			try {
 				AssignShiftChooseClub frame = new AssignShiftChooseClub();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -116,7 +124,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 
 		int startDayOfWeek = date.getDayOfWeek().getValue() % 7; // Sunday is 7 in LocalDate, but here it has to be 0 so
-																	// the modulus operator is used
+																	// the modulus operator is used. Now each week stars with sunday
 
 		// Clear all cells first
 		for (Cell cell : dayCells) {

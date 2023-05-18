@@ -24,10 +24,12 @@ public class Cell extends JButton {
 	// private static final int MAX_TEXT_LENGTH = 10;
 	// private static final int MAX_TEXT_LINES = 2;
 
-	// Constructor
+	 private static final Color TITLE_COLOR = new Color(174, 214, 241); 
+	 private static final Color DEFAULT_COLOR = Color.YELLOW; 
+	 private static final Color OTHERCELLS_COLOR = new Color(202, 207, 210);  
 	public Cell() {
 		setContentAreaFilled(true);
-		setBorder(BorderFactory.createLineBorder(Color.RED));
+		//setBorder(BorderFactory.createLineBorder(Color.RED));
 		// setBorder(null);
 		setHorizontalAlignment(JLabel.CENTER);
 //		shiftLabel = new JLabel(); 
@@ -37,6 +39,8 @@ public class Cell extends JButton {
 
 	public void asTitle() {
 		title = true;
+		 setBackground(TITLE_COLOR);
+	     setForeground(Color.BLACK);
 	}
 
 	public boolean isTitle() {
@@ -64,13 +68,13 @@ public class Cell extends JButton {
 
 	public void setAsToday() {
 		isToday = true;
-		setBackground(Color.YELLOW);
-		setForeground(Color.WHITE);
+		setBackground(DEFAULT_COLOR);
+	     setForeground(Color.BLACK);
 	}
 
 	public void setAsNotToday() {
 		isToday = false;
-		setBackground(Color.WHITE);
+		setBackground(OTHERCELLS_COLOR);
 		setForeground(Color.BLACK);
 	}
 
@@ -78,7 +82,7 @@ public class Cell extends JButton {
 	 protected void paintComponent(Graphics grphcs) {
         if (title) {
      // If the cell is a title cell, draw a line at the bottom
-            grphcs.setColor(new Color(213, 213, 213));
+            grphcs.setColor(TITLE_COLOR);
             grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
         }
      // If the cell represents today, draw a rounded rectangle with a specific color
