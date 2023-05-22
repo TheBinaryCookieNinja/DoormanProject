@@ -162,6 +162,14 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			cell.setDate(dayDate);
 			cell.currentMonth(true);
 			
+			
+			 LocalDate currentDate = LocalDate.now();
+		        if (dayDate.isEqual(currentDate)) {
+		            cell.setAsToday();
+		        } else {
+		            cell.setAsNotToday();
+		        }
+			
 			int shiftCount = getShiftCountForDate(dayDate);
 			cell.setShiftCount(shiftCount);
 
