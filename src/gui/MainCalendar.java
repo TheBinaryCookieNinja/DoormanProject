@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
@@ -44,20 +46,21 @@ public class MainCalendar extends JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-		
+	
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MainCalendar frame = new MainCalendar();
 					frame.setResizable(true);
-					frame.setVisible(true);
+					frame.setVisible(true);			
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
