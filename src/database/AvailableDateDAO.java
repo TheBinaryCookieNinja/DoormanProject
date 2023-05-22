@@ -10,7 +10,7 @@ public class AvailableDateDAO {
 	private static final String findByIdQ = 
 			"select * from AvailableDates where availableDatesId = ?";
 	private static final String createAvailableDateQ = 
-			"insert into AvailableDates (availableDatesId, calenderDate, employeeId) values (?,?,?)";
+			"insert into AvailableDates (calenderDate, employeeId) values (?,?)";
 	
 	private PreparedStatement findById, createAvailableDate;
 	
@@ -39,9 +39,8 @@ public class AvailableDateDAO {
 	}
 	
 	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
-		createAvailableDate.setInt(1, AvailableDate.getLocalDate());
-		createAvailableDate.setString(2, AvailableDate.getCalendarDate());
-		createAvailableDate.setInt(3, AvailableDate.getEmployeeId());
+		createAvailableDate.setString(1, availableDate.getCalendarDate());
+		createAvailableDate.setInt(2, availableDate.getEmployeeId());
 	}
 	
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {

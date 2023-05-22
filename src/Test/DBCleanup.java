@@ -89,7 +89,7 @@ public class DBCleanup {
 			+ ");\r\n"
 			+ "\r\n"
 			+ "CREATE TABLE AvailableDates (\r\n"
-			+ "  availableDatesId INT NOT NULL,\r\n"
+			+ "  availableDatesId INT NOT NULL IDENTITY,\r\n"
 			+ "  calenderDate DATE NOT NULL,\r\n"
 			+ "  employeeId INT,\r\n"
 			+ "  PRIMARY KEY (availableDatesId, calenderDate),\r\n"
