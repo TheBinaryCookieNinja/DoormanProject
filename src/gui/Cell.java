@@ -49,7 +49,7 @@ public class Cell extends JButton {
 		 shiftCountLabel = new JLabel();
 	        shiftCountLabel.setHorizontalAlignment(JLabel.CENTER);
 	        shiftCountLabel.setForeground(Color.BLACK);
-	        shiftCountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0)); // paddins is added so there will be a little extra space between date and shiftcount
+//	        shiftCountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0)); // paddins is added so there will be a little extra space between date and shiftcount
 	        shiftCountLabel.setFont(shiftCountLabel.getFont().deriveFont(12.0f));
 	       
 	        shiftCountLabel.setVisible(false); // den sarter jo med at være usynlig
