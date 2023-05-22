@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.util.List;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -9,9 +11,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 import database.DataAccessException;
+import model.Shift;
 
 import java.time.*;
 import java.time.LocalDate;
+
+import controller.ShiftCtrl;
 
 public class ShiftCalendarPanel extends JLayeredPane {
 
@@ -21,18 +26,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private Cell[] titleCells;
 
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
-	    this(LocalDateTime.of(year, month, 1, 0, 0));
+		this(LocalDateTime.of(year, month, 1, 0, 0));
 	}
 
 	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
-	    this.month = dateTime.getMonthValue();
-	    this.year = dateTime.getYear();
-	    initComponents();
-	    initializeDaysInMonth(null);
-	    setDatesForMonth(dateTime.withDayOfMonth(1).toLocalDate());
+		this.month = dateTime.getMonthValue();
+		this.year = dateTime.getYear();
+		initComponents();
+		initializeDaysInMonth(null);
+		setDatesForMonth(dateTime.withDayOfMonth(1).toLocalDate());
 	}
 
-	
 	private void initComponents() {
 		String[] daysOfWeek = { "Søn", "Man", "Tir", "Ons", "Tors", "Fre", "Lør" };
 		this.setLayout(new GridLayout(0, 7));
@@ -42,17 +46,15 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			Cell cell = new Cell();
 			cell.asTitle();
 			cell.setText(daysOfWeek[i]);
-		
-			
+
 			if (daysOfWeek[i].equals("Søn")) {
-	            cell.setForeground(Color.RED);
-	        }
-			
+				cell.setForeground(Color.RED);
+			}
+
 			this.add(cell);
 			titleCells[i] = cell;
 		}
-		
-		
+
 	}
 
 //	public void setDateCellActionListener(ActionListener listener) {
@@ -85,17 +87,16 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			if (localDate.equals(LocalDate.now())) {
 				cell.setAsToday();
 			} else {
-				cell.setAsNotToday();;
+				cell.setAsNotToday();
+
 			}
 
 			cell.addActionListener(e -> {
-			    LocalDate selectedDate = cell.getDate();
-			    System.out.println(selectedDate);
-			    openAssignShiftChooseClub(selectedDate);
-			    
+				LocalDate selectedDate = cell.getDate();
+				System.out.println(selectedDate);
+				openAssignShiftChooseClub(selectedDate);
+
 			});
-			
-			
 
 			this.add(cell);
 			dayCells[i] = cell;
@@ -117,6 +118,18 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			}
 		});
 	}
+	
+	public int getShiftCountForDate(LocalDate date) {
+	    try {
+	        ShiftCtrl shiftController = new ShiftCtrl();
+	        List<Shift> shifts = shiftController.getShiftsByDate(date);
+	        return shifts.size();
+	    } catch (DataAccessException e) {
+	        
+	        e.printStackTrace();
+	    }
+	    return 0; 
+	}
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
 		if (month < 1 || month > 12) {
@@ -124,7 +137,8 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 
 		int startDayOfWeek = date.getDayOfWeek().getValue() % 7; // Sunday is 7 in LocalDate, but here it has to be 0 so
-																	// the modulus operator is used. Now each week stars with sunday
+																	// the modulus operator is used. Now each week stars
+																	// with sunday
 
 		// Clear all cells first
 		for (Cell cell : dayCells) {
@@ -155,7 +169,5 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 
 	}
-	
-	
 
 }
