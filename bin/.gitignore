@@ -3,6 +3,10 @@
 /controller/
 /database/
 /gui/
+<<<<<<< Updated upstream
 /icons/
 /model/
 /module-info.class
+=======
+/model/
+>>>>>>> Stashed changes
