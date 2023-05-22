@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
-
+import gui.MainCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -148,17 +148,29 @@ public class ForsideChef extends JFrame {
 									.addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))))
 				);
 				
-				JMenu mnNewMenu = new JMenu("New menu");
+				JMenu mnNewMenu = new JMenu("Menu");
 				menuBar.add(mnNewMenu);
 				
-				JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-				mnNewMenu.add(mntmNewMenuItem);
+				JMenuItem mntmAssignShift = new JMenuItem("Assign Shift");
+			    mnNewMenu.add(mntmAssignShift);
+			    mntmAssignShift.addActionListener(e ->  {
+			    	openAssignShiftCalendar();
+			    }); 
+			    
+			        
 				
-				JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+				JMenuItem mntmNewMenuItem_1 = new JMenuItem("Register availability");
 				mnNewMenu.add(mntmNewMenuItem_1);
 				contentPane.setLayout(gl_contentPane);
 
 	}
+			    public void openAssignShiftCalendar() throws DataAccessException {
+		            MainCalendar calendar = new MainCalendar();
+		            calendar.setVisible(true);
+
+		           this.setVisible(false); 
+		        }
+			
 }
 
 
