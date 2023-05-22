@@ -154,7 +154,12 @@ public class ForsideChef extends JFrame {
 				JMenuItem mntmAssignShift = new JMenuItem("Assign Shift");
 			    mnNewMenu.add(mntmAssignShift);
 			    mntmAssignShift.addActionListener(e ->  {
-			    	openAssignShiftCalendar();
+			    	try {
+						openAssignShiftCalendar();
+					} catch (DataAccessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			    }); 
 			    
 			        
