@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,6 +21,8 @@ public class Cell extends JButton {
 	private boolean title;
 	private boolean isToday;
 	// private JLabel shiftLabel;
+	private JLabel shiftCountLabel;
+	private JLabel dateLabel;
 
 	// private static final int MAX_TEXT_LENGTH = 10;
 	// private static final int MAX_TEXT_LINES = 2;
@@ -27,14 +30,33 @@ public class Cell extends JButton {
 	 private static final Color TITLE_COLOR = new Color(174, 214, 241); 
 	 private static final Color DEFAULT_COLOR = Color.YELLOW; 
 	 private static final Color OTHERCELLS_COLOR = new Color(202, 207, 210);  
-	public Cell() {
-		setContentAreaFilled(true);
+	
+	 public Cell() {
+		 setLayout(new BorderLayout());
 		//setBorder(BorderFactory.createLineBorder(Color.RED));
 		// setBorder(null);
-		setHorizontalAlignment(JLabel.CENTER);
+		
 //		shiftLabel = new JLabel(); 
 //		shiftLabel.setPreferredSize(new Dimension(80, 80));
 //        add(shiftLabel);
+		
+		 // create date label and customize it
+		    dateLabel = new JLabel();
+	        dateLabel.setHorizontalAlignment(JLabel.CENTER);
+	        add(dateLabel, BorderLayout.CENTER);
+		 
+	     // create date label and also customize it
+		 shiftCountLabel = new JLabel();
+	        shiftCountLabel.setHorizontalAlignment(JLabel.CENTER);
+	        shiftCountLabel.setForeground(Color.BLACK);
+	        shiftCountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0)); // paddins is added so there will be a little extra space between date and shiftcount
+	        shiftCountLabel.setFont(shiftCountLabel.getFont().deriveFont(12.0f));
+	       
+	        shiftCountLabel.setVisible(false); // den sarter jo med at være usynlig
+	        add(shiftCountLabel, BorderLayout.SOUTH);
+	       
+	        setContentAreaFilled(true);
+	        setHorizontalAlignment(JLabel.CENTER);
 	}
 
 	public void asTitle() {
@@ -60,6 +82,7 @@ public class Cell extends JButton {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+		
 	}
 
 	public LocalDate getDate() {
@@ -79,7 +102,8 @@ public class Cell extends JButton {
 	}
 	
 	public void setShiftCount(int shiftCount) {
-	    setText(Integer.toString(shiftCount));
+		 shiftCountLabel.setText("Der er " + Integer.toString(shiftCount) + " vagter");
+	     shiftCountLabel.setVisible(shiftCount > 0); // before it was invisible, now if there are any shifts, it gets visible
 	}
 
 	@Override

@@ -32,9 +32,11 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
 		this.month = dateTime.getMonthValue();
 		this.year = dateTime.getYear();
+		
+		ZoneId timeZone = ZoneId.systemDefault();
 		initComponents();
 		initializeDaysInMonth(null);
-		setDatesForMonth(dateTime.withDayOfMonth(1).toLocalDate());
+		setDatesForMonth(dateTime.withDayOfMonth(1).atZone(timeZone).toLocalDate());
 	}
 
 	private void initComponents() {
@@ -81,17 +83,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		// Initialize each day in the month
 		for (int i = 0; i < numDaysInMonth; i++) {
 			Cell cell = new Cell();
-			LocalDate localDate = LocalDate.of(year, month, i + 1);
-			cell.setDate(localDate);
-			cell.setText(String.valueOf(i + 1));
-			if (localDate.equals(LocalDate.now())) {
+			LocalDate dayDate = LocalDate.of(year, month, i + 1);
+			cell.setDate(dayDate);
+			cell.setText(String.valueOf(dayDate.getDayOfMonth()));
+			if (dayDate.equals(LocalDate.now())) {
 				cell.setAsToday();
 			} else {
 				cell.setAsNotToday();
 
 			}
 			
-			int shiftCount = getShiftCountForDate(localDate); // Retrieve the shift count
+			int shiftCount = getShiftCountForDate(dayDate); // Retrieve the shift count
 		    cell.setShiftCount(shiftCount); // Set the shift count in the Cell
 
 			cell.addActionListener(e -> {
@@ -135,11 +137,12 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	}
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
+		 int month = date.getMonthValue();
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
 
-		int startDayOfWeek = date.getDayOfWeek().getValue() % 7; // Sunday is 7 in LocalDate, but here it has to be 0 so
+		int startDayOfWeek = date.withDayOfMonth(1).getDayOfWeek().getValue() % 7;// Sunday is 7 in LocalDate, but here it has to be 0 so
 																	// the modulus operator is used. Now each week stars
 																	// with sunday
 
@@ -154,10 +157,13 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		// Set the dates
 		for (int i = 0; i < dayCells.length; i++) {
 			Cell cell = dayCells[(startDayOfWeek + i) % dayCells.length];
-			LocalDate dayDate = LocalDate.of(year, month, i + 1);
+			LocalDate dayDate = date.plusDays(i);
 			cell.setText(String.valueOf(dayDate.getDayOfMonth()));
 			cell.setDate(dayDate);
 			cell.currentMonth(true);
+			
+			int shiftCount = getShiftCountForDate(dayDate);
+			cell.setShiftCount(shiftCount);
 
 			// here shifts objects are added to a date cell if the shift date matches the
 			// date cell
