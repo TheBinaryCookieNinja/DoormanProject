@@ -52,7 +52,6 @@ public class AssignShiftChooseClub extends JFrame {
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenuItem mntmNewMenuItem;
-	private PopUp pp;
 	private ShiftCtrl shiftCtrl;
 	private JButton btnShiftTime1_1;
 	private JButton btnShiftTime1_2;
@@ -104,7 +103,7 @@ public class AssignShiftChooseClub extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssignShiftChooseClub frame = new AssignShiftChooseClub();
+					AssignShiftChooseClub frame = new AssignShiftChooseClub(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -117,7 +116,7 @@ public class AssignShiftChooseClub extends JFrame {
 	 * Create the frame.
 	 * @throws DataAccessException 
 	 */
-	public AssignShiftChooseClub() throws DataAccessException {
+	public AssignShiftChooseClub(LocalDate currentDate) throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
@@ -135,14 +134,7 @@ public class AssignShiftChooseClub extends JFrame {
 		
 		mntmNewMenuItem_1 = new JMenuItem("Calendar");
 		mntmNewMenuItem_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, InputEvent.SHIFT_DOWN_MASK));
-		mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				pp = new PopUp();
-				pp.setVisible(true);
-			}
-		});
+	
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		mntmNewMenuItem_2 = new JMenuItem("Department schedule");
@@ -740,13 +732,13 @@ public class AssignShiftChooseClub extends JFrame {
 		btnShiftTime12_1.setVisible(false);
 		btnShiftTime12_2.setVisible(false);
 		 
-		init();
+		init(currentDate);
 	}
 	
-	private void init() throws DataAccessException {
+	private void init(LocalDate currentDate) throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
 		displayBars();
-		displayShifts();	
+		displayShifts(currentDate);	
 	}
 	
 	private void displayBars() throws DataAccessException {
@@ -764,9 +756,8 @@ public class AssignShiftChooseClub extends JFrame {
 		lblName12.setText(shiftCtrl.findBarById(12).getName());
 	}
 	
-	private void displayShifts() throws DataAccessException {
-	   shiftCtrl.getShiftsByDate(LocalDate.of(2023, 05, 15
-			   ))
+	private void displayShifts(LocalDate currentDate) throws DataAccessException {
+	   shiftCtrl.getShiftsByDate(currentDate)
 				.stream()
 				.forEach(s -> {	
 					try {

@@ -19,9 +19,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private int year;
 	private Cell[] dayCells;
 	private Cell[] titleCells;
-	/**
-	 * @wbp.parser.constructor
-	 */
+
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
 		this.month = month;
 		this.year = year;
@@ -30,11 +28,15 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		setDatesForMonth(LocalDate.of(year, month, 1));
 	}
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	
 	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
 		this(dateTime.getMonthValue(), dateTime.getYear());
 	}
 
+	
 	private void initComponents() {
 		String[] daysOfWeek = { "Søn", "Man", "Tir", "Ons", "Tors", "Fre", "Lør" };
 		this.setLayout(new GridLayout(0, 7));
@@ -109,7 +111,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		System.out.println("Action listener triggered!");
 		SwingUtilities.invokeLater(() -> {
 			try {
-				AssignShiftChooseClub frame = new AssignShiftChooseClub();
+				AssignShiftChooseClub frame = new AssignShiftChooseClub(date);
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
 			} catch (Exception e) {
