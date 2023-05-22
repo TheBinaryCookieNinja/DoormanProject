@@ -55,7 +55,7 @@ public class ShiftCalendarCustom extends JPanel {
 		//thisMonth();
 		calendarPanels = new HashMap<>();
 		initComponents();
-		slide.show(new ShiftCalendarPanel(5, 2021), SlidingPanel.AnimateType.TO_RIGHT);
+		slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 		initializeThread();
 		initializeLabels();
