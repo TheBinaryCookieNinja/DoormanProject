@@ -98,7 +98,6 @@ public class AssignShiftChooseClub extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -117,6 +116,7 @@ public class AssignShiftChooseClub extends JFrame {
 	 * @throws DataAccessException 
 	 */
 	public AssignShiftChooseClub(LocalDate currentDate) throws DataAccessException {
+		setUIStyle();
 		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
@@ -910,6 +910,27 @@ public class AssignShiftChooseClub extends JFrame {
 		gad.setVisible(true);
 		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+	}
+	
+	private void setUIStyle() {
+		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
+				//Nimbus uses Java 2D vector graphics to draw the user interface (UI), rather than static bitmaps, so the UI can be crisply rendered at any resolution
+				try {
+		            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		                if ("Nimbus".equals(info.getName())) {
+		                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		                    break;
+		                }
+		            }
+		        } catch (ClassNotFoundException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (InstantiationException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (IllegalAccessException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        }
 	}
 	
 }
