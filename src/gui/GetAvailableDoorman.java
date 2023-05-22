@@ -30,7 +30,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 
 public class GetAvailableDoorman extends JFrame {
 
@@ -137,7 +139,7 @@ public class GetAvailableDoorman extends JFrame {
 	
 	private void updateDoormanList() {
 		try {
-			List<Doorman> dlo = shiftCtrl.findAllDoormen();
+			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift();
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));

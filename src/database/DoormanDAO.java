@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +26,6 @@ public class DoormanDAO {
 			"delete * from Doorman where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
 			findAllQ + "as d" +
-			"left join Employee on (Employee.employeeId = d.employeeId)" +
 			"left join AvailableDates on AvailableDates.employeeId = d.employeeId" +
 			"left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?)" +
 			"left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?)" + 
@@ -131,9 +129,10 @@ public class DoormanDAO {
 	public List<Doorman> getAvailableDoormenForShift(LocalDate date, int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
+			java.sql.Date sqlDate = java.sql.Date.valueOf(date); // Convert LocalDate to java.sql.Date
 			getAvailableDoormenForShift.setInt(1, barId);
 			getAvailableDoormenForShift.setInt(2, barId);
-			getAvailableDoormenForShift.setDate(3, Date.valueOf(date));
+			getAvailableDoormenForShift.setDate(3, sqlDate);
 			rs = getAvailableDoormenForShift.executeQuery();
 			List<Doorman> res = buildObjects(rs);
 			return res;
