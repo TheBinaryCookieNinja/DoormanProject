@@ -94,7 +94,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 
 			cell.addActionListener(e -> {
 			    LocalDate selectedDate = cell.getDate();
+			    System.out.println(selectedDate);
 			    openAssignShiftChooseClub(selectedDate);
+			    
 			});
 			
 			
