@@ -1,31 +1,42 @@
 package controller;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import database.AvailableDateDAO;
+import database.DBConnection;
 import database.DataAccessException;
+import model.AvailableDate;
 
 public class AvailableDateCtrl {
-	private AvailableDateDAO availabledatedao;
-	private LocalDate availableDate;
-	private boolean isAvailable;
+	private AvailableDateDAO adDAO;
 
 	public AvailableDateCtrl() throws DataAccessException{
 	    try {
-	    	availabledatedao = new AvailableDateDAO();
+	    	adDAO = new AvailableDateDAO();
 	    } catch (Exception e) {
 	    	throw new DataAccessException(e, "Unable to create availableDateDAO");
 	    }
 	}
 	
-	public LocalDate createAvailableDates(LocalDate localdate, int doormanId) throws DataAccessException {
-		return new AvailableDate(localDate, doormanId);;
+	public AvailableDate createAvailableDates(LocalDate localdate, int doormanId) throws DataAccessException {
+		String localDateString = localdate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+		return new AvailableDate(0, localDateString, doormanId);
 		
 	}
 	
-	public boolean confirmAvailability(LocalDate availableDate) throws DataAccessException {
-		return isAvailable;
-		
+	public boolean confirmAvailability(AvailableDate availableDate) throws DataAccessException, SQLException {
+		boolean succes = false;
+		DBConnection.getInstance().startTransaction();
+		try {
+			adDAO.createAvailableDate(availableDate);
+			DBConnection.getInstance().commitTransaction();
+			succes = true;
+		}catch(Exception e) {
+			DBConnection.getInstance().rollbackTransaction();
+		}
+		return succes;
 	}
 
 
