@@ -127,7 +127,7 @@ public class BarDAO {
 //				String name = rs.getString("namee");
 //				String phone = rs.getString("phone");
 //				String email = rs.getString("email");
-//				int addressId = rs.getInt("addressId");
+//				int addressId = rs.getInt("addiressId");
 //				String cvr = rs.getString("cvr");	
 				
 				Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getInt("addressId"), rs.getString("cvr"));
