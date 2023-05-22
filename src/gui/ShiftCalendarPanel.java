@@ -90,6 +90,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();
 
 			}
+			
+			int shiftCount = getShiftCountForDate(localDate); // Retrieve the shift count
+		    cell.setShiftCount(shiftCount); // Set the shift count in the Cell
 
 			cell.addActionListener(e -> {
 				LocalDate selectedDate = cell.getDate();
