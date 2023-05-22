@@ -27,7 +27,6 @@ import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.Dimension;
@@ -758,9 +757,9 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayShifts(LocalDate currentDate) throws DataAccessException {
-		List<Shift> sList = shiftCtrl.getShiftsByDate(currentDate);
-	    for(int i = 0; i < sList.size(); i++) {
-		   Shift s = sList.get(i);
+	   shiftCtrl.getShiftsByDate(currentDate)
+				.stream()
+				.forEach(s -> {	
 					try {
 						switch(shiftCtrl.findBarById(s.getBarId()).getName()){
 							case "Fabrikken":
@@ -890,7 +889,7 @@ public class AssignShiftChooseClub extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();				
 					}
-				}
+				});
 									
 	}
 	
