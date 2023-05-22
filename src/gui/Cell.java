@@ -77,6 +77,10 @@ public class Cell extends JButton {
 		setBackground(OTHERCELLS_COLOR);
 		setForeground(Color.BLACK);
 	}
+	
+	public void setShiftCount(int shiftCount) {
+	    setText(Integer.toString(shiftCount));
+	}
 
 	@Override
 	 protected void paintComponent(Graphics grphcs) {
