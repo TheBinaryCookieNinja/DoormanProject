@@ -32,6 +32,7 @@ public class Cell extends JButton {
 	 private static final Color OTHERCELLS_COLOR = new Color(202, 207, 210);  
 	
 	 public Cell() {
+		 
 		 setLayout(new BorderLayout());
 		//setBorder(BorderFactory.createLineBorder(Color.RED));
 		// setBorder(null);
