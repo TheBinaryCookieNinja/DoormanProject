@@ -20,17 +20,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private Cell[] dayCells;
 	private Cell[] titleCells;
 
-	  public ShiftCalendarPanel(int month, int year) throws DataAccessException {
-	        this(LocalDate.of(year, month, 1));
-	    }
+	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
+	    this(LocalDateTime.of(year, month, 1, 0, 0));
+	}
 
-	    public ShiftCalendarPanel(LocalDate date) throws DataAccessException {
-	        this.month = date.getMonthValue();
-	        this.year = date.getYear();
-	        initComponents();
-	        initializeDaysInMonth(null);
-	        setDatesForMonth(date.withDayOfMonth(1));
-	    }
+	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
+	    this.month = dateTime.getMonthValue();
+	    this.year = dateTime.getYear();
+	    initComponents();
+	    initializeDaysInMonth(null);
+	    setDatesForMonth(dateTime.withDayOfMonth(1).toLocalDate());
+	}
 
 	
 	private void initComponents() {
