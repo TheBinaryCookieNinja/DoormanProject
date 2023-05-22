@@ -766,12 +766,24 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime1_1.getText().isEmpty()) {
 									btnShiftTime1_1.setVisible(true);
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									btnShiftTime1_1.addActionListener(e -> {displayGetAvailableDoorman();});
+									btnShiftTime1_1.addActionListener(e -> {try {
+										displayGetAvailableDoorman();
+									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+											| UnsupportedLookAndFeelException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}});
 								}
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									btnShiftTime1_2.addActionListener(e -> {displayGetAvailableDoorman();});
+									btnShiftTime1_2.addActionListener(e -> {try {
+										displayGetAvailableDoorman();
+									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+											| UnsupportedLookAndFeelException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}});
 								}
 								break;
 							case "Zurf":
@@ -893,9 +905,8 @@ public class AssignShiftChooseClub extends JFrame {
 									
 	}
 	
-	private void displayGetAvailableDoorman() {
+	private void displayGetAvailableDoorman() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		GetAvailableDoorman gad = new GetAvailableDoorman();
-		this.setVisible(false);
 		gad.setVisible(true);
 		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);

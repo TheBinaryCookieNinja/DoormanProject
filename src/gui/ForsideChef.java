@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.DataAccessException;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -17,6 +20,8 @@ import javax.swing.JList;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import java.awt.Choice;
+import java.awt.Dialog;
+
 import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
 import javax.swing.GroupLayout;
@@ -164,6 +169,17 @@ public class ForsideChef extends JFrame {
 				});
 		btnArbejdsdage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnUddelegering.addActionListener(e -> {
+			try {
+				MainCalendar mc = new MainCalendar();
+				this.setVisible(false);
+				mc.setVisible(true);
+				mc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+			} catch (DataAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		});
 
