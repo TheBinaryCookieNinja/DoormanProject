@@ -26,6 +26,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 
@@ -115,23 +117,6 @@ public class ForsideChef extends JFrame {
 		JScrollPane scrollPane2 = new JScrollPane(EventsList);
 		
 		JMenuBar menuBar = new JMenuBar();
-		
-		JButton btnVagtkalender = new JButton("Vagtkalender");
-		menuBar.add(btnVagtkalender);
-		
-		JButton btnArbejdsdage = new JButton("Angiv arbejdsdage");
-		menuBar.add(btnArbejdsdage);
-		
-				   
-				
-				JButton btnUddelegering = new JButton("Vagt uddelegering");
-				menuBar.add(btnUddelegering);
-				
-				JButton btnAfdelingsplan = new JButton("Afdelingsplan");
-				menuBar.add(btnAfdelingsplan);
-				
-				JButton btnStatistikker = new JButton("Statistikker");
-				menuBar.add(btnStatistikker);
 				GroupLayout gl_contentPane = new GroupLayout(contentPane);
 				gl_contentPane.setHorizontalGroup(
 					gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -162,26 +147,16 @@ public class ForsideChef extends JFrame {
 									.addGap(24)
 									.addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))))
 				);
+				
+				JMenu mnNewMenu = new JMenu("New menu");
+				menuBar.add(mnNewMenu);
+				
+				JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+				mnNewMenu.add(mntmNewMenuItem);
+				
+				JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+				mnNewMenu.add(mntmNewMenuItem_1);
 				contentPane.setLayout(gl_contentPane);
-				btnStatistikker.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-		btnArbejdsdage.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnUddelegering.addActionListener(e -> {
-			try {
-				MainCalendar mc = new MainCalendar();
-				this.setVisible(false);
-				mc.setVisible(true);
-				mc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-			} catch (DataAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
 
 	}
 }
