@@ -25,7 +25,7 @@ private LocalDate createAvailableDates(LocalDate localdate, int doormanId) throw
 	return availableDate;
 	
 }
-public boolean confirmAvailability(LocalDate availableDate) {
+public boolean confirmAvailability(LocalDate availableDate) throws DataAccessException {
 	return isAvailable;
 	
 }
