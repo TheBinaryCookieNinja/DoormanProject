@@ -82,7 +82,7 @@ public class DoormanDAO {
 		createDoorman.setString(3, doorman.getL_name());
 		createDoorman.setString(4, doorman.getPhone());
 		createDoorman.setString(5, doorman.getEmail());
-		createDoorman.setString(6, doorman.getAddressId());
+		createDoorman.setInt(6, doorman.getAddressId());
 		createDoorman.setString(7, doorman.getPasscode());
 		createDoorman.setDouble(8, doorman.getHourlyRate());
 		createDoorman.execute();
@@ -95,7 +95,7 @@ public class DoormanDAO {
 		final String l_name = d.getL_name();
 		final String phone = d.getPhone();
 		final String email = d.getEmail();
-		final String address = d.getAddressId();
+		final int address = d.getAddressId();
 		final String passcode = d.getPasscode();
 		final double hourlyRate = d.getHourlyRate();
 		
@@ -109,7 +109,7 @@ public class DoormanDAO {
 			update.setString(3, l_name);
 			update.setString(4, phone);
 			update.setString(5, email);
-			update.setString(6, address);
+			update.setInt(6, address);
 			update.setString(7, passcode);
 			update.setDouble(8, hourlyRate);
 			
@@ -141,17 +141,17 @@ public class DoormanDAO {
 	}
 	
 	private Doorman buildObject(ResultSet rs) throws SQLException {
-		Doorman d = new Doorman(
-				rs.getInt("employeeId"),
-				rs.getString("f_name"),
-				rs.getString("l_name"),
-				rs.getString("phone"),
-				rs.getString("email"),
-				rs.getString("address"),
-				rs.getString("passcode"),
-				rs.getDouble("hourlyRate")
-				);
-		return d;
+		int employeeId = rs.getInt("employeeId");
+		String f_name = rs.getString("f_name");
+		String l_name = rs.getString("l_name");
+		String phone = rs.getString("phone");
+		String email = rs.getString("email");
+		int addressId = rs.getInt("addressId");
+		String passcode = rs.getString("passcode");
+		Double hourlyRate = rs.getDouble("hourlyRate");
+		
+		return new Doorman(employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate);
+		
 	}
 	
 	private List<Doorman> buildObjects(ResultSet rs) throws SQLException {
