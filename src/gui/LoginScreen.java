@@ -25,7 +25,7 @@ public class LoginScreen extends JFrame {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can handle the exception here
+            // If Nimbus is not available,  the exception is handled here
             e.printStackTrace();
         }
 
@@ -42,9 +42,9 @@ public class LoginScreen extends JFrame {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
-                // Add your login logic here
+                // Add logic here
 
-                // For this example, let's just display a message dialog
+                // Simple welcome dialog
                 JOptionPane.showMessageDialog(LoginScreen.this, "Welcome, " + username + "!");
             }
         });
@@ -81,7 +81,8 @@ public class LoginScreen extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LoginScreen().setVisible(true);
+                LoginScreen loginScreen = new LoginScreen();
+                loginScreen.setVisible(true);
             }
         });
     }
