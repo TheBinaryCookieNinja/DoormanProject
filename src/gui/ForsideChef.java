@@ -68,7 +68,7 @@ public class ForsideChef extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public ForsideChef() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		setUIStyle();
+		UIStyle.setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -177,26 +177,7 @@ public class ForsideChef extends JFrame {
 				contentPane.setLayout(gl_contentPane);
 
 	}
-	private void setUIStyle() {
-		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
-				//Nimbus uses Java 2D vector graphics to draw the user interface (UI), rather than static bitmaps, so the UI can be crisply rendered at any resolution
-				try {
-		            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		                if ("Nimbus".equals(info.getName())) {
-		                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-		                    break;
-		                }
-		            }
-		        } catch (ClassNotFoundException ex) {
-		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        } catch (InstantiationException ex) {
-		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        } catch (IllegalAccessException ex) {
-		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        }
-	}
+
 			    private void openAssignShiftCalendar() throws DataAccessException {
 		            MainCalendar calendar = new MainCalendar();
 		            calendar.setVisible(true);
