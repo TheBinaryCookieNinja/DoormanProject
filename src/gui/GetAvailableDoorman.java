@@ -104,17 +104,12 @@ public class GetAvailableDoorman extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnNewButton_1.addActionListener(e -> {
-			try {
-				shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId());
-			} catch (DataAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				try {
+					clickConfirm();
+				} catch (DataAccessException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -158,6 +153,11 @@ public class GetAvailableDoorman extends JFrame {
 		} catch (DataAccessException e) {
 			JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
 		}
+	}
+	
+	private void clickConfirm() throws DataAccessException, SQLException {
+		shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId());
+		this.dispose();
 	}
 	
 	private void setUIStyle() {
