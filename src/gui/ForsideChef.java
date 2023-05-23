@@ -68,7 +68,7 @@ public class ForsideChef extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public ForsideChef() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIStyle.setUIStyle();
+		//UIStyle.setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -180,9 +180,8 @@ public class ForsideChef extends JFrame {
 
 			    private void openAssignShiftCalendar() throws DataAccessException {
 		            MainCalendar calendar = new MainCalendar();
-		            calendar.setVisible(true);
-
-		           this.setVisible(false); 
+		            calendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		            calendar.setVisible(true); 
 		        }
 			
 }
