@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class DoormanDAO {
 	private static final String deleteDoormanQ =
 			"delete * from Doorman where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
-			findAllQ + " left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
+			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
 	
 	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman, getAvailableDoormenForShift;
 			
@@ -124,10 +125,9 @@ public class DoormanDAO {
 	public List<Doorman> getAvailableDoormenForShift(LocalDate date, int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
-			java.sql.Date sqlDate = java.sql.Date.valueOf(date); // Convert LocalDate to java.sql.Date
 			getAvailableDoormenForShift.setInt(1, barId);
 			getAvailableDoormenForShift.setInt(2, barId);
-			getAvailableDoormenForShift.setDate(3, sqlDate);
+			getAvailableDoormenForShift.setDate(3, Date.valueOf(date));
 			rs = getAvailableDoormenForShift.executeQuery();
 			List<Doorman> res = buildObjects(rs);
 			return res;
