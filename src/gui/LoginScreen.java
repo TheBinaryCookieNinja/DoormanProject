@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.time.LocalDate;
+import gui.ForsideChef;
 
 public class LoginScreen extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -123,14 +124,11 @@ public class LoginScreen extends JFrame {
         
     	init();
     	}
-
     	
     	private void init() throws DataAccessException {
-    		doormanCtrl = new DoormanCtrl();
-    		
+    		doormanCtrl = new DoormanCtrl();	
     	}
     	
-
     	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
     	    try {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
@@ -139,8 +137,8 @@ public class LoginScreen extends JFrame {
     	        } else {
     	            JOptionPane.showMessageDialog(null, "Forkert brugernavn eller adgangskode.", "Login Error", JOptionPane.ERROR_MESSAGE);
     	        }
-    	    } catch (Exception e) {
-    	    	
+    	    } finally {
+    	        // Code to be executed regardless of whether an exception is thrown or not, use to clean resources etc.
     	    } 
     	 } 
     
@@ -149,7 +147,6 @@ public class LoginScreen extends JFrame {
 		fc.setVisible(true);
 		fc.setAlwaysOnTop(true);
 		fc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-    
     }
     
 }
