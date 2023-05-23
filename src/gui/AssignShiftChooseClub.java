@@ -768,8 +768,7 @@ public class AssignShiftChooseClub extends JFrame {
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
 									btnShiftTime1_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman();
-										shiftCtrl.setBarId(s.getBarId());
+										displayGetAvailableDoorman(currentDate, s.getBarId());
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -781,7 +780,7 @@ public class AssignShiftChooseClub extends JFrame {
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
 									btnShiftTime1_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman();
+										displayGetAvailableDoorman(currentDate, s.getBarId());
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -908,8 +907,8 @@ public class AssignShiftChooseClub extends JFrame {
 									
 	}
 	
-	private void displayGetAvailableDoorman() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		GetAvailableDoorman gad = new GetAvailableDoorman();
+	private void displayGetAvailableDoorman(LocalDate currentDate, int barId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		GetAvailableDoorman gad = new GetAvailableDoorman(currentDate, barId);
 		gad.setVisible(true);
 		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
