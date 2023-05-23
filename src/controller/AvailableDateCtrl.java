@@ -38,6 +38,10 @@ public class AvailableDateCtrl {
 		}
 		return succes;
 	}
+	
+	public void deleteAvailableDate(int doormandId) throws SQLException {
+		adDAO.deleteAvailableDate(doormandId);
+	}
 
 
 }

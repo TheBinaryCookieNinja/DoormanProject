@@ -7,6 +7,7 @@ import java.util.List;
 import database.DBConnection;
 import database.DataAccessException;
 import database.ShiftDAO;
+import model.AvailableDate;
 import model.Bar;
 import model.Doorman;
 import model.Shift;
@@ -17,6 +18,7 @@ public class ShiftCtrl  {
 	private DoormanCtrl doormanCtrl;
 	private Shift shift;
 	private int barId;
+	private AvailableDateCtrl availableDateCtrl;
 	
 	
 	
@@ -28,6 +30,8 @@ public class ShiftCtrl  {
 		}
 		barCtrl = new BarController();
 		doormanCtrl = new DoormanCtrl();
+		availableDateCtrl = new AvailableDateCtrl();
+		shift = getShiftById(1);
 	}
 
 	 /**
@@ -38,7 +42,6 @@ public class ShiftCtrl  {
      */
 	public List<Shift> getShiftsByDate(LocalDate date) throws DataAccessException {
 //		// Convert java.util.Date to java.time.LocalDate
-//		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return shiftDAO.getShiftsByDate(date);
 		
 	}
@@ -67,8 +70,8 @@ public class ShiftCtrl  {
 		boolean confirmation = false;
 		try {
 			DBConnection.getInstance().startTransaction();
-			shiftDAO.updateDoormanId(shift, doormanId);
-			doormanCtrl.deleteDoorman(doormanId);
+			shiftDAO.updateDoormanId(shift.getShiftId(), doormanId);
+			availableDateCtrl.deleteAvailableDate(doormanId);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
 		} catch (SQLException e) {

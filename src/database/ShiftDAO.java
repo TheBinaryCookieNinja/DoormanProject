@@ -13,9 +13,8 @@ public class ShiftDAO {
 	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
 	private static final String findByIdQ = findAllQ + " where shiftId = ?";
 	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
-	private static final String updateQ = "update Shiftt set shiftId = ?, shiftDate = ?, checkInTime = ?, checkOutTime = ?, barId = ?, doormanId = ?, signatureId =?";
+	private static final String updateQ = "update Shiftt set doormanId = ? where shiftId = ?";
 	private static final String deleteShiftQ = "delete from Shiftt where shiftId = ?";
-
 	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
 
 	private PreparedStatement findAll, findById, createShift, update, deleteShift, findByDate;
@@ -69,21 +68,10 @@ public class ShiftDAO {
 
 	}
 
-	public void updateDoormanId(Shift s, int doormanId) throws DataAccessException {
-		final int shiftId = s.getShiftId();
-		final String shiftDate = s.getShiftDate();
-		final String checkInTime = s.getCheckInTime();
-		final String checkOutTime = s.getCheckOutTime();
-		final int barId = s.getBarId();
-
+	public void updateDoormanId(int shiftId, int doormanId) throws DataAccessException {
 		try {
-			update.setInt(1, shiftId);
-			update.setString(2, shiftDate);
-			update.setString(3, checkInTime);
-			update.setString(4, checkOutTime);
-			update.setInt(5, barId);
-			update.setInt(6, doormanId);
-
+			update.setInt(1, doormanId);
+			update.setInt(2, shiftId);
 			update.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
