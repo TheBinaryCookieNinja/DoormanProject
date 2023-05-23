@@ -27,7 +27,7 @@ public class LoginScreen extends JFrame {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available,  the exception is handled here
+            // If Nimbus is not available, the exception is handled here
             e.printStackTrace();
         }
 
@@ -92,9 +92,9 @@ public class LoginScreen extends JFrame {
 
     private boolean authenticateUser(String username, String password) {
         // Hildur database
-        String jdbcUrl = "jdbc:mysql://localhost:1433//OtherCompany";
-        String dbUsername = "sa";
-        String dbPassword = "Olikocherr657@";
+        String jdbcUrl = "jdbc:sqlserver://%s:%d;databaseName=%s;user=%s;password=%s;encrypt=false";
+        String dbUsername = "DMA-CSD-S221_10463670";
+        String dbPassword = "Password1!";
 
         try {
             // Establishing a connection to the aforementioned database
