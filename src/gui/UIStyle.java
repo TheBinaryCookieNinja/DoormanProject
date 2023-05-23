@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.UIManager;
 
-public  class UIStyle {
+public class UIStyle {
 	
 	static void setUIStyle() {
 		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
