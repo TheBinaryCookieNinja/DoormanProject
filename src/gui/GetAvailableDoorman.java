@@ -139,7 +139,7 @@ public class GetAvailableDoorman extends JFrame {
 	
 	private void updateDoormanList() {
 		try {
-			List<Doorman> dlo = shiftCtrl.findAllDoormen();
+			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(currentDate));
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));

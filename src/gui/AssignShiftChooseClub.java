@@ -766,8 +766,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime1_1.getText().isEmpty()) {
 									btnShiftTime1_1.setVisible(true);
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									btnShiftTime1_1.addActionListener(e -> {try {
+									btnShiftTime1_1.addActionListener(e -> {
+									try {
 										displayGetAvailableDoorman();
+										shiftCtrl.setBarId(s.getBarId());
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -777,7 +779,8 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									btnShiftTime1_2.addActionListener(e -> {try {
+									btnShiftTime1_2.addActionListener(e -> {
+									try {
 										displayGetAvailableDoorman();
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
