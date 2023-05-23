@@ -116,7 +116,7 @@ public class AssignShiftChooseClub extends JFrame {
 	 * @throws DataAccessException 
 	 */
 	public AssignShiftChooseClub(LocalDate currentDate) throws DataAccessException {
-		UIStyle.setUIStyle();
+		setUIStyle();
 		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
@@ -768,7 +768,7 @@ public class AssignShiftChooseClub extends JFrame {
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
 									btnShiftTime1_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, s.getBarId());
+										displayGetAvailableDoorman(currentDate, 1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -781,7 +781,7 @@ public class AssignShiftChooseClub extends JFrame {
 									btnShiftTime1_2.setToolTipText("" + s.getBarId());
 									btnShiftTime1_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, Integer.parseInt(btnShiftTime1_2.getToolTipText()));
+										displayGetAvailableDoorman(currentDate, 1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -913,5 +913,26 @@ public class AssignShiftChooseClub extends JFrame {
 		gad.setVisible(true);
 		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+	}
+	
+	private void setUIStyle() {
+		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
+				//Nimbus uses Java 2D vector graphics to draw the user interface (UI), rather than static bitmaps, so the UI can be crisply rendered at any resolution
+				try {
+		            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		                if ("Nimbus".equals(info.getName())) {
+		                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		                    break;
+		                }
+		            }
+		        } catch (ClassNotFoundException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (InstantiationException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (IllegalAccessException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		            java.util.logging.Logger.getLogger(MainCalendar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        }
 	}
 }

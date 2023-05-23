@@ -60,7 +60,7 @@ public class ShiftCtrl  {
 	}
 	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
-	   // return doormanCtrl.getAvailableDoormenForShift(LocalDate.of(2023, 05, 15), 1);
+		//return doormanCtrl.getAvailableDoormenForShift(LocalDate.of(2023, 05, 15), 1);
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  

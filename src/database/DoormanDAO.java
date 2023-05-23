@@ -25,13 +25,7 @@ public class DoormanDAO {
 	private static final String deleteDoormanQ =
 			"delete * from Doorman where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
-			findAllQ + 
-			"as d" +
-			"left join AvailableDates on AvailableDates.employeeId = d.employeeId" +
-			"left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?)" +
-			"left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?)" + 
-			"where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null" +
-			"order by DoormanWishlist.employeeId desc";
+			findAllQ + " left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
 	
 	private PreparedStatement findAll, findById, createDoorman, update, deleteDoorman, getAvailableDoormenForShift;
 			
