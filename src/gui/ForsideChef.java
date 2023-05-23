@@ -70,7 +70,7 @@ public class ForsideChef extends JFrame {
 	public ForsideChef() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 1500, 1100);
 		contentPane = new JPanel();
 
 		setContentPane(contentPane);
@@ -172,9 +172,24 @@ public class ForsideChef extends JFrame {
 			    
 			        
 				
-				JMenuItem mntmNewMenuItem_1 = new JMenuItem("Register availability");
-				mnNewMenu.add(mntmNewMenuItem_1);
+				JMenuItem mntmRegisterAvailability = new JMenuItem("Register availability");
+				mnNewMenu.add(mntmRegisterAvailability);
+				mntmRegisterAvailability.addActionListener(e ->  {
+			    	try {
+						openRegisterAvailabilityCalendar();
+					} catch (DataAccessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    }); 
+				
+				
+				
 				contentPane.setLayout(gl_contentPane);
+				
+		
+				setLocationRelativeTo(null);
+			    pack();
 
 	}
 
@@ -183,6 +198,15 @@ public class ForsideChef extends JFrame {
 		            calendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		            calendar.setVisible(true); 
 		        }
+			    
+			    private void openRegisterAvailabilityCalendar() throws DataAccessException  {
+			    	MainAvailabilityCalendar availabilityCalendar = new MainAvailabilityCalendar();
+			    	availabilityCalendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			    	availabilityCalendar.setVisible(true); 
+			    	
+			    	
+			    	
+	}
 			    
 				private void setUIStyle() {
 					//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
