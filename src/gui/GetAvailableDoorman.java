@@ -123,23 +123,23 @@ public class GetAvailableDoorman extends JFrame {
 		gbc_btnNewButton.gridy = 6;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
-		init();
+		init(currentDate, barId);
 	}
 
 	
-	private void init() {
+	private void init(LocalDate currentDate, int barId) {
 		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
 			shiftCtrl = new ShiftCtrl();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		updateDoormanList();
+		updateDoormanList(currentDate, barId);
 	}
 	
-	private void updateDoormanList() {
+	private void updateDoormanList(LocalDate currentDate, int barId) {
 		try {
-			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(currentDate));
+			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(currentDate, barId));
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));
