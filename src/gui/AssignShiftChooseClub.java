@@ -778,9 +778,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+									btnShiftTime1_2.setToolTipText("" + s.getBarId());
 									btnShiftTime1_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, s.getBarId());
+										displayGetAvailableDoorman(currentDate, Integer.parseInt(btnShiftTime1_2.getToolTipText()));
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
