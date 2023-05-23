@@ -20,6 +20,7 @@ public class Cell extends JButton {
 	private LocalDate date;
 	private boolean title;
 	private boolean isToday;
+	 private boolean isEmpty;
 	// private JLabel shiftLabel;
 	private JLabel shiftCountLabel;
 	private JLabel dateLabel;
@@ -105,6 +106,12 @@ public class Cell extends JButton {
 		 shiftCountLabel.setText("Der er " + Integer.toString(shiftCount) + " vagter");
 	     shiftCountLabel.setVisible(shiftCount > 0); // before it was invisible, now if there are any shifts, it gets visible
 	}
+	
+	public void setEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
+        dateLabel.setVisible(!isEmpty);
+        shiftCountLabel.setVisible(!isEmpty);
+    }
 
 	@Override
 	 protected void paintComponent(Graphics grphcs) {
