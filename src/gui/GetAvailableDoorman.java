@@ -33,6 +33,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GetAvailableDoorman extends JFrame {
 
@@ -65,7 +67,7 @@ public class GetAvailableDoorman extends JFrame {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	public GetAvailableDoorman() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+	public GetAvailableDoorman(LocalDate currentDate, int barId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIStyle.setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1030, 660);
@@ -99,6 +101,11 @@ public class GetAvailableDoorman extends JFrame {
 		contentPane.add(doormanList, gbc_doormanList);
 		
 		JButton btnNewButton_1 = new JButton("Confirm");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnNewButton_1.addActionListener(e -> {
 			try {
 				shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId());
@@ -118,28 +125,31 @@ public class GetAvailableDoorman extends JFrame {
 		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Cancel");
+		btnNewButton.addActionListener(e -> {
+			dispose();
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 6;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
-		init();
+		init(currentDate, barId);
 	}
 
 	
-	private void init() {
+	private void init(LocalDate currentDate, int barId) {
 		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
 			shiftCtrl = new ShiftCtrl();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		updateDoormanList();
+		updateDoormanList(currentDate, barId);
 	}
 	
-	private void updateDoormanList() {
+	private void updateDoormanList(LocalDate currentDate, int barId) {
 		try {
-			List<Doorman> dlo = shiftCtrl.findAllDoormen();
+			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(currentDate, barId);
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));

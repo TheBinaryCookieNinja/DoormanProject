@@ -14,7 +14,8 @@ import model.Doorman;
 public class DoormanDAO {
 	
 	private static final String findAllQ =
-			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId";
+			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d"
+			+ "left join Employee on Employee.employeeId = d.employeeId";
 	private static final String findByIdQ = 
 			findAllQ + "where employeeId = ?";
 	private static final String createDoormanQ =
@@ -24,7 +25,8 @@ public class DoormanDAO {
 	private static final String deleteDoormanQ =
 			"delete * from Doorman where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
-			findAllQ + "as d" +
+			findAllQ + 
+			"as d" +
 			"left join AvailableDates on AvailableDates.employeeId = d.employeeId" +
 			"left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?)" +
 			"left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?)" + 
