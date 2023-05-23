@@ -68,7 +68,7 @@ public class ForsideChef extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public ForsideChef() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		//UIStyle.setUIStyle();
+		UIStyle.setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
