@@ -7,27 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginScreen extends JFrame {
-    private JTextField usernameField;
+   
+	private JTextField usernameField;
     private JPasswordField passwordField;
 
     public LoginScreen() {
         setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
 
-        // Set Nimbus look and feel
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available,  the exception is handled here
-            e.printStackTrace();
-        }
+        UIStyle.setUIStyle();
 
         // Create components
         JLabel usernameLabel = new JLabel("Username:");
@@ -37,8 +27,7 @@ public class LoginScreen extends JFrame {
         passwordField = new JPasswordField(20);
 
         JButton loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        loginButton.addActionListener(e ->{
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
@@ -46,7 +35,7 @@ public class LoginScreen extends JFrame {
 
                 // Simple welcome dialog
                 JOptionPane.showMessageDialog(LoginScreen.this, "Welcome, " + username + "!");
-            }
+            
         });
 
         // Create layout

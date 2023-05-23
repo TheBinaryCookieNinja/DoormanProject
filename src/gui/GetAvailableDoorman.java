@@ -52,7 +52,7 @@ public class GetAvailableDoorman extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GetAvailableDoorman frame = new GetAvailableDoorman();
+					GetAvailableDoorman frame = new GetAvailableDoorman(null, 0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
