@@ -89,6 +89,30 @@ public class AssignShiftChooseClub extends JFrame {
 	private JLabel lblName10;
 	private JLabel lblName11;
 	private JLabel lblName12;
+	private int barId1_1;
+	private int barId1_2;
+	private int barId2_1;
+	private int barId2_2;
+	private int barId3_1;
+	private int barId3_2;
+	private int barId4_1;
+	private int barId4_2;
+	private int barId5_1;
+	private int barId5_2;
+	private int barId6_1;
+	private int barId6_2;
+	private int barId7_1;
+	private int barId7_2;
+	private int barId8_1;
+	private int barId8_2;
+	private int barId9_1;
+	private int barId9_2;
+	private int barId10_1;
+	private int barId10_2;
+	private int barId11_1;
+	private int barId11_2;
+	private int barId12_1;
+	private int barId12_2;
 
 	/**
 	 * Launch the application.
@@ -766,9 +790,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime1_1.getText().isEmpty()) {
 									btnShiftTime1_1.setVisible(true);
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+									barId1_2 = s.getBarId();
 									btnShiftTime1_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, 1);
+										displayGetAvailableDoorman(currentDate, barId1_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -778,10 +803,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									btnShiftTime1_2.setToolTipText("" + s.getBarId());
+									barId1_2 = s.getBarId();
 									btnShiftTime1_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, 1);
+										displayGetAvailableDoorman(currentDate, barId1_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
