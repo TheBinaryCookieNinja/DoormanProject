@@ -5,19 +5,31 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class LoginScreen extends JFrame {
-   
+    private static final long serialVersionUID = 1L;
 	private JTextField usernameField;
     private JPasswordField passwordField;
 
     public LoginScreen() {
         setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
 
-        UIStyle.setUIStyle();
+        // Set Nimbus look and feel
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available,  the exception is handled here
+            e.printStackTrace();
+        }
 
         // Create components
         JLabel usernameLabel = new JLabel("Username:");
@@ -27,7 +39,8 @@ public class LoginScreen extends JFrame {
         passwordField = new JPasswordField(20);
 
         JButton loginButton = new JButton("Login");
-        loginButton.addActionListener(e ->{
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
@@ -35,30 +48,40 @@ public class LoginScreen extends JFrame {
 
                 // Simple welcome dialog
                 JOptionPane.showMessageDialog(LoginScreen.this, "Welcome, " + username + "!");
-            
+            }
         });
 
-        // Create layout
+     // Create layout
         JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(10, 10, 10, 10);
+        GridBagConstraints constraints;
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 0;
         panel.add(usernameLabel, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 1;
         panel.add(usernameField, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
         panel.add(passwordLabel, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 1;
         panel.add(passwordField, constraints);
 
-        constraints.gridx = 1;
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.gridx = 0;
         constraints.gridy = 2;
+        constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(loginButton, constraints);
 
@@ -67,6 +90,39 @@ public class LoginScreen extends JFrame {
         pack();
     }
 
+    private boolean authenticateUser(String username, String password) {
+        // Hildur database
+        String jdbcUrl = "jdbc:mysql://localhost:1433//OtherCompany";
+        String dbUsername = "sa";
+        String dbPassword = "Olikocherr657@";
+
+        try {
+            // Establishing a connection to the aforementioned database
+            Connection connection = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+
+            // Prepared statement
+            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            // Execute query
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if a matching user exists
+            boolean isAuthenticated = resultSet.next();
+
+            resultSet.close();
+            statement.close();
+           // connection.close();
+
+            return isAuthenticated;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
