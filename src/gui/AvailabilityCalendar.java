@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import controller.AvailableDateCtrl;
 import database.DataAccessException;
 
 import javax.swing.GroupLayout.Alignment;
@@ -37,6 +39,7 @@ public class AvailabilityCalendar extends JPanel {
 	private Map<String, AvailabilityCalendarPanel> calendarPanels;
 	private AvailabilityCalendarPanel currentPanel;
 	private LocalDateTime dateTime;
+	private AvailableDateCtrl availableDateCtrl;
 
 	private JButton arrowBack;
 	private JButton arrowForward;
@@ -47,16 +50,16 @@ public class AvailabilityCalendar extends JPanel {
 	private JLabel lbTime;
 	private JLabel lbType;
 
-	public AvailabilityCalendar() throws DataAccessException {
+	public AvailabilityCalendar(AvailableDateCtrl availableDateCtrl) throws DataAccessException {
+		this.availableDateCtrl = availableDateCtrl;
 		setBackground(Color.WHITE);
 		dateTime = LocalDateTime.now();
-		// thisMonth();
+
 		calendarPanels = new HashMap<>();
 		initComponents();
 		slide.show(new AvailabilityCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 		initializeThread();
-		initializeLabels();
 		initializeButtons();
 
 	}
@@ -157,19 +160,28 @@ public class AvailabilityCalendar extends JPanel {
 												.addGap(22)))));
 
 		GroupLayout layout = new GroupLayout(this);
-		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup()
-				.addContainerGap().addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(slide, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE))
-				.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addGap(13)
-						.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(slide, GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE))
-				.addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
-						GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)));
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(14)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(jLayeredPane1, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+						.addComponent(slide, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addGap(13)
+					.addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(slide, GroupLayout.PREFERRED_SIZE, 692, Short.MAX_VALUE))
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
+		);
 		this.setLayout(layout);
 		try {
 			initializeButtons();
@@ -193,16 +205,6 @@ public class AvailabilityCalendar extends JPanel {
 	}
 
 	private void initializeLabels() throws DataAccessException {
-//		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
-//		lbTime.setForeground(Color.BLACK);
-//		lbTime.setHorizontalAlignment(SwingConstants.LEFT);
-//
-//		lbType.setFont(new Font("SansSerif", Font.BOLD, 25));
-//		lbType.setForeground(Color.BLACK);
-//
-//		lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
-//		lbDate.setForeground(Color.BLACK);
-//		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 
 		lbTime = new JLabel();
 		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
@@ -218,10 +220,27 @@ public class AvailabilityCalendar extends JPanel {
 		lbDate.setForeground(Color.BLACK);
 		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 
-		jPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
-		jPanel1.add(lbTime);
-		jPanel1.add(lbType);
-		jPanel1.add(lbDate);
+		
+	    JPanel registerPanel = new JPanel();
+	    registerPanel.setBackground(Color.WHITE);
+	    registerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+	    JLabel lbRegisterAvailability = new JLabel();
+	    lbRegisterAvailability.setFont(new Font("SansSerif", Font.BOLD, 20));
+	    lbRegisterAvailability.setForeground(Color.BLACK);
+	    lbRegisterAvailability.setHorizontalAlignment(SwingConstants.CENTER);
+	    lbRegisterAvailability.setBorder(BorderFactory.createEmptyBorder(100, 50, 0, 0)); 
+	    lbRegisterAvailability.setText("<html>This is the calendar for<br>registering your availability</html>");
+
+	  
+	    registerPanel.add(lbRegisterAvailability);
+
+	    // Add the existing labels and the register panel to the main panel
+	    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+	    jPanel1.add(lbTime);
+	    jPanel1.add(lbType);
+	    jPanel1.add(lbDate);
+	    jPanel1.add(registerPanel);
 	}
 
 	private void initializeThread() {

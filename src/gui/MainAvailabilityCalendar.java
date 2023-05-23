@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import controller.AvailableDateCtrl;
 
 import database.DataAccessException;
 
@@ -83,8 +84,8 @@ public class MainAvailabilityCalendar extends JFrame {
 	    jPanel1.setBackground(new Color(255, 255, 255));
 	    contentPane.add(jPanel1);
 	    
-	    
-	    calendarAvailability = new AvailabilityCalendar();
+	    AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
+	    calendarAvailability = new AvailabilityCalendar(availableDateCtrl);
 	    calendarAvailability.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 205)));
 	    
 	    GroupLayout jPanel1Layout = new GroupLayout(jPanel1);

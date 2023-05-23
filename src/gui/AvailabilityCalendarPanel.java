@@ -7,16 +7,17 @@ import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
 import database.DataAccessException;
-import model.Shift;
+import model.AvailableDate;
 
 import java.time.*;
 import java.time.LocalDate;
 
-import controller.ShiftCtrl;
+import controller.AvailableDateCtrl;
 
 public class AvailabilityCalendarPanel extends JLayeredPane {
 
@@ -24,6 +25,7 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	private int year;
 	private Cell[] dayCells;
 	private Cell[] titleCells;
+	private AvailableDateCtrl availableDateCtrl;
 
 	public AvailabilityCalendarPanel(int month, int year) throws DataAccessException {
 		this(LocalDateTime.of(year, month, 1, 0, 0));
@@ -37,6 +39,10 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 		initComponents();
 		initializeDaysInMonth(null);
 		setDatesForMonth(dateTime.withDayOfMonth(1).atZone(timeZone).toLocalDate());
+	}
+	
+	public AvailabilityCalendarPanel(LocalDateTime dateTime, AvailableDateCtrl availableDateCtrl) throws DataAccessException {
+	    this.availableDateCtrl = availableDateCtrl;
 	}
 
 	private void initComponents() {
@@ -96,7 +102,12 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 			cell.addActionListener(e -> {
                 LocalDate selectedDate = cell.getDate();
                 System.out.println(selectedDate);
-                handleAvailabilityRegistration(selectedDate);
+                try {
+					handleAvailabilityRegistration(selectedDate);
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}
             });
 
 
@@ -108,9 +119,25 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 		this.repaint();
 	}
 
-	private void handleAvailabilityRegistration(LocalDate selectedDate) {
-    // Implement your logic for handling availability registration here
-}
+	private void handleAvailabilityRegistration(LocalDate selectedDate) throws SQLException {
+	    int confirm = JOptionPane.showConfirmDialog(null, "Do you want to confirm availability registration on " + selectedDate + "?", "Confirm Availability Registration", JOptionPane.YES_NO_OPTION);
+	    if (confirm == JOptionPane.YES_OPTION) {
+	        try {
+	            int doormanId = 1;
+	            AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
+	            AvailableDate availableDate = availableDateCtrl.createAvailableDates(selectedDate, doormanId);
+	            boolean success = availableDateCtrl.confirmAvailability(availableDate);
+	            if (success) {
+	                JOptionPane.showMessageDialog(null, "Availability registered successfully!");
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Failed to register availability. Please try again.");
+	            }
+	        } catch (DataAccessException e) {
+	            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+	        }
+	    }
+	}
+
 	
 	
 
@@ -148,16 +175,6 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 		            cell.setAsNotToday();
 		        }
 
-			// here shifts objects are added to a date cell if the shift date matches the
-			// date cell
-//			if (shiftCtrl != null) {
-//
-//				List<Shift> shifts = shiftCtrl.getShiftsByDate((dayDate));
-//
-//				for (Shift shift : shifts) {
-//					String shiftText = String.format("<html>%d<br/>%04d-%02d-%02d %s - %s</html>", shift.getShiftId(),
-//							shift.getCheckInTime(), shift.getCheckOutTime());
-//					cell.addShift(shiftText);
 		}
 
 	}

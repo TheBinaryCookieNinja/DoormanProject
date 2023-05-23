@@ -208,16 +208,6 @@ public class ShiftCalendarCustom extends JPanel {
 	}
 
 	private void initializeLabels() throws DataAccessException {
-//		lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
-//		lbTime.setForeground(Color.BLACK);
-//		lbTime.setHorizontalAlignment(SwingConstants.LEFT);
-//
-//		lbType.setFont(new Font("SansSerif", Font.BOLD, 25));
-//		lbType.setForeground(Color.BLACK);
-//
-//		lbDate.setFont(new Font("SansSerif", Font.PLAIN, 18));
-//		lbDate.setForeground(Color.BLACK);
-//		lbDate.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		lbTime = new JLabel();
         lbTime.setFont(new Font("SansSerif", Font.BOLD, 30));
