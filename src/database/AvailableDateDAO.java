@@ -11,8 +11,10 @@ public class AvailableDateDAO {
 			"select * from AvailableDates where availableDatesId = ?";
 	private static final String createAvailableDateQ = 
 			"insert into AvailableDates (calenderDate, employeeId) values (?,?)";
+	private static final String deleteAvailableDateQ = 
+			"delete from AvailableDates where employeeId = ?";
 	
-	private PreparedStatement findById, createAvailableDate;
+	private PreparedStatement findById, createAvailableDate, deleteAvailableDate;
 	
 	public AvailableDateDAO() throws DataAccessException {
 		try {
@@ -20,6 +22,8 @@ public class AvailableDateDAO {
 					.prepareStatement(findByIdQ); 
 			createAvailableDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(createAvailableDateQ);
+			deleteAvailableDate = DBConnection.getInstance().getConnection()
+					.prepareStatement(deleteAvailableDateQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -41,6 +45,11 @@ public class AvailableDateDAO {
 	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
 		createAvailableDate.setString(1, availableDate.getCalendarDate());
 		createAvailableDate.setInt(2, availableDate.getEmployeeId());
+	}
+	
+	public void deleteAvailableDate(int doormanId) throws SQLException {
+		deleteAvailableDate.setInt(1, doormanId);
+		deleteAvailableDate.execute();
 	}
 	
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {

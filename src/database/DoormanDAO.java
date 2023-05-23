@@ -117,11 +117,6 @@ public class DoormanDAO {
 
 	}
 	
-	public void deleteDoorman(int employeeId) throws SQLException {
-		deleteDoorman.setInt(1, employeeId);
-		deleteDoorman.execute();
-	}
-	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate date, int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
