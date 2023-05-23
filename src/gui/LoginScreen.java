@@ -5,6 +5,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class LoginScreen extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -89,6 +90,39 @@ public class LoginScreen extends JFrame {
         pack();
     }
 
+    private boolean authenticateUser(String username, String password) {
+        // Hildur database
+        String jdbcUrl = "jdbc:mysql://localhost:1433//OtherCompany";
+        String dbUsername = "sa";
+        String dbPassword = "Olikocherr657@";
+
+        try {
+            // Establishing a connection to the aforementioned database
+            Connection connection = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+
+            // Prepared statement
+            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            // Execute query
+            ResultSet resultSet = statement.executeQuery();
+
+            // Check if a matching user exists
+            boolean isAuthenticated = resultSet.next();
+
+            resultSet.close();
+            statement.close();
+           // connection.close();
+
+            return isAuthenticated;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
