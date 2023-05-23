@@ -7,17 +7,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginScreen extends JFrame {
-   
+    private static final long serialVersionUID = 1L;
 	private JTextField usernameField;
     private JPasswordField passwordField;
 
     public LoginScreen() {
         setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
 
-        UIStyle.setUIStyle();
+        // Set Nimbus look and feel
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available,  the exception is handled here
+            e.printStackTrace();
+        }
 
         // Create components
         JLabel usernameLabel = new JLabel("Username:");
@@ -27,7 +38,8 @@ public class LoginScreen extends JFrame {
         passwordField = new JPasswordField(20);
 
         JButton loginButton = new JButton("Login");
-        loginButton.addActionListener(e ->{
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
@@ -35,30 +47,40 @@ public class LoginScreen extends JFrame {
 
                 // Simple welcome dialog
                 JOptionPane.showMessageDialog(LoginScreen.this, "Welcome, " + username + "!");
-            
+            }
         });
 
-        // Create layout
+     // Create layout
         JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(10, 10, 10, 10);
+        GridBagConstraints constraints;
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 0;
         panel.add(usernameLabel, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 1;
         panel.add(usernameField, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
         panel.add(passwordLabel, constraints);
 
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 1;
         panel.add(passwordField, constraints);
 
-        constraints.gridx = 1;
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.gridx = 0;
         constraints.gridy = 2;
+        constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(loginButton, constraints);
 
