@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginScreen extends JFrame {
-    private JTextField usernameField;
+    private static final long serialVersionUID = 1L;
+	private JTextField usernameField;
     private JPasswordField passwordField;
 
     public LoginScreen() {
