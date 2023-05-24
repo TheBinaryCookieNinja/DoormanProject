@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 public class AvailableDateDAOTest {
 
-    private static final int NUM_THREADS = 4;
+    private static final int NUM_THREADS = 40;
     private static final int NUM_ITERATIONS = 2;
 
     @Test

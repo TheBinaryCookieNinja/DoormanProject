@@ -16,7 +16,6 @@ public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
 	private BarController barCtrl;
 	private DoormanCtrl doormanCtrl;
-	private Shift shift;
 	private AvailableDateCtrl availableDateCtrl;
 	
 	
@@ -30,7 +29,6 @@ public class ShiftCtrl  {
 		barCtrl = new BarController();
 		doormanCtrl = new DoormanCtrl();
 		availableDateCtrl = new AvailableDateCtrl();
-		shift = getShiftById(1);
 	}
 
 	 /**
@@ -65,11 +63,11 @@ public class ShiftCtrl  {
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  
-	public boolean confirmShift(int doormanId) throws DataAccessException, SQLException {
+	public boolean confirmShift(int doormanId, int shiftId) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
 			DBConnection.getInstance().startTransaction();
-			shiftDAO.updateDoormanId(shift.getShiftId(), doormanId);
+			shiftDAO.updateDoormanId(shiftId, doormanId);
 			availableDateCtrl.deleteAvailableDate(doormanId);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
@@ -80,6 +78,4 @@ public class ShiftCtrl  {
 		return confirmation;
 	}
 	
-	public void setBarId(int barId) {
-	}
 }

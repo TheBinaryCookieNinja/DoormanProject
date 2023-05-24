@@ -18,7 +18,7 @@ public class AvailableDateDAO {
 			"delete from AvailableDates where employeeId = ?";
 	
 	private PreparedStatement findById, createAvailableDate, deleteAvailableDate;
-	private static final int NUM_LOCKS = 10; // Number of locks to use
+	private static final int NUM_LOCKS = 8; // Number of locks to use
     private Lock[] locks; // Array of locks for lock striping
 	
 	public AvailableDateDAO() throws DataAccessException {
