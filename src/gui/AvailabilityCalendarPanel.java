@@ -120,6 +120,15 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	}
 
 	private void handleAvailabilityRegistration(LocalDate selectedDate) throws SQLException {
+		LocalDate currentDate = LocalDate.now();
+		LocalDate minDate = currentDate.plusWeeks(2);
+		
+		if(selectedDate.isBefore(minDate)) {
+		   JOptionPane.showMessageDialog(null, "Registration of availability is only allowed at least two weeks before the shift starts😯" );
+		   return;
+		}
+		
+		
 	    int confirm = JOptionPane.showConfirmDialog(null, "Do you want to confirm availability registration on " + selectedDate + "?", "Confirm Availability Registration", JOptionPane.YES_NO_OPTION);
 	    if (confirm == JOptionPane.YES_OPTION) {
 	        try {
@@ -128,9 +137,9 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	            AvailableDate availableDate = availableDateCtrl.createAvailableDates(selectedDate, doormanId);
 	            boolean success = availableDateCtrl.confirmAvailability(availableDate);
 	            if (success) {
-	                JOptionPane.showMessageDialog(null, "Availability registered successfully!");
+	                JOptionPane.showMessageDialog(null, "Availability registered successfully😀");
 	            } else {
-	                JOptionPane.showMessageDialog(null, "Failed to register availability. Please try again.");
+	                JOptionPane.showMessageDialog(null, "Failed to register availability. Please try again😥");
 	            }
 	        } catch (DataAccessException e) {
 	            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
