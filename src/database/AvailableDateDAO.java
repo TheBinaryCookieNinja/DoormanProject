@@ -53,11 +53,11 @@ public class AvailableDateDAO {
 	}
 	
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {
-		AvailableDate aD = new AvailableDate(
+		AvailableDate availableDate = new AvailableDate(
 				rs.getInt("availableDatesId"),
 				rs.getDate("calendarDate"),
 				rs.getInt("employeeId")
 				);
-		return aD;
+		return availableDate;
 	}
 }

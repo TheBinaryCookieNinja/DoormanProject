@@ -25,7 +25,7 @@ public class AvailableDate {
 			return calendarDate;
 		}
 
-		public void setCalendarDate(String calendarDate) {
+		public void setCalendarDate(Date calendarDate) {
 			this.calendarDate = calendarDate;
 		}
 
