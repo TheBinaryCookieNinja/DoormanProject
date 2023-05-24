@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+
 import java.util.List;
 
 import java.awt.event.ActionListener;
@@ -11,7 +12,9 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import database.DataAccessException;
+import database.DoormanDAO;
 import model.AvailableDate;
+import model.Doorman;
 
 import java.time.*;
 import java.time.LocalDate;
@@ -25,6 +28,7 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	private Cell[] dayCells;
 	private Cell[] titleCells;
 	private AvailableDateCtrl availableDateCtrl;
+	private DoormanDAO doormanDAO;
 
 	public AvailabilityCalendarPanel(int month, int year) throws DataAccessException {
 		this(LocalDateTime.of(year, month, 1, 0, 0));
@@ -98,6 +102,16 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();
 
 			}
+			
+			 boolean isAvailable = checkAvailabilityForDate(dayDate);
+		        if (isAvailable) {
+		            cell.setText("Free");
+		            cell.setBackground(Color.GREEN);
+		        } else {
+		            cell.setText("Occupied");
+		            cell.setBackground(Color.RED);
+		        }
+
 
 			cell.addActionListener(e -> {
 				LocalDate selectedDate = cell.getDate();
@@ -117,6 +131,32 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 		this.revalidate();
 		this.repaint();
 	}
+	
+	private boolean checkAvailabilityForDate(LocalDate date) {
+	    try {
+	        AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
+	        DoormanDAO doormanDAO = new DoormanDAO();
+	        
+	        List<Doorman> doormen = doormanDAO.findAll(); 
+
+	       
+	        for (Doorman doorman : doormen) {
+	            int doormanId = doorman.getEmployeeId();
+	            boolean isRegistered = availableDateCtrl.isAvailabilityRegistered(doormanId, date);
+	            if (isRegistered) {
+	                return false; 
+	            }
+	        }
+
+	        return true; 
+	    } catch (DataAccessException e) {
+	        
+	        e.printStackTrace();
+	        return false; 
+	    }
+	}
+
+
 
 	private void handleAvailabilityRegistration(LocalDate selectedDate) throws SQLException {
 		LocalDate currentDate = LocalDate.now();
@@ -133,7 +173,7 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 				"Confirm Availability Registration", JOptionPane.YES_NO_OPTION);
 		if (confirm == JOptionPane.YES_OPTION) {
 			try {
-				int doormanId = 1;
+				int doormanId = 5;
 				AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
 
 				if (availableDateCtrl.isAvailabilityRegistered(doormanId, selectedDate)) {

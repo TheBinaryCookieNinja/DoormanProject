@@ -1,8 +1,11 @@
 package database;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,8 +19,11 @@ public class AvailableDateDAO {
 			"insert into AvailableDates (calenderDate, employeeId) values (?,?)";
 	private static final String deleteAvailableDateQ = 
 			"delete from AvailableDates where employeeId = ?";
+	private static final String findByDoormanIdAndDateQ = 
+	        "SELECT * FROM AvailableDates WHERE employeeId = ? AND calenderDate = ?";
+
 	
-	private PreparedStatement findById, createAvailableDate, deleteAvailableDate;
+	private PreparedStatement findById, createAvailableDate, deleteAvailableDate, findByDoormanIdAndDate;
 	private Lock mutex;
 	
 	public AvailableDateDAO() throws DataAccessException {
@@ -28,6 +34,8 @@ public class AvailableDateDAO {
 					.prepareStatement(createAvailableDateQ);
 			deleteAvailableDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(deleteAvailableDateQ);
+			findByDoormanIdAndDate = DBConnection.getInstance().getConnection()
+					.prepareStatement(findByDoormanIdAndDateQ);
 			mutex = new ReentrantLock();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
@@ -74,12 +82,31 @@ public class AvailableDateDAO {
         }
 	}
 	
+	
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {
 		AvailableDate availableDate = new AvailableDate(
 				rs.getInt("availableDatesId"),
-				rs.getDate("calendarDate"),
+				rs.getDate("calenderDate"),
 				rs.getInt("employeeId")
 				);
 		return availableDate;
 	}
+	public AvailableDate findByDoormanIdAndDate(int doormanId, LocalDate date) throws SQLException {
+	    try {
+	    	mutex.lock();
+	        findByDoormanIdAndDate.setInt(1, doormanId);
+	        findByDoormanIdAndDate.setDate(2, java.sql.Date.valueOf(date));
+	        ResultSet rs = findByDoormanIdAndDate.executeQuery();
+	        AvailableDate availableDate = null;
+	        if (rs.next()) {
+	            availableDate = buildObject(rs);
+	        }
+	        return availableDate;
+	    } finally {
+	     
+	        
+	        mutex.unlock();
+	    }
+	}
+
 }

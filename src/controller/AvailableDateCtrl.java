@@ -43,13 +43,22 @@ public class AvailableDateCtrl {
 		adDAO.deleteAvailableDate(doormandId);
 	}
 
-	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
-		AvailableDate availableDate = adDAO.findById(doormanId);
-		if(availableDate != null) {
-			LocalDate registeredDate = availableDate.getCalendarDate().toLocalDate();
-			return registeredDate.isEqual(selectedDate);
-		}
-		return false;
+//	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
+//		AvailableDate availableDate = adDAO.findById(doormanId);
+//		if(availableDate != null) {
+//			LocalDate registeredDate = availableDate.getCalendarDate().toLocalDate();
+//			return registeredDate.isEqual(selectedDate);
+//		}
+//		return false;
+//	}
+	
+	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException {
+	    try {
+	        AvailableDate availableDate = adDAO.findByDoormanIdAndDate(doormanId, selectedDate);
+	        return availableDate != null;
+	    } catch (SQLException e) {
+	        throw new DataAccessException(e, "Can't register on a date that you are already registered on - please try another date 😀");
+	    }
 	}
 
 }
