@@ -3,7 +3,6 @@ package gui;
 import java.awt.*;
 import java.util.List;
 
-
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,15 +33,16 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	public AvailabilityCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
 		this.month = dateTime.getMonthValue();
 		this.year = dateTime.getYear();
-		
+
 		ZoneId timeZone = ZoneId.systemDefault();
 		initComponents();
 		initializeDaysInMonth(null);
 		setDatesForMonth(dateTime.withDayOfMonth(1).atZone(timeZone).toLocalDate());
 	}
-	
-	public AvailabilityCalendarPanel(LocalDateTime dateTime, AvailableDateCtrl availableDateCtrl) throws DataAccessException {
-	    this.availableDateCtrl = availableDateCtrl;
+
+	public AvailabilityCalendarPanel(LocalDateTime dateTime, AvailableDateCtrl availableDateCtrl)
+			throws DataAccessException {
+		this.availableDateCtrl = availableDateCtrl;
 	}
 
 	private void initComponents() {
@@ -98,18 +98,17 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();
 
 			}
-			
+
 			cell.addActionListener(e -> {
-                LocalDate selectedDate = cell.getDate();
-                System.out.println(selectedDate);
-                try {
+				LocalDate selectedDate = cell.getDate();
+				System.out.println(selectedDate);
+				try {
 					handleAvailabilityRegistration(selectedDate);
 				} catch (SQLException e1) {
-					
+
 					e1.printStackTrace();
 				}
-            });
-
+			});
 
 			this.add(cell);
 			dayCells[i] = cell;
@@ -122,43 +121,50 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	private void handleAvailabilityRegistration(LocalDate selectedDate) throws SQLException {
 		LocalDate currentDate = LocalDate.now();
 		LocalDate minDate = currentDate.plusWeeks(2);
-		
-		if(selectedDate.isBefore(minDate)) {
-		   JOptionPane.showMessageDialog(null, "Registration of availability is only allowed at least two weeks before the shift starts😯" );
-		   return;
+
+		if (selectedDate.isBefore(minDate)) {
+			JOptionPane.showMessageDialog(null,
+					"Registration of availability is only allowed at least two weeks before the shift starts😯");
+			return;
 		}
-		
-		
-	    int confirm = JOptionPane.showConfirmDialog(null, "Do you want to confirm availability registration on " + selectedDate + "?", "Confirm Availability Registration", JOptionPane.YES_NO_OPTION);
-	    if (confirm == JOptionPane.YES_OPTION) {
-	        try {
-	            int doormanId = 1;
-	            AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
-	            AvailableDate availableDate = availableDateCtrl.createAvailableDates(selectedDate, doormanId);
-	            boolean success = availableDateCtrl.confirmAvailability(availableDate);
-	            if (success) {
-	                JOptionPane.showMessageDialog(null, "Availability registered successfully😀");
-	            } else {
-	                JOptionPane.showMessageDialog(null, "Failed to register availability. Please try again😥");
-	            }
-	        } catch (DataAccessException e) {
-	            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-	        }
-	    }
+
+		int confirm = JOptionPane.showConfirmDialog(null,
+				"Do you want to confirm availability registration on " + selectedDate + "?",
+				"Confirm Availability Registration", JOptionPane.YES_NO_OPTION);
+		if (confirm == JOptionPane.YES_OPTION) {
+			try {
+				int doormanId = 1;
+				AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
+
+				if (availableDateCtrl.isAvailabilityRegistered(doormanId, selectedDate)) {
+					JOptionPane.showMessageDialog(null,
+							"Availability has already been registred for this date - please try another date😜");
+					return;
+				}
+
+				AvailableDate availableDate = availableDateCtrl.createAvailableDates(selectedDate, doormanId);
+				boolean success = availableDateCtrl.confirmAvailability(availableDate);
+				if (success) {
+					JOptionPane.showMessageDialog(null, "Availability registered successfully😀");
+				} else {
+					JOptionPane.showMessageDialog(null, "Failed to register availability. Please try again😥");
+				}
+			} catch (DataAccessException e) {
+				JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+			}
+		}
 	}
 
-	
-	
-
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
-		 int month = date.getMonthValue();
+		int month = date.getMonthValue();
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
 
-		int startDayOfWeek = date.withDayOfMonth(1).getDayOfWeek().getValue() % 7;// Sunday is 7 in LocalDate, but here it has to be 0 so
-																	// the modulus operator is used. Now each week stars
-																	// with sunday
+		int startDayOfWeek = date.withDayOfMonth(1).getDayOfWeek().getValue() % 7;// Sunday is 7 in LocalDate, but here
+																					// it has to be 0 so
+		// the modulus operator is used. Now each week stars
+		// with sunday
 
 		// Clear all cells first
 		for (Cell cell : dayCells) {
@@ -175,14 +181,13 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 			cell.setText(String.valueOf(dayDate.getDayOfMonth()));
 			cell.setDate(dayDate);
 			cell.currentMonth(true);
-			
-			
-			 LocalDate currentDate = LocalDate.now();
-		        if (dayDate.isEqual(currentDate)) {
-		            cell.setAsToday();
-		        } else {
-		            cell.setAsNotToday();
-		        }
+
+			LocalDate currentDate = LocalDate.now();
+			if (dayDate.isEqual(currentDate)) {
+				cell.setAsToday();
+			} else {
+				cell.setAsNotToday();
+			}
 
 		}
 
