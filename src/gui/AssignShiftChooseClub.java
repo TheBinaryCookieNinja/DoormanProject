@@ -49,9 +49,6 @@ import java.awt.event.InputEvent;
 public class AssignShiftChooseClub extends JFrame {
 
 	private JPanel contentPane;
-	private JMenuItem mntmNewMenuItem_1;
-	private JMenuItem mntmNewMenuItem_2;
-	private JMenuItem mntmNewMenuItem;
 	private ShiftCtrl shiftCtrl;
 	private JButton btnShiftTime1_1;
 	private JButton btnShiftTime1_2;
@@ -144,26 +141,6 @@ public class AssignShiftChooseClub extends JFrame {
 		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 904, 450);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("Menu");
-		menuBar.add(mnNewMenu);
-		
-		mntmNewMenuItem = new JMenuItem("Assign shifts");
-
-		mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.SHIFT_DOWN_MASK));
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		mntmNewMenuItem_1 = new JMenuItem("Calendar");
-		mntmNewMenuItem_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, InputEvent.SHIFT_DOWN_MASK));
-	
-		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		mntmNewMenuItem_2 = new JMenuItem("Department schedule");
-		mntmNewMenuItem_2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_DOWN_MASK));
-		mnNewMenu.add(mntmNewMenuItem_2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

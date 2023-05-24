@@ -27,6 +27,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
 public class GetAvailableDoorman extends JFrame {
 
@@ -62,23 +64,24 @@ public class GetAvailableDoorman extends JFrame {
 	public GetAvailableDoorman(LocalDate currentDate, int barId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1030, 660);
+		setBounds(100, 100, 516, 262);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblNewLabel = new JLabel("Available Doorman List");
+		JLabel lblNewLabel = new JLabel("Available Doormen");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 1;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
 		doormanList = new JList<Doorman>();
@@ -86,13 +89,28 @@ public class GetAvailableDoorman extends JFrame {
 		GridBagConstraints gbc_doormanList = new GridBagConstraints();
 		
 		
-		gbc_doormanList.insets = new Insets(0, 0, 5, 5);
+		gbc_doormanList.insets = new Insets(0, 0, 5, 0);
 		gbc_doormanList.fill = GridBagConstraints.BOTH;
-		gbc_doormanList.gridx = 2;
-		gbc_doormanList.gridy = 3;
+		gbc_doormanList.gridx = 0;
+		gbc_doormanList.gridy = 1;
 		contentPane.add(doormanList, gbc_doormanList);
 		
-		JButton btnNewButton_1 = new JButton("Confirm");
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.anchor = GridBagConstraints.NORTHEAST;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 2;
+		contentPane.add(panel, gbc_panel);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnNewButton_1 = new JButton("Add to shift");
+		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Cancel");
+		panel.add(btnNewButton);
+		btnNewButton.addActionListener(e -> {
+			dispose();
+		});
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -104,21 +122,6 @@ public class GetAvailableDoorman extends JFrame {
 				}
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.EAST;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 6;
-		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("Cancel");
-		btnNewButton.addActionListener(e -> {
-			dispose();
-		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 6;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
 		init(currentDate, barId);
 	}

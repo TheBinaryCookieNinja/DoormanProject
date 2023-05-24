@@ -29,6 +29,6 @@ public class DoormanCtrl {
 	    
 	    public List<Doorman> findAll() throws DataAccessException{
 	    	return doormanDAO.findAll();	    	
-	    }
+	    }	
 	}
 

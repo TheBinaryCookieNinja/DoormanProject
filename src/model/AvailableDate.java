@@ -1,11 +1,13 @@
 package model;
 
+import java.sql.Date;
+
 public class AvailableDate {
 	  private int availableDateId;
-	  private String calendarDate;
+	  private Date calendarDate;
 	  private int employeeId;
 
-	    public AvailableDate(int availableDateId, String calendarDate, int employeeId) {
+	    public AvailableDate(int availableDateId, Date calendarDate, int employeeId) {
 	    	this.availableDateId = availableDateId;
 	    	this.calendarDate = calendarDate;
 	    	this.employeeId = employeeId;
@@ -19,7 +21,7 @@ public class AvailableDate {
 			this.availableDateId = availableDateId;
 		}
 
-		public String getCalendarDate() {
+		public Date getCalendarDate() {
 			return calendarDate;
 		}
 

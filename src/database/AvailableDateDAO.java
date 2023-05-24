@@ -43,7 +43,7 @@ public class AvailableDateDAO {
 	}
 	
 	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
-		createAvailableDate.setString(1, availableDate.getCalendarDate());
+		createAvailableDate.setDate(1, availableDate.getCalendarDate());
 		createAvailableDate.setInt(2, availableDate.getEmployeeId());
 	}
 	
@@ -55,7 +55,7 @@ public class AvailableDateDAO {
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {
 		AvailableDate aD = new AvailableDate(
 				rs.getInt("availableDatesId"),
-				rs.getString("calendarDate"),
+				rs.getDate("calendarDate"),
 				rs.getInt("employeeId")
 				);
 		return aD;
