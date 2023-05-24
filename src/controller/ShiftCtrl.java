@@ -17,7 +17,6 @@ public class ShiftCtrl  {
 	private BarController barCtrl;
 	private DoormanCtrl doormanCtrl;
 	private Shift shift;
-	private int barId;
 	private AvailableDateCtrl availableDateCtrl;
 	
 	
@@ -82,6 +81,5 @@ public class ShiftCtrl  {
 	}
 	
 	public void setBarId(int barId) {
-		this.barId = barId;
 	}
 }
