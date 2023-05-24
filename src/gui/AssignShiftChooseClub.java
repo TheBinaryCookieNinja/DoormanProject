@@ -1112,7 +1112,6 @@ public class AssignShiftChooseClub extends JFrame {
 	private void displayGetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		GetAvailableDoorman gad = new GetAvailableDoorman(currentDate, barId, shiftId);
 		gad.setVisible(true);
-		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	
