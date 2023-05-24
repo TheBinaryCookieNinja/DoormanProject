@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,8 +22,7 @@ public class AvailableDateCtrl {
 	}
 	
 	public AvailableDate createAvailableDates(LocalDate localdate, int doormanId) throws DataAccessException {
-		String localDateString = localdate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-		return new AvailableDate(0, localDateString, doormanId);
+		return new AvailableDate(0, Date.valueOf(localdate), doormanId);
 		
 	}
 	
