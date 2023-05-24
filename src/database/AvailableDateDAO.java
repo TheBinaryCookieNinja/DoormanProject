@@ -3,6 +3,9 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import model.AvailableDate;
 
 public class AvailableDateDAO {
@@ -15,6 +18,7 @@ public class AvailableDateDAO {
 			"delete from AvailableDates where employeeId = ?";
 	
 	private PreparedStatement findById, createAvailableDate, deleteAvailableDate;
+	private Lock mutex;
 	
 	public AvailableDateDAO() throws DataAccessException {
 		try {
@@ -24,33 +28,50 @@ public class AvailableDateDAO {
 					.prepareStatement(createAvailableDateQ);
 			deleteAvailableDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(deleteAvailableDateQ);
+			mutex = new ReentrantLock();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
 	}
-	public AvailableDate findById(int AvailableDatesId) throws DataAccessException  {
+	public AvailableDate findById(int availableDatesId) throws DataAccessException  {
 		try {
-			findById.setInt(1, AvailableDatesId);
-			ResultSet rs = findById.executeQuery();
-			AvailableDate p = null;
-			if(rs.next()) {
-				p = buildObject(rs);
-			}
-			return p;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find by id = " + AvailableDatesId);
-		}
+            mutex.lock(); // Acquire the lock
+
+            findById.setInt(1, availableDatesId);
+            ResultSet rs = findById.executeQuery();
+            AvailableDate p = null;
+            if (rs.next()) {
+                p = buildObject(rs);
+            }
+            return p;
+        } catch (SQLException e) {
+            throw new DataAccessException(e, "Could not find by id = " + availableDatesId);
+        } finally {
+            mutex.unlock(); // Release the lock in the finally block
+        }
 	}
 	
 	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
-		createAvailableDate.setDate(1, availableDate.getCalendarDate());
-		createAvailableDate.setInt(2, availableDate.getEmployeeId());
-		createAvailableDate.execute();
+		try {
+            mutex.lock(); // Acquire the lock
+
+            createAvailableDate.setDate(1, availableDate.getCalendarDate());
+            createAvailableDate.setInt(2, availableDate.getEmployeeId());
+            createAvailableDate.execute();
+        } finally {
+            mutex.unlock(); // Release the lock in the finally block
+        }
 	}
 	
 	public void deleteAvailableDate(int doormanId) throws SQLException {
-		deleteAvailableDate.setInt(1, doormanId);
-		deleteAvailableDate.execute();
+		try {
+            mutex.lock(); // Acquire the lock
+
+            deleteAvailableDate.setInt(1, doormanId);
+            deleteAvailableDate.execute();
+        } finally {
+            mutex.unlock(); // Release the lock in the finally block
+        }
 	}
 	
 	private AvailableDate buildObject(ResultSet rs) throws SQLException {
