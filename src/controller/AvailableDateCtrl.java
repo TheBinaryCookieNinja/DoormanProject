@@ -3,8 +3,6 @@ package controller;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import database.AvailableDateDAO;
 import database.DBConnection;
 import database.DataAccessException;
