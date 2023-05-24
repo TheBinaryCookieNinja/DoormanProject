@@ -28,7 +28,7 @@ public class AvailableDateDAO {
 					.prepareStatement(createAvailableDateQ);
 			deleteAvailableDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(deleteAvailableDateQ);
-			mutex = new ReentrantLock();
+			mutex = new ReentrantLock(true); //initializes the reentrantLock as a fair lock
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
