@@ -15,7 +15,7 @@ public class ShiftDAO {
 	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String updateQ = "update Shiftt set doormanId = ? where shiftId = ?";
 	private static final String deleteShiftQ = "delete from Shiftt where shiftId = ?";
-	private static final String findByDateQ = findAllQ + " where shiftDate = ? and doormanId is null";
+	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
 
 	private PreparedStatement findAll, findById, createShift, update, deleteShift, findByDate;
 

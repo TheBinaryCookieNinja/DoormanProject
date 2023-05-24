@@ -46,7 +46,7 @@ public class GetAvailableDoorman extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GetAvailableDoorman frame = new GetAvailableDoorman(null, 0, 0);
+					GetAvailableDoorman frame = new GetAvailableDoorman(null, 0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +61,7 @@ public class GetAvailableDoorman extends JFrame {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	public GetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+	public GetAvailableDoorman(LocalDate currentDate, int barId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 516, 262);
@@ -115,7 +115,7 @@ public class GetAvailableDoorman extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					clickConfirm(shiftId);
+					clickConfirm();
 				} catch (DataAccessException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -150,15 +150,9 @@ public class GetAvailableDoorman extends JFrame {
 		}
 	}
 	
-	private void clickConfirm(int shiftId) throws DataAccessException, SQLException {
-		try {
-			shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId);
-			JOptionPane.showMessageDialog(null, "succes");
-			this.dispose();
-		}catch(DataAccessException e) {
-			JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
-		}
-		
+	private void clickConfirm() throws DataAccessException, SQLException {
+		shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId());
+		this.dispose();
 	}
 	
 	private void setUIStyle() {

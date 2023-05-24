@@ -39,6 +39,8 @@ public class AvailabilityCalendar extends JPanel {
 	private Map<String, AvailabilityCalendarPanel> calendarPanels;
 	private AvailabilityCalendarPanel currentPanel;
 	private LocalDateTime dateTime;
+	private AvailableDateCtrl availableDateCtrl;
+
 	private JButton arrowBack;
 	private JButton arrowForward;
 	private JLayeredPane jLayeredPane1;
@@ -49,6 +51,7 @@ public class AvailabilityCalendar extends JPanel {
 	private JLabel lbType;
 
 	public AvailabilityCalendar(AvailableDateCtrl availableDateCtrl) throws DataAccessException {
+		this.availableDateCtrl = availableDateCtrl;
 		setBackground(Color.WHITE);
 		dateTime = LocalDateTime.now();
 

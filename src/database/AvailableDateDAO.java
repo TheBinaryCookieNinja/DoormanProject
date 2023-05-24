@@ -18,8 +18,7 @@ public class AvailableDateDAO {
 			"delete from AvailableDates where employeeId = ?";
 	
 	private PreparedStatement findById, createAvailableDate, deleteAvailableDate;
-	private static final int NUM_LOCKS = 8; // Number of locks to use
-    private Lock[] locks; // Array of locks for lock striping
+	private Lock mutex;
 	
 	public AvailableDateDAO() throws DataAccessException {
 		try {
@@ -29,20 +28,15 @@ public class AvailableDateDAO {
 					.prepareStatement(createAvailableDateQ);
 			deleteAvailableDate = DBConnection.getInstance().getConnection()
 					.prepareStatement(deleteAvailableDateQ);
-			
-			locks = new ReentrantLock[NUM_LOCKS];
-	        for (int i = 0; i < NUM_LOCKS; i++) {
-	            locks[i] = new ReentrantLock(true); // Initializes each lock as a fair lock
-	        }
-	        
+			mutex = new ReentrantLock();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
 	}
 	public AvailableDate findById(int availableDatesId) throws DataAccessException  {
-		int lockIndex = calculateLockIndex(availableDatesId);
 		try {
-			locks[lockIndex].lock(); // Acquire the specific lock
+            mutex.lock(); // Acquire the lock
+
             findById.setInt(1, availableDatesId);
             ResultSet rs = findById.executeQuery();
             AvailableDate p = null;
@@ -53,32 +47,30 @@ public class AvailableDateDAO {
         } catch (SQLException e) {
             throw new DataAccessException(e, "Could not find by id = " + availableDatesId);
         } finally {
-        	locks[lockIndex].unlock(); // Acquire the specific lock
+            mutex.unlock(); // Release the lock in the finally block
         }
 	}
 	
 	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
-		int lockIndex = calculateLockIndex(availableDate.getEmployeeId());
 		try {
-			locks[lockIndex].lock(); // Acquire the specific lock
+            mutex.lock(); // Acquire the lock
 
             createAvailableDate.setDate(1, availableDate.getCalendarDate());
             createAvailableDate.setInt(2, availableDate.getEmployeeId());
             createAvailableDate.execute();
         } finally {
-        	locks[lockIndex].unlock(); // Acquire the specific lock
+            mutex.unlock(); // Release the lock in the finally block
         }
 	}
 	
 	public void deleteAvailableDate(int doormanId) throws SQLException {
-		int lockIndex = calculateLockIndex(doormanId);
 		try {
-			locks[lockIndex].lock(); // Acquire the specific lock
+            mutex.lock(); // Acquire the lock
 
             deleteAvailableDate.setInt(1, doormanId);
             deleteAvailableDate.execute();
         } finally {
-        	locks[lockIndex].unlock(); // Release the specific lock in the finally block
+            mutex.unlock(); // Release the lock in the finally block
         }
 	}
 	
@@ -90,10 +82,4 @@ public class AvailableDateDAO {
 				);
 		return availableDate;
 	}
-	
-	private int calculateLockIndex(int id) {
-	    int hash = id ^ (id >>> 16); // Apply a hashing function to the ID
-	    return Math.abs(hash) % NUM_LOCKS; // Calculate the lock index based on the hashed value
-	}
-
 }
