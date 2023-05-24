@@ -42,9 +42,10 @@ public class AvailableDateDAO {
 		}
 	}
 	
-	public void createAvailableDate(AvailableDate availableDate) throws SQLException {
+	public boolean createAvailableDate(AvailableDate availableDate) throws SQLException {
 		createAvailableDate.setDate(1, availableDate.getCalendarDate());
 		createAvailableDate.setInt(2, availableDate.getEmployeeId());
+		return createAvailableDate.execute();
 	}
 	
 	public void deleteAvailableDate(int doormanId) throws SQLException {
