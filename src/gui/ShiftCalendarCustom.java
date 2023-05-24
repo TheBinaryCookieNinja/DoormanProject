@@ -245,17 +245,7 @@ public class ShiftCalendarCustom extends JPanel {
 	}
 
 	private void arrowForwardActionPerformed() {
-//		if (month == 12) {
-//			month = 1;
-//			currentMonth = (currentMonth == 12) ? 1 : currentMonth + 1;
-//			currentYear = (currentMonth == 1) ? currentYear + 1 : currentYear;
-//			changeMonth(currentMonth, currentYear);
-//			year++;
-//		} else {
-//			month++;
-//		}
-//		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
-//		updateMonthYear();
+
 		 dateTime = dateTime.plusMonths(1);
 	        
 	        changePanel();
@@ -269,17 +259,7 @@ public class ShiftCalendarCustom extends JPanel {
 	}
 
 	private void arrowBackActionPerformed() {
-//		if (month == 1) {
-//			month = 12;
-//			currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
-//			currentYear = (currentMonth == 12) ? currentYear - 1 : currentYear;
-//			changeMonth(currentMonth, currentYear);
-//			year--;
-//		} else {
-//			month--;
-//		}
-//		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
-//		updateMonthYear();
+
 		
 		dateTime = dateTime.minusMonths(1);
         
@@ -294,47 +274,15 @@ public class ShiftCalendarCustom extends JPanel {
 
 	}
 
-//	public void thisMonth() {
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(new Date());
-//		month = calendar.get(Calendar.MONTH) + 1;
-//		year = calendar.get(Calendar.YEAR);
-//	}
+
 
 	private void updateMonthYear() {
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.set(Calendar.MONTH, month - 1);
-//		calendar.set(Calendar.YEAR, year);
-//		calendar.set(Calendar.DATE, 1);
-//		SimpleDateFormat df = new SimpleDateFormat("MMMM-yyyy");
-//		lbMonthYear.setText(df.format(calendar.getTime()));
+
 		DateTimeFormatter mf = DateTimeFormatter.ofPattern("MMMM yyyy");
         lbMonthYear.setText(dateTime.format(mf));
 	}
 
-//	public void changeMonth(int newMonth, int newYear) throws DataAccessException {
-//		if (calendarPanels.containsKey(String.valueOf(newMonth) + String.valueOf(newYear))) {
-//			this.remove(currentPanel);
-//			currentPanel = calendarPanels.get(String.valueOf(newMonth) + String.valueOf(newYear));
-//			if (currentPanel == null) {
-//				currentPanel = new ShiftCalendarPanel(month, year);
-//				calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), currentPanel);
-//			} else {
-//				currentPanel.initializeDaysInMonth(null);
-//			}
-//			this.add(currentPanel);
-//		} else {
-//			ShiftCalendarPanel newPanel = new ShiftCalendarPanel(newMonth, newYear);
-//			calendarPanels.put(String.valueOf(newMonth) + String.valueOf(newYear), newPanel);
-//			this.remove(currentPanel);
-//			currentPanel = newPanel;
-//			this.add(currentPanel);
-//		}
-//		currentMonth = newMonth;
-//		currentYear = newYear;
-//		this.validate();
-//		this.repaint();
-//	}
+
 	
 	private void changePanel() {
 	    try {
