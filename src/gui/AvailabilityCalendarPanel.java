@@ -136,12 +136,11 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 				int doormanId = 1;
 				AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
 
-				// Check if availability is already registered for the selected date
-		        boolean isRegistered = availableDateCtrl.isAvailabilityRegistered(doormanId, selectedDate);
-		        if (isRegistered) {
-		            JOptionPane.showMessageDialog(null, "Availability has already been registered for this date - please try another date😜");
-		            return;
-		        }
+				if (availableDateCtrl.isAvailabilityRegistered(doormanId, selectedDate)) {
+					JOptionPane.showMessageDialog(null,
+							"Availability has already been registred for this date - please try another date😜");
+					return;
+				}
 
 				AvailableDate availableDate = availableDateCtrl.createAvailableDates(selectedDate, doormanId);
 				boolean success = availableDateCtrl.confirmAvailability(availableDate);
