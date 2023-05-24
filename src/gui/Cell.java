@@ -133,48 +133,5 @@ public class Cell extends JButton {
         }
         super.paintComponent(grphcs);
     }
-//	protected void paintComponent(Graphics grphcs) {
-//		super.paintComponent(grphcs);
-//		if (title) {
-//			grphcs.setColor(new Color(213, 213, 213));
-//			grphcs.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
-//		}
-//		if (isToday) {
-//			grphcs.setColor(new Color(97, 49, 237));
-//			int cellSize = Math.min(getWidth(), getHeight()) - 10;
-//			int x = (getWidth() - cellSize) / 2;
-//			int y = (getHeight() - cellSize) / 2;
-//			grphcs.fillRoundRect(x, y, cellSize, cellSize, 100, 100);
-//		}
-//
-//	}
-
-//	public void addShift(String shiftText) {
-//		
-//		 shiftText = wrapText(shiftText, MAX_TEXT_LINES);
-//	        shiftLabel.setText("<html>" + shiftText + "</html>");
-//	}
-//	
-//	// a text wrapper that splits the text into words and adds line breaks when the length of the lines get greater than the limit set.
-//	private String wrapText(String text, int maxLines) {
-//        String wrappedText = "";
-//        String[] words = text.split(" ");
-//        int lineCount = 0;
-//        for (String word : words) {
-//            if (lineCount >= maxLines) {
-//                break;
-//            }
-//            if (wrappedText.length() + word.length() > MAX_TEXT_LENGTH) {
-//                wrappedText += "<br/>";
-//                lineCount++;
-//            }
-//            wrappedText += word + " ";
-//        }
-//        return wrappedText;
-//    }
-//
-//	public void clearShifts() {
-//		
-//		shiftLabel.setText("");
-//	}
 }
+

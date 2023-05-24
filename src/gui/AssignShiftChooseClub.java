@@ -86,30 +86,30 @@ public class AssignShiftChooseClub extends JFrame {
 	private JLabel lblName10;
 	private JLabel lblName11;
 	private JLabel lblName12;
-	private int barId1_1;
-	private int barId1_2;
-	private int barId2_1;
-	private int barId2_2;
-	private int barId3_1;
-	private int barId3_2;
-	private int barId4_1;
-	private int barId4_2;
-	private int barId5_1;
-	private int barId5_2;
-	private int barId6_1;
-	private int barId6_2;
-	private int barId7_1;
-	private int barId7_2;
-	private int barId8_1;
-	private int barId8_2;
-	private int barId9_1;
-	private int barId9_2;
-	private int barId10_1;
-	private int barId10_2;
-	private int barId11_1;
-	private int barId11_2;
-	private int barId12_1;
-	private int barId12_2;
+	private int shiftId1_1;
+	private int shiftId1_2;
+	private int shiftId2_1;
+	private int shiftId2_2;
+	private int shiftId3_1;
+	private int shiftId3_2;
+	private int shiftId4_1;
+	private int shiftId4_2;
+	private int shiftId5_1;
+	private int shiftId5_2;
+	private int shiftId6_1;
+	private int shiftId6_2;
+	private int shiftId7_1;
+	private int shiftId7_2;
+	private int shiftId8_1;
+	private int shiftId8_2;
+	private int shiftId9_1;
+	private int shiftId9_2;
+	private int shiftId10_1;
+	private int shiftId10_2;
+	private int shiftId11_1;
+	private int shiftId11_2;
+	private int shiftId12_1;
+	private int shiftId12_2;
 
 	/**
 	 * Launch the application.
@@ -767,10 +767,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime1_1.getText().isEmpty()) {
 									btnShiftTime1_1.setVisible(true);
 									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId1_1 = s.getBarId();
+									shiftId1_1 = s.getShiftId();
 									btnShiftTime1_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId1_1);
+										displayGetAvailableDoorman(currentDate, 1, shiftId1_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -780,10 +780,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime1_2.setVisible(true);
 									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId1_2 = s.getBarId();
+									shiftId1_2 = s.getShiftId();
 									btnShiftTime1_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId1_2);
+										displayGetAvailableDoorman(currentDate, 1, shiftId1_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -795,10 +795,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime2_1.getText().isEmpty()) {
 									btnShiftTime2_1.setVisible(true);
 									btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId2_1 = s.getBarId();
+									shiftId2_1 = s.getShiftId();
 									btnShiftTime2_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId2_1);
+										displayGetAvailableDoorman(currentDate, 2, shiftId2_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -808,10 +808,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime2_2.setVisible(true);
 									btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId12_2 = s.getBarId();
+									shiftId12_2 = s.getShiftId();
 									btnShiftTime2_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId2_2);
+										displayGetAvailableDoorman(currentDate, 2, shiftId2_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -823,10 +823,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime3_1.getText().isEmpty()) {
 									btnShiftTime3_1.setVisible(true);
 									btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId3_1 = s.getBarId();
+									shiftId3_1 = s.getShiftId();
 									btnShiftTime3_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId3_1);
+										displayGetAvailableDoorman(currentDate, 3, shiftId3_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -836,10 +836,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime3_2.setVisible(true);
 									btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId3_2 = s.getBarId();
+									shiftId3_2 = s.getShiftId();
 									btnShiftTime3_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId3_2);
+										displayGetAvailableDoorman(currentDate, 3, shiftId3_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -851,10 +851,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime4_1.getText().isEmpty()) {
 									btnShiftTime4_1.setVisible(true);
 									btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId4_1 = s.getBarId();
+									shiftId4_1 = s.getShiftId();
 									btnShiftTime4_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId4_1);
+										displayGetAvailableDoorman(currentDate, 4, shiftId4_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -865,10 +865,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime4_2.setVisible(true);
 									btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId4_2 = s.getBarId();
+									shiftId4_2 = s.getShiftId();
 									btnShiftTime4_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId4_2);
+										displayGetAvailableDoorman(currentDate, 4, shiftId4_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -880,10 +880,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime5_1.getText().isEmpty()) {
 									btnShiftTime5_1.setVisible(true);
 									btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId5_1 = s.getBarId();
+									shiftId5_1 = s.getShiftId();
 									btnShiftTime5_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId5_1);
+										displayGetAvailableDoorman(currentDate, 5, shiftId5_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -893,10 +893,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime5_2.setVisible(true);
 									btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId5_2 = s.getBarId();
+									shiftId5_2 = s.getShiftId();
 									btnShiftTime5_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId5_2);
+										displayGetAvailableDoorman(currentDate, 5, shiftId5_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -908,10 +908,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime6_1.getText().isEmpty()) {
 									btnShiftTime6_1.setVisible(true);
 									btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId6_1 = s.getBarId();
+									shiftId6_1 = s.getShiftId();
 									btnShiftTime6_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId6_1);
+										displayGetAvailableDoorman(currentDate, 6, shiftId6_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -921,10 +921,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime6_2.setVisible(true);
 									btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId6_2 = s.getBarId();
+									shiftId6_2 = s.getShiftId();
 									btnShiftTime6_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId6_2);
+										displayGetAvailableDoorman(currentDate, 6,  shiftId6_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -936,10 +936,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime7_1.getText().isEmpty()) {
 									btnShiftTime7_1.setVisible(true);
 									btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId7_1 = s.getBarId();
+									shiftId7_1 = s.getShiftId();
 									btnShiftTime7_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId7_1);
+										displayGetAvailableDoorman(currentDate, 7, shiftId7_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -949,10 +949,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime7_2.setVisible(true);
 									btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId7_2 = s.getBarId();
+									shiftId7_2 = s.getShiftId();
 									btnShiftTime7_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId7_2);
+										displayGetAvailableDoorman(currentDate, 7, shiftId7_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -964,10 +964,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime8_1.getText().isEmpty()) {
 									btnShiftTime8_1.setVisible(true);
 									btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId8_1 = s.getBarId();
+									shiftId8_1 = s.getShiftId();
 									btnShiftTime8_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId8_1);
+										displayGetAvailableDoorman(currentDate, 8, shiftId8_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -977,10 +977,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime8_2.setVisible(true);
 									btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId8_2 = s.getBarId();
+									shiftId8_2 = s.getShiftId();
 									btnShiftTime8_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId8_2);
+										displayGetAvailableDoorman(currentDate, 8, shiftId8_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -991,10 +991,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime9_1.getText().isEmpty()) {
 									btnShiftTime9_1.setVisible(true);
 									btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId9_1 = s.getBarId();
+									shiftId9_1 = s.getShiftId();
 									btnShiftTime9_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId9_1);
+										displayGetAvailableDoorman(currentDate, 9, shiftId9_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1004,10 +1004,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime9_2.setVisible(true);
 									btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId9_2 = s.getBarId();
+									shiftId9_2 = s.getShiftId();
 									btnShiftTime9_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId9_2);
+										displayGetAvailableDoorman(currentDate, 9, shiftId9_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1019,10 +1019,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime10_1.getText().isEmpty()) {
 									btnShiftTime10_1.setVisible(true);
 									btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId10_1 = s.getBarId();
+									shiftId10_1 = s.getShiftId();
 									btnShiftTime10_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId10_1);
+										displayGetAvailableDoorman(currentDate, 10, shiftId10_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1032,10 +1032,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime10_2.setVisible(true);
 									btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId10_2 = s.getBarId();
+									shiftId10_2 = s.getShiftId();
 									btnShiftTime10_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId10_2);
+										displayGetAvailableDoorman(currentDate, 10, shiftId10_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1047,10 +1047,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime11_1.getText().isEmpty()) {
 									btnShiftTime11_1.setVisible(true);
 									btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId11_1 = s.getBarId();
+									shiftId11_1 = s.getShiftId();
 									btnShiftTime11_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId11_1);
+										displayGetAvailableDoorman(currentDate, 11, shiftId11_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1060,10 +1060,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime11_2.setVisible(true);
 									btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId11_2 = s.getBarId();
+									shiftId11_2 = s.getShiftId();
 									btnShiftTime11_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId11_2);
+										displayGetAvailableDoorman(currentDate, 11, shiftId11_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1075,10 +1075,10 @@ public class AssignShiftChooseClub extends JFrame {
 								if(btnShiftTime12_1.getText().isEmpty()) {
 									btnShiftTime12_1.setVisible(true);
 									btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId12_1 = s.getBarId();
+									shiftId12_1 = s.getShiftId();
 									btnShiftTime12_1.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId12_1);
+										displayGetAvailableDoorman(currentDate, 12, shiftId12_1);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1088,10 +1088,10 @@ public class AssignShiftChooseClub extends JFrame {
 								else {
 									btnShiftTime12_2.setVisible(true);
 									btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									barId12_2 = s.getBarId();
+									shiftId12_2 = s.getShiftId();
 									btnShiftTime12_2.addActionListener(e -> {
 									try {
-										displayGetAvailableDoorman(currentDate, barId12_2);
+										displayGetAvailableDoorman(currentDate, 12, shiftId12_2);
 									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 											| UnsupportedLookAndFeelException e1) {
 										// TODO Auto-generated catch block
@@ -1109,10 +1109,9 @@ public class AssignShiftChooseClub extends JFrame {
 									
 	}
 	
-	private void displayGetAvailableDoorman(LocalDate currentDate, int barId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		GetAvailableDoorman gad = new GetAvailableDoorman(currentDate, barId);
+	private void displayGetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		GetAvailableDoorman gad = new GetAvailableDoorman(currentDate, barId, shiftId);
 		gad.setVisible(true);
-		gad.setAlwaysOnTop(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 	}
 	

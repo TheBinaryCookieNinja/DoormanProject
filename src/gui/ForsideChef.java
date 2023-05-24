@@ -38,12 +38,8 @@ public class ForsideChef extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Choice DropdownMenu;
 	private JTextField textInfo;
 	private JTextField txtEvents;
-	private String items;
-	
-
 	/**
 	 * Launch the application.
 	 */
