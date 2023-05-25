@@ -40,7 +40,6 @@ public class ShiftCtrl  {
 	public List<Shift> getShiftsByDate(LocalDate date) throws DataAccessException {
 //		// Convert java.util.Date to java.time.LocalDate
         return shiftDAO.getShiftsByDate(date);
-		
 	}
 	
 	public Shift getShiftById(int shiftId) throws DataAccessException{
