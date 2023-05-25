@@ -17,13 +17,17 @@ public class DoormanCtrl {
 	        	throw new DataAccessException(e, "Unable to create doormanDAO");
 	        }
 	    }
-
+	    
+	    public Doorman getDoormanByDoormanId(int doormanId) throws DataAccessException {
+	        return doormanDAO.findById(doormanId);
+	    }
+	    
 	    public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
 	        return doormanDAO.getAvailableDoormenForShift(localDate, barId);
 	    }
-
-	    public Doorman getDoormanByDoormanId(int doormanId) throws DataAccessException {
-	        return doormanDAO.findById(doormanId);
+	    
+	    public List<Doorman> isDoormanOnAnotherShift()throws DataAccessException {
+	        return doormanDAO.isDoormanOnAnotherShift();
 	    }
 	}
 

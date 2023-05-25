@@ -23,8 +23,12 @@ public class DoormanDAO {
 			findAllQ + "where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
 			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
+	private static final String isDoormanOnWishlistQ =
+			"select employeeId from DoormanWishList where barId = ? and employeeId = ?";
+	private static final String isDoormanOnAnotherShiftQ =
+			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join shiftt on (shiftt.doormanId = d.employeeId) where shiftt.doormanId is not null";
 	
-	private PreparedStatement findById, getAvailableDoormenForShift;
+	private PreparedStatement findById, getAvailableDoormenForShift, isDoormanOnWishlist, isDoormanOnAnotherShift;
 			
 	public DoormanDAO() throws DataAccessException {
 		try {
@@ -32,6 +36,10 @@ public class DoormanDAO {
 				.prepareStatement(findByIdQ);
 		getAvailableDoormenForShift = DBConnection.getInstance().getConnection()
 				.prepareStatement(getAvailableDoormenForShiftQ);
+		isDoormanOnWishlist = DBConnection.getInstance().getConnection()
+				.prepareStatement(isDoormanOnWishlistQ);
+		isDoormanOnAnotherShift = DBConnection.getInstance().getConnection()
+				.prepareStatement(isDoormanOnAnotherShiftQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -51,6 +59,19 @@ public class DoormanDAO {
 		}
 	}
 	
+	public List<Doorman> isDoormanOnWishlist(int barId, int employeeId) throws DataAccessException {
+		ResultSet rs;
+		try {
+			getAvailableDoormenForShift.setInt(1, barId);
+			getAvailableDoormenForShift.setInt(2, employeeId);
+			rs = getAvailableDoormenForShift.executeQuery();
+			List<Doorman> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not retrieve all persons");
+		}
+	}
+	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate date, int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
@@ -58,6 +79,17 @@ public class DoormanDAO {
 			getAvailableDoormenForShift.setInt(2, barId);
 			getAvailableDoormenForShift.setDate(3, Date.valueOf(date));
 			rs = getAvailableDoormenForShift.executeQuery();
+			List<Doorman> res = buildObjects(rs);
+			return res;
+		} catch (SQLException e) {
+			throw new DataAccessException(e, "Could not retrieve all persons");
+		}
+	}
+	
+	public List<Doorman> isDoormanOnAnotherShift() throws DataAccessException {
+		ResultSet rs;
+		try {
+			rs = isDoormanOnAnotherShift.executeQuery();
 			List<Doorman> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
