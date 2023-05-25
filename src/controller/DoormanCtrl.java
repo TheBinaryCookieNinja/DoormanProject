@@ -26,6 +26,10 @@ public class DoormanCtrl {
 	        return doormanDAO.getAvailableDoormenForShift(localDate, barId);
 	    }
 	    
+	    public List<Doorman> isDoormanOnOnWishList(int barId)throws DataAccessException {
+	        return doormanDAO.isDoormanOnWishlist(barId);
+	    }
+	    
 	    public List<Doorman> isDoormanOnAnotherShift()throws DataAccessException {
 	        return doormanDAO.isDoormanOnAnotherShift();
 	    }

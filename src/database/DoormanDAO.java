@@ -17,16 +17,16 @@ import model.Doorman;
 public class DoormanDAO {
 	
 	private static final String findAllQ =
-			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d "
-			+ "left join Employee on Employee.employeeId = d.employeeId";
+			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d "
+			+ "left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)";
 	private static final String findByIdQ = 
 			findAllQ + "where employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
-			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
+			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode) left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) left join shiftt on (shiftt.doormanId = d.employeeId) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by shiftt.doormanId asc, DoormanWishlist.employeeId desc";
 	private static final String isDoormanOnWishlistQ =
-			"select employeeId from DoormanWishList where barId = ? and employeeId = ?";
+			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode) left join DoormanWishList on (DoormanWishList.employeeId = d.employeeId) where barId = ?";
 	private static final String isDoormanOnAnotherShiftQ =
-			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join shiftt on (shiftt.doormanId = d.employeeId) where shiftt.doormanId is not null";
+			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)  join shiftt on (shiftt.doormanId = d.employeeId) where shiftt.doormanId is not null";
 	
 	private PreparedStatement findById, getAvailableDoormenForShift, isDoormanOnWishlist, isDoormanOnAnotherShift;
 			
@@ -59,12 +59,11 @@ public class DoormanDAO {
 		}
 	}
 	
-	public List<Doorman> isDoormanOnWishlist(int barId, int employeeId) throws DataAccessException {
+	public List<Doorman> isDoormanOnWishlist(int barId) throws DataAccessException {
 		ResultSet rs;
 		try {
-			getAvailableDoormenForShift.setInt(1, barId);
-			getAvailableDoormenForShift.setInt(2, employeeId);
-			rs = getAvailableDoormenForShift.executeQuery();
+			isDoormanOnWishlist.setInt(1, barId);
+			rs = isDoormanOnWishlist.executeQuery();
 			List<Doorman> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
@@ -103,11 +102,11 @@ public class DoormanDAO {
 		String l_name = rs.getString("l_name");
 		String phone = rs.getString("phone");
 		String email = rs.getString("email");
-		int addressId = rs.getInt("addressId");
+		String address = rs.getString("street") + ", " + rs.getString("city") + ", " + rs.getString("zipcode");
 		String passcode = rs.getString("passcode");
 		Double hourlyRate = rs.getDouble("hourlyRate");
 		
-		return new Doorman(employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate);
+		return new Doorman(employeeId, f_name, l_name, phone, email, address, passcode, hourlyRate);
 	}
 	
 	private List<Doorman> buildObjects(ResultSet rs) throws SQLException {

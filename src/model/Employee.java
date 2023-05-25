@@ -4,18 +4,18 @@ public abstract class Employee {
 	private int employeeId;
     private String phone;
     private String email;
-    private int addressId;
+    private String address;
     private String passcode;
 	private String l_name;
 	private String f_name;
 
-    public Employee(int employeeId, String f_name, String l_name, String phone, String email, int addressId, String passcode) {
+    public Employee(int employeeId, String f_name, String l_name, String phone, String email, String address, String passcode) {
         this.employeeId = employeeId;
         this.f_name = f_name;
         this.l_name = l_name;
         this.phone = phone;
         this.email = email;
-        this.addressId = addressId;
+        this.address = address;
         this.passcode = passcode;
     }
 
@@ -64,12 +64,12 @@ public abstract class Employee {
     }
 
   
-    public int getAddressId() {
-        return addressId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressId(int address) {
-        this.addressId = address;
+    public void setAddressId(String address) {
+        this.address = address;
     }
 
    

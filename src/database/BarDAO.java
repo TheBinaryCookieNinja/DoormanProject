@@ -10,7 +10,7 @@ import model.Bar;
 public class BarDAO {
 
 	private static final String findAllQ = 
-			"select barId, namee, phone, email, cvr, street, addresss.zipcode, city  from Bar as b left join Addresss on (Addresss.addressId = b.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)";
+			"select barId, namee, phone, email, cvr, street, addresss.zipcode, city from Bar as b left join Addresss on (Addresss.addressId = b.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)";
 	
 	private PreparedStatement findAll;
 	
