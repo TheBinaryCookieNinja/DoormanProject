@@ -11,11 +11,13 @@ import database.DataAccessException;
 import model.AvailableDate;
 
 public class AvailableDateCtrl {
-	private AvailableDateDAO adDAO;
+	private AvailableDateDAO availableDateDAO;
+	
+	
 
 	public AvailableDateCtrl() throws DataAccessException {
 		try {
-			adDAO = new AvailableDateDAO();
+			availableDateDAO = new AvailableDateDAO();
 		} catch (Exception e) {
 			throw new DataAccessException(e, "Unable to create availableDateDAO");
 		}
@@ -30,7 +32,7 @@ public class AvailableDateCtrl {
 		boolean succes = false;
 		DBConnection.getInstance().startTransaction();
 		try {
-			adDAO.createAvailableDate(availableDate);
+			availableDateDAO.createAvailableDate(availableDate);
 			DBConnection.getInstance().commitTransaction();
 			succes = true;
 		} catch (Exception e) {
@@ -40,7 +42,7 @@ public class AvailableDateCtrl {
 	}
 
 	public void deleteAvailableDate(int doormandId, LocalDate date) throws SQLException {
-		adDAO.deleteAvailableDate(doormandId, date);
+		availableDateDAO.deleteAvailableDate(doormandId, date);
 	}
 
 //	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
@@ -54,7 +56,7 @@ public class AvailableDateCtrl {
 	
 	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException {
 	    try {
-	        AvailableDate availableDate = adDAO.findByDoormanIdAndDate(doormanId, selectedDate);
+	        AvailableDate availableDate = availableDateDAO.findByDoormanIdAndDate(doormanId, selectedDate);
 	        return availableDate != null;
 	    } catch (SQLException e) {
 	        throw new DataAccessException(e, "Can't register on a date that you are already registered on - please try another date 😀");
