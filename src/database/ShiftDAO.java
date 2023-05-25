@@ -1,11 +1,14 @@
 package database;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import model.Shift;
 
@@ -15,12 +18,16 @@ public class ShiftDAO {
 	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
 
 	private PreparedStatement findAll, update, findByDate;
+	
+	private Lock mutex;
 
 	public ShiftDAO() throws DataAccessException {
 		try {
 			findAll = DBConnection.getInstance().getConnection().prepareStatement(findAllQ);
 			update = DBConnection.getInstance().getConnection().prepareStatement(updateQ);
 			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
+			
+			mutex = new ReentrantLock();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -29,34 +36,42 @@ public class ShiftDAO {
 	public List<Shift> findAll() throws DataAccessException {
 		ResultSet rs;
 		try {
+			mutex.lock();
 			rs = findAll.executeQuery();
 			List<Shift> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not retrieve all shifts");
+		}finally {
+			mutex.unlock();
 		}
 	}
 
 	public void updateDoormanId(int shiftId, int doormanId) throws DataAccessException {
 		try {
+			mutex.lock();
 			update.setInt(1, doormanId);
 			update.setInt(2, shiftId);
 			update.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
+		}finally {
+			mutex.unlock();
 		}
 	}
 
 	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
 		 try {
-		        java.sql.Date sqlDate = java.sql.Date.valueOf(localDate); // Convert LocalDate to java.sql.Date
-		        findByDate.setDate(1, sqlDate);
+			 mutex.lock();
+		        findByDate.setDate(1, Date.valueOf(localDate));
 		        ResultSet rs = findByDate.executeQuery();
 		        List<Shift> res = buildObjects(rs);
 		        return res;
 		    } catch (SQLException e) {
 		        throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
-		    }
+		    }finally {
+				mutex.unlock();
+			}
 
 	}
 
