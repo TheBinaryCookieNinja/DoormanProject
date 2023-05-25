@@ -19,15 +19,11 @@ public class ShiftDAO {
 
 	private PreparedStatement findAll, update, findByDate;
 	
-	private Lock mutex;
-
 	public ShiftDAO() throws DataAccessException {
 		try {
 			findAll = DBConnection.getInstance().getConnection().prepareStatement(findAllQ);
 			update = DBConnection.getInstance().getConnection().prepareStatement(updateQ);
 			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
-			
-			mutex = new ReentrantLock(true);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
@@ -36,21 +32,17 @@ public class ShiftDAO {
 	public List<Shift> findAll() throws DataAccessException {
 		ResultSet rs;
 		try {
-			mutex.lock();
 			rs = findAll.executeQuery();
 			List<Shift> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not retrieve all shifts");
-		}finally {
-			mutex.unlock();
 		}
 	}
 
 	public void updateDoormanId(int shiftId, int doormanId) throws DataAccessException, SQLException {
 		try {
 			DBConnection.getInstance().startTransaction();
-			mutex.lock();
 			update.setInt(1, doormanId);
 			update.setInt(2, shiftId);
 			update.executeUpdate();
@@ -58,24 +50,18 @@ public class ShiftDAO {
 		} catch (SQLException e) {
 			DBConnection.getInstance().rollbackTransaction();
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
-		}finally {
-			mutex.unlock();
 		}
 	}
 
 	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
 		 try {
-			 mutex.lock();
 		        findByDate.setDate(1, Date.valueOf(localDate));
 		        ResultSet rs = findByDate.executeQuery();
 		        List<Shift> res = buildObjects(rs);
 		        return res;
 		    } catch (SQLException e) {
 		        throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
-		    }finally {
-				mutex.unlock();
-			}
-
+		    }
 	}
 
 	private Shift buildObject(ResultSet rs) throws SQLException {

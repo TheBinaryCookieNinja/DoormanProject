@@ -90,7 +90,6 @@ public class ShiftCtrl  {
 			shiftDAO.updateDoormanId(shiftId, doormanId);
 
 			
-			availableDateCtrl.deleteAvailableDate(doormanId, date);
 			
 
 			//availableDateCtrl.deleteAvailableDate(doormanId, date);

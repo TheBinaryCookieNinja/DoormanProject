@@ -41,16 +41,6 @@ public class AvailableDateCtrl {
 		return succes;
 	}
 
-	public void deleteAvailableDate(int doormanId, LocalDate date) throws SQLException {
-		DBConnection.getInstance().startTransaction();
-		try {
-			availableDateDAO.deleteAvailableDate(doormanId, date);
-            DBConnection.getInstance().commitTransaction();
-        } catch (SQLException e) {
-        	DBConnection.getInstance().rollbackTransaction();
-        }
-    }
-
 //	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
 //		AvailableDate availableDate = adDAO.findById(doormanId);
 //		if(availableDate != null) {
