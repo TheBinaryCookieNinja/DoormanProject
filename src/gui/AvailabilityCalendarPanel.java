@@ -103,14 +103,14 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 
 			}
 			
-			 boolean isAvailable = checkAvailabilityForDate(dayDate);
-		        if (isAvailable) {
-		            cell.setText("Free");
-		            cell.setBackground(Color.GREEN);
-		        } else {
-		            cell.setText("Occupied");
-		            cell.setBackground(Color.RED);
-		        }
+//			 boolean isAvailable = checkAvailabilityForDate(dayDate);
+//		        if (isAvailable) {
+//		            cell.setText("Free");
+//		            cell.setBackground(Color.GREEN);
+//		        } else {
+//		            cell.setText("Occupied");
+//		            cell.setBackground(Color.RED);
+//		        }
 
 
 			cell.addActionListener(e -> {
@@ -132,29 +132,31 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 		this.repaint();
 	}
 	
-	private boolean checkAvailabilityForDate(LocalDate date) {
-	    try {
-	        AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
-	        DoormanDAO doormanDAO = new DoormanDAO();
-	        
-	        List<Doorman> doormen = doormanDAO.findAll(); 
-
-	       
-	        for (Doorman doorman : doormen) {
-	            int doormanId = doorman.getEmployeeId();
-	            boolean isRegistered = availableDateCtrl.isAvailabilityRegistered(doormanId, date);
-	            if (isRegistered) {
-	                return false; 
-	            }
-	        }
-
-	        return true; 
-	    } catch (DataAccessException e) {
-	        
-	        e.printStackTrace();
-	        return false; 
-	    }
-	}
+	
+	// denne metode var tænkt til at tjekke om
+//	private boolean checkAvailabilityForDate(LocalDate date) {
+//	    try {
+//	        AvailableDateCtrl availableDateCtrl = new AvailableDateCtrl();
+//	        DoormanDAO doormanDAO = new DoormanDAO();
+//	        
+//	        List<Doorman> doormen = doormanDAO.findAll(); 
+//
+//	       
+//	        for (Doorman doorman : doormen) {
+//	            int doormanId = doorman.getEmployeeId();
+//	            boolean isRegistered = availableDateCtrl.isAvailabilityRegistered(doormanId, date);
+//	            if (isRegistered) {
+//	                return false; 
+//	            }
+//	        }
+//
+//	        return true; 
+//	    } catch (DataAccessException e) {
+//	        
+//	        e.printStackTrace();
+//	        return false; 
+//	    }
+//	}
 
 
 
