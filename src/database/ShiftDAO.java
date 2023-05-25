@@ -27,7 +27,7 @@ public class ShiftDAO {
 			update = DBConnection.getInstance().getConnection().prepareStatement(updateQ);
 			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
 			
-			mutex = new ReentrantLock();
+			mutex = new ReentrantLock(true);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
 		}
