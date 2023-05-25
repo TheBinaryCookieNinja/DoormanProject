@@ -54,19 +54,15 @@ public class ShiftCtrl  {
 		return barCtrl.findById(barId);
 	}
 	
-	public List<Doorman> findAllDoormen() throws DataAccessException {
-		return doormanCtrl.findAll();
-	}
-	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  
-	public boolean confirmShift(int doormanId) throws DataAccessException, SQLException {
+	public boolean confirmShift(int doormanId, int shiftId) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
 			DBConnection.getInstance().startTransaction();
-			shiftDAO.updateDoormanId(shift.getShiftId(), doormanId);
+			shiftDAO.updateDoormanId(shiftId, doormanId);
 			availableDateCtrl.deleteAvailableDate(doormanId);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
@@ -75,9 +71,5 @@ public class ShiftCtrl  {
 			DBConnection.getInstance().rollbackTransaction();
 		}
 		return confirmation;
-	}
-	
-	public void setBarId(int barId) {
-		this.barId = barId;
 	}
 }
