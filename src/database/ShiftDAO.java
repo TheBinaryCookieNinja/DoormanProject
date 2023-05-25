@@ -11,21 +11,15 @@ import model.Shift;
 
 public class ShiftDAO {
 	private static final String findAllQ = "select shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId from Shiftt";
-	private static final String findByIdQ = findAllQ + " where shiftId = ?";
-	private static final String createShiftQ = "insert into Shiftt (shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId, signatureId) VALUES (?,?,?,?,?,?,?,?)";
 	private static final String updateQ = "update Shiftt set doormanId = ? where shiftId = ?";
-	private static final String deleteShiftQ = "delete from Shiftt where shiftId = ?";
 	private static final String findByDateQ = findAllQ + " where shiftDate = ?";
 
-	private PreparedStatement findAll, findById, createShift, update, deleteShift, findByDate;
+	private PreparedStatement findAll, update, findByDate;
 
 	public ShiftDAO() throws DataAccessException {
 		try {
 			findAll = DBConnection.getInstance().getConnection().prepareStatement(findAllQ);
-			findById = DBConnection.getInstance().getConnection().prepareStatement(findByIdQ);
-			createShift = DBConnection.getInstance().getConnection().prepareStatement(createShiftQ);
 			update = DBConnection.getInstance().getConnection().prepareStatement(updateQ);
-			deleteShift = DBConnection.getInstance().getConnection().prepareStatement(deleteShiftQ);
 			findByDate = DBConnection.getInstance().getConnection().prepareStatement(findByDateQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
