@@ -42,8 +42,11 @@ public class DBConnection {
 		return dbConnection;
 	}
 	
+	
+	
 	public void startTransaction() throws SQLException {
 		connection.setAutoCommit(false);
+		
 	}
 	
 	public void commitTransaction() throws SQLException {
@@ -55,6 +58,11 @@ public class DBConnection {
 		connection.rollback();
 		connection.setAutoCommit(true);
 	}
+	
+	public void setIsolationLevel(int isolationLevel) throws SQLException {
+		connection.setTransactionIsolation(isolationLevel);
+	}
+	
 	
 	public int executeInsertWithIdentity(PreparedStatement ps) throws SQLException  {
 		int res = -1;
