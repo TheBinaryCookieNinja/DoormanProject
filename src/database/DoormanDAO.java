@@ -34,8 +34,8 @@ public class DoormanDAO {
 				.prepareStatement(getAvailableDoormenForShiftQ);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare statement");
-			}
 		}
+	}
 	
 	public Doorman findById(int employeeId) throws DataAccessException {
 		try {
@@ -76,7 +76,6 @@ public class DoormanDAO {
 		Double hourlyRate = rs.getDouble("hourlyRate");
 		
 		return new Doorman(employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate);
-		
 	}
 	
 	private List<Doorman> buildObjects(ResultSet rs) throws SQLException {
