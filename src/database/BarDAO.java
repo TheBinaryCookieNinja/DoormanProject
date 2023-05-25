@@ -3,7 +3,6 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Bar;
@@ -11,7 +10,7 @@ import model.Bar;
 public class BarDAO {
 
 	private static final String findAllQ = 
-			"select barId, namee, phone, email, addressId, cvr from Bar";
+			"select barId, namee, phone, email, cvr, street, addresss.zipcode, city  from Bar as b left join Addresss on (Addresss.addressId = b.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)";
 	
 	private PreparedStatement findAll;
 	
@@ -36,7 +35,7 @@ public class BarDAO {
 	}
 	
 	private Bar buildObject(ResultSet rs) throws SQLException {
-		Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getInt("addressId"), rs.getString("cvr"));
+		Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getString("street") + ", " + rs.getString("city") + ", " + rs.getString("zipcode"), rs.getString("cvr"));
 				
 		System.out.println();
 		return bar;

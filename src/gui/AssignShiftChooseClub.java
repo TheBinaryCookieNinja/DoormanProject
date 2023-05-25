@@ -112,6 +112,18 @@ public class AssignShiftChooseClub extends JFrame {
 	private int shiftId11_2;
 	private int shiftId12_1;
 	private int shiftId12_2;
+	private JLabel lblAddress1;
+	private JLabel lblAddress2;
+	private JLabel lblAddress3;
+	private JLabel lblAddress4;
+	private JLabel lblAddress5;
+	private JLabel lblAddress6;
+	private JLabel lblAddress7;
+	private JLabel lblAddress8;
+	private JLabel lblAddress9;
+	private JLabel lblAddress10;
+	private JLabel lblAddress11;
+	private JLabel lblAddress12;
 
 	/**
 	 * Launch the application.
@@ -178,7 +190,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName1.gridy = 0;
 		panel_1.add(lblName1, gbc_lblName1);
 		
-		JLabel lblAddress1 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress1 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress1 = new GridBagConstraints();
 		gbc_lblAddress1.gridwidth = 2;
 		gbc_lblAddress1.insets = new Insets(0, 0, 5, 5);
@@ -229,7 +241,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName2.gridy = 0;
 		panel_2.add(lblName2, gbc_lblName2);
 		
-		JLabel lblAddress2 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress2 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress2 = new GridBagConstraints();
 		gbc_lblAddress2.gridwidth = 2;
 		gbc_lblAddress2.insets = new Insets(0, 0, 5, 5);
@@ -275,7 +287,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName3.gridy = 0;
 		panel_3.add(lblName3, gbc_lblName3);
 		
-		JLabel lblAddress3 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress3 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress3 = new GridBagConstraints();
 		gbc_lblAddress3.gridwidth = 2;
 		gbc_lblAddress3.insets = new Insets(0, 0, 5, 5);
@@ -321,7 +333,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName4.gridy = 0;
 		panel_4.add(lblName4, gbc_lblName4);
 		
-		JLabel lblAddress4 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress4 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress4 = new GridBagConstraints();
 		gbc_lblAddress4.gridwidth = 2;
 		gbc_lblAddress4.insets = new Insets(0, 0, 5, 5);
@@ -367,7 +379,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName5.gridy = 0;
 		panel_5.add(lblName5, gbc_lblName5);
 		
-		JLabel lblAddress5 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress5 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress5 = new GridBagConstraints();
 		gbc_lblAddress5.gridwidth = 2;
 		gbc_lblAddress5.insets = new Insets(0, 0, 5, 5);
@@ -413,7 +425,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName6.gridy = 0;
 		panel_6.add(lblName6, gbc_lblName6);
 		
-		JLabel lblAddress6 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress6 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress6 = new GridBagConstraints();
 		gbc_lblAddress6.gridwidth = 2;
 		gbc_lblAddress6.insets = new Insets(0, 0, 5, 5);
@@ -459,7 +471,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName7.gridy = 0;
 		panel_7.add(lblName7, gbc_lblName7);
 		
-		JLabel lblAddress7 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress7 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress7 = new GridBagConstraints();
 		gbc_lblAddress7.gridwidth = 2;
 		gbc_lblAddress7.insets = new Insets(0, 0, 5, 5);
@@ -505,7 +517,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName8.gridy = 0;
 		panel_8.add(lblName8, gbc_lblName8);
 		
-		JLabel lblAddress8 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress8 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress8 = new GridBagConstraints();
 		gbc_lblAddress8.gridwidth = 2;
 		gbc_lblAddress8.insets = new Insets(0, 0, 5, 5);
@@ -551,7 +563,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName9.gridy = 0;
 		panel_9.add(lblName9, gbc_lblName9);
 		
-		JLabel lblAddress9 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress9 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress9 = new GridBagConstraints();
 		gbc_lblAddress9.gridwidth = 2;
 		gbc_lblAddress9.insets = new Insets(0, 0, 5, 5);
@@ -597,7 +609,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName10.gridy = 0;
 		panel_10.add(lblName10, gbc_lblName10);
 		
-		JLabel lblAddress10 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress10 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress10 = new GridBagConstraints();
 		gbc_lblAddress10.gridwidth = 2;
 		gbc_lblAddress10.insets = new Insets(0, 0, 5, 5);
@@ -643,7 +655,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName11.gridy = 0;
 		panel_11.add(lblName11, gbc_lblName11);
 		
-		JLabel lblAddress11 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress11 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress11 = new GridBagConstraints();
 		gbc_lblAddress11.gridwidth = 2;
 		gbc_lblAddress11.insets = new Insets(0, 0, 5, 5);
@@ -688,7 +700,7 @@ public class AssignShiftChooseClub extends JFrame {
 		gbc_lblName12.gridy = 0;
 		panel_12.add(lblName12, gbc_lblName12);
 		
-		JLabel lblAddress12 = new JLabel("Jomfru Ane Gade ??");
+		lblAddress12 = new JLabel("Jomfru Ane Gade ??");
 		GridBagConstraints gbc_lblAddress12 = new GridBagConstraints();
 		gbc_lblAddress12.gridwidth = 2;
 		gbc_lblAddress12.insets = new Insets(0, 0, 5, 5);
@@ -758,6 +770,19 @@ public class AssignShiftChooseClub extends JFrame {
 		lblName10.setText(bars.get(9).getName());
 		lblName11.setText(bars.get(10).getName());
 		lblName12.setText(bars.get(11).getName());
+		lblAddress1.setText(bars.get(0).getAddress());
+		lblAddress2.setText(bars.get(1).getAddress());
+		lblAddress3.setText(bars.get(2).getAddress());
+		lblAddress4.setText(bars.get(3).getAddress());
+		lblAddress5.setText(bars.get(4).getAddress());
+		lblAddress6.setText(bars.get(5).getAddress());
+		lblAddress7.setText(bars.get(6).getAddress());
+		lblAddress8.setText(bars.get(7).getAddress());
+		lblAddress9.setText(bars.get(8).getAddress());
+		lblAddress10.setText(bars.get(9).getAddress());
+		lblAddress11.setText(bars.get(10).getAddress());
+		lblAddress12.setText(bars.get(11).getAddress());
+
 	}
 	
 	private void displayShifts(LocalDate currentDate) throws DataAccessException {
@@ -879,7 +904,7 @@ public class AssignShiftChooseClub extends JFrame {
 								}});
 							}
 							break;
-						case "Schwei grosse":
+						case "Zwei grosse":
 							if(btnShiftTime5_1.getText().isEmpty()) {
 								btnShiftTime5_1.setVisible(true);
 								btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
