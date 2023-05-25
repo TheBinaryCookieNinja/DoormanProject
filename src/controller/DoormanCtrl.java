@@ -16,7 +16,7 @@ public class DoormanCtrl {
 	        	doormanDAO = new DoormanDAO();
 	        } catch (Exception e) {
 	        	throw new DataAccessException(e, "Unable to create doormanDAO");
-	    }
+	        }
 	    }
 
 	    public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
