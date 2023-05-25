@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -58,8 +59,8 @@ public class ShiftCtrl  {
 		boolean confirmation = false;
 		try {
 			DBConnection con = DBConnection.getInstance();
+			con.setIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED);
 			con.startTransaction();
-			con.setIsolationLevel(2);
 			
 			shiftDAO.updateDoormanId(shiftId, doormanId);
 			availableDateCtrl.deleteAvailableDate(doormanId, date);
