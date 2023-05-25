@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.time.LocalDate;
 import gui.ForsideChef;
+import java.net.URL;
 
 public class LoginScreen extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -79,6 +80,9 @@ public class LoginScreen extends JFrame {
         });
 
      // Create layout
+        
+        
+        
         GridBagLayout gbl_panel = new GridBagLayout();
         gbl_panel.columnWeights = new double[]{0.0, 1.0};
         JPanel panel = new JPanel(gbl_panel);
@@ -112,9 +116,8 @@ public class LoginScreen extends JFrame {
 
         constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
-        constraints.gridx = 0;
+        constraints.gridx = 1;
         constraints.gridy = 2;
-        constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(loginButton, constraints);
 
@@ -142,12 +145,12 @@ public class LoginScreen extends JFrame {
     	    } 
     	 } 
     
-    private void displayFrontpage() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-    	ForsideChef fc = new ForsideChef();
-		fc.setVisible(true);
-		fc.setAlwaysOnTop(true);
-		fc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-    }
-    
+    	private void displayFrontpage() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    	    ForsideChef fc = new ForsideChef();
+    	    fc.setVisible(true);
+    	    fc.setAlwaysOnTop(true);
+    	    fc.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+    	} 
+    	
 }
 
