@@ -14,10 +14,8 @@ import model.Shift;
 
 public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
-	private BarController barCtrl;
+	private BarCtrl barCtrl;
 	private DoormanCtrl doormanCtrl;
-	private Shift shift;
-	private int barId;
 	private AvailableDateCtrl availableDateCtrl;
 	
 	
@@ -28,10 +26,9 @@ public class ShiftCtrl  {
 		} catch (Exception e) {
 			throw new DataAccessException(e, "Can't create shiftDAO");
 		}
-		barCtrl = new BarController();
+		barCtrl = new BarCtrl();
 		doormanCtrl = new DoormanCtrl();
 		availableDateCtrl = new AvailableDateCtrl();
-		shift = getShiftById(1);
 	}
 
 	 /**
