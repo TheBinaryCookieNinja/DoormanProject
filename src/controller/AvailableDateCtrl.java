@@ -41,9 +41,15 @@ public class AvailableDateCtrl {
 		return succes;
 	}
 
-	public void deleteAvailableDate(int doormandId, LocalDate date) throws SQLException {
-		availableDateDAO.deleteAvailableDate(doormandId, date);
-	}
+	public void deleteAvailableDate(int doormanId, LocalDate date) throws SQLException {
+		DBConnection.getInstance().startTransaction();
+		try {
+			availableDateDAO.deleteAvailableDate(doormanId, date);
+            DBConnection.getInstance().commitTransaction();
+        } catch (SQLException e) {
+        	DBConnection.getInstance().rollbackTransaction();
+        }
+    }
 
 //	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
 //		AvailableDate availableDate = adDAO.findById(doormanId);
@@ -54,11 +60,14 @@ public class AvailableDateCtrl {
 //		return false;
 //	}
 	
-	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException {
-	    try {
+	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
+		DBConnection.getInstance().startTransaction();
+		try {
 	        AvailableDate availableDate = availableDateDAO.findByDoormanIdAndDate(doormanId, selectedDate);
+	        DBConnection.getInstance().commitTransaction();
 	        return availableDate != null;
 	    } catch (SQLException e) {
+	    	DBConnection.getInstance().rollbackTransaction();
 	        throw new DataAccessException(e, "Can't register on a date that you are already registered on - please try another date 😀");
 	    }
 	}
