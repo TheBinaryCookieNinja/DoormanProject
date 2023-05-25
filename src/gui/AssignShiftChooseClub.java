@@ -27,6 +27,7 @@ import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.Dimension;
@@ -41,6 +42,7 @@ import javax.swing.event.MenuKeyListener;
 
 import controller.ShiftCtrl;
 import database.DataAccessException;
+import model.Bar;
 import model.Shift;
 
 import javax.swing.event.MenuKeyEvent;
@@ -738,372 +740,368 @@ public class AssignShiftChooseClub extends JFrame {
 	
 	private void init(LocalDate currentDate) throws DataAccessException {
 		shiftCtrl = new ShiftCtrl();
-		displayBars();
+		displayBars(currentDate);
 		displayShifts(currentDate);	
 	}
 	
-	private void displayBars() throws DataAccessException {
-		lblName1.setText(shiftCtrl.findBarById(1).getName());
-		lblName2.setText(shiftCtrl.findBarById(2).getName());
-		lblName3.setText(shiftCtrl.findBarById(3).getName());
-		lblName4.setText(shiftCtrl.findBarById(4).getName());
-		lblName5.setText(shiftCtrl.findBarById(5).getName());
-		lblName6.setText(shiftCtrl.findBarById(6).getName());
-		lblName7.setText(shiftCtrl.findBarById(7).getName());
-		lblName8.setText(shiftCtrl.findBarById(8).getName());
-		lblName9.setText(shiftCtrl.findBarById(9).getName());
-		lblName10.setText(shiftCtrl.findBarById(10).getName());
-		lblName11.setText(shiftCtrl.findBarById(11).getName());
-		lblName12.setText(shiftCtrl.findBarById(12).getName());
+	private void displayBars(LocalDate currentDate) throws DataAccessException {
+		List<Bar> bars = shiftCtrl.findAllBars();
+		lblName1.setText(bars.get(0).getName());
+		lblName2.setText(bars.get(1).getName());
+		lblName3.setText(bars.get(2).getName());
+		lblName4.setText(bars.get(3).getName());
+		lblName5.setText(bars.get(4).getName());
+		lblName6.setText(bars.get(5).getName());
+		lblName7.setText(bars.get(6).getName());
+		lblName8.setText(bars.get(7).getName());
+		lblName9.setText(bars.get(8).getName());
+		lblName10.setText(bars.get(9).getName());
+		lblName11.setText(bars.get(10).getName());
+		lblName12.setText(bars.get(11).getName());
 	}
 	
 	private void displayShifts(LocalDate currentDate) throws DataAccessException {
-	   shiftCtrl.getShiftsByDate(currentDate)
+		List<Bar> bars = shiftCtrl.findAllBars();
+		shiftCtrl.getShiftsByDate(currentDate)
 				.stream()
 				.forEach(s -> {	
-					try {
-						switch(shiftCtrl.findBarById(s.getBarId()).getName()){
-							case "Fabrikken":
-								if(btnShiftTime1_1.getText().isEmpty()) {
-									btnShiftTime1_1.setVisible(true);
-									btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId1_1 = s.getShiftId();
-									btnShiftTime1_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 1, shiftId1_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime1_2.setVisible(true);
-									btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId1_2 = s.getShiftId();
-									btnShiftTime1_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 1, shiftId1_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Zurf":
-								if(btnShiftTime2_1.getText().isEmpty()) {
-									btnShiftTime2_1.setVisible(true);
-									btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId2_1 = s.getShiftId();
-									btnShiftTime2_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 2, shiftId2_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime2_2.setVisible(true);
-									btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId12_2 = s.getShiftId();
-									btnShiftTime2_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 2, shiftId2_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "El Mundo":
-								if(btnShiftTime3_1.getText().isEmpty()) {
-									btnShiftTime3_1.setVisible(true);
-									btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId3_1 = s.getShiftId();
-									btnShiftTime3_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 3, shiftId3_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime3_2.setVisible(true);
-									btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId3_2 = s.getShiftId();
-									btnShiftTime3_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 3, shiftId3_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Sprutten":
-								if(btnShiftTime4_1.getText().isEmpty()) {
-									btnShiftTime4_1.setVisible(true);
-									btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId4_1 = s.getShiftId();
-									btnShiftTime4_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 4, shiftId4_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-									
-								}
-								else {
-									btnShiftTime4_2.setVisible(true);
-									btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId4_2 = s.getShiftId();
-									btnShiftTime4_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 4, shiftId4_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Schwei grosse":
-								if(btnShiftTime5_1.getText().isEmpty()) {
-									btnShiftTime5_1.setVisible(true);
-									btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId5_1 = s.getShiftId();
-									btnShiftTime5_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 5, shiftId5_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime5_2.setVisible(true);
-									btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId5_2 = s.getShiftId();
-									btnShiftTime5_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 5, shiftId5_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Wunderbar":
-								if(btnShiftTime6_1.getText().isEmpty()) {
-									btnShiftTime6_1.setVisible(true);
-									btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId6_1 = s.getShiftId();
-									btnShiftTime6_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 6, shiftId6_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime6_2.setVisible(true);
-									btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId6_2 = s.getShiftId();
-									btnShiftTime6_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 6, shiftId6_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Ambassade":
-								if(btnShiftTime7_1.getText().isEmpty()) {
-									btnShiftTime7_1.setVisible(true);
-									btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId7_1 = s.getShiftId();
-									btnShiftTime7_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 7, shiftId7_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime7_2.setVisible(true);
-									btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId7_2 = s.getShiftId();
-									btnShiftTime7_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 7, shiftId7_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Flamingo":
-								if(btnShiftTime8_1.getText().isEmpty()) {
-									btnShiftTime8_1.setVisible(true);
-									btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId8_1 = s.getShiftId();
-									btnShiftTime8_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 8, shiftId8_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime8_2.setVisible(true);
-									btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId8_2 = s.getShiftId();
-									btnShiftTime8_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 8, shiftId8_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-							case "Club Wolf":
-								if(btnShiftTime9_1.getText().isEmpty()) {
-									btnShiftTime9_1.setVisible(true);
-									btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId9_1 = s.getShiftId();
-									btnShiftTime9_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 9, shiftId9_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime9_2.setVisible(true);
-									btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId9_2 = s.getShiftId();
-									btnShiftTime9_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 9, shiftId9_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Under buret":
-								if(btnShiftTime10_1.getText().isEmpty()) {
-									btnShiftTime10_1.setVisible(true);
-									btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId10_1 = s.getShiftId();
-									btnShiftTime10_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 10, shiftId10_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime10_2.setVisible(true);
-									btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId10_2 = s.getShiftId();
-									btnShiftTime10_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 10, shiftId10_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Proud Mary":
-								if(btnShiftTime11_1.getText().isEmpty()) {
-									btnShiftTime11_1.setVisible(true);
-									btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId11_1 = s.getShiftId();
-									btnShiftTime11_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 11, shiftId11_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime11_2.setVisible(true);
-									btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId11_2 = s.getShiftId();
-									btnShiftTime11_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 11, shiftId11_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							case "Karaoke Bar":
-								if(btnShiftTime12_1.getText().isEmpty()) {
-									btnShiftTime12_1.setVisible(true);
-									btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId12_1 = s.getShiftId();
-									btnShiftTime12_1.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 12, shiftId12_1);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								else {
-									btnShiftTime12_2.setVisible(true);
-									btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
-									shiftId12_2 = s.getShiftId();
-									btnShiftTime12_2.addActionListener(e -> {
-									try {
-										displayGetAvailableDoorman(currentDate, 12, shiftId12_2);
-									} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-											| UnsupportedLookAndFeelException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}});
-								}
-								break;
-							
-						}
-					} catch (DataAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();				
+					switch(bars.get(s.getBarId()-1).getName()){
+						case "Fabrikken":
+							if(btnShiftTime1_1.getText().isEmpty()) {
+								btnShiftTime1_1.setVisible(true);
+								btnShiftTime1_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId1_1 = s.getShiftId();
+								btnShiftTime1_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 1, shiftId1_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime1_2.setVisible(true);
+								btnShiftTime1_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId1_2 = s.getShiftId();
+								btnShiftTime1_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 1, shiftId1_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Zurf":
+							if(btnShiftTime2_1.getText().isEmpty()) {
+								btnShiftTime2_1.setVisible(true);
+								btnShiftTime2_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId2_1 = s.getShiftId();
+								btnShiftTime2_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 2, shiftId2_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime2_2.setVisible(true);
+								btnShiftTime2_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId12_2 = s.getShiftId();
+								btnShiftTime2_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 2, shiftId2_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "El Mundo":
+							if(btnShiftTime3_1.getText().isEmpty()) {
+								btnShiftTime3_1.setVisible(true);
+								btnShiftTime3_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId3_1 = s.getShiftId();
+								btnShiftTime3_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 3, shiftId3_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime3_2.setVisible(true);
+								btnShiftTime3_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId3_2 = s.getShiftId();
+								btnShiftTime3_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 3, shiftId3_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Sprutten":
+							if(btnShiftTime4_1.getText().isEmpty()) {
+								btnShiftTime4_1.setVisible(true);
+								btnShiftTime4_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId4_1 = s.getShiftId();
+								btnShiftTime4_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 4, shiftId4_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+								
+							}
+							else {
+								btnShiftTime4_2.setVisible(true);
+								btnShiftTime4_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId4_2 = s.getShiftId();
+								btnShiftTime4_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 4, shiftId4_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Schwei grosse":
+							if(btnShiftTime5_1.getText().isEmpty()) {
+								btnShiftTime5_1.setVisible(true);
+								btnShiftTime5_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId5_1 = s.getShiftId();
+								btnShiftTime5_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 5, shiftId5_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime5_2.setVisible(true);
+								btnShiftTime5_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId5_2 = s.getShiftId();
+								btnShiftTime5_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 5, shiftId5_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Wunderbar":
+							if(btnShiftTime6_1.getText().isEmpty()) {
+								btnShiftTime6_1.setVisible(true);
+								btnShiftTime6_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId6_1 = s.getShiftId();
+								btnShiftTime6_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 6, shiftId6_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime6_2.setVisible(true);
+								btnShiftTime6_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId6_2 = s.getShiftId();
+								btnShiftTime6_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 6, shiftId6_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Ambassade":
+							if(btnShiftTime7_1.getText().isEmpty()) {
+								btnShiftTime7_1.setVisible(true);
+								btnShiftTime7_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId7_1 = s.getShiftId();
+								btnShiftTime7_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 7, shiftId7_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime7_2.setVisible(true);
+								btnShiftTime7_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId7_2 = s.getShiftId();
+								btnShiftTime7_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 7, shiftId7_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Flamingo":
+							if(btnShiftTime8_1.getText().isEmpty()) {
+								btnShiftTime8_1.setVisible(true);
+								btnShiftTime8_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId8_1 = s.getShiftId();
+								btnShiftTime8_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 8, shiftId8_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime8_2.setVisible(true);
+								btnShiftTime8_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId8_2 = s.getShiftId();
+								btnShiftTime8_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 8, shiftId8_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+						case "Club Wolf":
+							if(btnShiftTime9_1.getText().isEmpty()) {
+								btnShiftTime9_1.setVisible(true);
+								btnShiftTime9_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId9_1 = s.getShiftId();
+								btnShiftTime9_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 9, shiftId9_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime9_2.setVisible(true);
+								btnShiftTime9_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId9_2 = s.getShiftId();
+								btnShiftTime9_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 9, shiftId9_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Under buret":
+							if(btnShiftTime10_1.getText().isEmpty()) {
+								btnShiftTime10_1.setVisible(true);
+								btnShiftTime10_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId10_1 = s.getShiftId();
+								btnShiftTime10_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 10, shiftId10_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime10_2.setVisible(true);
+								btnShiftTime10_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId10_2 = s.getShiftId();
+								btnShiftTime10_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 10, shiftId10_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Proud Mary":
+							if(btnShiftTime11_1.getText().isEmpty()) {
+								btnShiftTime11_1.setVisible(true);
+								btnShiftTime11_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId11_1 = s.getShiftId();
+								btnShiftTime11_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 11, shiftId11_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime11_2.setVisible(true);
+								btnShiftTime11_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId11_2 = s.getShiftId();
+								btnShiftTime11_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 11, shiftId11_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;
+						case "Karaoke Bar":
+							if(btnShiftTime12_1.getText().isEmpty()) {
+								btnShiftTime12_1.setVisible(true);
+								btnShiftTime12_1.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId12_1 = s.getShiftId();
+								btnShiftTime12_1.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 12, shiftId12_1);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							else {
+								btnShiftTime12_2.setVisible(true);
+								btnShiftTime12_2.setText(s.getCheckInTime() + " - " + s.getCheckOutTime());
+								shiftId12_2 = s.getShiftId();
+								btnShiftTime12_2.addActionListener(e -> {
+								try {
+									displayGetAvailableDoorman(currentDate, 12, shiftId12_2);
+								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+										| UnsupportedLookAndFeelException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}});
+							}
+							break;				
 					}
 				});
 									

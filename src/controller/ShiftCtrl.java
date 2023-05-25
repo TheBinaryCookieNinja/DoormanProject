@@ -42,16 +42,12 @@ public class ShiftCtrl  {
         return shiftDAO.getShiftsByDate(date);
 	}
 	
-	public Shift getShiftById(int shiftId) throws DataAccessException{
-		return shiftDAO.findById(shiftId);
-	}
-	
 	public List<Shift> findAll() throws DataAccessException{
 		return shiftDAO.findAll();
 	}
 	
-	public Bar findBarById(int barId) throws DataAccessException {
-		return barCtrl.findById(barId);
+	public List<Bar> findAllBars() throws DataAccessException {
+		return barCtrl.findAll();
 	}
 	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {

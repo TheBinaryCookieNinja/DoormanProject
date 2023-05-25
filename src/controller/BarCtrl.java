@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import database.BarDAO;
 import database.DataAccessException;
 import model.Bar;
@@ -15,7 +17,7 @@ public class BarCtrl {
 		}
 	}
 
-		public Bar findById(int barId) throws DataAccessException {
-			return barDAO.findById(barId);
+		public List<Bar> findAll() throws DataAccessException {
+			return barDAO.findAll();
 		}
 }

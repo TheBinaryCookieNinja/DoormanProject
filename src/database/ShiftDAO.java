@@ -43,31 +43,6 @@ public class ShiftDAO {
 		}
 	}
 
-	public Shift findById(int shiftId) throws DataAccessException {
-		try {
-			findById.setInt(1, shiftId);
-			ResultSet rs = findById.executeQuery();
-			Shift s = null;
-			if (rs.next()) {
-				s = buildObject(rs);
-			}
-			return s;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find by id = " + shiftId);
-		}
-	}
-
-	public void createShift(Shift shift) throws SQLException {
-		createShift.setInt(1, shift.getShiftId());
-		createShift.setString(2, shift.getShiftDate());
-		createShift.setString(3, shift.getCheckInTime());
-		createShift.setString(4, shift.getCheckOutTime());
-		createShift.setInt(5, shift.getBarId());
-		createShift.setInt(6, shift.getDoormanId());
-		createShift.execute();
-
-	}
-
 	public void updateDoormanId(int shiftId, int doormanId) throws DataAccessException {
 		try {
 			update.setInt(1, doormanId);
@@ -76,11 +51,6 @@ public class ShiftDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
 		}
-	}
-
-	public void deleteShift(int shiftId) throws SQLException {
-		deleteShift.setInt(1, shiftId);
-		deleteShift.execute();
 	}
 
 	public List<Shift> getShiftsByDate(LocalDate localDate) throws DataAccessException {
