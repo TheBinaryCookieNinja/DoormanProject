@@ -65,7 +65,7 @@ public class ShiftCtrl  {
 			con.setIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED);
 			
 			shiftDAO.updateDoormanId(shiftId, doormanId);
-			availableDateCtrl.deleteAvailableDate(doormanId, date);
+			//availableDateCtrl.deleteAvailableDate(doormanId, date);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
 		} catch (SQLException e) {
