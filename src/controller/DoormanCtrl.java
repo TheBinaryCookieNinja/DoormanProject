@@ -26,9 +26,5 @@ public class DoormanCtrl {
 	    public Doorman getDoormanByDoormanId(int doormanId) throws DataAccessException {
 	        return doormanDAO.findById(doormanId);
 	    }
-	    
-	    public List<Doorman> findAll() throws DataAccessException{
-	    	return doormanDAO.findAll();	    	
-	    }	
 	}
 
