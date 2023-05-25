@@ -24,12 +24,10 @@ public class DoormanDAO {
 	private static final String getAvailableDoormenForShiftQ = 
 			"select Employee.employeeId, f_name, l_name, phone, email, addressId, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by DoormanWishlist.employeeId desc";
 	
-	private PreparedStatement findAll, findById, getAvailableDoormenForShift;
+	private PreparedStatement findById, getAvailableDoormenForShift;
 			
 	public DoormanDAO() throws DataAccessException {
 		try {
-		findAll = DBConnection.getInstance().getConnection()
-				.prepareStatement(findAllQ);
 		findById = DBConnection.getInstance().getConnection()
 				.prepareStatement(findByIdQ);
 		getAvailableDoormenForShift = DBConnection.getInstance().getConnection()
@@ -38,17 +36,6 @@ public class DoormanDAO {
 			throw new DataAccessException(e, "Could not prepare statement");
 			}
 		}
-		
-	public List<Doorman> findAll() throws DataAccessException {
-		ResultSet rs;
-		try {
-			rs = findAll.executeQuery();
-			List<Doorman> res = buildObjects(rs);
-			return res;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not retrieve all doormen");
-		}
-	}
 	
 	public Doorman findById(int employeeId) throws DataAccessException {
 		try {
