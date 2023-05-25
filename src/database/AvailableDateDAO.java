@@ -39,7 +39,6 @@ public class AvailableDateDAO {
 		}
 	}
 	public AvailableDate findById(int availableDateId) throws DataAccessException  {
-		int lockIndex = calculateLockIndex(availableDateId);
 		try {
             findById.setInt(1, availableDateId);
             ResultSet rs = findById.executeQuery();
