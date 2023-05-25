@@ -29,6 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 
 public class GetAvailableDoorman extends JFrame {
 
@@ -73,7 +74,7 @@ public class GetAvailableDoorman extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Available Doormen");
@@ -84,16 +85,17 @@ public class GetAvailableDoorman extends JFrame {
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		contentPane.add(scrollPane, gbc_scrollPane);
+		
 		doormanList = new JList<Doorman>();
+		scrollPane.setViewportView(doormanList);
 		doormanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		GridBagConstraints gbc_doormanList = new GridBagConstraints();
-		
-		
-		gbc_doormanList.insets = new Insets(0, 0, 5, 0);
-		gbc_doormanList.fill = GridBagConstraints.BOTH;
-		gbc_doormanList.gridx = 0;
-		gbc_doormanList.gridy = 1;
-		contentPane.add(doormanList, gbc_doormanList);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
