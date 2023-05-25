@@ -5,9 +5,12 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import database.DBConnection;
 import database.DataAccessException;
 import database.ShiftDAO;
+import gui.ShiftCalendarPanel;
 import model.AvailableDate;
 import model.Bar;
 import model.Doorman;
@@ -18,6 +21,7 @@ public class ShiftCtrl  {
 	private BarCtrl barCtrl;
 	private DoormanCtrl doormanCtrl;
 	private AvailableDateCtrl availableDateCtrl;
+	private ShiftCalendarPanel shiftCalendarPanel;
 	
 	
 	
@@ -55,6 +59,25 @@ public class ShiftCtrl  {
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  
+	
+	 public void setShiftCalendarPanel(ShiftCalendarPanel shiftCalendarPanel) {
+	        this.shiftCalendarPanel = shiftCalendarPanel;
+	    }
+
+	    public ShiftCalendarPanel getShiftCalendarPanel() {
+	        return shiftCalendarPanel;
+	    }
+	    
+	    public int getShiftCountForDate(LocalDate date) throws DataAccessException {
+	        try {
+	            ShiftDAO shiftDAO = new ShiftDAO();
+	            List<Shift> shifts = shiftDAO.getShiftsByDate(date);
+	            return shifts.size();
+	        } catch (DataAccessException e) {
+	            e.printStackTrace();
+	        }
+	        return 0;
+	    }
 	public boolean confirmShift(int doormanId, int shiftId, LocalDate date) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
@@ -65,13 +88,26 @@ public class ShiftCtrl  {
 			con.setIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED);
 			
 			shiftDAO.updateDoormanId(shiftId, doormanId);
+			
 			availableDateCtrl.deleteAvailableDate(doormanId, date);
+			
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBConnection.getInstance().rollbackTransaction();
 		}
+		
+//		SwingUtilities.invokeLater(() -> {
+//	        try {
+//	        	ShiftCtrl shiftCtrl = new ShiftCtrl();
+//	            ShiftCalendarPanel shiftCalendarPanel = getShiftCalendarPanel(); // Get the ShiftCalendarPanel instance
+//	            int shiftCount = shiftCtrl.getShiftCountForDate(date); // Retrieve the updated shift count
+//	            shiftCalendarPanel.updateShiftCount(date, shiftCount); // Update the shift count in the ShiftCalendarPanel
+//	        } catch (DataAccessException e) {
+//	            e.printStackTrace();
+//	        }
+//	    });
 		return confirmation;
 	}
 }

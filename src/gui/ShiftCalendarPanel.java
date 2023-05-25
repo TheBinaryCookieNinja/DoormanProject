@@ -135,6 +135,16 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	    }
 	    return 0; 
 	}
+	
+	public void updateShiftCount(LocalDate date, int shiftCount) {
+	    for (Cell cell : dayCells) {
+	        if (cell.getDate() != null && cell.getDate().equals(date)) {
+	            cell.setShiftCount(shiftCount);
+	            break;
+	        }
+	    }
+	}
+
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
 		 int month = date.getMonthValue();
