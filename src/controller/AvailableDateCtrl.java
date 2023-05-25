@@ -39,8 +39,8 @@ public class AvailableDateCtrl {
 		return succes;
 	}
 
-	public void deleteAvailableDate(int doormandId) throws SQLException {
-		adDAO.deleteAvailableDate(doormandId);
+	public void deleteAvailableDate(int doormandId, LocalDate date) throws SQLException {
+		adDAO.deleteAvailableDate(doormandId, date);
 	}
 
 //	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {

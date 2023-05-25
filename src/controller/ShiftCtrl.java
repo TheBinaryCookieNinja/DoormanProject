@@ -58,12 +58,12 @@ public class ShiftCtrl  {
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  
-	public boolean confirmShift(int doormanId, int shiftId) throws DataAccessException, SQLException {
+	public boolean confirmShift(int doormanId, int shiftId, LocalDate date) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
 			DBConnection.getInstance().startTransaction();
 			shiftDAO.updateDoormanId(shiftId, doormanId);
-			availableDateCtrl.deleteAvailableDate(doormanId);
+			availableDateCtrl.deleteAvailableDate(doormanId, date);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
 		} catch (SQLException e) {

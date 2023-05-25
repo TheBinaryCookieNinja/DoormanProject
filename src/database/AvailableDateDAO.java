@@ -22,8 +22,8 @@ public class AvailableDateDAO {
 	private static final String findByDoormanIdAndDateQ = 
 	        "SELECT * FROM AvailableDates WHERE employeeId = ? AND calenderDate = ?";
 
-	
 	private PreparedStatement findById, createAvailableDate, deleteAvailableDate, findByDoormanIdAndDate;
+	
 	private static final int NUM_LOCKS = 10; // Number of locks to use
     private Lock[] locks; // Array of locks for lock striping
 	
@@ -99,6 +99,7 @@ public class AvailableDateDAO {
 				);
 		return availableDate;
 	}
+	
 	public AvailableDate findByDoormanIdAndDate(int doormanId, LocalDate date) throws SQLException {
 		int lockIndex = calculateLockIndex(doormanId);
 	    try {

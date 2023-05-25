@@ -115,7 +115,7 @@ public class GetAvailableDoorman extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					clickConfirm(shiftId);
+					clickConfirm(shiftId, currentDate);
 				} catch (DataAccessException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -150,8 +150,8 @@ public class GetAvailableDoorman extends JFrame {
 		}
 	}
 	
-	private void clickConfirm(int shiftId) throws DataAccessException, SQLException {
-		shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId);
+	private void clickConfirm(int shiftId, LocalDate currentDate) throws DataAccessException, SQLException {
+		shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, currentDate);
 		JOptionPane.showMessageDialog(null, "Succes");
 		this.dispose();
 	}
