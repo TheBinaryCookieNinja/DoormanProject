@@ -46,8 +46,8 @@ public class ShiftCtrl  {
 		return shiftDAO.findAll();
 	}
 	
-	public List<Bar> findAllBars() throws DataAccessException {
-		return barCtrl.findAll();
+	public List<Bar> getAllBars() throws DataAccessException {
+		return barCtrl.getAll();
 	}
 	
 	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {

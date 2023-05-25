@@ -757,7 +757,7 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayBars(LocalDate currentDate) throws DataAccessException {
-		List<Bar> bars = shiftCtrl.findAllBars();
+		List<Bar> bars = shiftCtrl.getAllBars();
 		lblName1.setText(bars.get(0).getName());
 		lblName2.setText(bars.get(1).getName());
 		lblName3.setText(bars.get(2).getName());
@@ -786,7 +786,7 @@ public class AssignShiftChooseClub extends JFrame {
 	}
 	
 	private void displayShifts(LocalDate currentDate) throws DataAccessException {
-		List<Bar> bars = shiftCtrl.findAllBars();
+		List<Bar> bars = shiftCtrl.getAllBars();
 		shiftCtrl.getShiftsByDate(currentDate)
 				.stream()
 				.forEach(s -> {	

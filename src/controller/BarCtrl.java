@@ -17,7 +17,7 @@ public class BarCtrl {
 		}
 	}
 
-		public List<Bar> findAll() throws DataAccessException {
-			return barDAO.findAll();
+		public List<Bar> getAll() throws DataAccessException {
+			return barDAO.getAll();
 		}
 }

@@ -23,7 +23,7 @@ public class BarDAO {
 		}
 	}
 	
-	public List<Bar> findAll() throws DataAccessException {
+	public List<Bar> getAll() throws DataAccessException {
 	ResultSet rs;
 	try {
 		rs = findAll.executeQuery();

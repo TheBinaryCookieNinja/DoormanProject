@@ -62,7 +62,7 @@ public class GetAvailableDoorman extends JFrame {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	public GetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+	public GetAvailableDoorman(LocalDate date, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		setUIStyle();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 516, 262);
@@ -117,7 +117,7 @@ public class GetAvailableDoorman extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					clickConfirm(shiftId, currentDate);
+					clickConfirm(shiftId, date);
 				} catch (DataAccessException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -125,23 +125,23 @@ public class GetAvailableDoorman extends JFrame {
 			}
 		});
 		
-		init(currentDate, barId);
+		init(date, barId);
 	}
 
 	
-	private void init(LocalDate currentDate, int barId) {
+	private void init(LocalDate date, int barId) {
 		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
 			shiftCtrl = new ShiftCtrl();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		updateDoormanList(currentDate, barId);
+		updateDoormanList(date, barId);
 	}
 	
-	private void updateDoormanList(LocalDate currentDate, int barId) {
+	private void updateDoormanList(LocalDate date, int barId) {
 		try {
-			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(currentDate, barId);
+			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(date, barId);
 			dataListModel = new DefaultListModel<>();
 			for (int i = 0; i < dlo.size(); i++) {
 				dataListModel.addElement(dlo.get(i));
@@ -152,9 +152,15 @@ public class GetAvailableDoorman extends JFrame {
 		}
 	}
 	
-	private void clickConfirm(int shiftId, LocalDate currentDate) throws DataAccessException, SQLException {
-		shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, currentDate);
-		JOptionPane.showMessageDialog(null, "Succes");
+	private void clickConfirm(int shiftId, LocalDate date) throws DataAccessException, SQLException {
+		boolean confirm = shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, date);
+		if(confirm = true) {
+			JOptionPane.showMessageDialog(null, "Succes");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Error, try again");
+		}
+		
 		this.dispose();
 	}
 	
