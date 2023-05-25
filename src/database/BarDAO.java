@@ -3,55 +3,22 @@ package database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Bar;
-import model.Shift;
 
 public class BarDAO {
 
-	private static final String findAllQ = 
-			"select barId, namee, phone, email, addressId, cvr from Bar";
 	private static final String findByIdQ = 
-			findAllQ + " where barId = ?";
-	private static final String createBarQ =
-			"insert into Bar (barId, namee, phone, email, addressId, cvr) VALUES (?,?,?,?,?,?)";
-	private static final String updateQ = 
-			"update Bar set barId = ?, namee = ?, phone = ?, email = ?, addressId = ?, cvr = ?";
-	private static final String deleteBarQ = 
-			"delete * from Bar where barId = ?";
-	private static final String findByDateQ = findAllQ + " FROM Bar b " + "INNER JOIN Shiftt s ON b.barId = s.barId " + "WHERE s.shiftDate = ?";
+			"select barId, namee, phone, email, addressId, cvr from Bar where barId = ?";
+
 	
-	private PreparedStatement findAll, findById, createBar, update, deleteBar, findByDate;
+	private PreparedStatement findById;
 	
 	public BarDAO() throws DataAccessException {
 		try {
-			findAll = DBConnection.getInstance().getConnection()
-					.prepareStatement(findAllQ);
 			findById = DBConnection.getInstance().getConnection()
 					.prepareStatement(findByIdQ);
-			createBar = DBConnection.getInstance().getConnection()
-					.prepareStatement(createBarQ);
-			update = DBConnection.getInstance().getConnection()
-					.prepareStatement(updateQ);
-			deleteBar = DBConnection.getInstance().getConnection()
-					.prepareStatement(deleteBarQ);
-			findByDate = DBConnection.getInstance().getConnection()
-					.prepareStatement(findByDateQ);
 			} catch (SQLException e) {
 				throw new DataAccessException(e, "Could not prepare statement");
-		}
-	}
-	public List<Bar> findAll() throws DataAccessException {
-	ResultSet rs;
-	try {
-		rs = findAll.executeQuery();
-		List<Bar> res = buildObjects(rs);
-		return res;
-	} catch (SQLException e) {
-		throw new DataAccessException(e, "Could not retrieve all bars");
 		}
 	}
 	
@@ -69,79 +36,10 @@ public class BarDAO {
 		}
 	}
 	
-	public List<Bar> getBarListByDate(LocalDate localDate) throws DataAccessException{
-		try {
-			findByDate.setString(1, localDate.toString()); // converts the localDate to a String, since the Date in the
-															// database schema is a String
-			ResultSet rs = findByDate.executeQuery();
-			List<Bar> res = buildObjects(rs);
-			return res;
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not find shifts by date = " + localDate);
-		}
-	}
-	
-	public void createBar (Bar bar) throws SQLException {
-		createBar.setInt(1, bar.getBarId());
-		createBar.setString(2, bar.getName());
-		createBar.setString(3, bar.getPhone());
-		createBar.setString(4, bar.getEmail());
-		createBar.setInt(5, bar.getAddressId());
-		createBar.setString(6, bar.getCvr());
-		createBar.execute();
-	}
-	
-	public void update(Bar b) throws DataAccessException {
-		final int barId = b.getBarId();
-		final String name = b.getName();
-		final String phone = b.getPhone();
-		final String email = b.getEmail();
-		final int addressId = b.getAddressId();
-		final String cvr = b.getCvr();
-				
-		try {
-			//update Bar set 
-			//barId = ?, name = ?, phone = ?
-			//email = ?, address = ?, cvr = ? where barId = ?
-			
-			update.setInt(1, barId);
-			update.setString(2, name);
-			update.setString(3, phone);
-			update.setString(4, email);
-			update.setInt(5, addressId);
-			update.setString(6, cvr);
-			
-			update.executeUpdate();
-		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not update shift where id = " + barId);
-		}
-	}
-	
-	public void deleteBar(int barId) throws SQLException {
-		deleteBar.setInt(1, barId);
-		deleteBar.execute();
-	}
-	
 	private Bar buildObject(ResultSet rs) throws SQLException {
-//				int barId = rs.getInt("barId");
-//				String name = rs.getString("namee");
-//				String phone = rs.getString("phone");
-//				String email = rs.getString("email");
-//				int addressId = rs.getInt("addiressId");
-//				String cvr = rs.getString("cvr");	
+		Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getInt("addressId"), rs.getString("cvr"));
 				
-				Bar bar = new Bar(rs.getInt("barId"), rs.getString("namee"), rs.getString("phone"), rs.getString("email"), rs.getInt("addressId"), rs.getString("cvr"));
-				
-				System.out.println();
-				return bar;
+		System.out.println();
+		return bar;
 	}
-	
-	private List<Bar> buildObjects(ResultSet rs) throws SQLException {
-		List<Bar> res = new ArrayList<>();
-		while(rs.next()) {
-			res.add(buildObject(rs));
-		}
-		return res;
-	}
-	
 }
