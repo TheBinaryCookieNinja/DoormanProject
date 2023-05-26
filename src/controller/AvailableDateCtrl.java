@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -25,13 +26,15 @@ public class AvailableDateCtrl {
 	public boolean confirmAvailability(LocalDate localdate, int doormanId) throws DataAccessException, SQLException {
 		AvailableDate availableDate = new AvailableDate(0, Date.valueOf(localdate), doormanId);
 		boolean succes = false;
-		DBConnection.getInstance().startTransaction();
+		DBConnection con = DBConnection.getInstance();
+		con.startTransaction();
+		con.setIsolationLevel(Connection.TRANSACTION_SERIALIZABLE);
 		try {
 			availableDateDAO.createAvailableDate(availableDate);
-			DBConnection.getInstance().commitTransaction();
+			con.commitTransaction();
 			succes = true;
 		} catch (Exception e) {
-			DBConnection.getInstance().rollbackTransaction();
+			con.rollbackTransaction();
 		}
 		return succes;
 	}
@@ -46,13 +49,15 @@ public class AvailableDateCtrl {
 //	}
 	
 	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
-		DBConnection.getInstance().startTransaction();
+		DBConnection con = DBConnection.getInstance();
+		con.startTransaction();
+		con.setIsolationLevel(Connection.TRANSACTION_SERIALIZABLE);
 		try {
 	        AvailableDate availableDate = availableDateDAO.findByDoormanIdAndDate(doormanId, selectedDate);
-	        DBConnection.getInstance().commitTransaction();
+	       con.commitTransaction();
 	        return availableDate != null;
 	    } catch (SQLException e) {
-	    	DBConnection.getInstance().rollbackTransaction();
+	    	con.rollbackTransaction();
 	        throw new DataAccessException(e, "Can't register on a date that you are already registered on - please try another date 😀");
 	    }
 	}

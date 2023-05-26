@@ -36,7 +36,7 @@ public class DBConnection {
 		}
 	}
 	
-	public static DBConnection getInstance() {
+	public synchronized static DBConnection getInstance() {
 		if(dbConnection == null) {
 			dbConnection = new DBConnection();
 		}
@@ -71,6 +71,7 @@ public class DBConnection {
 				ResultSet rs = ps.getGeneratedKeys();
 				rs.next();
 				res = rs.getInt(1);
+				rs.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
