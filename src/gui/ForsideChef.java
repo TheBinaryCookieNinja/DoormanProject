@@ -179,11 +179,15 @@ public class ForsideChef extends JFrame {
         pack();
     }
     private void openAssignShiftCalendar() throws DataAccessException {
+        setVisible(false); // Hide the ForsideChef window
+
         MainCalendar calendar = new MainCalendar();
         calendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         calendar.setVisible(true);
     }
     private void openRegisterAvailabilityCalendar() throws DataAccessException {
+        setVisible(false); // Hide the ForsideChef window
+
         MainAvailabilityCalendar availabilityCalendar = new MainAvailabilityCalendar();
         availabilityCalendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         availabilityCalendar.setVisible(true);
