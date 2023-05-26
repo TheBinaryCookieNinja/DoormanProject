@@ -802,7 +802,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 1, shiftId1_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -815,7 +815,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 1, shiftId1_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -830,7 +830,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 2, shiftId2_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -843,7 +843,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 2, shiftId2_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -858,7 +858,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 3, shiftId3_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -871,7 +871,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 3, shiftId3_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -886,7 +886,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 4, shiftId4_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -900,7 +900,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 4, shiftId4_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -915,7 +915,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 5, shiftId5_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -928,7 +928,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 5, shiftId5_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -943,7 +943,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 6, shiftId6_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -956,7 +956,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 6, shiftId6_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -971,7 +971,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 7, shiftId7_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -984,7 +984,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 7, shiftId7_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -999,7 +999,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 8, shiftId8_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1012,7 +1012,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 8, shiftId8_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1026,7 +1026,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 9, shiftId9_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1039,7 +1039,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 9, shiftId9_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1054,7 +1054,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 10, shiftId10_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1067,7 +1067,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 10, shiftId10_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1082,7 +1082,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 11, shiftId11_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1095,7 +1095,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 11, shiftId11_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1110,7 +1110,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 12, shiftId12_1);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1123,7 +1123,7 @@ public class AssignShiftChooseClub extends JFrame {
 								try {
 									displayGetAvailableDoorman(currentDate, 12, shiftId12_2);
 								} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-										| UnsupportedLookAndFeelException | SQLException e1) {
+										| UnsupportedLookAndFeelException | SQLException | DataAccessException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}});
@@ -1134,7 +1134,7 @@ public class AssignShiftChooseClub extends JFrame {
 									
 	}
 	
-	private void displayGetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
+	private void displayGetAvailableDoorman(LocalDate currentDate, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException, DataAccessException {
 		GetAvailableDoorman gad = new GetAvailableDoorman(currentDate, barId, shiftId);
 		gad.setVisible(true);
 		gad.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
