@@ -11,6 +11,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/matia/Downloads/sqljdbc_12.2.0.0_enu/sqljdbc_12.2/enu/mssql-jdbc-12.2.0.jre8.jar"/>
+	<classpathentry kind="lib" path="/Users/kocg/Desktop/UCN/Downloads/sqljdbc_12.2/enu/mssql-jdbc-12.2.0.jre8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
