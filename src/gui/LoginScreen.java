@@ -36,6 +36,9 @@ public class LoginScreen extends JFrame {
 				} catch (DataAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
                 loginScreen.setVisible(true);
             }
