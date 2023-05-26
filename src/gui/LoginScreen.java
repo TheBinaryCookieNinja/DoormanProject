@@ -72,7 +72,7 @@ public class LoginScreen extends JFrame {
             	try {
 					authenticateUser();
 				} catch (NumberFormatException | ClassNotFoundException | InstantiationException
-						| IllegalAccessException | DataAccessException | UnsupportedLookAndFeelException e1) {
+						| IllegalAccessException | DataAccessException | UnsupportedLookAndFeelException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -132,7 +132,7 @@ public class LoginScreen extends JFrame {
     		doormanCtrl = new DoormanCtrl();	
     	}
     	
-    	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
     	    try {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
     	        if (d.getPasscode().equals(textField.getText())) {
