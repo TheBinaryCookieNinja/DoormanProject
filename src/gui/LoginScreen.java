@@ -69,6 +69,17 @@ public class LoginScreen extends JFrame {
         JLabel passwordLabel = new JLabel("Password:");
 
         usernameField = new JTextField(20);
+        usernameField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    authenticateUser();
+                } catch (NumberFormatException | DataAccessException | ClassNotFoundException
+                        | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException
+                        | SQLException | IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
@@ -155,11 +166,12 @@ public class LoginScreen extends JFrame {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
     	        if (d.getPasscode().equals(passwordField.getText())) {
     	            displayFrontpage();
+    	            this.dispose();
     	        } else {
     	            JOptionPane.showMessageDialog(null, "Forkert brugernavn eller adgangskode.", "Login Error", JOptionPane.ERROR_MESSAGE);
     	        }
     	    } finally {
-    	        this.dispose();
+    	        
     	    } 
     	 } 
     
