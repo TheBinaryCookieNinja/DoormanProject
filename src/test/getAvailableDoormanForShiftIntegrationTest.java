@@ -4,14 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import database.DBConnection;
 import database.DataAccessException;
 import database.DoormanDAO;
 import model.Doorman;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 public class getAvailableDoormanForShiftIntegrationTest {
