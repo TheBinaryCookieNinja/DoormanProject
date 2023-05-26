@@ -46,7 +46,7 @@ public class ShiftAssignmentSystemTest {
         Doorman doorman = availableDoormen.get(doormanId);
         
         // Assign the shift to the selected doorman
-        boolean assignmentSuccessful = shiftCtrl.confirmShift(doorman.getEmployeeId(), shift.getShiftId(), date);
+        boolean assignmentSuccessful = shiftCtrl.confirmShift(doorman.getEmployeeId(), shift.getShiftId());
         
 
         // Assert

@@ -79,7 +79,7 @@ public class ShiftCtrl  {
 	        return 0;
 	    }
 	    
-	public boolean confirmShift(int doormanId, int shiftId, LocalDate date) throws DataAccessException, SQLException {
+	public boolean confirmShift(int doormanId, int shiftId) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
 			DBConnection.getInstance().startTransaction();
@@ -92,4 +92,8 @@ public class ShiftCtrl  {
 		}
 		return confirmation;
 	}
+	
+	public List<Doorman> isDoormanOnAnotherShift()throws DataAccessException, SQLException {
+        return doormanCtrl.isDoormanOnAnotherShift();
+    }
 }
