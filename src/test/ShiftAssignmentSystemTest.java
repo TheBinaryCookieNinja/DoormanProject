@@ -25,9 +25,9 @@ public class ShiftAssignmentSystemTest {
     	ShiftCtrl shiftCtrl = new ShiftCtrl();
     	
         LocalDate date = LocalDate.of(2023, 05, 15);
-        int barId = 1;
-        int shiftId = 1;
-        int doormanId = 2;
+        int barId = 5;
+        int shiftId = 5;
+        int doormanId = 3;
         
         // Act 
         // Create a new shift
@@ -39,7 +39,7 @@ public class ShiftAssignmentSystemTest {
         
         Bar bar = bars.get(barId); // Choose the first bar in the list
         
-     // Retrieve a list of available doormen for the shift date and bar
+        // Retrieve a list of available doormen for the shift date and bar
         List<Doorman> availableDoormen = shiftCtrl.getAvailableDoormenForShift(date, bar.getBarId());
         
         // Select the first available doorman for assignment
