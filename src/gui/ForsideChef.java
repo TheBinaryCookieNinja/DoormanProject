@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 
 import database.DataAccessException;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -21,6 +25,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import java.awt.FlowLayout;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import java.awt.Choice;
 import java.awt.Dialog;
@@ -65,9 +71,10 @@ public class ForsideChef extends JFrame {
      * @throws IllegalAccessException
      * @throws InstantiationException
      * @throws ClassNotFoundException
+     * @throws IOException 
      */
     public ForsideChef() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
-            UnsupportedLookAndFeelException {
+            UnsupportedLookAndFeelException, IOException {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1500, 1100);
@@ -181,6 +188,10 @@ public class ForsideChef extends JFrame {
 
         setLocationRelativeTo(null);
         pack();
+        
+        File iconFile = new File("/Users/kocg/Desktop/UCN/GIT/EksamensProjektDoorman/src/icons/bpslogostor.png");
+        Image iconImage = ImageIO.read(iconFile);
+        setIconImage(iconImage);
 
     }
 

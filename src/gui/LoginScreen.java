@@ -12,6 +12,7 @@ import database.DoormanDAO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import gui.ForsideChef;
@@ -75,6 +76,9 @@ public class LoginScreen extends JFrame {
 						| IllegalAccessException | DataAccessException | UnsupportedLookAndFeelException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
             }
         });
@@ -132,7 +136,7 @@ public class LoginScreen extends JFrame {
     		doormanCtrl = new DoormanCtrl();	
     	}
     	
-    	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
+    	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException, IOException {
     	    try {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
     	        if (d.getPasscode().equals(passwordField.getText())) {
@@ -145,7 +149,7 @@ public class LoginScreen extends JFrame {
     	    } 
     	 } 
     
-    	private void displayFrontpage() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    	private void displayFrontpage() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, IOException {
     	    ForsideChef fc = new ForsideChef();
     	    fc.setVisible(true);
     	    fc.setAlwaysOnTop(true);
