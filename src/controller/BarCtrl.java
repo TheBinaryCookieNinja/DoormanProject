@@ -1,8 +1,10 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import database.BarDAO;
+import database.DBConnection;
 import database.DataAccessException;
 import model.Bar;
 
@@ -17,7 +19,16 @@ public class BarCtrl {
 		}
 	}
 
-		public List<Bar> getAll() throws DataAccessException {
-			return barDAO.getAll();
+		public List<Bar> getAll() throws DataAccessException, SQLException {
+			DBConnection.getInstance().startTransaction();
+			try {
+				List<Bar> lBar = barDAO.getAll();
+				DBConnection.getInstance().commitTransaction();
+				return lBar;
+			}catch (SQLException e) {
+				DBConnection.getInstance().rollbackTransaction();
+				throw new DataAccessException(e, "Can't find any bars");
+			}
+			
 		}
 }
