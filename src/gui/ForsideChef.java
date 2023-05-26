@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 import java.awt.Choice;
@@ -192,8 +193,7 @@ public class ForsideChef extends JFrame {
         
      // Set the title icon image
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bpslogostor.png"));
-        JFrame frame = new JFrame();
-        frame.setIconImage(icon.getImage());
+        setIconImage(icon.getImage());
 
 
     }
