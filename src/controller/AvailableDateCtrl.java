@@ -13,7 +13,6 @@ import model.AvailableDate;
 public class AvailableDateCtrl {
 	private AvailableDateDAO availableDateDAO;
 	
-	
 
 	public AvailableDateCtrl() throws DataAccessException {
 		try {
@@ -23,12 +22,8 @@ public class AvailableDateCtrl {
 		}
 	}
 
-	public AvailableDate createAvailableDates(LocalDate localdate, int doormanId) throws DataAccessException {
-		return new AvailableDate(0, Date.valueOf(localdate), doormanId);
-
-	}
-
-	public boolean confirmAvailability(AvailableDate availableDate) throws DataAccessException, SQLException {
+	public boolean confirmAvailability(LocalDate localdate, int doormanId) throws DataAccessException, SQLException {
+		AvailableDate availableDate = new AvailableDate(0, Date.valueOf(localdate), doormanId);
 		boolean succes = false;
 		DBConnection.getInstance().startTransaction();
 		try {
