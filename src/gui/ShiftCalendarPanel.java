@@ -3,7 +3,6 @@ package gui;
 import java.awt.*;
 import java.util.List;
 
-
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,16 +23,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private int year;
 	private Cell[] dayCells;
 	private Cell[] titleCells;
-	private ShiftCtrl shiftCtrl; 
+	private ShiftCtrl shiftCtrl;
+
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
-		 this(LocalDate.of(year, month, 1));
+		this(LocalDate.of(year, month, 1));
 	}
 
 	public ShiftCalendarPanel(LocalDate date) throws DataAccessException {
 		this.month = date.getMonthValue();
 		this.year = date.getYear();
 		shiftCtrl = new ShiftCtrl();
-		//ZoneId timeZone = ZoneId.systemDefault();
+		// ZoneId timeZone = ZoneId.systemDefault();
 		initComponents();
 		initializeDaysInMonth(null);
 		setDatesForMonth(date.withDayOfMonth(1));
@@ -92,9 +92,9 @@ public class ShiftCalendarPanel extends JLayeredPane {
 				cell.setAsNotToday();
 
 			}
-			
+
 			int shiftCount = getShiftCountForDate(dayDate); // Retrieve the shift count
-		    cell.setShiftCount(shiftCount); // Set the shift count in the Cell
+			cell.setShiftCount(shiftCount); // Set the shift count in the Cell
 
 			cell.addActionListener(e -> {
 				LocalDate selectedDate = cell.getDate();
@@ -123,41 +123,49 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			}
 		});
 	}
-	
+
 	public int getShiftCountForDate(LocalDate date) {
-	    try {
-	        List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
-	        return shifts.size();
-	    } catch (DataAccessException e) {
-	        
-	        e.printStackTrace();
-	    }
-	    return 0; 
+		try {
+			List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
+			return shifts.size();
+		} catch (DataAccessException e) {
+
+			e.printStackTrace();
+		}
+		return 0;
 	}
-	
+
 	public void updateShiftCount(LocalDate date, int shiftCount) {
-	    for (Cell cell : dayCells) {
-	        if (cell.getDate() != null && cell.getDate().equals(date)) {
-	            cell.setShiftCount(shiftCount);
-	            break;
-	        }
-	    }
+		for (Cell cell : dayCells) {
+			if (cell.getDate() != null && cell.getDate().equals(date)) {
+				cell.setShiftCount(shiftCount - 1);
+				break;
+			}
+		}
 	}
 
 	public void refreshCalendar() throws DataAccessException {
-        initializeDaysInMonth(null);
-        setDatesForMonth(LocalDate.of(year, month, 1));
-    }
+		initializeDaysInMonth(null);
+		setDatesForMonth(LocalDate.of(year, month, 1));
+
+		for (Cell cell : dayCells) {
+			LocalDate date = cell.getDate();
+			int shiftCount = getShiftCountForDate(date);
+			cell.setShiftCount(shiftCount);
+
+		}
+	}
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
-		 int month = date.getMonthValue();
+		int month = date.getMonthValue();
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
 
-		int startDayOfWeek = date.withDayOfMonth(1).getDayOfWeek().getValue() % 7;// Sunday is 7 in LocalDate, but here it has to be 0 so
-																	// the modulus operator is used. Now each week stars
-																	// with sunday
+		int startDayOfWeek = date.withDayOfMonth(1).getDayOfWeek().getValue() % 7;// Sunday is 7 in LocalDate, but here
+																					// it has to be 0 so
+		// the modulus operator is used. Now each week stars
+		// with sunday
 
 		// Clear all cells first
 		for (Cell cell : dayCells) {
@@ -174,15 +182,14 @@ public class ShiftCalendarPanel extends JLayeredPane {
 			cell.setText(String.valueOf(dayDate.getDayOfMonth()));
 			cell.setDate(dayDate);
 			cell.currentMonth(true);
-			
-			
-			 LocalDate currentDate = LocalDate.now();
-		        if (dayDate.isEqual(currentDate)) {
-		            cell.setAsToday();
-		        } else {
-		            cell.setAsNotToday();
-		        }
-			
+
+			LocalDate currentDate = LocalDate.now();
+			if (dayDate.isEqual(currentDate)) {
+				cell.setAsToday();
+			} else {
+				cell.setAsNotToday();
+			}
+
 			int shiftCount = getShiftCountForDate(dayDate);
 			cell.setShiftCount(shiftCount);
 
