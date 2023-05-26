@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import gui.MainCalendar;
 
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -189,9 +190,11 @@ public class ForsideChef extends JFrame {
         setLocationRelativeTo(null);
         pack();
         
-        File iconFile = new File("icons/bpslogostor.png");
-        Image iconImage = ImageIO.read(iconFile);
-        setIconImage(iconImage);
+     // Set the title icon image
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/bpslogostor.png"));
+        JFrame frame = new JFrame();
+        frame.setIconImage(icon.getImage());
+
 
     }
 
