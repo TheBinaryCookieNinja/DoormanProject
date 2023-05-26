@@ -15,18 +15,24 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class AvailableDateDAOTest {
 
     private static final int NUM_THREADS = 12;
     private static final int NUM_ITERATIONS = 4;
-
+    private int initialVersion;
     @Test
     @DisplayName("test concurrent access to DAO with lock")
     public void testConcurrentAccessWithLock() throws InterruptedException, DataAccessException {
         // Arrange
+    	AtomicReference<AvailableDate> availableDateRef = new AtomicReference<>(new AvailableDate(0, null, 0));
         AvailableDateDAO availableDateDAO = new AvailableDateDAO();
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
         CountDownLatch latch = new CountDownLatch(NUM_THREADS);
+        AtomicInteger readCounter = new AtomicInteger(0);
+        AtomicInteger writeCounter = new AtomicInteger(0);
 
         // Act
         for (int i = 0; i < NUM_THREADS; i++) {
@@ -36,12 +42,17 @@ public class AvailableDateDAOTest {
                     latch.await(); // Wait for all threads to be ready
 
                     for (int j = 0; j < NUM_ITERATIONS; j++) {
-                        // Simulate database read operation
-                        AvailableDate availableDate = availableDateDAO.findById(1);
+                        // read operation
+                    	AvailableDate currentAvailableDate = availableDateDAO.findById(1);
+                        initialVersion = currentAvailableDate.getVersion();
+                        
+                        readCounter.incrementAndGet();
 
-                        // Simulate database write operation
+                        // write operation
                         try {
+                        	currentAvailableDate.setVersion(initialVersion + 1);
 							availableDateDAO.createAvailableDate(new AvailableDate(0, Date.valueOf(LocalDate.of(j, 05, 10)), 1));
+							writeCounter.incrementAndGet();
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -53,14 +64,15 @@ public class AvailableDateDAOTest {
             });
         }
 
-        // Wait for all threads to finish
+        
         executorService.shutdown();
         while (!executorService.isTerminated()) {
-            // Wait for the executor service to terminate
+            
         }
 
         // Assert
-        // Add assertions to validate the desired behavior
-        Assertions.assertTrue(true);
+        Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, readCounter.get(), "Incorrect number of reads");
+        Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, writeCounter.get(), "Incorrect number of writes");
+        Assertions.assertTrue(initialVersion <= availableDateRef.get().getVersion(), "Dirty read detected");
     }
 }
