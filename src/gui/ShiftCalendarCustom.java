@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class ShiftCalendarCustom extends JPanel {
 	private SlidingPanel slide;
 	private Map<String, ShiftCalendarPanel> calendarPanels;
 	private ShiftCalendarPanel currentPanel;
-	private LocalDateTime dateTime;
+	private LocalDate date;
 
 	private JButton arrowBack;
 	private JButton arrowForward;
@@ -44,11 +45,11 @@ public class ShiftCalendarCustom extends JPanel {
 
 	public ShiftCalendarCustom() throws DataAccessException {
 		setBackground(Color.WHITE);
-		dateTime = LocalDateTime.now();
+		date = LocalDate.now();
 		//thisMonth();
 		calendarPanels = new HashMap<>();
 		initComponents();
-		slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_RIGHT);
+		slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_RIGHT);
 		updateMonthYear();
 		initializeThread();
 		initializeLabels();
@@ -256,11 +257,11 @@ public class ShiftCalendarCustom extends JPanel {
 //		}
 //		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
 //		updateMonthYear();
-		 dateTime = dateTime.plusMonths(1);
+		 date = date.plusMonths(1);
 	        
 	        changePanel();
 	        try {
-				slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_LEFT);
+				slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_LEFT);
 			} catch (DataAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -281,11 +282,11 @@ public class ShiftCalendarCustom extends JPanel {
 //		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
 //		updateMonthYear();
 		
-		dateTime = dateTime.minusMonths(1);
+		date = date.minusMonths(1);
         
         changePanel();
         try {
-			slide.show(new ShiftCalendarPanel(dateTime), SlidingPanel.AnimateType.TO_RIGHT);
+			slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_RIGHT);
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -309,7 +310,7 @@ public class ShiftCalendarCustom extends JPanel {
 //		SimpleDateFormat df = new SimpleDateFormat("MMMM-yyyy");
 //		lbMonthYear.setText(df.format(calendar.getTime()));
 		DateTimeFormatter mf = DateTimeFormatter.ofPattern("MMMM yyyy");
-        lbMonthYear.setText(dateTime.format(mf));
+        lbMonthYear.setText(date.format(mf));
 	}
 
 //	public void changeMonth(int newMonth, int newYear) throws DataAccessException {
@@ -338,9 +339,9 @@ public class ShiftCalendarCustom extends JPanel {
 	
 	private void changePanel() {
 	    try {
-	        String monthYearKey = dateTime.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+	        String monthYearKey = date.format(DateTimeFormatter.ofPattern("MM-yyyy"));
 	        if (!calendarPanels.containsKey(monthYearKey)) {
-	            ShiftCalendarPanel panel = new ShiftCalendarPanel(dateTime.getMonthValue(), dateTime.getYear());
+	            ShiftCalendarPanel panel = new ShiftCalendarPanel(date.getMonthValue(), date.getYear());
 	            calendarPanels.put(monthYearKey, panel);
 	        }
 	        if (currentPanel != null) {

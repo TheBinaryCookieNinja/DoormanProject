@@ -26,17 +26,17 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private Cell[] titleCells;
 
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
-		this(LocalDateTime.of(year, month, 1, 0, 0));
+		 this(LocalDate.of(year, month, 1));
 	}
 
-	public ShiftCalendarPanel(LocalDateTime dateTime) throws DataAccessException {
-		this.month = dateTime.getMonthValue();
-		this.year = dateTime.getYear();
+	public ShiftCalendarPanel(LocalDate date) throws DataAccessException {
+		this.month = date.getMonthValue();
+		this.year = date.getYear();
 		
-		ZoneId timeZone = ZoneId.systemDefault();
+		//ZoneId timeZone = ZoneId.systemDefault();
 		initComponents();
 		initializeDaysInMonth(null);
-		setDatesForMonth(dateTime.withDayOfMonth(1).atZone(timeZone).toLocalDate());
+		setDatesForMonth(date.withDayOfMonth(1));
 	}
 
 	private void initComponents() {
@@ -145,6 +145,10 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	    }
 	}
 
+	public void refreshCalendar() throws DataAccessException {
+        initializeDaysInMonth(null);
+        setDatesForMonth(LocalDate.of(year, month, 1));
+    }
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException {
 		 int month = date.getMonthValue();

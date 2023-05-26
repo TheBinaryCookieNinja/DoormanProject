@@ -39,6 +39,7 @@ public class GetAvailableDoorman extends JFrame {
 	private ShiftCtrl shiftCtrl;
 	
 	
+	
 
 	/**
 	 * Launch the application.
@@ -155,6 +156,7 @@ public class GetAvailableDoorman extends JFrame {
 		boolean confirm = shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, date);
 		if(confirm = true) {
 			JOptionPane.showMessageDialog(null, "Succes");
+			updateShiftCountOnCalendar(date);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Error, try again");
@@ -162,6 +164,14 @@ public class GetAvailableDoorman extends JFrame {
 		
 		this.dispose();
 	}
+	
+	private void updateShiftCountOnCalendar(LocalDate date) throws DataAccessException {
+	    int shiftCount = shiftCtrl.getShiftCountForDate(date);
+	    ShiftCalendarPanel shiftCalendarPanel = new ShiftCalendarPanel(date);
+	    shiftCalendarPanel.updateShiftCount(date, shiftCount);
+	    shiftCalendarPanel.refreshCalendar();
+	}
+
 	
 	private void setUIStyle() {
 		//https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/nimbus.html
