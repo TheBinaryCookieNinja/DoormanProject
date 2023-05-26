@@ -24,7 +24,7 @@ public class getAvailableDoormanForShiftIntegrationTest {
 	    }
 	
     @Test
-    public void testGetAvailableDoormenForShiftNotEmpty() {
+    public void testGetAvailableDoormenForShiftNotEmptyAndObjectsNotEmpty() {
         // Arrange
         LocalDate date = LocalDate.of(2023, 05, 15);
         int barId = 1;
@@ -43,7 +43,16 @@ public class getAvailableDoormanForShiftIntegrationTest {
         // Assert
         Assertions.assertNotNull(availableDoormen);
         Assertions.assertFalse(availableDoormen.isEmpty());
-        
+        for (Doorman doorman : availableDoormen) {
+            Assertions.assertNotNull(doorman.getF_name());
+            Assertions.assertNotNull(doorman.getL_name());
+            Assertions.assertNotNull(doorman.getEmployeeId());
+            Assertions.assertNotNull(doorman.getEmail());
+            Assertions.assertNotNull(doorman.getPhone());
+            Assertions.assertNotNull(doorman.getPasscode());
+            Assertions.assertNotNull(doorman.getAddress());
+            Assertions.assertNotNull(doorman.getHourlyRate());
+        }
     }
     
     @Test
@@ -65,7 +74,7 @@ public class getAvailableDoormanForShiftIntegrationTest {
 
         // Assert
         Assertions.assertNotNull(availableDoormen);
-        Assertions.assertFalse(availableDoormen.size()>0);        
+        Assertions.assertFalse(availableDoormen.size()>0);   
     }
 }
 
