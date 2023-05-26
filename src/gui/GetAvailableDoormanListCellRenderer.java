@@ -13,6 +13,7 @@ import database.DataAccessException;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JLabel;
@@ -61,7 +62,7 @@ class GetAvailableDoormanListCellRenderer implements ListCellRenderer<Doorman> {
 					}
 				}
 			}
-		} catch (DataAccessException e) {
+		} catch (DataAccessException | SQLException e) {
 			// TODO Auto-generated catch block
 		}
 		return renderer;

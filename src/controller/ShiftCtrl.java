@@ -55,7 +55,7 @@ public class ShiftCtrl  {
 		return barCtrl.getAll();
 	}
 	
-	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException {
+	public List<Doorman> getAvailableDoormenForShift(LocalDate localDate, int barId) throws DataAccessException, SQLException {
 		return doormanCtrl.getAvailableDoormenForShift(localDate, barId);
 	}
 	  

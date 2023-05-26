@@ -62,8 +62,9 @@ public class GetAvailableDoorman extends JFrame {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	public GetAvailableDoorman(LocalDate date, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+	public GetAvailableDoorman(LocalDate date, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
 		setUIStyle();
 		setBounds(100, 100, 516, 262);
 		contentPane = new JPanel();
@@ -129,7 +130,7 @@ public class GetAvailableDoorman extends JFrame {
 	}
 
 	
-	private void init(LocalDate date, int barId) {
+	private void init(LocalDate date, int barId) throws SQLException {
 		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
 			shiftCtrl = new ShiftCtrl();
@@ -139,7 +140,7 @@ public class GetAvailableDoorman extends JFrame {
 		updateDoormanList(date, barId);
 	}
 	
-	private void updateDoormanList(LocalDate date, int barId) {
+	private void updateDoormanList(LocalDate date, int barId) throws SQLException {
 		try {
 			List<Doorman> dlo = shiftCtrl.getAvailableDoormenForShift(date, barId);
 			dataListModel = new DefaultListModel<>();
