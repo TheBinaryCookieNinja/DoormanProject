@@ -189,7 +189,7 @@ public class ForsideChef extends JFrame {
         setLocationRelativeTo(null);
         pack();
         
-        File iconFile = new File("/Users/kocg/Desktop/UCN/GIT/EksamensProjektDoorman/src/icons/bpslogostor.png");
+        File iconFile = new File("icons/bpslogostor.png");
         Image iconImage = ImageIO.read(iconFile);
         setIconImage(iconImage);
 
