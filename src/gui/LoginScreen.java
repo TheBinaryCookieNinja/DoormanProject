@@ -115,6 +115,17 @@ public class LoginScreen extends JFrame {
         panel.add(passwordLabel, constraints_2);
         
         passwordField = new JTextField(20);
+        passwordField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    authenticateUser();
+                } catch (NumberFormatException | DataAccessException | ClassNotFoundException
+                        | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException
+                        | SQLException | IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
         GridBagConstraints gbc_passwordField = new GridBagConstraints();
         gbc_passwordField.insets = new Insets(0, 0, 5, 0);
         gbc_passwordField.gridx = 1;
