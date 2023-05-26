@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 
 import controller.DoormanCtrl;
+import controller.ShiftCtrl;
 import database.DataAccessException;
 
 import java.awt.Component;
@@ -28,7 +29,7 @@ class GetAvailableDoormanListCellRenderer implements ListCellRenderer<Doorman> {
     private ImageIcon iconChecked;
     private int iconSize;
     private Font iconFont;
-    private DoormanCtrl doormanCtrl;
+    private ShiftCtrl shiftCtrl;
     private List<Doorman> doormen;
 
 
@@ -38,7 +39,7 @@ class GetAvailableDoormanListCellRenderer implements ListCellRenderer<Doorman> {
         iconSize = 20; // Adjust the icon size as needed
         iconFont = new Font(Font.SANS_SERIF, Font.PLAIN, 12); // Adjust the font size as needed
         try {
-            doormanCtrl = new DoormanCtrl();
+        	shiftCtrl = new ShiftCtrl();
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
@@ -50,7 +51,7 @@ class GetAvailableDoormanListCellRenderer implements ListCellRenderer<Doorman> {
         Component renderer = defaultRenderer.getListCellRendererComponent(list, doorman.getF_name() + " " + doorman.getL_name(), index, isSelected, cellHasFocus);
         
 		try {
-		doormen = doormanCtrl.isDoormanOnAnotherShift();
+		doormen = shiftCtrl.isDoormanOnAnotherShift();
 			if(doormen.size() > 0) {
 				for(int i = 0; i < doormen.size(); i++) {
 					if (renderer instanceof JLabel && doorman.getEmployeeId() == doormen.get(i).getEmployeeId()) {

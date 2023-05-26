@@ -158,7 +158,7 @@ public class GetAvailableDoorman extends JFrame {
 	}
 	
 	private void clickConfirm(int shiftId, LocalDate date) throws DataAccessException, SQLException {
-		boolean confirm = shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, date);
+		boolean confirm = shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId);
 		if(confirm) {
 			JOptionPane.showMessageDialog(null, "Succes");
 			updateShiftCountOnCalendar(date);
