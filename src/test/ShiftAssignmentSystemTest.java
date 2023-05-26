@@ -20,31 +20,33 @@ public class ShiftAssignmentSystemTest {
     @Test
     @DisplayName("Assign a shift to a doorman")
     public void testShiftAssignment() throws DataAccessException, SQLException {
-        // Arrange
+        
+    	// Arrange
     	ShiftCtrl shiftCtrl = new ShiftCtrl();
-    	 
+    	
         LocalDate date = LocalDate.of(2023, 05, 15);
         int barId = 1;
+        int shiftId = 1;
+        int doormanId = 2;
         
-        // Act
-        
+        // Act 
         // Create a new shift
         List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
-        Shift shift = shifts.get(barId);
+        Shift shift = shifts.get(shiftId);
         
         // Retrieve an existing bar
         List<Bar> bars = shiftCtrl.getAllBars();
         
-        Bar bar = bars.get(0); // Choose the first bar in the list
+        Bar bar = bars.get(barId); // Choose the first bar in the list
         
      // Retrieve a list of available doormen for the shift date and bar
         List<Doorman> availableDoormen = shiftCtrl.getAvailableDoormenForShift(date, bar.getBarId());
         
         // Select the first available doorman for assignment
-        Doorman doorman = availableDoormen.get(0);
+        Doorman doorman = availableDoormen.get(doormanId);
         
         // Assign the shift to the selected doorman
-        boolean assignmentSuccessful = shiftCtrl.confirmShift(doorman.getEmployeeId(), newShift.getShiftId(), date);
+        boolean assignmentSuccessful = shiftCtrl.confirmShift(doorman.getEmployeeId(), shift.getShiftId(), date);
         
 
         // Assert
@@ -52,7 +54,12 @@ public class ShiftAssignmentSystemTest {
         Assertions.assertTrue(assignmentSuccessful, "Shift assignment failed");
 
         // Retrieve the updated shift from the database
-        Shift assignedShift = shiftCtrl.getShiftById(newShift.getShiftId());
+       List<Shift> newShifts = shiftCtrl.getShiftsByDate(date);
+       		Shift assignedShift = null;
+    		   for (Shift newShift : newShifts) {
+    			   if (newShift.getShiftId() == shift.getShiftId())
+    				  assignedShift = newShift;
+    		   }
 
         // Verify that the shift has been assigned to the doorman
         Assertions.assertEquals(doorman.getEmployeeId(), assignedShift.getDoormanId(), "Incorrect doorman assignment");
