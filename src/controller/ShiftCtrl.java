@@ -81,19 +81,10 @@ public class ShiftCtrl  {
 	public boolean confirmShift(int doormanId, int shiftId, LocalDate date) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
-			
 			DBConnection con = DBConnection.getInstance();
-			
 			con.startTransaction();
 			con.setIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED);
-			
 			shiftDAO.updateDoormanId(shiftId, doormanId);
-
-			
-			
-
-			//availableDateCtrl.deleteAvailableDate(doormanId, date);
-
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
 		} catch (SQLException e) {
