@@ -150,8 +150,9 @@ public class AssignShiftChooseClub extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws DataAccessException 
+	 * @throws SQLException 
 	 */
-	public AssignShiftChooseClub(LocalDate currentDate) throws DataAccessException {
+	public AssignShiftChooseClub(LocalDate currentDate) throws DataAccessException, SQLException {
 		setUIStyle();
 		shiftCtrl = new ShiftCtrl();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -751,13 +752,13 @@ public class AssignShiftChooseClub extends JFrame {
 		init(currentDate);
 	}
 	
-	private void init(LocalDate currentDate) throws DataAccessException {
+	private void init(LocalDate currentDate) throws DataAccessException, SQLException {
 		shiftCtrl = new ShiftCtrl();
 		displayBars(currentDate);
 		displayShifts(currentDate);	
 	}
 	
-	private void displayBars(LocalDate currentDate) throws DataAccessException {
+	private void displayBars(LocalDate currentDate) throws DataAccessException, SQLException {
 		List<Bar> bars = shiftCtrl.getAllBars();
 		lblName1.setText(bars.get(0).getName());
 		lblName2.setText(bars.get(1).getName());
@@ -786,7 +787,7 @@ public class AssignShiftChooseClub extends JFrame {
 
 	}
 	
-	private void displayShifts(LocalDate currentDate) throws DataAccessException {
+	private void displayShifts(LocalDate currentDate) throws DataAccessException, SQLException {
 		List<Bar> bars = shiftCtrl.getAllBars();
 		shiftCtrl.getShiftsByDate(currentDate)
 				.stream()
