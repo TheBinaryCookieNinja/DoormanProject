@@ -185,6 +185,7 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 				}
 				
 				boolean success = availableDateCtrl.confirmAvailability(selectedDate, doormanId);
+				
 				if (success) {
 					JOptionPane.showMessageDialog(null, "Availability registered successfully😀");
 				} else {
