@@ -37,6 +37,7 @@ public class GetAvailableDoorman extends JFrame {
 	private DefaultListModel<Doorman>dataListModel;
 	private JList<Doorman> doormanList;
 	private ShiftCtrl shiftCtrl;
+	private ShiftCalendarPanel shiftCalendarPanel;
 	
 	
 	
@@ -48,7 +49,8 @@ public class GetAvailableDoorman extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GetAvailableDoorman frame = new GetAvailableDoorman(null, 0, 0);
+					LocalDate date = LocalDate.of(2023, 5, 26);
+					GetAvailableDoorman frame = new GetAvailableDoorman(date, 0, 0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,8 +65,9 @@ public class GetAvailableDoorman extends JFrame {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
+	 * @throws DataAccessException 
 	 */
-	public GetAvailableDoorman(LocalDate date, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
+	public GetAvailableDoorman(LocalDate date, int barId, int shiftId) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException, DataAccessException {
 		setUIStyle();
 		setBounds(100, 100, 516, 262);
 		contentPane = new JPanel();
@@ -130,7 +133,8 @@ public class GetAvailableDoorman extends JFrame {
 	}
 
 	
-	private void init(LocalDate date, int barId) throws SQLException {
+	private void init(LocalDate date, int barId) throws SQLException, DataAccessException {
+		 shiftCalendarPanel = new ShiftCalendarPanel(date);
 		doormanList.setCellRenderer(new GetAvailableDoormanListCellRenderer());
 		try {
 			shiftCtrl = new ShiftCtrl();
@@ -155,7 +159,7 @@ public class GetAvailableDoorman extends JFrame {
 	
 	private void clickConfirm(int shiftId, LocalDate date) throws DataAccessException, SQLException {
 		boolean confirm = shiftCtrl.confirmShift(doormanList.getSelectedValue().getEmployeeId(), shiftId, date);
-		if(confirm = true) {
+		if(confirm) {
 			JOptionPane.showMessageDialog(null, "Succes");
 			updateShiftCountOnCalendar(date);
 		}
@@ -168,7 +172,6 @@ public class GetAvailableDoorman extends JFrame {
 	
 	private void updateShiftCountOnCalendar(LocalDate date) throws DataAccessException {
 	    int shiftCount = shiftCtrl.getShiftCountForDate(date);
-	    ShiftCalendarPanel shiftCalendarPanel = new ShiftCalendarPanel(date);
 	    shiftCalendarPanel.updateShiftCount(date, shiftCount);
 	    shiftCalendarPanel.refreshCalendar();
 	}
