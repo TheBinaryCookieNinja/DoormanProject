@@ -42,7 +42,7 @@ public class LoginScreen extends JFrame {
         });
     }
 	
-    public LoginScreen() throws DataAccessException {
+    public LoginScreen() throws DataAccessException, IOException {
         setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
