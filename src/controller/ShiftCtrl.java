@@ -51,7 +51,7 @@ public class ShiftCtrl  {
 		return shiftDAO.findAll();
 	}
 	
-	public List<Bar> getAllBars() throws DataAccessException {
+	public List<Bar> getAllBars() throws DataAccessException, SQLException {
 		return barCtrl.getAll();
 	}
 	
