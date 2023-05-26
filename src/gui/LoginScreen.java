@@ -22,7 +22,7 @@ public class LoginScreen extends JFrame {
 	private JTextField usernameField;
 	private DoormanCtrl doormanCtrl;
 	private GridBagConstraints constraints_1;
-	private JTextField textField;
+	private JTextField passwordField;
 	private GridBagConstraints constraints_2;
 
 	
@@ -107,12 +107,12 @@ public class LoginScreen extends JFrame {
         constraints_2.gridy = 1;
         panel.add(passwordLabel, constraints_2);
         
-        textField = new JTextField(20);
-        GridBagConstraints gbc_textField = new GridBagConstraints();
-        gbc_textField.insets = new Insets(0, 0, 5, 0);
-        gbc_textField.gridx = 1;
-        gbc_textField.gridy = 1;
-        panel.add(textField, gbc_textField);
+        passwordField = new JTextField(20);
+        GridBagConstraints gbc_passwordField = new GridBagConstraints();
+        gbc_passwordField.insets = new Insets(0, 0, 5, 0);
+        gbc_passwordField.gridx = 1;
+        gbc_passwordField.gridy = 1;
+        panel.add(passwordField, gbc_passwordField);
 
         constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
@@ -135,13 +135,13 @@ public class LoginScreen extends JFrame {
     	private void authenticateUser() throws NumberFormatException, DataAccessException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, SQLException {
     	    try {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
-    	        if (d.getPasscode().equals(textField.getText())) {
+    	        if (d.getPasscode().equals(passwordField.getText())) {
     	            displayFrontpage();
     	        } else {
     	            JOptionPane.showMessageDialog(null, "Forkert brugernavn eller adgangskode.", "Login Error", JOptionPane.ERROR_MESSAGE);
     	        }
     	    } finally {
-    	        // Code to be executed regardless of whether an exception is thrown or not, use to clean resources etc.
+    	        this.dispose();
     	    } 
     	 } 
     

@@ -20,7 +20,7 @@ public class DoormanDAO {
 			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d "
 			+ "left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)";
 	private static final String findByIdQ = 
-			findAllQ + "where employeeId = ?";
+			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode)where employee.employeeId = ?";
 	private static final String getAvailableDoormenForShiftQ = 
 			"select Employee.employeeId, f_name, l_name, phone, email, employee.addressId, street, addresss.zipcode, city, passcode, hourlyRate from Doorman as d left join Employee on Employee.employeeId = d.employeeId left join Addresss on (Addresss.addressId = employee.addressId) left join Zipcode on (zipcode.zipcode = addresss.zipcode) left join AvailableDates on AvailableDates.employeeId = d.employeeId left join DoormanWishlist on (DoormanWishList.employeeId = d.employeeId and DoormanWishlist.BarId = ?) left join DoormanBlacklist on (DoormanBlacklist.employeeId = d.employeeId and DoormanBlacklist.BarId = ?) left join shiftt on (shiftt.doormanId = d.employeeId) where AvailableDates.calenderDate = ? and DoormanBlacklist.BarId is null order by shiftt.doormanId asc, DoormanWishlist.employeeId desc";
 	private static final String isDoormanOnWishlistQ =
