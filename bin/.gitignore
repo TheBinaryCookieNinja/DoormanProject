@@ -1,2 +1,8 @@
+/.DS_Store
 /controller/
+/database/
 /gui/
+/icons/
+/model/
+/module-info.class
+/test/
