@@ -78,12 +78,11 @@ public class ShiftCtrl  {
 	        }
 	        return 0;
 	    }
+	    
 	public boolean confirmShift(int doormanId, int shiftId, LocalDate date) throws DataAccessException, SQLException {
 		boolean confirmation = false;
 		try {
-			DBConnection con = DBConnection.getInstance();
-			con.startTransaction();
-			con.setIsolationLevel(Connection.TRANSACTION_READ_UNCOMMITTED);
+			DBConnection.getInstance().startTransaction();
 			shiftDAO.updateDoormanId(shiftId, doormanId);
 			DBConnection.getInstance().commitTransaction();
 			confirmation = true;
@@ -91,17 +90,6 @@ public class ShiftCtrl  {
 			e.printStackTrace();
 			DBConnection.getInstance().rollbackTransaction();
 		}
-		
-//		SwingUtilities.invokeLater(() -> {
-//	        try {
-//	        	ShiftCtrl shiftCtrl = new ShiftCtrl();
-//	            ShiftCalendarPanel shiftCalendarPanel = getShiftCalendarPanel(); // Get the ShiftCalendarPanel instance
-//	            int shiftCount = shiftCtrl.getShiftCountForDate(date); // Retrieve the updated shift count
-//	            shiftCalendarPanel.updateShiftCount(date, shiftCount); // Update the shift count in the ShiftCalendarPanel
-//	        } catch (DataAccessException e) {
-//	            e.printStackTrace();
-//	        }
-//	    });
 		return confirmation;
 	}
 }
