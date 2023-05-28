@@ -60,12 +60,12 @@ public class ShiftCtrl  {
 	}
 	  
 	
-	 public void setShiftCalendarPanel(ShiftCalendarPanel shiftCalendarPanel) {
+	public void setShiftCalendarPanel(ShiftCalendarPanel shiftCalendarPanel) {
 	        this.shiftCalendarPanel = shiftCalendarPanel;
 	    }
 
-	    public ShiftCalendarPanel getShiftCalendarPanel() {
-	        return shiftCalendarPanel;
+	public ShiftCalendarPanel getShiftCalendarPanel() {
+	       return shiftCalendarPanel;
 	    }
 	    
 	    public int getShiftCountForDate(LocalDate date) throws DataAccessException {
