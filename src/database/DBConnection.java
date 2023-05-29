@@ -25,7 +25,7 @@ public class DBConnection {
 		try {
 			Class.forName(driverClass);
 			connection = DriverManager.getConnection(connectionString);
-			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
 		} catch (ClassNotFoundException e) {
 			System.err.println("Could not load JDBC driver");
 			e.printStackTrace();

@@ -1,17 +1,13 @@
 package controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-import javax.swing.SwingUtilities;
 
 import database.DBConnection;
 import database.DataAccessException;
 import database.ShiftDAO;
 import gui.ShiftCalendarPanel;
-import model.AvailableDate;
 import model.Bar;
 import model.Doorman;
 import model.Shift;
@@ -20,7 +16,6 @@ public class ShiftCtrl  {
 	private ShiftDAO shiftDAO;
 	private BarCtrl barCtrl;
 	private DoormanCtrl doormanCtrl;
-	private AvailableDateCtrl availableDateCtrl;
 	private ShiftCalendarPanel shiftCalendarPanel;
 	
 	
@@ -33,7 +28,6 @@ public class ShiftCtrl  {
 		}
 		barCtrl = new BarCtrl();
 		doormanCtrl = new DoormanCtrl();
-		availableDateCtrl = new AvailableDateCtrl();
 	}
 
 	 /**

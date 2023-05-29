@@ -31,7 +31,7 @@ public class ShiftAssignmentSystemTest {
         int doormanId = 3; */
         
       //Invalid inputs:
-        LocalDate date = LocalDate.of(2023, 05, 41);
+        LocalDate date = LocalDate.of(2023, 05, 45);
         int barId = -3;
         int shiftId = -19;
         int doormanId = -3;
