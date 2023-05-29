@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +44,7 @@ public class ShiftCalendarCustom extends JPanel {
 	
 	
 
-	public ShiftCalendarCustom() throws DataAccessException {
+	public ShiftCalendarCustom() throws DataAccessException, SQLException {
 		setBackground(Color.WHITE);
 		date = LocalDate.now();
 		//thisMonth();
@@ -86,14 +87,28 @@ public class ShiftCalendarCustom extends JPanel {
 		arrowForward.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		arrowForward.setContentAreaFilled(false);
 		arrowForward.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		arrowForward.addActionListener(evt -> SwingUtilities.invokeLater(this::arrowForwardActionPerformed));
+		arrowForward.addActionListener(evt -> SwingUtilities.invokeLater(() -> {
+			try {
+				arrowForwardActionPerformed();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}));
 
 		arrowBack = new JButton();
 		arrowBack.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/angle-double-small-left.png")));
 		arrowBack.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		arrowBack.setContentAreaFilled(false);
 		arrowBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		arrowBack.addActionListener(evt -> SwingUtilities.invokeLater(this::arrowBackActionPerformed));
+		arrowBack.addActionListener(evt -> SwingUtilities.invokeLater(() -> {
+			try {
+				arrowBackActionPerformed();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}));
 
 		jLayeredPane1.setLayer(arrowForward, JLayeredPane.DEFAULT_LAYER);
 		jLayeredPane1.setLayer(arrowBack, JLayeredPane.DEFAULT_LAYER);
@@ -245,7 +260,7 @@ public class ShiftCalendarCustom extends JPanel {
 	        }).start();
 	}
 
-	private void arrowForwardActionPerformed() {
+	private void arrowForwardActionPerformed() throws SQLException {
 //		if (month == 12) {
 //			month = 1;
 //			currentMonth = (currentMonth == 12) ? 1 : currentMonth + 1;
@@ -269,7 +284,7 @@ public class ShiftCalendarCustom extends JPanel {
 	        updateMonthYear();
 	}
 
-	private void arrowBackActionPerformed() {
+	private void arrowBackActionPerformed() throws SQLException {
 //		if (month == 1) {
 //			month = 12;
 //			currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
@@ -337,7 +352,7 @@ public class ShiftCalendarCustom extends JPanel {
 //		this.repaint();
 //	}
 	
-	private void changePanel() {
+	private void changePanel() throws SQLException {
 	    try {
 	        String monthYearKey = date.format(DateTimeFormatter.ofPattern("MM-yyyy"));
 	        if (!calendarPanels.containsKey(monthYearKey)) {

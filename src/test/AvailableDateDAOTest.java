@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class AvailableDateDAOTest {
 
-    private static final int NUM_THREADS = 12;
-    private static final int NUM_ITERATIONS = 4;
+    private static final int NUM_THREADS = 40;
+    private static final int NUM_ITERATIONS = 12;
     private int initialVersion;
     @Test
     @DisplayName("test concurrent access to DAO with lock")
@@ -71,8 +71,8 @@ public class AvailableDateDAOTest {
         }
 
         // Assert
-        //Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, readCounter.get(), "Incorrect number of reads");
-        //Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, writeCounter.get(), "Incorrect number of writes");
+        Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, readCounter.get(), "Incorrect number of reads");
+        Assertions.assertEquals(NUM_THREADS * NUM_ITERATIONS, writeCounter.get(), "Incorrect number of writes");
         Assertions.assertTrue(initialVersion <= availableDateRef.get().getVersion(), "Dirty read detected");
     }
 }

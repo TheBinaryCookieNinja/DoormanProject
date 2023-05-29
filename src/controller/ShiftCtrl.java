@@ -35,14 +35,34 @@ public class ShiftCtrl  {
      *
      * @param date the date to get shifts for
      * @return list of shifts for the specified date
+	 * @throws SQLException 
      */
-	public List<Shift> getShiftsByDate(LocalDate date) throws DataAccessException {
-//		// Convert java.util.Date to java.time.LocalDate
-        return shiftDAO.getShiftsByDate(date);
+	public List<Shift> getShiftsByDate(LocalDate date) throws DataAccessException, SQLException {
+		List<Shift> shifts = null;
+		try {
+			DBConnection.getInstance().startTransaction();
+			shifts = shiftDAO.getShiftsByDate(date);
+			DBConnection.getInstance().commitTransaction();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBConnection.getInstance().rollbackTransaction();
+		}
+		return shifts;
 	}
 	
-	public List<Shift> findAll() throws DataAccessException{
-		return shiftDAO.findAll();
+	public List<Shift> findAll() throws DataAccessException, SQLException{
+		List<Shift> shifts = null;
+		try {
+			DBConnection.getInstance().startTransaction();
+			shifts = shiftDAO.findAll();
+			DBConnection.getInstance().commitTransaction();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBConnection.getInstance().rollbackTransaction();
+		}
+		return shifts;
 	}
 	
 	public List<Bar> getAllBars() throws DataAccessException, SQLException {

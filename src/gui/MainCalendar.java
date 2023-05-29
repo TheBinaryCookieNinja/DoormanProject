@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
@@ -65,13 +66,14 @@ public class MainCalendar extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws DataAccessException
+	 * @throws SQLException 
 	 */
-	public MainCalendar() throws DataAccessException {
+	public MainCalendar() throws DataAccessException, SQLException {
 		setUIStyle();
 		initComponents();
 	}
 	
-	private void initComponents() throws DataAccessException {
+	private void initComponents() throws DataAccessException, SQLException {
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 1400, 1000);
 	    contentPane = new JPanel();

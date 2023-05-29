@@ -170,7 +170,7 @@ public class GetAvailableDoorman extends JFrame {
 		this.dispose();
 	}
 	
-	private void updateShiftCountOnCalendar(LocalDate date) throws DataAccessException {
+	private void updateShiftCountOnCalendar(LocalDate date) throws DataAccessException, SQLException {
 	    int shiftCount = shiftCtrl.getShiftCountForDate(date);
 	    shiftCalendarPanel.updateShiftCount(date, shiftCount);
 	    shiftCalendarPanel.refreshCalendar();

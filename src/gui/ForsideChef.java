@@ -13,6 +13,7 @@ import database.DataAccessException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -159,7 +160,10 @@ public class ForsideChef extends JFrame {
                 openAssignShiftCalendar();
             } catch (DataAccessException e1) {
                 e1.printStackTrace();
-            }
+            } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         });
         JMenuItem mntmRegisterAvailability = new JMenuItem("Register availability");
         mnNewMenu.add(mntmRegisterAvailability);
@@ -180,7 +184,7 @@ public class ForsideChef extends JFrame {
         setLocationRelativeTo(null);
         pack();
     }
-    private void openAssignShiftCalendar() throws DataAccessException {
+    private void openAssignShiftCalendar() throws DataAccessException, SQLException {
         MainCalendar calendar = new MainCalendar();
         calendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         calendar.addWindowListener(new WindowAdapter() {

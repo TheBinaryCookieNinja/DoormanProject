@@ -6,6 +6,7 @@ import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -25,11 +26,11 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private Cell[] titleCells;
 	private ShiftCtrl shiftCtrl;
 
-	public ShiftCalendarPanel(int month, int year) throws DataAccessException {
+	public ShiftCalendarPanel(int month, int year) throws DataAccessException, SQLException {
 		this(LocalDate.of(year, month, 1));
 	}
 
-	public ShiftCalendarPanel(LocalDate date) throws DataAccessException {
+	public ShiftCalendarPanel(LocalDate date) throws DataAccessException, SQLException {
 		this.month = date.getMonthValue();
 		this.year = date.getYear();
 		shiftCtrl = new ShiftCtrl();
@@ -64,7 +65,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 //	        cell.addActionListener(listener);
 //	    }
 //}
-	public void initializeDaysInMonth(ActionListener listener) {
+	public void initializeDaysInMonth(ActionListener listener) throws SQLException {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
 		}
@@ -124,7 +125,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		});
 	}
 
-	public int getShiftCountForDate(LocalDate date) {
+	public int getShiftCountForDate(LocalDate date) throws SQLException {
 		try {
 			List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
 			return shifts.size();
@@ -144,7 +145,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 	}
 
-	public void refreshCalendar() throws DataAccessException {
+	public void refreshCalendar() throws DataAccessException, SQLException {
 		initializeDaysInMonth(null);
 		setDatesForMonth(LocalDate.of(year, month, 1));
 
@@ -156,7 +157,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 		}
 	}
 
-	public void setDatesForMonth(LocalDate date) throws DataAccessException {
+	public void setDatesForMonth(LocalDate date) throws DataAccessException, SQLException {
 		int month = date.getMonthValue();
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month value: " + month);
