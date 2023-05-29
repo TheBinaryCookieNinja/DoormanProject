@@ -24,21 +24,22 @@ public class ShiftAssignmentSystemTest {
     	// Arrange
     	ShiftCtrl shiftCtrl = new ShiftCtrl();
         
-      //Valid inputs:
+        //Valid inputs:
         LocalDate date = LocalDate.of(2023, 05, 16);
         int barId = 3;
         int shiftId = 5;
         int doormanId = 3;
         
         // Act 
-        // Create a new shift
+        // Gets a list of shifts
         List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
+        //chooses one of them
         Shift shift = shifts.get(shiftId);
         
         // Retrieve an existing bar
         List<Bar> bars = shiftCtrl.getAllBars();
-        
-        Bar bar = bars.get(barId); // Choose the first bar in the list
+        // Chooses one of the bars
+        Bar bar = bars.get(barId); 
         
         // Retrieve a list of available doormen for the shift date and bar
         List<Doorman> availableDoormen = shiftCtrl.getAvailableDoormenForShift(date, bar.getBarId());

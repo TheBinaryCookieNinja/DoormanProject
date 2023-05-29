@@ -2,9 +2,11 @@ package test;
 
 import database.AvailableDateDAO;
 import database.DataAccessException;
+import database.DoormanDAO;
 import model.AvailableDate;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +25,13 @@ public class AvailableDateDAOTest {
     private static final int NUM_THREADS = 40;
     private static final int NUM_ITERATIONS = 12;
     private int initialVersion;
+    
+    @BeforeEach
+    void setUp() throws SQLException {
+        // Set up any necessary test fixtures or dependencies
+        DBCleanup.main(null);
+    }
+    
     @Test
     @DisplayName("test concurrent access to DAO with lock")
     public void testConcurrentAccessWithLock() throws InterruptedException, DataAccessException {

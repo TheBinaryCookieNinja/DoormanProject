@@ -8,6 +8,7 @@ import database.DataAccessException;
 import database.DoormanDAO;
 import model.Doorman;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 public class getAvailableDoormanForShiftIntegrationTest {
@@ -15,8 +16,9 @@ public class getAvailableDoormanForShiftIntegrationTest {
 	private DoormanDAO doormanDAO;
 
 	@BeforeEach
-	public void setup() throws DataAccessException {
+	public void setup() throws DataAccessException, SQLException {
 		doormanDAO = new DoormanDAO();
+		DBCleanup.main(null);
 	    }
 	
     @Test

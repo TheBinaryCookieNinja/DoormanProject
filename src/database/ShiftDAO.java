@@ -66,7 +66,7 @@ public class ShiftDAO {
 
 	private Shift buildObject(ResultSet rs) throws SQLException {
 	    int shiftId = rs.getInt("shiftId");
-	    String shiftDate = rs.getString("shiftDate");
+	    Date shiftDate = rs.getDate("shiftDate");
 	    String checkInTime = rs.getString("checkInTime");
 	    String checkOutTime = rs.getString("checkOutTime");
 	    int barId = rs.getInt("barId");
@@ -75,15 +75,12 @@ public class ShiftDAO {
 	    Shift s = new Shift(shiftId, shiftDate, checkInTime, checkOutTime, barId, doormanId);
 	    return s;
 	}
-
-
-
+	
 	private List<Shift> buildObjects(ResultSet rs) throws SQLException {
 		List<Shift> res = new ArrayList<>();
 		while (rs.next()) {
 			res.add(buildObject(rs));
 		}
 		return res;
-
 	}
 }

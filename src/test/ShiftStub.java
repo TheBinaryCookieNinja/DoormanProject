@@ -1,16 +1,14 @@
-package model;
+package test;
 
-import java.sql.Date;
-
-public class Shift {
-	  private int shiftId;
-	    private Date shiftDate;
+public class ShiftStub {
+		private int shiftId;
+	    private String shiftDate;
 	    private String checkInTime;
 	    private String checkOutTime;
 		private int barId;
 		private int doormanId;
 
-	    public Shift(int shiftId, Date shiftDate, String checkInTime, String checkOutTime, int barId, int doormanId) {
+	    public ShiftStub(int shiftId, String shiftDate, String checkInTime, String checkOutTime, int barId, int doormanId) {
 	        this.shiftId = shiftId;
 	        this.shiftDate = shiftDate;
 	        this.checkInTime = checkInTime;
@@ -29,11 +27,11 @@ public class Shift {
 	    }
 
 	
-	    public Date getShiftDate() {
+	    public String getShiftDate() {
 	        return shiftDate;
 	    }
 
-	    public void setShiftDate(Date shiftDate) {
+	    public void setShiftDate(String shiftDate) {
 	        this.shiftDate = shiftDate;
 	    }
 
