@@ -23,11 +23,18 @@ public class ShiftAssignmentSystemTest {
         
     	// Arrange
     	ShiftCtrl shiftCtrl = new ShiftCtrl();
-    	
-        LocalDate date = LocalDate.of(2023, 05, 15);
+
+    	//Valid inputs:
+     /*   LocalDate date = LocalDate.of(2023, 05, 15);
         int barId = 5;
         int shiftId = 5;
-        int doormanId = 3;
+        int doormanId = 3; */
+        
+      //Invalid inputs:
+        LocalDate date = LocalDate.of(2023, 05, 41);
+        int barId = -3;
+        int shiftId = -19;
+        int doormanId = -3;
         
         // Act 
         // Create a new shift

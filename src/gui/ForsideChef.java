@@ -23,6 +23,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import java.awt.FlowLayout;
@@ -181,13 +183,29 @@ public class ForsideChef extends JFrame {
     private void openAssignShiftCalendar() throws DataAccessException {
         MainCalendar calendar = new MainCalendar();
         calendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        calendar.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                dispose(); // Dispose the current window (ForsideChef) after the new window is closed
+            }
+        });
+        dispose(); // Dispose the current window (ForsideChef)
         calendar.setVisible(true);
     }
+
     private void openRegisterAvailabilityCalendar() throws DataAccessException {
         MainAvailabilityCalendar availabilityCalendar = new MainAvailabilityCalendar();
         availabilityCalendar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        availabilityCalendar.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                dispose(); // Dispose the current window (ForsideChef) after the new window is closed
+            }
+        });
+        dispose(); // Dispose the current window (ForsideChef)
         availabilityCalendar.setVisible(true);
     }
+
     
     private void performLogout() {
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout",
