@@ -51,7 +51,7 @@ public class AvailableDateCtrl {
 	public boolean isAvailabilityRegistered(int doormanId, LocalDate selectedDate) throws DataAccessException, SQLException {
 		DBConnection con = DBConnection.getInstance();
 		con.startTransaction();
-		con.setIsolationLevel(Connection.TRANSACTION_SERIALIZABLE);
+		con.setIsolationLevel(Connection.TRANSACTION_READ_COMMITTED);
 		try {
 	        AvailableDate availableDate = availableDateDAO.findByDoormanIdAndDate(doormanId, selectedDate);
 	       con.commitTransaction();
