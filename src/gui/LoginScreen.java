@@ -4,19 +4,15 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import controller.DoormanCtrl;
-import controller.ShiftCtrl;
 import database.DataAccessException;
 import model.Doorman;
-import database.DoormanDAO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
-import gui.ForsideChef;
-import java.net.URL;
+
 
 public class LoginScreen extends JFrame {
     private static final long serialVersionUID = 1L;

@@ -1,21 +1,10 @@
 package gui;
 
 import java.awt.*;
-
-import java.util.List;
-
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-
 import javax.swing.*;
-
 import database.DataAccessException;
-import database.DoormanDAO;
-import model.AvailableDate;
-import model.Doorman;
-
 import java.time.*;
 import java.time.LocalDate;
 
@@ -28,7 +17,6 @@ public class AvailabilityCalendarPanel extends JLayeredPane {
 	private Cell[] dayCells;
 	private Cell[] titleCells;
 	private AvailableDateCtrl availableDateCtrl;
-	private DoormanDAO doormanDAO;
 
 	public AvailabilityCalendarPanel(int month, int year) throws DataAccessException {
 		this(LocalDateTime.of(year, month, 1, 0, 0));

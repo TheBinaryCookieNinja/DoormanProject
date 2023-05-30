@@ -1,11 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;

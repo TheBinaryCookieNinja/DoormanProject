@@ -2,16 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.time.LocalDate;
-import java.util.Date;
 
-import javax.swing.BorderFactory;
+import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -20,7 +15,7 @@ public class Cell extends JButton {
 	private LocalDate date;
 	private boolean title;
 	private boolean isToday;
-	 private boolean isEmpty;
+	private boolean isEmpty;
 	// private JLabel shiftLabel;
 	private JLabel shiftCountLabel;
 	private JLabel dateLabel;
@@ -37,9 +32,9 @@ public class Cell extends JButton {
 		//setBorder(BorderFactory.createLineBorder(Color.RED));
 		// setBorder(null);
 		
-//		shiftLabel = new JLabel(); 
-//		shiftLabel.setPreferredSize(new Dimension(80, 80));
-//        add(shiftLabel);
+		 //	shiftLabel = new JLabel(); 
+		 //	shiftLabel.setPreferredSize(new Dimension(80, 80));
+		 // add(shiftLabel);
 		
 		 // create date label and customize it
 		    dateLabel = new JLabel();
@@ -53,7 +48,7 @@ public class Cell extends JButton {
 //	        shiftCountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0)); // paddins is added so there will be a little extra space between date and shiftcount
 	        shiftCountLabel.setFont(shiftCountLabel.getFont().deriveFont(12.0f));
 	       
-	        shiftCountLabel.setVisible(false); // den sarter jo med at være usynlig
+	        shiftCountLabel.setVisible(false); // sets count label invisible
 	        add(shiftCountLabel, BorderLayout.SOUTH);
 	       
 	        setContentAreaFilled(true);

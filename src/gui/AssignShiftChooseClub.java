@@ -10,44 +10,21 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JMenu;
-import java.awt.GridLayout;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 import java.awt.Dialog;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.awt.Dimension;
-import javax.swing.JMenuBar;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import java.awt.event.KeyEvent;
-import javax.swing.Box;
-import javax.swing.event.MenuKeyListener;
 
 import controller.ShiftCtrl;
 import database.DataAccessException;
 import model.Bar;
-import model.Shift;
-
-import javax.swing.event.MenuKeyEvent;
-import java.awt.event.InputEvent;
 
 public class AssignShiftChooseClub extends JFrame {
 
