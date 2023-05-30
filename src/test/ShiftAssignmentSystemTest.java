@@ -1,6 +1,5 @@
 package test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,18 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 import controller.ShiftCtrl;
 import database.DataAccessException;
-import database.DoormanDAO;
 import model.Bar;
 import model.Doorman;
 import model.Shift;
-
 public class ShiftAssignmentSystemTest {
 
-	@BeforeEach
-	public void setup() throws DataAccessException, SQLException {
-		DBCleanup.main(null);
-	}
-	
     @Test
     @DisplayName("Assign a valid shift to a valid doorman with valid date and bar")
     public void testShiftAssignment() throws DataAccessException, SQLException {
