@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+
 import java.util.List;
 
 import java.awt.event.ActionListener;
@@ -16,6 +17,12 @@ import java.time.LocalDate;
 
 import controller.ShiftCtrl;
 
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.HashMap;
+
 public class ShiftCalendarPanel extends JLayeredPane {
 
 	private int month;
@@ -23,6 +30,8 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	private Cell[] dayCells;
 	private Cell[] titleCells;
 	private ShiftCtrl shiftCtrl;
+	private Map<LocalDate, List<Shift>> shiftCache = new HashMap<>();
+
 
 	public ShiftCalendarPanel(int month, int year) throws DataAccessException, SQLException {
 		this(LocalDate.of(year, month, 1));
@@ -101,7 +110,7 @@ public class ShiftCalendarPanel extends JLayeredPane {
 				openAssignShiftChooseClub(selectedDate);
 
 			});
-
+//  adds the Cell to the GUI component and stores the Cell in the dayCells array
 			this.add(cell);
 			dayCells[i] = cell;
 		}
@@ -124,15 +133,16 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	}
 
 	public int getShiftCountForDate(LocalDate date) throws SQLException {
-		try {
-			List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
-			return shifts.size();
-		} catch (DataAccessException e) {
-
-			e.printStackTrace();
-		}
-		return 0;
-	}
+        if (!shiftCache.containsKey(date)) {
+            try {
+                List<Shift> shifts = shiftCtrl.getShiftsByDate(date);
+                shiftCache.put(date, shifts);
+            } catch (DataAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return shiftCache.get(date).size();
+    }
 
 	public void updateShiftCount(LocalDate date, int shiftCount) {
 		for (Cell cell : dayCells) {
@@ -144,15 +154,41 @@ public class ShiftCalendarPanel extends JLayeredPane {
 	}
 
 	public void refreshCalendar() throws DataAccessException, SQLException {
-		initializeDaysInMonth(null);
-		setDatesForMonth(LocalDate.of(year, month, 1));
+	    SwingWorker<Map<LocalDate, List<Shift>>, Void> worker = new SwingWorker<>() {
+	        @Override
+	        protected Map<LocalDate, List<Shift>> doInBackground() throws Exception {
+	            Map<LocalDate, List<Shift>> shifts = new HashMap<>();
+	            for (LocalDate date : getAllDatesInMonth()) {
+	                shifts.put(date, shiftCtrl.getShiftsByDate(date));
+	            }
+	            return shifts;
+	            
+	        }
 
-		for (Cell cell : dayCells) {
-			LocalDate date = cell.getDate();
-			int shiftCount = getShiftCountForDate(date);
-			cell.setShiftCount(shiftCount);
+	        @Override
+	        protected void done() { //called on EDT so its threadsafe to update here
+	            try {
+	                shiftCache = get();
+	                // Update the GUI here...
+	                for (Cell cell : dayCells) {
+	                    LocalDate date = cell.getDate();
+	                    int shiftCount = getShiftCountForDate(date);
+	                    cell.setShiftCount(shiftCount);
+	                }
+	            } catch (InterruptedException | ExecutionException | SQLException e) {
+	                ((Throwable) e).printStackTrace();
+	            }
+	        }
+	    };
+	    worker.execute();
+	    //This will fetch the shifts for each date in the month in a background thread and store them in the cache. 
+	    //it will update the GUI.
+	}
 
-		}
+	public List<LocalDate> getAllDatesInMonth() {
+	    return IntStream.rangeClosed(1, YearMonth.of(year, month).lengthOfMonth())// generate a stream of integers from 1 to number of days in month
+	                    .mapToObj(day -> LocalDate.of(year, month, day))
+	                    .collect(Collectors.toList());
 	}
 
 	public void setDatesForMonth(LocalDate date) throws DataAccessException, SQLException {

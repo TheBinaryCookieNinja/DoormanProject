@@ -64,6 +64,7 @@ public class ShiftCalendarCustom extends JPanel {
 	
 	private void initComponents() throws DataAccessException {
 		slide = new SlidingPanel();
+		slide.setAnimationSpeed(70);
 		slide.setBackground(new Color(255, 255, 255));
 		jPanel1 = new JPanel();
 		jPanel1.setBackground(new Color(255, 255, 255));
