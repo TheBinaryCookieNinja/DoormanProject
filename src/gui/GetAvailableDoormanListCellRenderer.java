@@ -1,13 +1,9 @@
 package gui;
 
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
-
-import controller.DoormanCtrl;
 import controller.ShiftCtrl;
 import database.DataAccessException;
 
@@ -15,7 +11,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JLabel;
 

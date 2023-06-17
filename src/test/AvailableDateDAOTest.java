@@ -2,7 +2,6 @@ package test;
 
 import database.AvailableDateDAO;
 import database.DataAccessException;
-import database.DoormanDAO;
 import model.AvailableDate;
 
 import org.junit.jupiter.api.Assertions;

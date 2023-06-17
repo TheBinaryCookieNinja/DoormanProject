@@ -46,7 +46,7 @@ public class SlidingPanel extends JPanel {
     private Component comExit;
     private Component comShow;
     private AnimateType animateType;
-    private int animate = 35;
+    private int animate = 70;
 
     public void show(Component com, AnimateType animateType) {
         if (!timer.isRunning()) {
@@ -97,6 +97,10 @@ public class SlidingPanel extends JPanel {
                 comExit = comShow;
             }
         }
+    }
+    
+    public void setAnimationSpeed(int speed) {
+        this.animate = speed;
     }
 
     private void initComponents() {

@@ -6,15 +6,11 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-import controller.BarCtrl;
-import controller.DoormanCtrl;
 import controller.ShiftCtrl;
 import database.DataAccessException;
 import model.Bar;
 import model.Doorman;
 import model.Shift;
-import database.ShiftDAO;
 public class ShiftAssignmentSystemTest {
 
     @Test

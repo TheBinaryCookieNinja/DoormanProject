@@ -2,7 +2,6 @@ package test;
 
 import java.sql.SQLException;
 
-import database.DBConnection;
 /**
  * Utility class used by all the @Before methods in the test suite
  * that access the database. All tables are dropped, re-created and 
