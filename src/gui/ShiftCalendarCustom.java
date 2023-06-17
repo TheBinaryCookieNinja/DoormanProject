@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -22,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import database.DataAccessException;
 import javax.swing.GroupLayout.Alignment;
@@ -32,7 +35,8 @@ public class ShiftCalendarCustom extends JPanel {
 	private Map<String, ShiftCalendarPanel> calendarPanels;
 	private ShiftCalendarPanel currentPanel;
 	private LocalDate date;
-
+	
+	private JLabel loadingLabel;
 	private JButton arrowBack;
 	private JButton arrowForward;
 	private JLayeredPane jLayeredPane1;
@@ -51,10 +55,12 @@ public class ShiftCalendarCustom extends JPanel {
 		calendarPanels = new HashMap<>();
 		initComponents();
 		slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_RIGHT);
+		new DataFetcher(date).execute();
 		updateMonthYear();
 		initializeThread();
 		initializeLabels();
 		initializeButtons();
+		fetchPanels();
 		
 		
 	}
@@ -64,7 +70,7 @@ public class ShiftCalendarCustom extends JPanel {
 	
 	private void initComponents() throws DataAccessException {
 		slide = new SlidingPanel();
-		slide.setAnimationSpeed(70);
+		slide.setAnimationSpeed(40);
 		slide.setBackground(new Color(255, 255, 255));
 		jPanel1 = new JPanel();
 		jPanel1.setBackground(new Color(255, 255, 255));
@@ -73,6 +79,10 @@ public class ShiftCalendarCustom extends JPanel {
 		lbTime = new JLabel();
 		lbType = new JLabel();
 		lbDate = new JLabel();
+		loadingLabel = new JLabel();
+        
+        
+        
 
 		lbMonthYear.setBackground(new Color(0, 128, 192));
 		lbMonthYear.setFont(new Font("sansserif", Font.BOLD, 30));
@@ -143,34 +153,43 @@ public class ShiftCalendarCustom extends JPanel {
 										.addComponent(lbType))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(lbDate)
 								.addContainerGap(537, Short.MAX_VALUE)));
+		
+		loadingLabel = new JLabel();
+		loadingLabel.setIcon(new ImageIcon(ShiftCalendarCustom.class.getResource("/icons/1495.gif")));
 
 		GroupLayout jLayeredPane1Layout = new GroupLayout(jLayeredPane1);
+		jLayeredPane1Layout.setHorizontalGroup(
+			jLayeredPane1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jLayeredPane1Layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addGap(82)
+					.addComponent(loadingLabel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+					.addGap(31)
+					.addComponent(lbMonthYear, GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addGap(22))
+		);
+		jLayeredPane1Layout.setVerticalGroup(
+			jLayeredPane1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jLayeredPane1Layout.createSequentialGroup()
+					.addGap(14)
+					.addGroup(jLayeredPane1Layout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(jLayeredPane1Layout.createSequentialGroup()
+							.addGroup(jLayeredPane1Layout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lbMonthYear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+								.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
+							.addGap(19))
+						.addGroup(jLayeredPane1Layout.createSequentialGroup()
+							.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
+				.addGroup(Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(loadingLabel, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		jLayeredPane1.setLayout(jLayeredPane1Layout);
-		jLayeredPane1Layout.setHorizontalGroup(jLayeredPane1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jLayeredPane1Layout.createSequentialGroup().addContainerGap()
-						.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(lbMonthYear, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-						.addGap(22)));
-		jLayeredPane1Layout.setVerticalGroup(jLayeredPane1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jLayeredPane1Layout.createSequentialGroup().addContainerGap()
-						.addGroup(jLayeredPane1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jLayeredPane1Layout
-										.createSequentialGroup()
-										.addComponent(arrowBack, GroupLayout.PREFERRED_SIZE, 41,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())
-								.addGroup(GroupLayout.Alignment.TRAILING,
-										jLayeredPane1Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-												.addGroup(jLayeredPane1Layout
-														.createParallelGroup(GroupLayout.Alignment.TRAILING)
-														.addComponent(lbMonthYear, GroupLayout.PREFERRED_SIZE, 38,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(arrowForward, GroupLayout.PREFERRED_SIZE, 38,
-																GroupLayout.PREFERRED_SIZE))
-												.addGap(22)))));
 
 		GroupLayout layout = new GroupLayout(this);
 		layout.setHorizontalGroup(
@@ -259,8 +278,15 @@ public class ShiftCalendarCustom extends JPanel {
 	                });
 	            }
 	        }).start();
+		
+		 // Start the data fetcher
+	    new DataFetcher(date).execute();
 	}
-
+	
+	private void fetchPanels() {
+        loadingLabel.setVisible(true);
+        new DataFetcher(date).execute();
+    }
 	private void arrowForwardActionPerformed() throws SQLException {
 //		if (month == 12) {
 //			month = 1;
@@ -274,16 +300,31 @@ public class ShiftCalendarCustom extends JPanel {
 //		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_LEFT);
 //		updateMonthYear();
 		 date = date.plusMonths(1);
-	        
-	        changePanel();
-	        try {
-				slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_LEFT);
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        updateMonthYear();
+	        String monthYearKey = date.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+	        if (!calendarPanels.containsKey(monthYearKey)) {
+	            // If the data hasn't been fetched yet, show a loading spinner or some other indication
+	        	loadingLabel.setVisible(true);
+	            // Then, you could start a new DataFetcher to fetch the data
+	            new DataFetcher(date).execute();
+	        } else {
+	            // If the data has been fetched, use it to update the panel
+	        	loadingLabel.setVisible(false);
+	            changePanel();
+	            slide.show(calendarPanels.get(monthYearKey), SlidingPanel.AnimateType.TO_LEFT);
+	            updateMonthYear();
+	        }
 	}
+	
+//	 date = date.plusMonths(1);
+//     
+//     changePanel();
+//     try {
+//			slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_LEFT);
+//		} catch (DataAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//     updateMonthYear();
 
 	private void arrowBackActionPerformed() throws SQLException {
 //		if (month == 1) {
@@ -298,18 +339,33 @@ public class ShiftCalendarCustom extends JPanel {
 //		slide.show(new ShiftCalendarPanel(month, year), SlidingPanel.AnimateType.TO_RIGHT);
 //		updateMonthYear();
 		
-		date = date.minusMonths(1);
-        
-        changePanel();
-        try {
-			slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_RIGHT);
-		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        updateMonthYear();
+		 date = date.minusMonths(1);
+	        String monthYearKey = date.format(DateTimeFormatter.ofPattern("MM-yyyy"));
+	        if (!calendarPanels.containsKey(monthYearKey)) {
+	            // If the data hasn't been fetched yet, show a loading spinner or some other indication
+	        	loadingLabel.setVisible(true);
+	            // Then, you could start a new DataFetcher to fetch the data
+	            new DataFetcher(date).execute();
+	        } else {
+	            // If the data has been fetched, use it to update the panel
+	        	loadingLabel.setVisible(false);
+	            changePanel();
+	            slide.show(calendarPanels.get(monthYearKey), SlidingPanel.AnimateType.TO_RIGHT);
+	            updateMonthYear();
+	        }
 
 	}
+	
+//	date = date.minusMonths(1);
+//    
+//    changePanel();
+//    try {
+//		slide.show(new ShiftCalendarPanel(date), SlidingPanel.AnimateType.TO_RIGHT);
+//	} catch (DataAccessException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//    updateMonthYear(); 	
 
 //	public void thisMonth() {
 //		Calendar calendar = Calendar.getInstance();
@@ -371,4 +427,35 @@ public class ShiftCalendarCustom extends JPanel {
 	        JOptionPane.showMessageDialog(null, "Error loading data", "Error", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
+	//this DataFetcher class is used to create ShiftCalendarPanel objects for the next and previous months in a 
+	//background thread, and then add them to the calendarPanels map when they're ready.
+	class DataFetcher extends SwingWorker<Map<String, ShiftCalendarPanel>, Void> {
+        private LocalDate date;
+
+        public DataFetcher(LocalDate date) {
+            this.date = date;
+        }
+
+        @Override
+        // time consuming tasks here
+        protected Map<String, ShiftCalendarPanel> doInBackground() throws Exception {
+            Map<String, ShiftCalendarPanel> panels = new HashMap<>();
+            LocalDate nextMonth = date.plusMonths(1);
+            LocalDate previousMonth = date.minusMonths(1);
+            panels.put(nextMonth.format(DateTimeFormatter.ofPattern("MM-yyyy")), new ShiftCalendarPanel(nextMonth.getMonthValue(), nextMonth.getYear()));
+            panels.put(previousMonth.format(DateTimeFormatter.ofPattern("MM-yyyy")), new ShiftCalendarPanel(previousMonth.getMonthValue(), previousMonth.getYear()));
+            return panels;
+        }
+
+        @Override
+        //called on the Event Dispatch Thread after doInBackground has finished
+        protected void done() {
+            try {
+                Map<String, ShiftCalendarPanel> fetchedPanels = get();
+                calendarPanels.putAll(fetchedPanels);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
