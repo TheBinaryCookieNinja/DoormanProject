@@ -40,13 +40,9 @@ public class ShiftDAO {
 
 	public void updateDoormanId(int shiftId, int doormanId) throws DataAccessException, SQLException {
 		try {
-			DBConnection.getInstance().startTransaction();
 			update.setInt(1, doormanId);
 			update.setInt(2, shiftId);
-			update.executeUpdate();
-			DBConnection.getInstance().commitTransaction();
 		} catch (SQLException e) {
-			DBConnection.getInstance().rollbackTransaction();
 			throw new DataAccessException(e, "Could not update shift where id = " + shiftId);
 		}
 	}
