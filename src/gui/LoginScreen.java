@@ -166,7 +166,7 @@ public class LoginScreen extends JFrame {
     	        Doorman d = doormanCtrl.getDoormanByDoormanId(Integer.parseInt(usernameField.getText()));
     	        if (d.getPasscode().equals(passwordField.getText())) {
     	            displayFrontpage();
-    	            this.dispose();
+    	            dispose();
     	        } else {
     	            JOptionPane.showMessageDialog(null, "Forkert brugernavn eller adgangskode.", "Login Error", JOptionPane.ERROR_MESSAGE);
     	        }
